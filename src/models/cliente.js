@@ -7,7 +7,7 @@ const clienteSchema = new mongoose.Schema(
         dataNascimento:{type:Date},
         sexo:{type:String},
         cep:{type:String},
-        endereço:{type:String}
+        endereco:{type:String}
     }
 )
 const cliente = mongoose.model("cliente",clienteSchema)
