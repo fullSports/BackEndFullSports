@@ -4,7 +4,7 @@ const clienteSchema = new mongoose.Schema(
         id:{type:String}, 
         cpf:{type:String},
         nome:{type:String},
-        dataNascimento:{type:Date},
+        dataNascimento:{type: String},
         sexo:{type:String},
         cep:{type:String},
         endereco:{type:String}
