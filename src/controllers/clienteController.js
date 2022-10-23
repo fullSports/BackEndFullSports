@@ -29,13 +29,13 @@ class clienteController{
     static listarClienteId = (req, res)=>{
         const id = req.params.id;
 
-        cliente.findById(id).populate('cliente').exec((err,cliente)=>{
+        cliente.findById(id, (err, clientes)=>{
             if(err){
-                res.status(400).send({message: `${err.message} - id do cliente não localizado`});
+                res.status(400).sed({menssage: `${err.menssage} - id do cliente não encotrado`});
             }else{
-                res.status(200).send(cliente);
-            };
-        });
+                res.status(200).send(clientes);
+            }
+        })
     }
     static excluirCliente = (req, res)=>{
         const id = req.params.id;
