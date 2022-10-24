@@ -1,35 +1,17 @@
-const { post } = require("../app.js");
 const cliente = require("../models/cliente.js");
-const imagem = require("./../models/imagem.js");
 class clienteController {
     static listarClientes = (req, res) => {
-        // cliente.find((err, cliente)=>{
-        //     res.status(200).json(cliente)
-        //    })
-
-        imagem.find((err, imagem) => {
-            res.status(200).json(imagem)
-
+        cliente.find((err, cliente) => {
+            res.status(200).json(cliente)
         })
     }
     static cadastrarCliente = async (req, res) => {
-        // let clientes = new cliente(req.body);
-        const { originalname: name, size, key, url = "" } = req.file;
-
-        const imagemPost = await imagem.create({
-            name,
-            size,
-            key,
-            url
-        })
-        res.json(imagemPost)
-
-
+        let clientes = new cliente(req.body);
         clientes.save((err) => {
             if (err) {
                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o cliente` }));
             } else {
-                res.status(200).send(clientes.toJSON())
+                res.status(200).send(clientes.toJSON(imagemPost))
             };
         });
 

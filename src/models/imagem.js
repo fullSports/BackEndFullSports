@@ -1,4 +1,11 @@
 const mongoose = require('mongoose');
+require("dotenv").config();
+const aws = require('aws-sdk');
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
+
+const  s3 = new aws.S3();
 
 const ImagemSchema = new mongoose.Schema({
     name: String,
@@ -10,4 +17,22 @@ const ImagemSchema = new mongoose.Schema({
         default: Date.now,
     }
 });
-module.exports = mongoose.model("imagem", ImagemSchema);
+ImagemSchema.pre('save',function(){
+   if(!this.url) {
+        this.url=`${process.env.APP_URL}/files/${this.key}`;
+   }
+});
+ImagemSchema.pre('remove',function(){
+    if(process.env.STORAGE_TYPE === 's3'){
+        return s3.deleteObject({
+            Bucket: 'upload-image-fullsports',
+            key: this.key
+        }).promise()
+    }else{
+        return promisify(
+        fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.key)
+        );
+    }
+});
+const imagem = mongoose.model("imagem", ImagemSchema);
+module.exports = imagem
