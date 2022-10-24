@@ -1,4 +1,4 @@
-import cliente from "../models/cliente.js";
+const cliente = require ("../models/cliente.js");
 class clienteController{
     static listarClientes = (req, res)=>{
         cliente.find((err, cliente)=>{
@@ -48,4 +48,4 @@ class clienteController{
         });
     }
 }
-export default clienteController
+module.exports = clienteController;

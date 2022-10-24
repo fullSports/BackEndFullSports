@@ -1,5 +1,5 @@
-import express from 'express';
-import routerCliente from './clienteRoutes.js';
+const express = require('express');
+const routerCliente = require('./clienteRoutes.js');
 
 const routes = (app)=>{
     app.route('/').get((req,res)=>{
@@ -10,4 +10,4 @@ const routes = (app)=>{
         routerCliente
     )
 }
-export default routes
+module.exports = routes

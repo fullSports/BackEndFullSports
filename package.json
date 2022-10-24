@@ -1,7 +1,6 @@
 {
   "name": "backendfullsports",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,6 +14,8 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mongoose": "^6.6.2",
+    "morgan": "^1.10.0",
+    "muter": "^0.7.0",
     "nodemon": "^2.0.20"
   }
 }

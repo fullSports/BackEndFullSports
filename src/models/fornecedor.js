@@ -1,10 +1,16 @@
-import mongoose from "mongoose";
+const mongoose = require ("mongoose");
 const fornecedorSchema = new mongoose.Schema(
     {
-        id:{type:String},
-        cnpj:{type:String},
-        endereco:{type:String}
+        id:{
+            type:String
+        },
+        cnpj:{
+            type:String
+        },
+        endereco:{
+            type:String
+        }
     }
 )
-const fornecedor = mongoose.model("fornecedor",fornecedorSchema)
-export default fornecedor
+const fornecedor = mongoose.model("fornecedor",fornecedorSchema);
+module.exports = fornecedor;
