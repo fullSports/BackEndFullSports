@@ -1,9 +1,6 @@
 const mongoose = require ("mongoose");
 const clienteSchema = new mongoose.Schema(
     {
-        id:{
-            type:String
-        }, 
         cpf:{
             type:String,
             required: true
@@ -33,9 +30,7 @@ const clienteSchema = new mongoose.Schema(
             required: true
         },
         imagePerfil: {
-            type: String,
-            required: true,
-            trim: true
+            type: mongoose.Schema.Types.ObjectId,ref: 'imagem', required: true,
         }
     });
 const cliente = mongoose.model("cliente",clienteSchema);
