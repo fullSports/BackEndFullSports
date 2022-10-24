@@ -11,7 +11,7 @@ class clienteController {
             if (err) {
                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o cliente` }));
             } else {
-                res.status(200).send(clientes.toJSON(imagemPost))
+                res.status(200).send(clientes.toJSON())
             };
         });
 

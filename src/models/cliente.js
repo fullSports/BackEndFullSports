@@ -30,7 +30,7 @@ const clienteSchema = new mongoose.Schema(
             required: true
         },
         imagePerfil: {
-            type: mongoose.Schema.Types.ObjectId,ref: 'imagem', required: true,
+            type: mongoose.Schema.Types.ObjectId,ref: 'imagem'
         }
     });
 const cliente = mongoose.model("cliente",clienteSchema);
