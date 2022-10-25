@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require ('express');
 const cors = require ("cors");
 const morgan = require('morgan')
 const routes = require ("./routes/index.js");
 const db = require ("./config/dbConnect.js");
+const path = require('path')
 const app = express(); 
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Headers", '*');
@@ -18,7 +20,8 @@ db.once("open", ()=> {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use(morgan)
+app.use(morgan('default'))
+app.use('/files',express.static(path.resolve(__dirname,'..','tmp','uploads')))
 routes(app)
 
 
