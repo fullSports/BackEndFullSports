@@ -1,6 +1,8 @@
 const express = require('express');
 const routerCliente = require('./clienteRoutes.js');
+const routeFornecedor = require('./fornecedorRoutes.js');
 const routerImagem = require('./imagemRoutes.js');
+const routeProduto = require('./produtoRoutes.js');
 require('dotenv').config()
 const routes = (app)=>{
     app.route('/').get((req,res)=>{
@@ -9,7 +11,9 @@ const routes = (app)=>{
     app.use(
         express.json(),
         routerCliente,
-        routerImagem
+        routerImagem,
+        routeProduto,
+        routeFornecedor
     )
 }
 module.exports = routes
