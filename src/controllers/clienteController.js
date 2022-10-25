@@ -6,7 +6,7 @@ class clienteController {
         })
     }
     static cadastrarCliente = async (req, res) => {
-        let clientes = new cliente(req.body);
+        let clientes = new cliente(req.body, req.file);
         clientes.save((err) => {
             if (err) {
                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o cliente` }));
