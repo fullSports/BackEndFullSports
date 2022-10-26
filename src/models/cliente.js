@@ -4,7 +4,7 @@ const aws = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-
+const ImagemSchema = require("./imagem.js")
 const  s3 = new aws.S3();
 
 const clienteSchema = new mongoose.Schema(
@@ -38,14 +38,7 @@ const clienteSchema = new mongoose.Schema(
             required: true
         },
         imagePerfil: {
-            name: String,
-            size: Number,
-            key: String,
-            url: String,
-            createAt: {
-                type: Date,
-                default: Date.now,
-            }
+           type: mongoose.Schema.Types.ObjectId, ref: 'imagem',
         }
     });
 clienteSchema.pre('save',function(){

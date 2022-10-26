@@ -14,7 +14,7 @@ class clienteController {
                 res.status(200).send(clientes.toJSON())
             };
         });
-
+        
     }
     static atualizarCliente = (req, res) => {
         const id = req.params.id;
