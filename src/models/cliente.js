@@ -38,7 +38,15 @@ const clienteSchema = new mongoose.Schema(
             required: true
         },
         imagePerfil: {
-           type: mongoose.Schema.Types.ObjectId, ref: 'imagem',
+            // name: String,
+            // size: Number,
+            // key: String,
+            // url: String,
+            // createAt: {
+            //     type: Date,
+            //     default: Date.now,
+            // }
+            type: mongoose.Schema.Types.ObjectId,ref: 'imagem'
         }
     });
 clienteSchema.pre('save',function(){

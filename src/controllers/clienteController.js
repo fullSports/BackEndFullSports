@@ -14,7 +14,18 @@ class clienteController {
                 res.status(200).send(clientes.toJSON())
             };
         });
-        
+        // const { originalname: name, size, key, location: url = "" } = req.file;
+        // const { originalname: cpf,nome,dataNascimento,sexo,cep,endereco, } = req.body;
+
+        // const PostCliente = await cliente.create({
+        //     imagePerfil:{
+        //         name,
+        //         size,
+        //         key,
+        //         url
+        //     }
+        // });
+        // res.json(PostCliente);
     }
     static atualizarCliente = (req, res) => {
         const id = req.params.id;
