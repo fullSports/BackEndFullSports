@@ -34,5 +34,5 @@ ImagemSchema.pre('remove',function(){
         );
     }
 });
-const imagem = mongoose.model("imagem", ImagemSchema);
+const imagem = mongoose.model("imagems", ImagemSchema);
 module.exports = imagem

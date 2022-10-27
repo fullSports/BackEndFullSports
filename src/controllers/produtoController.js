@@ -5,8 +5,8 @@ class produtoController {
             res.status(200).json(produto)
         })
     }
-    static cadastrarProduto = async (req, res) => {
-        let produtos = new produto(req.body, req.file);
+    static cadastrarProduto =(req, res) => {
+        let produtos = new produto(req.body);
         produtos.save((err) => {
             if (err) {
                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o produto` }));

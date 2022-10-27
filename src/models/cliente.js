@@ -37,35 +37,25 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        imagePerfil: {
-            // name: String,
-            // size: Number,
-            // key: String,
-            // url: String,
-            // createAt: {
-            //     type: Date,
-            //     default: Date.now,
-            // }
-            type: mongoose.Schema.Types.ObjectId,ref: 'imagem'
-        }
+        imagems:{type: mongoose.Schema.Types.ObjectId,ref: 'imagem', required: true},
     });
 clienteSchema.pre('save',function(){
-    if(!this.imagePerfil.url) {
-         this.imagePerfil.url=`${process.env.APP_URL}/files/${this.imagePerfil.key}`;
+    if(!this.imagems.url) {
+         this.imagems.url=`${process.env.APP_URL}/files/${this.imagems.key}`;
     }
  });
  clienteSchema.pre('remove',function(){
     if(process.env.STORAGE_TYPE === 's3'){
         return s3.deleteObject({
             Bucket: 'upload-image-fullsports',
-            key: this.imagePerfil.key
+            key: this.imagems.key
         }).promise()
     }else{
         return promisify(
-        fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.imagePerfil.key)
+        fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.imagems.key)
         );
     }
 });
 
-const cliente = mongoose.model("cliente", clienteSchema);
+const cliente = mongoose.model("clientes", clienteSchema);
 module.exports = cliente;
