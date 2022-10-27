@@ -5,8 +5,8 @@ class fornecedorController {
             res.status(200).json(fornecedor)
         })
     }
-    static cadastrarFornecedor = async (req, res) => {
-        let fornecedors = new fornecedor(req.body, req.file);
+    static cadastrarFornecedor = (req, res) => {
+        let fornecedors = new fornecedor(req.body);
         fornecedors.save((err) => {
             if (err) {
                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o fornecedor` }));

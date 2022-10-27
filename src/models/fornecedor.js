@@ -12,5 +12,5 @@ const fornecedorSchema = new mongoose.Schema(
         }
     }
 )
-const fornecedor = mongoose.model("fornecedor",fornecedorSchema);
+const fornecedor = mongoose.model("fornecedores",fornecedorSchema);
 module.exports = fornecedor;

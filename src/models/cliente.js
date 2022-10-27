@@ -37,25 +37,25 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        imagems:{type: mongoose.Schema.Types.ObjectId,ref: 'imagem', required: true},
+        imagems:{type: mongoose.Schema.Types.ObjectId,ref: 'imagens', required: true},
     });
-clienteSchema.pre('save',function(){
-    if(!this.imagems.url) {
-         this.imagems.url=`${process.env.APP_URL}/files/${this.imagems.key}`;
-    }
- });
- clienteSchema.pre('remove',function(){
-    if(process.env.STORAGE_TYPE === 's3'){
-        return s3.deleteObject({
-            Bucket: 'upload-image-fullsports',
-            key: this.imagems.key
-        }).promise()
-    }else{
-        return promisify(
-        fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.imagems.key)
-        );
-    }
-});
+// clienteSchema.pre('save',function(){
+//     if(!this.imagems.url) {
+//          this.imagems.url=`${process.env.APP_URL}/files/${this.imagems.key}`;
+//     }
+//  });
+//  clienteSchema.pre('remove',function(){
+//     if(process.env.STORAGE_TYPE === 's3'){
+//         return s3.deleteObject({
+//             Bucket: 'upload-image-fullsports',
+//             key: this.imagems.key
+//         }).promise()
+//     }else{
+//         return promisify(
+//         fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.imagems.key)
+//         );
+//     }
+// });
 
 const cliente = mongoose.model("clientes", clienteSchema);
 module.exports = cliente;
