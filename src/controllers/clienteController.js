@@ -1,4 +1,8 @@
+const { remove } = require("../models/cliente.js");
 const cliente = require("../models/cliente.js");
+const Imagem = require("../models/imagem.js");
+require('dotenv').config()
+
 class clienteController {
     static listarClientes = (req, res) => {
         cliente.find()
@@ -41,15 +45,29 @@ class clienteController {
             }
         })
     }
-    static excluirCliente = (req, res) => {
+    static excluirCliente  = async(req, res) => {
         const id = req.params.id;
-        cliente.findByIdAndDelete(id, (err) => {
-            if (!err) {
-                res.status(200).send({ message: 'cliente deletado com sucesso' });
-            } else {
-                res.status(500).send({ message: `${err.message} - erro ao excluir o cliente` });
-            }
-        });
+
+        let url = process.env.APP_URL+"/listar-cliente/"+id
+        console.log(url)
+        var XMLHttpRequest = require('xhr2');
+        let req1 = new XMLHttpRequest();
+        req1.open("GET",url)
+        req1.send();
+        req1.onload = async ()=> {
+        if(req1.status===200){
+            let resposta = JSON.parse(req1.response);
+            console.log(resposta.imagemPerfil._id)
+           const clienteDelete = await cliente.findById(id)
+           await clienteDelete.remove();
+
+           const imagem = await Imagem.findById(resposta.imagemPerfil._id);
+            await imagem.remove();
+           return res.send({message: "cliente deletado com sucesso"})
+        }
+    }
+
+       
     }
 }
 module.exports = clienteController;
