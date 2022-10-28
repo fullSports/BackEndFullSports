@@ -37,7 +37,10 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        imagems:{type: mongoose.Schema.Types.ObjectId,ref: 'imagens', required: true},
+        imagemPerfil:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'imagem', 
+        required: true
+    },
     });
 // clienteSchema.pre('save',function(){
 //     if(!this.imagems.url) {

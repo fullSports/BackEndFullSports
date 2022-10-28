@@ -3,7 +3,6 @@ const routerCliente = require('./clienteRoutes.js');
 const routeFornecedor = require('./fornecedorRoutes.js');
 const routerImagem = require('./imagemRoutes.js');
 const routeProduto = require('./produtoRoutes.js');
-require('dotenv').config()
 const routes = (app)=>{
     app.route('/').get((req,res)=>{
         res.status(200).json({"status": "iniciado"})

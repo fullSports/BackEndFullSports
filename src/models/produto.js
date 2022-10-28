@@ -4,7 +4,7 @@ const produtoSchema = new mongoose.Schema(
         id:{
             type:String
         },
-        cnpj:{type: mongoose.Schema.Types.ObjectId,ref: 'fornecedores', required: true},
+        cnpj:{type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', required: true},
           
         tipoProduto:{
             type:String, 

@@ -1,7 +1,9 @@
 const cliente = require("../models/cliente.js");
 class clienteController {
     static listarClientes = (req, res) => {
-        cliente.find((err, cliente) => {
+        cliente.find()
+        .populate("imagemPerfil")
+        .exec((err, cliente) => {
             res.status(200).json(cliente)
         })
     }
@@ -29,8 +31,9 @@ class clienteController {
     }
     static listarClienteId = (req, res) => {
         const id = req.params.id;
-
-        cliente.findById(id, (err, clientes) => {
+        cliente.findById(id)
+        .populate('imagemPerfil')
+        .exec((err, clientes) => {
             if (err) {
                 res.status(400).sed({ menssage: `${err.menssage} - id do cliente não encotrado` });
             } else {
