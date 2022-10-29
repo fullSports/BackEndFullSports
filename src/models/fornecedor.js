@@ -5,10 +5,16 @@ const fornecedorSchema = new mongoose.Schema(
             type:String
         },
         cnpj:{
-            type:String
+            type:String,
+            require
+        },
+        nomeEmpresa:{
+            type:String,
+            require
         },
         endereco:{
-            type:String
+            type:String,
+            require
         }
     }
 )
