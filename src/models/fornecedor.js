@@ -15,6 +15,10 @@ const fornecedorSchema = new mongoose.Schema(
         endereco:{
             type:String,
             require
+        },
+        dataCadastro:{
+            type:String,
+            require
         }
     }
 )
