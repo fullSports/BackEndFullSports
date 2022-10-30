@@ -3,9 +3,11 @@ const produtoSchema = new mongoose.Schema(
     {
         id:{
             type:String
+        },       
+        nomeProduto:{
+            type: String,
+            require: true
         },
-        cnpj:{type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', required: true},
-          
         tipoProduto:{
             type:String, 
             required:true
@@ -26,7 +28,7 @@ const produtoSchema = new mongoose.Schema(
             type: String,
             required:true
         },
-
+        fornecedor:{type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', required: true},
     });
 const produto = mongoose.model("produtos",produtoSchema);
 module.exports=produto;

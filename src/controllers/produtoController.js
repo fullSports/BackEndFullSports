@@ -2,7 +2,7 @@ const produto = require("../models/produto.js");
 class produtoController {
     static listarProdutos = (req, res) => {
         produto.find()
-        .populate('cnpj')
+        .populate('fornecedor')
         .exec((err, produtos)=>{
             res.status(200).json(produtos);
         });
@@ -32,7 +32,7 @@ class produtoController {
     static listarProdutoId = (req, res) => {
         const id = req.params.id;
         produto.findById(id)
-        .populate('cnpj')
+        .populate('fornecedor')
         .exec((err, produtos) => {
             if (err) {
                 res.status(400).sed({ menssage: `${err.menssage} - id do produto não encotrado` });
