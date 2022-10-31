@@ -57,13 +57,18 @@ class clienteController {
         req1.onload = async () => {
             if (req1.status === 200) {
                 let resposta = JSON.parse(req1.response);
-                console.log(resposta.imagemPerfil._id)
-                const clienteDelete = await cliente.findById(id)
-                await clienteDelete.remove();
-
-                const imagem = await Imagem.findById(resposta.imagemPerfil._id);
-                await imagem.remove();
-                return res.send({ message: "cliente deletado com sucesso" })
+               
+                if (resposta.imagemPerfil == null) {
+                    const clienteDelete = await cliente.findById(id)
+                    await clienteDelete.remove();
+                    return res.send({ message: "cliente deletado com sucesso" })
+                } else {
+                    const clienteDelete = await cliente.findById(id)
+                    await clienteDelete.remove();
+                    const imagem = await Imagem.findById(resposta.imagemPerfil._id);
+                    await imagem.remove();
+                    return res.send({ message: "cliente deletado com sucesso" })
+                }
             }
         }
 
