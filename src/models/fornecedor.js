@@ -6,19 +6,23 @@ const fornecedorSchema = new mongoose.Schema(
         },
         cnpj:{
             type:String,
-            require
+            require: true  
         },
         nomeEmpresa:{
             type:String,
-            require
+            require: true  
+        },
+        cep:{
+          type: String,
+          require: true  
         },
         endereco:{
             type:String,
-            require
+            require: true  
         },
         dataCadastro:{
             type:String,
-            require
+            require: true  
         }
     }
 )
