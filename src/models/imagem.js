@@ -25,8 +25,8 @@ ImagemSchema.pre('save',function(){
 ImagemSchema.pre('remove',function(){
     if(process.env.STORAGE_TYPE === 's3'){
         return s3.deleteObject({
-            Bucket: 'upload-image-fullsports',
-            key: this.key
+            Bucket: process.env.BUCKET_AWS,
+            Key: this.key
         }).promise()
     }else{
         return promisify(

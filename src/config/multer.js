@@ -19,7 +19,7 @@ const storageTypes = {
     }),
     s3: multerS3({
         s3: new aws.S3(),
-        bucket: 'upload-image-fullsports',
+        bucket: process.env.BUCKET_AWS,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl:'public-read',
         key: (req, file, cb)=>{
