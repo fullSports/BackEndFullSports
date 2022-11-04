@@ -57,7 +57,7 @@ class produtoController {
             if (req1.status === 200) {
                 let resposta = JSON.parse(req1.response);
 
-                if(resposta.imagemProduto === null || resposta.imagemProduto.length===0 ){
+                if(resposta.imagemProduto === null){
                     produto.findByIdAndDelete(id, (err) => {
                         if (!err) {
                             res.status(200).send({ message: 'produto  deletado com sucesso1' });
@@ -72,6 +72,8 @@ class produtoController {
                             const imagem = await Imagem.findById(item._id);
                             await imagem.remove();
                             })
+                            const produtoDelete = await produto.findById(id)
+                            produtoDelete.remove()
                             res.status(200).send({ message: 'produto deletado com sucesso-' });
                         } else {
                             res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
