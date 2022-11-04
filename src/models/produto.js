@@ -28,7 +28,13 @@ const produtoSchema = new mongoose.Schema(
             type: String,
             required:true
         },
-        fornecedor:{type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', required: true},
+        fornecedor:{
+            type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', 
+            required: true
+        },
+        imagemProduto: [
+            {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
+        ]
     });
 const produto = mongoose.model("produtos",produtoSchema);
 module.exports=produto;
