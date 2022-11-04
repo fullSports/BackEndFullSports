@@ -1,4 +1,3 @@
-const { remove } = require("../models/cliente.js");
 const cliente = require("../models/cliente.js");
 const Imagem = require("../models/imagem.js");
 require('dotenv').config()
@@ -54,25 +53,34 @@ class clienteController {
         let req1 = new XMLHttpRequest();
         req1.open("GET", url)
         req1.send();
-        req1.onload = async () => {
+        req1.onload = async (err) => {
             if (req1.status === 200) {
                 let resposta = JSON.parse(req1.response);
-               
+
                 if (resposta.imagemPerfil == null) {
-                    const clienteDelete = await cliente.findById(id)
-                    await clienteDelete.remove();
-                    return res.send({ message: "cliente deletado com sucesso" })
+                    cliente.findByIdAndDelete(id, (err) => {
+                        if (!err) {
+                            res.status(200).send({ message: 'cliente deletado com sucesso' });
+                        } else {
+                            res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
+                        }
+                    });
                 } else {
-                    const clienteDelete = await cliente.findById(id)
-                    await clienteDelete.remove();
-                    const imagem = await Imagem.findById(resposta.imagemPerfil._id);
-                    await imagem.remove();
-                    return res.send({ message: "cliente deletado com sucesso" })
+                    cliente.findByIdAndDelete(id, async (err) => {
+                        if (!err) {
+                            const imagem = await Imagem.findById(resposta.imagemPerfil._id);
+                            await imagem.remove();
+                            res.status(200).send({ message: 'cliente deletado com sucesso' });
+                        } else {
+                            res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
+                        }
+                    });
                 }
             }
         }
-
-
     }
+
+
+
 }
 module.exports = clienteController;

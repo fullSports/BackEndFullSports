@@ -6,5 +6,5 @@ routeProduto
     .get("/listar-produto/:id", produtoController.listarProdutoId)
     .post("/cadastrar-produto", produtoController.cadastrarProduto)
     .put("/atualizar-produto/:id", produtoController.atualizarProduto)
-    .delete("/deletar-produtos/:id", produtoController.excluirProduto)
+    .delete("/deletar-produto/:id", produtoController.excluirProduto)
 module.exports = routeProduto    
