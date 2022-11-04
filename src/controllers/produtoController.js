@@ -2,7 +2,7 @@ const produto = require("../models/produto.js");
 class produtoController {
     static listarProdutos = (req, res) => {
         produto.find()
-        // .populate('fornecedor')
+        .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, produtos)=>{
             res.status(200).json(produtos);
