@@ -1,4 +1,5 @@
 const express = require('express');
+const routerequipamento = require('./categorias/equipamentoRoutes.js');
 const routerRoupa = require('./categorias/roupaRoutes.js');
 const routerCliente = require('./clienteRoutes.js');
 const routeFornecedor = require('./fornecedorRoutes.js');
@@ -14,7 +15,8 @@ const routes = (app)=>{
         routerImagem,
         routeProduto,
         routeFornecedor,
-        routerRoupa
+        routerRoupa,
+        routerequipamento
     )
 }
 module.exports = routes
