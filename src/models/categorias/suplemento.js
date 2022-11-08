@@ -20,9 +20,6 @@ const suplementoSchema = new mongoose.Schema({
         type:Number, 
         required:true
     },
-    dataCadastro:{
-        type: String,
-    },
     imagemProduto: [
         {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
     ]

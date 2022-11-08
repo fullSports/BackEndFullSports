@@ -24,10 +24,6 @@ const roupaSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    categoria:{
-        type: String,
-        required: true
-    },
     preco:{
         type:String,
         required:true
@@ -35,9 +31,6 @@ const roupaSchema = new mongoose.Schema({
     quantidade:{
         type:Number, 
         required:true
-    },
-    dataCadastro:{
-        type: String,
     },
     imagemProduto: [
         {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
