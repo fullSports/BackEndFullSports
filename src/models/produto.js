@@ -32,6 +32,7 @@ const produtoSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', 
             required: true
         },
+    
         imagemProduto: [
             {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
         ]
