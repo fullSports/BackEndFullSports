@@ -9,13 +9,13 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        email: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true
+        login:{
+            adm:{
+                type: mongoose.Schema.Types.ObjectId, ref: 'login',
+            },
+            cliente:{
+                type: mongoose.Schema.Types.ObjectId, ref: 'login',
+            }
         },
         dataNascimento: {
             type: String,
@@ -37,10 +37,9 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-    //      imagemPerfil:{
-    //      type: mongoose.Schema.Types.ObjectId,ref: 'imagem', 
-    //      required: true
-    //  },
+         imagemPerfil:{
+         type: mongoose.Schema.Types.ObjectId,ref: 'imagem'
+     },
     });
 
 const cliente = mongoose.model("clientes", clienteSchema);
