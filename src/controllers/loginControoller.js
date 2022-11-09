@@ -1,25 +1,38 @@
-const login = require = require("../models/login.js");
-
+const login = require("../models/login.js");
+const bcrypt = require("bcrypt");
+const { hash } = require("bcrypt");
 class loginController {
     static cadastrarLogin = async (req, res) => {
         let loginBody = new login(req.body);
-        const {email} = req.body
+        const { email, password, isAdmin } = req.body
         try {
             const usuarioExiste = await login.findOne({ email })
-            if(!usuarioExiste){
-                loginBody.save((err) => {
-                    if (err) {
-                        res.status(500).send(({ message: `${err.message} - falha ao cadastrar o login` }));
-                    } else {
-                        res.status(200).send(loginBody.toJSON())
-                    };
-                })
-            }else{
-                res.status(200).send(({message: "email ja cadastrado"}))
-            }    
-    }catch (error) {
-        res.status(500).json({ message: "Erro ao pesquisar email!" })
-    }
+            if (!usuarioExiste) {
+                bcrypt.hash(password, 10)
+                    .then(hash => {
+                        let encryptedPassowrd = hash
+
+                        let newLogin = new login({
+                            email: email,
+                            password: encryptedPassowrd,
+                            isAdmin: isAdmin
+                        });
+                        newLogin.save((err) => {
+                            if (err) {
+                                res.status(500).send(({ message: `${err.message} - falha ao cadastrar o login` }));
+                            } else {
+                                res.status(200).send(loginBody.toJSON())
+                            };
+                        })
+                    }).catch(err => res.status(500).json({ message: `erro ao cadastrar login- ${err}` }))
+
+
+            } else {
+                res.status(200).send(({ message: "email ja cadastrado" }))
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Erro ao pesquisar email!" })
+        }
     }
     static listarLogin = (req, res) => {
         login.find((err, loginBody) => {
@@ -63,14 +76,19 @@ class loginController {
         });
     }
     static realizarLogin = async (req, res) => {
-        const {email,password} = req.body
+        const { email, password } = req.body
         try {
             const usuarioExiste = await login.findOne({ email })
             console.log(usuarioExiste.email)
-            if (!usuarioExiste) return res.status(404).send("Email Não Encontrado!")
-            const passwordValido = password == usuarioExiste.password
-            if (!passwordValido) return res.status(404).send("Senha incorreta!")
-            res.status(200).json({ result: usuarioExiste })
+            if (!usuarioExiste) return res.status(404).send({ message: "email já existe" })
+            const comparaSenha = await bcrypt.compareSync(password, usuarioExiste.password)
+            if (comparaSenha) {
+                console.log("senha correta ")
+                return res.status(200).json({ result: usuarioExiste })
+            } else {
+                return res.status(404).send({ message: "senha incorreta" })
+            }
+
         } catch (error) {
             res.status(500).json({ message: "Erro ao Tentar Login!" })
         }
