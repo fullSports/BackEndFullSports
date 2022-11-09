@@ -10,6 +10,11 @@ const loginSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        isAdmin:{
+            type: Boolean,
+            required: true,
+            default: false
+        }
     }
 );
 const login = mongoose.model("login", loginSchema);
