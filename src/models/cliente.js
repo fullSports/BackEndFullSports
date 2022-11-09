@@ -9,6 +9,14 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        email: {
+            type: String,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
         dataNascimento: {
             type: String,
             required: true
@@ -29,10 +37,10 @@ const clienteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        imagemPerfil:{
-        type: mongoose.Schema.Types.ObjectId,ref: 'imagem', 
-        required: true
-    },
+    //      imagemPerfil:{
+    //      type: mongoose.Schema.Types.ObjectId,ref: 'imagem', 
+    //      required: true
+    //  },
     });
 
 const cliente = mongoose.model("clientes", clienteSchema);

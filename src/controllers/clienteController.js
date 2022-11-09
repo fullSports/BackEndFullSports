@@ -5,7 +5,7 @@ require('dotenv').config()
 class clienteController {
     static listarClientes = (req, res) => {
         cliente.find()
-            .populate("imagemPerfil")
+            // .populate("imagemPerfil")
             .exec((err, cliente) => {
                 res.status(200).json(cliente)
             })
@@ -18,7 +18,20 @@ class clienteController {
             } else {
                 res.status(200).send(clientes.toJSON())
             };
-        });
+        });     
+    }
+    static loginCliente = async(req, res) => {
+        const {email,password} = req.body
+        try {
+            const usuarioExiste = await cliente.findOne({email})
+            console.log(usuarioExiste.email)
+            if(!usuarioExiste) return res.status(404).send("Email Não Encontrado!")
+            const passwordValido = password==usuarioExiste.password
+            if(!passwordValido) return res.status(404).send("Senha incorreta!")
+            res.status(200).json({result:usuarioExiste})
+        } catch (error) {
+            res.status(500).json({message:"Erro ao Tentar Login!"})
+        }
 
     }
     static atualizarCliente = (req, res) => {
