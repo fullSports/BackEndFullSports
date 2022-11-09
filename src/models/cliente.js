@@ -10,7 +10,8 @@ const clienteSchema = new mongoose.Schema(
             required: true
         },
         login:{
-            type: mongoose.Schema.Types.ObjectId, ref: 'login',
+            type: mongoose.Schema.Types.ObjectId,ref: 'login',
+            required: true
         },
         dataNascimento: {
             type: String,

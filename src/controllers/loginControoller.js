@@ -1,6 +1,5 @@
 const login = require("../models/login.js");
 const bcrypt = require("bcrypt");
-const { hash } = require("bcrypt");
 class loginController {
     static cadastrarLogin = async (req, res) => {
         let loginBody = new login(req.body);

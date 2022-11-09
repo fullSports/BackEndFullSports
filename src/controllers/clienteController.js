@@ -1,6 +1,7 @@
 const api = require("../config/api.js");
 const cliente = require("../models/cliente.js");
 const Imagem = require("../models/imagem.js");
+const Login = require("../models/login.js");
 require('dotenv').config()
 
 class clienteController {
@@ -37,6 +38,7 @@ class clienteController {
         const id = req.params.id;
         cliente.findById(id)
             .populate('imagemPerfil')
+            .populate('login')
             .exec((err, clientes) => {
                 if (err) {
                     res.status(400).sed({ menssage: `${err.menssage} - id do cliente não encotrado` });
@@ -50,8 +52,11 @@ class clienteController {
         api.request({
             method: "GET",
             url: `listar-cliente/${id}`,
-        }).then(async (resposta) => {
-            if (resposta.imagemPerfil == null ||resposta.imagemPerfil == undefined) {
+        }).then(async resposta => {
+
+            if (resposta.data.imagemPerfil == null || resposta.data.imagemPerfil == undefined) {
+                const login = await Login.findById(resposta.data.login._id)
+                await login.remove();
                 cliente.findByIdAndDelete(id, (err) => {
                     if (!err) {
                         res.status(200).send({ message: 'cliente deletado com sucesso' });
@@ -60,17 +65,20 @@ class clienteController {
                     }
                 });
             } else {
-                cliente.findByIdAndDelete(id, async (err) => {
-                    if (!err) {
-                        const imagem = await Imagem.findById(resposta.imagemPerfil._id);
-                        await imagem.remove();
-                        res.status(200).send({ message: 'cliente deletado com sucesso' });
-                    } else {
-                        res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
-                    }
-                });
+                console.log(resposta.data.imagemPerfil._id)
+                const imagem = await Imagem.findById(resposta.data.imagemPerfil._id);
+                await imagem.remove();
+                const login = await Login.findById(resposta.data.login._id)
+                await login.remove();
+                const clienteId = await cliente.findById(id)
+                await clienteId.remove()
+                console.log(resposta.data.imagemPerfil._id)
+                return res.status(200).send({ message: 'cliente deletado com sucesso' });
             }
-        }).catch((err) => console.log(err))
+        }).catch((err) => {
+            console.log(err)
+            res.status(500).send({ message: `${err.message} - erro ao deletar o cliente` });
+        })
     }
 
 
