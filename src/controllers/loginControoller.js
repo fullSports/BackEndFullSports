@@ -20,7 +20,7 @@ class loginController {
                             if (err) {
                                 res.status(500).send(({ message: `${err.message} - falha ao cadastrar o login` }));
                             } else {
-                                res.status(200).send(loginBody.toJSON())
+                                res.status(200).send(newLogin.toJSON())
                             };
                         })
                     }).catch(err => res.status(500).json({ message: `erro ao cadastrar login- ${err}` }))
