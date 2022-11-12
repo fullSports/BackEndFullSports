@@ -5,15 +5,27 @@ class fornecedorController {
             res.status(200).json(fornecedor)
         })
     }
-    static cadastrarFornecedor = (req, res) => {
+    static cadastrarFornecedor = async (req, res) => {
         let fornecedors = new fornecedor(req.body);
-        fornecedors.save((err) => {
-            if (err) {
-                res.status(500).send(({ message: `${err.message} - falha ao cadastrar o fornecedor` }));
-            } else {
-                res.status(200).send(fornecedors.toJSON())
-            };
-        });
+        const {cnpj} = req.body;
+
+       try{
+        const fornecedorExiste = await fornecedor.findOne({cnpj})
+
+        if(!fornecedorExiste){
+            fornecedors.save((err) => {
+                if (err) {
+                    res.status(500).send(({ message: `${err.message} - falha ao cadastrar o fornecedor` }));
+                } else {
+                    res.status(200).send(fornecedors.toJSON())
+                };
+            });
+        }else{
+            res.status(200).send(({ message: "cnpj ja cadastrado" }))
+        }
+       }catch (error) {
+        res.status(500).json({ message: "Erro ao pesquisar cnpj" })
+    }
 
     }
     static atualizarfornecedor = (req, res) => {
