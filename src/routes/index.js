@@ -1,4 +1,5 @@
 const express = require('express');
+const routerCalcado = require('./categorias/calcadoRoutes.js');
 const routerequipamento = require('./categorias/equipamentoRoutes.js');
 const routerRoupa = require('./categorias/roupaRoutes.js');
 const routersuplemento = require('./categorias/suplementoRoutes.js');
@@ -20,7 +21,8 @@ const routes = (app)=>{
         routerRoupa,
         routerequipamento,
         routersuplemento,
-        routerlogin
+        routerlogin,
+        routerCalcado
     )
 }
 module.exports = routes
