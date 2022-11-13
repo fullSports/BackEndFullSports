@@ -7,7 +7,8 @@ const produtoSchema = new mongoose.Schema(
         categoriaProduto: {
             roupa: { type: mongoose.Schema.Types.ObjectId, ref: 'roupas' },
             equipamento: { type: mongoose.Schema.Types.ObjectId, ref: 'equipamentos' },
-            suplemento: { type: mongoose.Schema.Types.ObjectId, ref: 'suplementos' }
+            suplemento: { type: mongoose.Schema.Types.ObjectId, ref: 'suplementos' },
+            calcado:{ type: mongoose.Schema.Types.ObjectId, ref: 'calcados' },
         },
         dataCadastro:{
             type: String,

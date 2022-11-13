@@ -25,5 +25,5 @@ const calçadoSchema = new mongoose.Schema({
     ]
 })
 
-const calcado = mongoose.model("calçados", calçadoSchema);
+const calcado = mongoose.model("calcados", calçadoSchema);
 module.exports = calcado;
