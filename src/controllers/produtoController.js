@@ -17,6 +17,15 @@ class produtoController {
                         }]
                     },
                     {
+                        path:'calcado',
+                        populate: [{
+                            path: 'imagemProduto'
+                        },
+                        {
+                            path: 'fornecedor'
+                        }]
+                    },
+                    {
                         path: 'equipamento',
                         populate: [{
                             path: 'imagemProduto'
@@ -72,7 +81,7 @@ class produtoController {
         produto.findById(id)
             .populate({
                 path: 'categoriaProduto',
-                populate: [{ path: 'roupa' }, { path: 'equipamento' }, { path: 'suplemento' }, { path: 'imagemProduto' }, { path: 'fornecedor' }]
+                populate: [{ path: 'roupa' }, { path: 'calcado' }, { path: 'suplemento' }, { path: 'imagemProduto' }, { path: 'fornecedor' }]
             })
             .exec((err, produtos) => {
                 if (err) {
@@ -107,6 +116,14 @@ class produtoController {
             }
             if (categoria.equipamento != undefined) {
                 return api.delete(`deletar-equipamento/${categoria.equipamento._id}`)
+                    .then(async (resposta) => {
+                        const produtoDelete = await produto.findById(id)
+                        produtoDelete.remove()
+                        res.status(200).send({ message: 'produto deletado com sucesso-' });
+                    }).catch((err) => console.log(err))
+            }
+            if (categoria.calcado != undefined) {
+                return api.delete(`deletar-calcado/${categoria.calcado._id}`)
                     .then(async (resposta) => {
                         const produtoDelete = await produto.findById(id)
                         produtoDelete.remove()
