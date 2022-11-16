@@ -68,6 +68,7 @@ class produtoController {
     }
     static atualizarProduto = (req, res) => {
         const id = req.params.id;
+        
         produto.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (!err) {
                 res.status(200).send({ message: 'produto atualizado com sucesso' });
@@ -79,10 +80,52 @@ class produtoController {
     static listarProdutoId = (req, res) => {
         const id = req.params.id;
         produto.findById(id)
-            .populate({
-                path: 'categoriaProduto',
-                populate: [{ path: 'roupa' }, { path: 'calcado' }, { path: 'suplemento' }, { path: 'imagemProduto' }, { path: 'fornecedor' }]
-            })
+        .populate({
+            path: 'categoriaProduto',
+            populate: [
+                {
+                    path: 'roupa',
+                    populate: [{
+                        path: 'imagemProduto'
+                    },
+                    {
+                        path: 'fornecedor'
+                    }]
+                },
+                {
+                    path:'calcado',
+                    populate: [{
+                        path: 'imagemProduto'
+                    },
+                    {
+                        path: 'fornecedor'
+                    }]
+                },
+                {
+                    path: 'equipamento',
+                    populate: [{
+                        path: 'imagemProduto'
+                    },
+                    {
+                        path: 'fornecedor'
+                    }]
+                },
+                {
+                    path: 'suplemento',
+                    populate: [{
+                        path: 'imagemProduto'
+                    },
+                    {
+                        path: 'fornecedor'
+                    }]
+                }, {
+                    path: 'imagemProduto'
+                },
+                {
+                    path: 'fornecedor'
+                }
+            ]
+        })
             .exec((err, produtos) => {
                 if (err) {
                     res.status(400).sed({ menssage: `${err.menssage} - id do produto não encotrado` });
