@@ -68,6 +68,7 @@ class produtoController {
     }
     static atualizarProduto = (req, res) => {
         const id = req.params.id;
+        
         produto.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (!err) {
                 res.status(200).send({ message: 'produto atualizado com sucesso' });
