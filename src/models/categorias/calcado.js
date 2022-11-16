@@ -1,15 +1,27 @@
 const mongoose = require("mongoose");
 
 const calçadoSchema = new mongoose.Schema({
-    id: {
+    id:{
         type: String
     },
-    nome: {
+    nome:{
         type: String,
         required: true
     },
     fornecedor:{
         type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', 
+        required: true
+    },
+    cor:{
+        type: String,
+        required: true
+    },
+    sexo:{
+        type: String,
+        required: true
+    },
+    tamanho:{
+        type: Number,
         required: true
     },
     preco:{

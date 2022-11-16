@@ -12,6 +12,18 @@ const suplementoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref:'fornecedores', 
         required: true
     },
+    cor:{
+        type: String,
+        required: true
+    },
+    sexo:{
+        type: String,
+        required: true
+    },
+    tamanho:{
+        type: Number,
+        required: true
+    },
     preco:{
         type:String,
         required:true
@@ -23,7 +35,6 @@ const suplementoSchema = new mongoose.Schema({
     imagemProduto: [
         {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
     ]
-
 })
 
 const suplemento = mongoose.model("suplementos", suplementoSchema);
