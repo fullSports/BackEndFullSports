@@ -7,5 +7,6 @@ routerequipamento
     .get("/listar-equipamento/:id", equipamentoController.listarequipamentoId)
     .post("/cadastrar-equipamento", equipamentoController.cadastrarequipamento)
     .put("/atualizar-equipamento/:id", equipamentoController.atualizarequipamento)
-    .delete("/deletar-equipamento/:id",equipamentoController.excluirequipamento)
+    .delete("/deletar-equipamento-e-imagem/:id",equipamentoController.excluirEquipamentoEimagem)
+    .delete("/deletar-equipamento/:id",equipamentoController.excluirEquipamento)
 module.exports = routerequipamento;

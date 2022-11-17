@@ -7,5 +7,6 @@ routerCalcado
     .get("/listar-calcado/:id", calcadoController.listarcalcadoId)
     .post("/cadastrar-calcado", calcadoController.cadastrarcalcado)
     .put("/atualizar-calcado/:id", calcadoController.atualizarcalcado)
-    .delete("/deletar-calcado/:id",calcadoController.excluircalcado)
+    .delete("/deletar-calcado-e-imagem/:id",calcadoController.excluirCalcadoEimagem)
+    .delete("/deletar-calcado/:id",calcadoController.ExcluirCalcado)
 module.exports = routerCalcado;

@@ -44,7 +44,7 @@ class suplementoController {
                 }
             })
     }
-    static excluirsuplemento = (req, res) => {
+    static excluirsuplementoEimagem = (req, res) => {
         const id = req.params.id;
 
         let url = process.env.APP_URL + "/listar-suplemento/" + id;
@@ -83,6 +83,16 @@ class suplementoController {
             }
         }
 
+    }
+    static excluirsuplemento = (req,res) =>{
+        const id = req.params.id;
+        suplemento.findByIdAndDelete(id, (err) => {
+            if (!err) {
+                res.status(200).send({ message: 'suplemento  deletado com sucesso1' });
+            } else {
+                res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
+            }
+        });
     }
 }
 module.exports = suplementoController;

@@ -44,7 +44,7 @@ class calcadoController {
                 }
             })
     }
-    static excluircalcado = (req, res) => {
+    static excluirCalcadoEimagem = (req, res) => {
         const id = req.params.id;
 
         let url = process.env.APP_URL + "/listar-calcado/" + id;
@@ -82,7 +82,16 @@ class calcadoController {
                 }
             }
         }
-
+    }
+    static ExcluirCalcado =(req,res) =>{
+        const id = req.params.id;
+        calcado.findByIdAndDelete(id, (err) => {
+            if (!err) {
+                res.status(200).send({ message: 'calcado  deletado com sucesso1' });
+            } else {
+                res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
+            }
+        });
     }
 }
 module.exports = calcadoController;

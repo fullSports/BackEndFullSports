@@ -142,7 +142,7 @@ class produtoController {
         }).then(async (resposta) => {
             const categoria = resposta.data.categoriaProduto;
             if (categoria.roupa != undefined) {
-                return api.delete(`deletar-roupa/${categoria.roupa._id}`)
+                return api.delete(`deletar-roupa-e-imagem/${categoria.roupa._id}`)
                     .then(async (resposta) => {
                         const produtoDelete = await produto.findById(id)
                         produtoDelete.remove()
@@ -150,7 +150,7 @@ class produtoController {
                     }).catch((err) => console.log(err))
             }
             if (categoria.suplemento != undefined) {
-                return api.delete(`deletar-suplemento/${categoria.suplemento._id}`)
+                return api.delete(`deletar-suplemento-e-imagem/${categoria.suplemento._id}`)
                     .then(async (resposta) => {
                         const produtoDelete = await produto.findById(id)
                         produtoDelete.remove()
@@ -158,7 +158,7 @@ class produtoController {
                     }).catch((err) => console.log(err))
             }
             if (categoria.equipamento != undefined) {
-                return api.delete(`deletar-equipamento/${categoria.equipamento._id}`)
+                return api.delete(`deletar-equipamento-e-imagem/${categoria.equipamento._id}`)
                     .then(async (resposta) => {
                         const produtoDelete = await produto.findById(id)
                         produtoDelete.remove()
@@ -166,7 +166,7 @@ class produtoController {
                     }).catch((err) => console.log(err))
             }
             if (categoria.calcado != undefined) {
-                return api.delete(`deletar-calcado/${categoria.calcado._id}`)
+                return api.delete(`deletar-calcado-e-imagem/${categoria.calcado._id}`)
                     .then(async (resposta) => {
                         const produtoDelete = await produto.findById(id)
                         produtoDelete.remove()

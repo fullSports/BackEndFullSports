@@ -44,7 +44,7 @@ class roupaController {
                 }
             })
     }
-    static excluirRoupa = (req, res) => {
+    static excluirRoupaEimagem = (req, res) => {
         const id = req.params.id;
 
         let url = process.env.APP_URL + "/listar-roupa/" + id;
@@ -82,7 +82,16 @@ class roupaController {
                 }
             }
         }
-
+    }
+    static excluirRoupa = (req,res)=>{
+        const id = req.params.id;
+        roupa.findByIdAndDelete(id, (err) => {
+            if (!err) {
+                res.status(200).send({ message: 'roupa  deletado com sucesso1' });
+            } else {
+                res.status(500).send({ message: `${err.message} - erro ao excluir o fornecedor` });
+            }
+        });
     }
 }
 module.exports = roupaController;
