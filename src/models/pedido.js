@@ -11,8 +11,7 @@ const pedidoSchema = new mongoose.Schema(
         required: true,
     },
     total: {
-        type: Number,
-        required: true,
+        type: Number
     }
     }
 )

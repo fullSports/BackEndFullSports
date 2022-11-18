@@ -2,6 +2,6 @@ const express = require("express");
 const pedidoController = require("./../controllers/pedidoController.js")
 const routerPedido = express.Router();
 routerPedido
-.post("/novo-pedido", pedidoController)
+.post("/realizar-pedido", pedidoController.RealizarPedido)
 .get("/listar-pedidos",pedidoController.ListarPedido)
 module.exports = routerPedido
