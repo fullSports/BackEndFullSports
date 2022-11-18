@@ -73,7 +73,7 @@ class produtoController {
             if (!err) {
                 res.status(200).send({ message: 'produto atualizado com sucesso' });
             } else {
-                res.status(500).sed({ message: `Erro ao cadastrar o produto - ${err.message}` });
+                res.status(500).send({ message: `Erro ao atualizar o produto - ${err.message}` });
             };
         });
     }

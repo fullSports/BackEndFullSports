@@ -7,6 +7,7 @@ const routerCliente = require('./clienteRoutes.js');
 const routeFornecedor = require('./fornecedorRoutes.js');
 const routerImagem = require('./imagemRoutes.js');
 const routerlogin = require('./loginRoutes.js');
+const routerPedido = require('./pedidoRoutes.js');
 const routeProduto = require('./produtoRoutes.js');
 const routes = (app)=>{
     app.route('/').get((req,res)=>{
@@ -22,7 +23,8 @@ const routes = (app)=>{
         routerequipamento,
         routersuplemento,
         routerlogin,
-        routerCalcado
+        routerCalcado,
+        routerPedido
     )
 }
 module.exports = routes
