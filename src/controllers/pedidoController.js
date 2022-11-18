@@ -173,11 +173,71 @@ class pedidoController {
             })
             .exec((err, pedidoI) => {
                 if (err) {
-                    res.status(500).send(({ message: "erro ao listar o pedido" }))
+                    res.status(500).send(({ message: "erro ao listar os pedidos" }))
                 } else {
                     res.status(200).json(pedidoI)
                 }
             })
+    }
+    static ListaPedidoId = (req,res) =>{
+        const id = req.params.id;
+        pedido.findById(id).populate({
+            path: 'produto',
+            populate: [
+                {
+                    path: 'categoriaProduto',
+                    populate: [
+                        {
+                            path: 'roupa',
+                            populate: [{
+                                path: 'imagemProduto'
+                            },
+                            {
+                                path: 'fornecedor'
+                            }]
+                        },
+                        {
+                            path:'calcado',
+                            populate: [{
+                                path: 'imagemProduto'
+                            },
+                            {
+                                path: 'fornecedor'
+                            }]
+                        },
+                        {
+                            path: 'equipamento',
+                            populate: [{
+                                path: 'imagemProduto'
+                            },
+                            {
+                                path: 'fornecedor'
+                            }]
+                        },
+                        {
+                            path: 'suplemento',
+                            populate: [{
+                                path: 'imagemProduto'
+                            },
+                            {
+                                path: 'fornecedor'
+                            }]
+                        }, {
+                            path: 'imagemProduto'
+                        },
+                        {
+                            path: 'fornecedor'
+                        }
+                    ] 
+                }
+            ]
+        }).exec((err,pedidoId)=>{
+            if (err) {
+                res.status(500).send(({ message: "erro ao listar o pedido" }))
+            } else {
+                res.status(200).json(pedidoId)
+            }
+        })
     }
     static RealizarPedido = (req, res) => {
         const { quantidadePedido, produto} = req.body;
@@ -288,6 +348,79 @@ class pedidoController {
 
 
 
+    }
+    static CancelarPedido = (req,res) =>{
+        const id = req.params.id;
+        try {
+            api.get(`${url}/listar-pedido/${id}`)
+            .then(respostaPedido=>{
+                api.get(`${url}/listar-produto/${respostaPedido.data.produto._id}`)
+                .then(respostaProduto => {
+                    if (respostaProduto.data.categoriaProduto.roupa !== undefined) {
+                        const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.roupa.quantidade;
+                        console.log(newQuantidade)
+                        api.put(`${url}/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
+                            quantidade: newQuantidade
+                        }).then(()=>{
+                            pedido.findByIdAndDelete(id,(err)=>{
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                } else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            })
+                        })
+                    } else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
+                        const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.equipamento.quantidade;
+                        console.log(newQuantidade)
+                        api.put(`${url}/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
+                            quantidade: newQuantidade
+                        }).then(()=>{
+                            pedido.findByIdAndDelete(id,(err)=>{
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                } else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            })
+                        })
+                    } else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
+                        const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.suplemento.quantidade;
+                        console.log(newQuantidade)
+                        api.put(`${url}/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
+                            quantidade: newQuantidade
+                        }).then(()=>{
+                            pedido.findByIdAndDelete(id,(err)=>{
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                } else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            })
+                        })
+                    } else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
+                        const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.calcado.quantidade;
+                        console.log(newQuantidade)
+                        api.put(`${url}/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
+                            quantidade: newQuantidade
+                        }).then(()=>{
+                            pedido.findByIdAndDelete(id,(err)=>{
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                } else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            })
+                        })
+
+                    }
+                })
+                .catch((err) => console.log(err));
+            })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ message: "Erro na requisição" })
+        }
     }
 }
 module.exports = pedidoController
