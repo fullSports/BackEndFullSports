@@ -2,7 +2,6 @@ const login = require("../models/login.js");
 const bcrypt = require("bcrypt");
 class loginController {
     static cadastrarLogin = async (req, res) => {
-        let loginBody = new login(req.body);
         const { email, password, isAdmin } = req.body
         try {
             const usuarioExiste = await login.findOne({ email })
@@ -24,8 +23,6 @@ class loginController {
                             };
                         })
                     }).catch(err => res.status(500).json({ message: `erro ao cadastrar login- ${err}` }))
-
-
             } else {
                 res.status(200).send(({ message: "email ja cadastrado" }))
             }
@@ -78,18 +75,17 @@ class loginController {
         const { email, password } = req.body
         try {
             const usuarioExiste = await login.findOne({ email })
-            console.log(usuarioExiste.email)
-            if (!usuarioExiste) return res.status(404).send({ message: "email já existe" })
-            const comparaSenha = await bcrypt.compareSync(password, usuarioExiste.password)
-            if (comparaSenha) {
-                console.log("senha correta ")
-                return res.status(200).json({ result: usuarioExiste })
+            if (!usuarioExiste) {
+                return res.status(500).send({ message: "email não cadastrado" })
             } else {
-                return res.status(404).send({ message: "senha incorreta" })
+                const comparaSenha = await bcrypt.compareSync(password, usuarioExiste.password)
+                if (comparaSenha) {
+                    return res.status(200).json({ result: usuarioExiste })
+                } else {
+                    return res.status(500).send({ message: "senha incorreta" })
+                }
             }
-
         } catch (error) {
-            console.log(error)
             res.status(500).json({ message: "Erro ao Tentar Login!" })
         }
     }
@@ -100,11 +96,9 @@ class loginController {
             if (!pesquisaEmail) {
                 res.status(200).send({ emailExiste: false });
             } else {
-                console.log(pesquisaEmail.email);
                 res.status(200).send({ emailExiste: true });
             }
         } catch (error) {
-            console.log(error)
             res.status(500).json({ message: "Erro ao pesquisar o e-mail!" })
         }
     }
