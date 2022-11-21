@@ -9,4 +9,5 @@ routerlogin
     .put("/login/:id",loginController.atualizarLogin)
     .delete("/login/:id",loginController.excluirLogin)
     .post("/realizar-login",loginController.realizarLogin)
+    .post("/pesquisar-email", loginController.pesquisarEmail)
 module.exports = routerlogin;

@@ -89,9 +89,24 @@ class loginController {
             }
 
         } catch (error) {
+            console.log(error)
             res.status(500).json({ message: "Erro ao Tentar Login!" })
         }
-
+    }
+    static pesquisarEmail = async (req, res) => {
+        const { email } = req.body;
+        try {
+            const pesquisaEmail = await login.findOne({ email });
+            if (!pesquisaEmail) {
+                res.status(200).send({ emailExiste: false });
+            } else {
+                console.log(pesquisaEmail.email);
+                res.status(200).send({ emailExiste: true });
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: "Erro ao pesquisar o e-mail!" })
+        }
     }
 }
 module.exports = loginController;
