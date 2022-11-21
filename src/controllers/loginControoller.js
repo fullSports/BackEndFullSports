@@ -76,13 +76,13 @@ class loginController {
         try {
             const usuarioExiste = await login.findOne({ email })
             if (!usuarioExiste) {
-                return res.status(500).send({ message: "email não cadastrado" })
+                return res.status(200).send({ message: "email não cadastrado" })
             } else {
                 const comparaSenha = await bcrypt.compareSync(password, usuarioExiste.password)
                 if (comparaSenha) {
                     return res.status(200).json({ result: usuarioExiste })
                 } else {
-                    return res.status(500).send({ message: "senha incorreta" })
+                    return res.status(200).send({ message: "senha incorreta" })
                 }
             }
         } catch (error) {
