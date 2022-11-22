@@ -56,11 +56,11 @@ class loginController {
     static atualizarLogin = (req, res) => {
         const id = req.params.id;
 
-        login.findById(id, (err, loginBody) => {
+        login.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (err) {
                 res.status(400).sed({ menssage: `${err.menssage} - id do login não encontrado` });
             } else {
-                res.status(200).send(loginBody);
+                res.status(200).send({message: "login atualizado com sucesso"});
             }
         })
     }
