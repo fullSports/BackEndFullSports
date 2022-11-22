@@ -55,8 +55,9 @@ class pedidoController {
                             }
                         ]
                     }
-                ]
-            })
+                ],
+                
+            }).populate('cliente')
             .exec((err, pedidoI) => {
                 if (err) {
                     res.status(500).send(({ message: "erro ao listar os pedidos" }))
@@ -117,7 +118,7 @@ class pedidoController {
                     ]
                 }
             ]
-        }).exec((err, pedidoId) => {
+        }).populate('cliente').exec((err, pedidoId) => {
             if (err) {
                 res.status(500).send(({ message: "erro ao listar o pedido" }))
             } else {
@@ -126,7 +127,7 @@ class pedidoController {
         })
     }
     static RealizarPedido = (req, res) => {
-        const { quantidadePedido, produto } = req.body;
+        const { quantidadePedido, produto,cliente } = req.body;
         try {
             if (quantidadePedido < 1) {
                 res.status(500).send({ message: "minimo de 1 para realizar o pedido" })
@@ -148,6 +149,7 @@ class pedidoController {
                                 let newPedido = new pedido({
                                     quantidadePedido: quantidadePedido,
                                     produto: produto,
+                                    cliente: cliente,
                                     total: totalPedio,
                                 });
                                 newPedido.save((err) => {
@@ -175,6 +177,7 @@ class pedidoController {
                                 let newPedido = new pedido({
                                     quantidadePedido: quantidadePedido,
                                     produto: produto,
+                                    cliente: cliente,
                                     total: totalPedio,
                                 });
                                 newPedido.save((err) => {
@@ -201,6 +204,7 @@ class pedidoController {
                                 let newPedido = new pedido({
                                     quantidadePedido: quantidadePedido,
                                     produto: produto,
+                                    cliente: cliente,
                                     total: totalPedio,
                                 });
                                 newPedido.save((err) => {
@@ -228,6 +232,7 @@ class pedidoController {
                                 let newPedido = new pedido({
                                     quantidadePedido: quantidadePedido,
                                     produto: produto,
+                                    cliente: cliente,
                                     total: totalPedio,
                                 });
                                 newPedido.save((err) => {

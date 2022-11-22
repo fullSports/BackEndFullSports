@@ -1,5 +1,8 @@
 const login = require("../models/login.js");
+const cliente = require("../models/cliente.js")
 const bcrypt = require("bcrypt");
+const api = require("../config/api.js")
+const url = process.env.APP_URL
 class loginController {
     static cadastrarLogin = async (req, res) => {
         const { email, password, isAdmin } = req.body
@@ -93,12 +96,33 @@ class loginController {
         const { email } = req.body;
         try {
             const pesquisaEmail = await login.findOne({ email });
+            console.log(pesquisaEmail)
             if (!pesquisaEmail) {
                 res.status(200).send({ emailExiste: false });
             } else {
                 res.status(200).send({ emailExiste: true });
             }
         } catch (error) {
+            res.status(500).json({ message: "Erro ao pesquisar o e-mail!" })
+        }
+    }
+    static pesquisarEmail_RetornarCliente = async (req, res) => {
+        const { email } = req.body;
+        try {
+            const pesquisaEmail = await cliente.findOne({ email });
+            console.log(pesquisaEmail._id.toString())
+            const   id = pesquisaEmail._id.toString()
+            api.get(`${url}/listar-cliente/${id}`).then(resposta => {
+                console.log(resposta.data._id)
+                res.status(200).json(resposta.data)
+                
+            }).catch((error) => {
+                console.log(error)
+                res.status(500).json({ message: "Erro ao pesquisar o e-mail!" })
+            })
+
+        } catch (error) {
+            console.log(error)
             res.status(500).json({ message: "Erro ao pesquisar o e-mail!" })
         }
     }

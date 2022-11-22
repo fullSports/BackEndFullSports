@@ -10,4 +10,5 @@ routerlogin
     .delete("/login/:id",loginController.excluirLogin)
     .post("/realizar-login",loginController.realizarLogin)
     .post("/pesquisar-email", loginController.pesquisarEmail)
+    .post("/pesquisar-email-cliente", loginController.pesquisarEmail_RetornarCliente)
 module.exports = routerlogin;
