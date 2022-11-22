@@ -1,4 +1,4 @@
-const login = require("../models/login.js");
+const loginM = require("../models/login.js");
 const cliente = require("../models/cliente.js")
 const bcrypt = require("bcrypt");
 const api = require("../config/api.js")
@@ -7,13 +7,13 @@ class loginController {
     static cadastrarLogin = async (req, res) => {
         const { email, password, isAdmin } = req.body
         try {
-            const usuarioExiste = await login.findOne({ email })
+            const usuarioExiste = await loginM.findOne({ email })
             if (!usuarioExiste) {
                 bcrypt.hash(password, 10)
                     .then(hash => {
                         let encryptedPassowrd = hash
 
-                        let newLogin = new login({
+                        let newLogin = new loginM({
                             email: email,
                             password: encryptedPassowrd,
                             isAdmin: isAdmin
@@ -45,7 +45,7 @@ class loginController {
     static listarLoginID = (req, res) => {
         const id = req.params.id
 
-        login.findById(id, (err, loginBody) => {
+        loginM.findById(id, (err, loginBody) => {
             if (err) {
                 res.status(400).sed({ menssage: `${err.menssage} - id do fornecedor não encotrado` });
             } else {
@@ -56,7 +56,7 @@ class loginController {
     static atualizarLogin = (req, res) => {
         const id = req.params.id;
 
-        login.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+        loginM.findByIdAndUpdate(id, { $set: req.body }, (err) => {
             if (err) {
                 res.status(400).sed({ menssage: `${err.menssage} - id do login não encontrado` });
             } else {
@@ -66,7 +66,7 @@ class loginController {
     }
     static excluirLogin = (req, res) => {
         const id = req.params.id;
-        login.findByIdAndDelete(id, (err) => {
+        loginM.findByIdAndDelete(id, (err) => {
             if (!err) {
                 res.status(200).send({ message: `login deletado` });
             } else {
@@ -77,7 +77,7 @@ class loginController {
     static realizarLogin = async (req, res) => {
         const { email, password } = req.body
         try {
-            const usuarioExiste = await login.findOne({ email })
+            const usuarioExiste = await loginM.findOne({ email })
             if (!usuarioExiste) {
                 return res.status(200).send({ message: "email não cadastrado" })
             } else {
@@ -95,7 +95,7 @@ class loginController {
     static pesquisarEmail = async (req, res) => {
         const { email } = req.body;
         try {
-            const pesquisaEmail = await login.findOne({ email });
+            const pesquisaEmail = await loginM.findOne({ email });
             console.log(pesquisaEmail)
             if (!pesquisaEmail) {
                 res.status(200).send({ emailExiste: false });
@@ -109,9 +109,13 @@ class loginController {
     static pesquisarEmail_RetornarCliente = async (req, res) => {
         const { email } = req.body;
         try {
-            const pesquisaEmail = await cliente.findOne({ email });
-            console.log(pesquisaEmail._id.toString())
-            const   id = pesquisaEmail._id.toString()
+            const pesquisaLogin = await loginM.findOne({email})
+            console.log(pesquisaLogin._id.toString())
+            const login = pesquisaLogin
+            console.log(login)
+            const pesquisaCliente = await cliente.findOne({login})
+            console.log(pesquisaCliente)
+            const id = pesquisaCliente._id.toString();
             api.get(`${url}/listar-cliente/${id}`).then(resposta => {
                 console.log(resposta.data._id)
                 res.status(200).json(resposta.data)
