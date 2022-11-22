@@ -10,6 +10,10 @@ const pedidoSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId, ref: 'produtos',
         required: true,
     },
+    cliente:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'clientes',
+        required: true,
+    },
     total: {
         type: Number
     }

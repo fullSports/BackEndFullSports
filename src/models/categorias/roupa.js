@@ -30,6 +30,7 @@ const roupaSchema = new mongoose.Schema({
     }, 
     quantidade:{
         type:Number, 
+        min: [1, 'Quantidade nao pode ser inferior a 1'],
         required:true
     },
     imagemProduto: [
