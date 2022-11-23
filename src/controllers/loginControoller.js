@@ -34,7 +34,7 @@ class loginController {
         }
     }
     static listarLogin = (req, res) => {
-        login.find((err, loginBody) => {
+        loginM.find((err, loginBody) => {
             try {
                 res.status(200).json(loginBody)
             } catch {
