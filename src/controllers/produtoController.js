@@ -128,7 +128,7 @@ class produtoController {
         })
             .exec((err, produtos) => {
                 if (err) {
-                    res.status(400).sed({ menssage: `${err.menssage} - id do produto não encotrado` });
+                    res.status(400).send({ menssage: `${err.menssage} - id do produto não encotrado` });
                 } else {
                     res.status(200).send(produtos);
                 }
