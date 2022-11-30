@@ -2,9 +2,7 @@
     "name": "backendfullsports",
     "version": 2,
     "public": true,
-    "build": {
-        "use": "@vercel/node"
-    },
+    "buildCommand": "node ./index.js",
     "routes": [
         {
             "src": "/(.*)",
