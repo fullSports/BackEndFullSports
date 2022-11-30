@@ -3,8 +3,10 @@ const express = require ('express');
 const cors = require ("cors");
 const routes = require ("./routes/index.js");
 const db = require ("./config/dbConnect.js");
+const { Router } = require('express')
 const path = require('path')
 const app = express(); 
+const route = Router()
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Headers", '*');
     res.header("Access-Control-Allow-Origin", '*');
@@ -19,6 +21,7 @@ db.once("open", ()=> {
 })
 
 app.use(express.json());
+app.use(route)
 routes(app)
 
 app.use('/files',express.static(path.resolve(__dirname,'..','tmp','uploads')))
