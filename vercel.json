@@ -2,7 +2,7 @@
     "name": "backendfullsports",
     "version": 2,
     "public": true,
-    "buildCommand": "node ./index.js",
+    "buildCommand": "node index.js",
     "routes": [
         {
             "src": "/(.*)",
