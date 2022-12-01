@@ -4,7 +4,8 @@
 installing the dependencies
 ### `npm install `
 In the project directory, you can run:
-
+### `npm run build `
+To build the project and test how it would look in production
 ### `npm run dev`
 
 Runs the app in the development mode.\
