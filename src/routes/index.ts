@@ -1,7 +1,7 @@
 import express,{Response,Request} from 'express';
 import routerCalcado from './Categorias/CalcadosRoutes/calcadoRoutes';
-import routerequipamento from './categorias/equipamentoRoutes/equipamentoRoutes';
-import routerRoupa from './categorias/roupaRoutes/roupaRoutes';
+import routerEquipamento from './Categorias/EquipamentoRoutes/equipamentoRoutes';
+import routerRoupa from './Categorias/RoupaRoutes/roupaRoutes';
 import routerSuplemento from './Categorias/SuplementoRoutes/suplementoRoutes';
 import routerCliente from './ClienteRoutes/clienteRoutes'
 import routeFornecedor from './FornecedorRoutes/fornecedorRoutes';
@@ -20,7 +20,7 @@ const Routes = (app = express())=>{
         routeProduto,
         routeFornecedor,
         routerRoupa,
-        routerequipamento,
+        routerEquipamento,
         routerSuplemento,
         routerlogin,
         routerCalcado,

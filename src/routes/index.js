@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const calcadoRoutes_1 = __importDefault(require("./Categorias/CalcadosRoutes/calcadoRoutes"));
-const equipamentoRoutes_1 = __importDefault(require("./categorias/equipamentoRoutes/equipamentoRoutes"));
-const roupaRoutes_1 = __importDefault(require("./categorias/roupaRoutes/roupaRoutes"));
+const equipamentoRoutes_1 = __importDefault(require("./Categorias/EquipamentoRoutes/equipamentoRoutes"));
+const roupaRoutes_1 = __importDefault(require("./Categorias/RoupaRoutes/roupaRoutes"));
 const suplementoRoutes_1 = __importDefault(require("./Categorias/SuplementoRoutes/suplementoRoutes"));
 const clienteRoutes_1 = __importDefault(require("./ClienteRoutes/clienteRoutes"));
 const fornecedorRoutes_1 = __importDefault(require("./FornecedorRoutes/fornecedorRoutes"));

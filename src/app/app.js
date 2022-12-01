@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const index_1 = __importDefault(require("../routes/index"));
+const routes_1 = __importDefault(require("../routes"));
 const dbConnect_1 = __importDefault(require("../config/dbConnect/dbConnect"));
 const express_2 = require("express");
 const path_1 = __importDefault(require("path"));
@@ -26,6 +26,6 @@ dbConnect_1.default.once("open", () => {
 });
 app.use(express_1.default.json());
 app.use(route);
-(0, index_1.default)(app);
+(0, routes_1.default)(app);
 app.use('/files', express_1.default.static(path_1.default.resolve(__dirname, '..', '..', 'tmp', 'uploads')));
 exports.default = app;
