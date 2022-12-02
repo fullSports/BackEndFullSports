@@ -139,7 +139,7 @@ pedidoController.RealizarPedido = (req, res) => {
             res.status(500).send({ message: "minimo de 1 para realizar o pedido" });
         }
         else
-            api_1.default.get(`${url}/listar-produto/${produto}`)
+            api_1.default.get(`/listar-produto/${produto}`)
                 .then(resposta => {
                 if (resposta.data.categoriaProduto.roupa !== undefined) {
                     const newQuantidade = resposta.data.categoriaProduto.roupa.quantidade - quantidadePedido;
@@ -150,7 +150,7 @@ pedidoController.RealizarPedido = (req, res) => {
                         res.status(500).send({ message: "quantidade do produto maior que a disponivel" });
                     }
                     else {
-                        api_1.default.put(`${url}/atualizar-roupa/${resposta.data.categoriaProduto.roupa._id}`, {
+                        api_1.default.put(`/atualizar-roupa/${resposta.data.categoriaProduto.roupa._id}`, {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
@@ -181,7 +181,7 @@ pedidoController.RealizarPedido = (req, res) => {
                         res.status(500).send({ message: "quantidade do produto maior que a disponivel" });
                     }
                     else {
-                        api_1.default.put(`${url}/atualizar-equipamento/${resposta.data.categoriaProduto.equipamento._id}`, {
+                        api_1.default.put(`/atualizar-equipamento/${resposta.data.categoriaProduto.equipamento._id}`, {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
@@ -211,7 +211,7 @@ pedidoController.RealizarPedido = (req, res) => {
                         res.status(500).send({ message: "quantidade do produto maior que a disponivel" });
                     }
                     else {
-                        api_1.default.put(`${url}/atualizar-suplemento/${resposta.data.categoriaProduto.suplemento._id}`, {
+                        api_1.default.put(`/atualizar-suplemento/${resposta.data.categoriaProduto.suplemento._id}`, {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
@@ -241,7 +241,7 @@ pedidoController.RealizarPedido = (req, res) => {
                         res.status(500).send({ message: "quantidade do produto maior que a disponivel" });
                     }
                     else {
-                        api_1.default.put(`${url}/atualizar-calcado/${resposta.data.categoriaProduto.calcado._id}`, {
+                        api_1.default.put(`/atualizar-calcado/${resposta.data.categoriaProduto.calcado._id}`, {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
@@ -272,14 +272,14 @@ pedidoController.RealizarPedido = (req, res) => {
 pedidoController.CancelarPedido = (req, res) => {
     const id = req.params.id;
     try {
-        api_1.default.get(`${url}/listar-pedido/${id}`)
+        api_1.default.get(`/listar-pedido/${id}`)
             .then(respostaPedido => {
-            api_1.default.get(`${url}/listar-produto/${respostaPedido.data.produto._id}`)
+            api_1.default.get(`/listar-produto/${respostaPedido.data.produto._id}`)
                 .then(respostaProduto => {
                 if (respostaProduto.data.categoriaProduto.roupa !== undefined) {
                     const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.roupa.quantidade;
                     console.log(newQuantidade);
-                    api_1.default.put(`${url}/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
+                    api_1.default.put(`/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
@@ -297,7 +297,7 @@ pedidoController.CancelarPedido = (req, res) => {
                 else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
                     const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.equipamento.quantidade;
                     console.log(newQuantidade);
-                    api_1.default.put(`${url}/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
+                    api_1.default.put(`/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
@@ -315,7 +315,7 @@ pedidoController.CancelarPedido = (req, res) => {
                 else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
                     const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.suplemento.quantidade;
                     console.log(newQuantidade);
-                    api_1.default.put(`${url}/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
+                    api_1.default.put(`/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
@@ -333,7 +333,7 @@ pedidoController.CancelarPedido = (req, res) => {
                 else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
                     const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.calcado.quantidade;
                     console.log(newQuantidade);
-                    api_1.default.put(`${url}/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
+                    api_1.default.put(`/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
