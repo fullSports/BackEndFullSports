@@ -2,6 +2,12 @@ import api from "../../config/api/api";
 import pedido from "../../models/ModelPedidos/pedido";
 import produto from "../../models/ModelProduto/produto";
 import { Request, Response } from 'express';
+import IPedido from "../../interfaces/IPedido";
+import IProduto from "../../interfaces/IProduto";
+import IRoupa from "../../interfaces/Produtos/IRoupa";
+import IEquipamentos from "../../interfaces/Produtos/IEquipamentos";
+import ISuplementos from "../../interfaces/Produtos/ISuplementos";
+import ICacados from "../../interfaces/Produtos/ICalcados";
 require('dotenv').config();
 const url = process.env.APP_URL
 class pedidoController {
@@ -255,15 +261,15 @@ class pedidoController {
     static CancelarPedido = (req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            api.get(`/listar-pedido/${id}`)
+            api.get<IPedido>(`/listar-pedido/${id}`)
                 .then(respostaPedido => {
-                    api.get(`/listar-produto/${respostaPedido.data.produto._id}`)
+                    api.get<IProduto>(`/listar-produto/${respostaPedido.data.produto._id}`)
                         .then(respostaProduto => {
                             console.log(respostaProduto.data)
                             if (respostaProduto.data.categoriaProduto.roupa !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.roupa.quantidade;
                                 console.log(newQuantidade)
-                                api.put(`/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
+                                api.put<IRoupa>(`/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
                                     quantidade: newQuantidade
                                 }).then(() => {
                                     setTimeout(function () {
@@ -281,7 +287,7 @@ class pedidoController {
                             } else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.equipamento.quantidade;
                                 console.log(newQuantidade)
-                                api.put(`/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
+                                api.put<IEquipamentos>(`/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
                                     quantidade: newQuantidade
                                 }).then(() => {
                                     setTimeout(function () {
@@ -299,7 +305,7 @@ class pedidoController {
                             } else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.suplemento.quantidade;
                                 console.log(newQuantidade)
-                                api.put(`/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
+                                api.put<ISuplementos>(`/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
                                     quantidade: newQuantidade
                                 }).then(() => {
                                     setTimeout(function () {
@@ -317,7 +323,7 @@ class pedidoController {
                             } else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.calcado.quantidade;
                                 console.log(newQuantidade)
-                                api.put(`/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
+                                api.put<ICacados>(`/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
                                     quantidade: newQuantidade
                                 }).then(() => {
                                     setTimeout(function () {
