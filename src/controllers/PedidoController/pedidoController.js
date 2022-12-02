@@ -282,14 +282,16 @@ pedidoController.CancelarPedido = (req, res) => {
                     api_1.default.put(`${url}/atualizar-roupa/${respostaProduto.data.categoriaProduto.roupa._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
-                        pedido_1.default.findByIdAndDelete(id, (err) => {
-                            if (!err) {
-                                res.status(200).send({ message: `pedudo deletado` });
-                            }
-                            else {
-                                res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
-                            }
-                        });
+                        setTimeout(function () {
+                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                }
+                                else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            });
+                        }, 1000);
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
@@ -298,14 +300,16 @@ pedidoController.CancelarPedido = (req, res) => {
                     api_1.default.put(`${url}/atualizar-equipamento/${respostaProduto.data.categoriaProduto.equipamento._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
-                        pedido_1.default.findByIdAndDelete(id, (err) => {
-                            if (!err) {
-                                res.status(200).send({ message: `pedudo deletado` });
-                            }
-                            else {
-                                res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
-                            }
-                        });
+                        setTimeout(function () {
+                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                }
+                                else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            });
+                        }, 1000);
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
@@ -314,14 +318,16 @@ pedidoController.CancelarPedido = (req, res) => {
                     api_1.default.put(`${url}/atualizar-suplemento/${respostaProduto.data.categoriaProduto.suplemento._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
-                        pedido_1.default.findByIdAndDelete(id, (err) => {
-                            if (!err) {
-                                res.status(200).send({ message: `pedudo deletado` });
-                            }
-                            else {
-                                res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
-                            }
-                        });
+                        setTimeout(function () {
+                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                }
+                                else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            });
+                        }, 1000);
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
@@ -330,14 +336,16 @@ pedidoController.CancelarPedido = (req, res) => {
                     api_1.default.put(`${url}/atualizar-calcado/${respostaProduto.data.categoriaProduto.calcado._id}`, {
                         quantidade: newQuantidade
                     }).then(() => {
-                        pedido_1.default.findByIdAndDelete(id, (err) => {
-                            if (!err) {
-                                res.status(200).send({ message: `pedudo deletado` });
-                            }
-                            else {
-                                res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
-                            }
-                        });
+                        setTimeout(function () {
+                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                                if (!err) {
+                                    res.status(200).send({ message: `pedudo deletado` });
+                                }
+                                else {
+                                    res.status(500).send({ message: `${err.message} - erro ao deletar pedido` });
+                                }
+                            });
+                        }, 1000);
                     });
                 }
             })
