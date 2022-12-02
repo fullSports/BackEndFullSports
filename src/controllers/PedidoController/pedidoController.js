@@ -276,6 +276,7 @@ pedidoController.CancelarPedido = (req, res) => {
             .then(respostaPedido => {
             api_1.default.get(`/listar-produto/${respostaPedido.data.produto._id}`)
                 .then(respostaProduto => {
+                console.log(respostaProduto.data);
                 if (respostaProduto.data.categoriaProduto.roupa !== undefined) {
                     const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.roupa.quantidade;
                     console.log(newQuantidade);
@@ -292,6 +293,9 @@ pedidoController.CancelarPedido = (req, res) => {
                                 }
                             });
                         }, 1000);
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).json({ message: "Erro na requisição-atualizar-produto" });
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
@@ -310,6 +314,9 @@ pedidoController.CancelarPedido = (req, res) => {
                                 }
                             });
                         }, 1000);
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).json({ message: "Erro na requisição-atualizar-produto" });
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
@@ -328,6 +335,9 @@ pedidoController.CancelarPedido = (req, res) => {
                                 }
                             });
                         }, 1000);
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).json({ message: "Erro na requisição-atualizar-produto" });
                     });
                 }
                 else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
@@ -346,10 +356,16 @@ pedidoController.CancelarPedido = (req, res) => {
                                 }
                             });
                         }, 1000);
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).json({ message: "Erro na requisição-atualizar-produto" });
                     });
                 }
             })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                console.log(err);
+                res.status(500).json({ message: "Erro na requisição-listar produto" });
+            });
         });
     }
     catch (err) {

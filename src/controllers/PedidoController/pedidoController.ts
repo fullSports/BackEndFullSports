@@ -259,6 +259,7 @@ class pedidoController {
                 .then(respostaPedido => {
                     api.get(`/listar-produto/${respostaPedido.data.produto._id}`)
                         .then(respostaProduto => {
+                            console.log(respostaProduto.data)
                             if (respostaProduto.data.categoriaProduto.roupa !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.roupa.quantidade;
                                 console.log(newQuantidade)
@@ -274,7 +275,9 @@ class pedidoController {
                                             }
                                         })
                                     }, 1000)
-                                })
+                                }).catch((err) =>{console.log(err)
+                                    res.status(500).json({ message: "Erro na requisição-atualizar-produto" })
+                                });
                             } else if (respostaProduto.data.categoriaProduto.equipamento !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.equipamento.quantidade;
                                 console.log(newQuantidade)
@@ -290,7 +293,9 @@ class pedidoController {
                                             }
                                         })
                                     }, 1000)
-                                })
+                                }).catch((err) =>{console.log(err)
+                                    res.status(500).json({ message: "Erro na requisição-atualizar-produto" })
+                                });
                             } else if (respostaProduto.data.categoriaProduto.suplemento !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.suplemento.quantidade;
                                 console.log(newQuantidade)
@@ -306,7 +311,9 @@ class pedidoController {
                                             }
                                         })
                                     }, 1000)
-                                })
+                                }).catch((err) =>{console.log(err)
+                                    res.status(500).json({ message: "Erro na requisição-atualizar-produto" })
+                                });
                             } else if (respostaProduto.data.categoriaProduto.calcado !== undefined) {
                                 const newQuantidade = respostaPedido.data.quantidadePedido + respostaProduto.data.categoriaProduto.calcado.quantidade;
                                 console.log(newQuantidade)
@@ -322,11 +329,15 @@ class pedidoController {
                                             }
                                         })
                                     }, 1000)
-                                })
+                                }).catch((err) =>{console.log(err)
+                                    res.status(500).json({ message: "Erro na requisição-atualizar-produto" })
+                                });
 
                             }
                         })
-                        .catch((err) => console.log(err));
+                        .catch((err) =>{console.log(err)
+                            res.status(500).json({ message: "Erro na requisição-listar produto" })
+                        });
                 })
         } catch (err) {
             console.log(err)
