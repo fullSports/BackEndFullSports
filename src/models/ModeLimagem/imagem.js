@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 require("dotenv").config();
-const aws = require('aws-sdk');
+const AWS = require("aws-sdk");
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 
-const  s3 = new aws.S3();
-
+const s3 = new AWS.S3({
+    accessKeyId: process.env.KEY_ID,
+    secretAccessKey: process.env.ACCESS_KEY,
+    region: process.env.REGIONAWS
+})
 const ImagemSchema = new mongoose.Schema({
     name: String,
     size: Number,
@@ -25,7 +28,7 @@ ImagemSchema.pre('save',function(){
 ImagemSchema.pre('remove',function(){
     if(process.env.STORAGE_TYPE === 's3'){
         return s3.deleteObject({
-            Bucket: process.env.BUCKET_AWS,
+            Bucket: process.env.BUCKET,
             Key: this.key
         }).promise()
     }else{

@@ -2,8 +2,14 @@ const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
 const multerS3 = require('multer-s3');
-const aws = require('aws-sdk')
+const AWS = require("aws-sdk");
+const { S3Client } = require('@aws-sdk/client-s3');
 require('dotenv').config();
+const s3 = new AWS.S3({
+    accessKeyId: process.env.KEY_ID,
+    secretAccessKey: process.env.ACCESS_KEY,
+    region: process.env.REGIONAWS
+})
 const storageTypes = {
     local: multer.diskStorage({
         destination: (req,file,cb) =>{
@@ -18,8 +24,8 @@ const storageTypes = {
         }
     }),
     s3: multerS3({
-        s3: new aws.S3(),
-        bucket: process.env.BUCKET_AWS,
+        s3: s3,
+        bucket: process.env.BUCKET,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl:'public-read',
         key: (req, file, cb)=>{
