@@ -2,10 +2,10 @@ require("dotenv").config();
 import express from "express"
 import cors from 'cors';
 import Routes from "../routes";
-import db from "../config/dbConnect/dbConnect";
+
 import { Router } from 'express';
 import path from 'path';
-const app = express(); 
+export const app = express(); 
 const route = Router();
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Headers", '*');
@@ -15,18 +15,11 @@ app.use((req, res, next)=>{
     app.use(cors())
     next()
 })
-db.on("error", console.log.bind(console,"erro na conexão! "))
-db.once("open", ()=> {
-    console.log("conexão com banco bem-sucedida!")
-})
+
 
 app.use(express.json());
 app.use(route)
 Routes(app)
 
 app.use('/files',express.static(path.resolve(__dirname,'..','..','tmp','uploads')))
-
-
-
-export default app
 
