@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.produtoController = void 0;
 const produto_1 = require("../../models/ModelProduto/produto");
 const api_1 = __importDefault(require("../../config/api/api"));
+const { logger } = require("../../logger/index");
 class produtoController {
 }
 exports.produtoController = produtoController;
@@ -161,37 +162,133 @@ produtoController.excluirProduto = (req, res) => {
         url: `listar-produto/${id}`
     }).then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
         const categoria = resposta.data.categoriaProduto;
-        if (categoria.roupa != undefined) {
-            return api_1.default.delete(`deletar-roupa-e-imagem/${categoria.roupa._id}`)
-                .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.produto.findById(id);
-                produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
-                res.status(200).send({ message: 'produto deletado com sucesso-' });
-            })).catch((err) => console.log(err));
+        if (categoria) {
+            if (categoria.roupa != undefined) {
+                if (categoria.roupa) {
+                    return api_1.default.delete(`deletar-roupa-e-imagem/${categoria.roupa._id}`)
+                        .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
+                        const produtoDelete = yield produto_1.produto.findById(id);
+                        produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
+                        res.status(200).send({ message: 'produto deletado com sucesso-' });
+                    })).catch((err) => {
+                        api_1.default.delete(`deletar-roupa/${categoria.roupa._id}`).then(resposta => {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }).catch((err) => {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                            logger.error(err);
+                        });
+                        res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        logger.error(err);
+                    });
+                }
+                else {
+                    produto_1.produto.findByIdAndDelete(id, (err) => {
+                        if (!err) {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }
+                        else {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        }
+                    });
+                }
+            }
+            if (categoria.suplemento != undefined) {
+                if (categoria.suplemento) {
+                    return api_1.default.delete(`deletar-suplemento-e-imagem/${categoria.suplemento._id}`)
+                        .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
+                        const produtoDelete = yield produto_1.produto.findById(id);
+                        produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
+                        res.status(200).send({ message: 'produto deletado com sucesso-' });
+                    })).catch((err) => {
+                        api_1.default.delete(`deletar-suplemento/${categoria.suplemento._id}`).then(reposta => {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }).catch((err) => {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                            logger.error(err);
+                        });
+                        res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        logger.error(err);
+                    });
+                }
+                else {
+                    produto_1.produto.findByIdAndDelete(id, (err) => {
+                        if (!err) {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }
+                        else {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        }
+                    });
+                }
+            }
+            if (categoria.equipamento != undefined) {
+                if (categoria.equipamento) {
+                    return api_1.default.delete(`deletar-equipamento-e-imagem/${categoria.equipamento._id}`)
+                        .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
+                        const produtoDelete = yield produto_1.produto.findById(id);
+                        produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
+                        res.status(200).send({ message: 'produto deletado com sucesso-' });
+                    })).catch((err) => {
+                        api_1.default.delete(`deletar-equipamento/${categoria.equipamento._id}`).then(resposta => {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }).catch((err) => {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                            logger.error(err);
+                        });
+                        res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        logger.error(err);
+                    });
+                }
+                else {
+                    produto_1.produto.findByIdAndDelete(id, (err) => {
+                        if (!err) {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }
+                        else {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        }
+                    });
+                }
+            }
+            if (categoria.calcado != undefined) {
+                if (categoria.calcado) {
+                    return api_1.default.delete(`deletar-calcado-e-imagem/${categoria.calcado._id}`)
+                        .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
+                        const produtoDelete = yield produto_1.produto.findById(id);
+                        produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
+                        res.status(200).send({ message: 'produto deletado com sucesso-' });
+                    })).catch((err) => {
+                        api_1.default.delete(`deletar-calcado/${categoria.calcado_id}`).then(resposta => {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }).catch((err) => {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                            logger.error(err);
+                        });
+                        res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        logger.error(err);
+                    });
+                }
+                else {
+                    produto_1.produto.findByIdAndDelete(id, (err) => {
+                        if (!err) {
+                            res.status(200).send({ message: 'produto deletado com sucesso-' });
+                        }
+                        else {
+                            res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                        }
+                    });
+                }
+            }
         }
-        if (categoria.suplemento != undefined) {
-            return api_1.default.delete(`deletar-suplemento-e-imagem/${categoria.suplemento._id}`)
-                .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.produto.findById(id);
-                produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
-                res.status(200).send({ message: 'produto deletado com sucesso-' });
-            })).catch((err) => console.log(err));
-        }
-        if (categoria.equipamento != undefined) {
-            return api_1.default.delete(`deletar-equipamento-e-imagem/${categoria.equipamento._id}`)
-                .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.produto.findById(id);
-                produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
-                res.status(200).send({ message: 'produto deletado com sucesso-' });
-            })).catch((err) => console.log(err));
-        }
-        if (categoria.calcado != undefined) {
-            return api_1.default.delete(`deletar-calcado-e-imagem/${categoria.calcado._id}`)
-                .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.produto.findById(id);
-                produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
-                res.status(200).send({ message: 'produto deletado com sucesso-' });
-            })).catch((err) => console.log(err));
+        else {
+            produto_1.produto.findByIdAndDelete(id, (err) => {
+                if (!err) {
+                    res.status(200).send({ message: 'produto deletado com sucesso-' });
+                }
+                else {
+                    res.status(500).send({ message: 'Erro ao deletar o prodtuo' });
+                }
+            });
         }
     }));
 };

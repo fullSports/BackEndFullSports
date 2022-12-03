@@ -15,10 +15,19 @@ const routerImagem = require('./imagemRoutes.js');
 const loginRoutes_1 = require("./LoginRoutes/loginRoutes");
 const pedidoRoutes_1 = require("./PedidoRoutes/pedidoRoutes");
 const produtoRoutes_1 = require("./ProdutoRoutes/produtoRoutes");
+const dbConnect_1 = require("../config/dbConnect/dbConnect");
+const index_1 = require("../logger/index");
 const Routes = (app = (0, express_1.default)()) => {
     app.route('/').get((req, res) => {
         res.status(200).json({ "status": "iniciado" });
     });
-    return app.use(express_1.default.json(), clienteRoutes_1.routerCliente, routerImagem, produtoRoutes_1.routeProduto, fornecedorRoutes_1.routeFornecedor, roupaRoutes_1.routerRoupa, equipamentoRoutes_1.routerEquipamento, suplementoRoutes_1.routerSuplemento, loginRoutes_1.routerlogin, calcadoRoutes_1.routerCalcado, pedidoRoutes_1.routerPedido);
+    app.route('/teste').get((req, res) => {
+        res.status(200).json({ "status": "teste" });
+    });
+    dbConnect_1.db.on("error", index_1.logger.error.bind(console, "erro na conexão com o banco de dados! "));
+    dbConnect_1.db.once("open", () => {
+        index_1.logger.info("conexão com banco bem-sucedida!");
+    });
+    app.use(express_1.default.json(), clienteRoutes_1.routerCliente, routerImagem, produtoRoutes_1.routeProduto, fornecedorRoutes_1.routeFornecedor, roupaRoutes_1.routerRoupa, equipamentoRoutes_1.routerEquipamento, suplementoRoutes_1.routerSuplemento, loginRoutes_1.routerlogin, calcadoRoutes_1.routerCalcado, pedidoRoutes_1.routerPedido);
 };
 exports.Routes = Routes;
