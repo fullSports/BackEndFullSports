@@ -1,5 +1,5 @@
 import suplemento from "../../../models/categorias/Suplemento/suplemento";
-const Imagem = require("../../../models/ModeLimagem/imagem.js");
+const Imagem = require("../../../models/imagem.js");
 import {Request,Response} from "express"
 import api from "../../../config/api/api";
 class suplementoController {

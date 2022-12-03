@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const equipamento_1 = __importDefault(require("../../../models/categorias/Equipamento/equipamento"));
-const Imagem = require("../../../models/ModeLimagem/imagem.js");
+const Imagem = require("../../../models/imagem.js");
 const api_1 = __importDefault(require("../../../config/api/api"));
 class equipamentoController {
 }

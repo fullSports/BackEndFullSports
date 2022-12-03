@@ -1,8 +1,8 @@
 const express = require ("express");
 const routerImagem = express.Router();
 const multer = require('multer');
-const imagemController = require("../../controllers/ImagemController/imagemController.js");
-const multerConfig = require('./../../config/muterConfig/multer.js');
+const imagemController = require("../controllers/imagemController.js");
+const multerConfig = require('../config/multer.js');
 routerImagem
     .get("/imagem",imagemController.listarImagem)
     .post("/imagem", multer(multerConfig).single('file'), imagemController.cadastrarImagem)

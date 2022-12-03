@@ -15,7 +15,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const api_1 = __importDefault(require("../../config/api/api"));
 const cliente_1 = __importDefault(require("../../models/ModelCliente/cliente"));
-const Imagem = require("../../models/ModeLimagem/imagem.js");
+const Imagem = require("../../models/imagem.js");
 const login_1 = __importDefault(require("../../models/ModelLogin/login"));
 require('dotenv').config();
 class clienteController {

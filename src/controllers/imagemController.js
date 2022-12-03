@@ -1,4 +1,4 @@
-const Imagem = require("../../models/ModeLimagem/imagem.js")
+const Imagem = require("../models/imagem.js")
 class imagemController {
     static listarImagem = (req,res)=>{
         Imagem.find((err,imagens)=>{
