@@ -7,7 +7,7 @@ exports.app = void 0;
 require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const routes_1 = __importDefault(require("../routes"));
+const routes_1 = require("../routes");
 const express_2 = require("express");
 const path_1 = __importDefault(require("path"));
 exports.app = (0, express_1.default)();
@@ -22,5 +22,5 @@ exports.app.use((req, res, next) => {
 });
 exports.app.use(express_1.default.json());
 exports.app.use(route);
-(0, routes_1.default)(exports.app);
+(0, routes_1.Routes)(exports.app);
 exports.app.use('/files', express_1.default.static(path_1.default.resolve(__dirname, '..', '..', 'tmp', 'uploads')));

@@ -13,23 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const login_1 = __importDefault(require("../../models/ModelLogin/login"));
-const cliente_1 = __importDefault(require("../../models/ModelCliente/cliente"));
+exports.loginController = void 0;
+const login_1 = require("../../models/ModelLogin/login");
+const cliente_1 = require("../../models/ModelCliente/cliente");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const api_1 = __importDefault(require("../../config/api/api"));
 const url = process.env.APP_URL;
 class loginController {
 }
+exports.loginController = loginController;
 _a = loginController;
 loginController.cadastrarLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, isAdmin } = req.body;
     try {
-        const usuarioExiste = yield login_1.default.findOne({ email });
+        const usuarioExiste = yield login_1.login.findOne({ email });
         if (!usuarioExiste) {
             bcrypt_1.default.hash(password, 10)
                 .then(hash => {
                 let encryptedPassowrd = hash;
-                let newLogin = new login_1.default({
+                let newLogin = new login_1.login({
                     email: email,
                     password: encryptedPassowrd,
                     isAdmin: isAdmin
@@ -54,7 +56,7 @@ loginController.cadastrarLogin = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 loginController.listarLogin = (req, res) => {
-    login_1.default.find((err, loginBody) => {
+    login_1.login.find((err, loginBody) => {
         try {
             res.status(200).json(loginBody);
         }
@@ -65,7 +67,7 @@ loginController.listarLogin = (req, res) => {
 };
 loginController.listarLoginID = (req, res) => {
     const id = req.params.id;
-    login_1.default.findById(id, (err, loginBody) => {
+    login_1.login.findById(id, (err, loginBody) => {
         if (err) {
             res.status(400).send({ menssage: `${err.message} - id do fornecedor não encotrado` });
         }
@@ -76,7 +78,7 @@ loginController.listarLoginID = (req, res) => {
 };
 loginController.atualizarLogin = (req, res) => {
     const id = req.params.id;
-    login_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    login_1.login.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (err) {
             res.status(400).send({ menssage: `${err.message} - id do login não encontrado` });
         }
@@ -87,7 +89,7 @@ loginController.atualizarLogin = (req, res) => {
 };
 loginController.excluirLogin = (req, res) => {
     const id = req.params.id;
-    login_1.default.findByIdAndDelete(id, (err) => {
+    login_1.login.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: `login deletado` });
         }
@@ -99,7 +101,7 @@ loginController.excluirLogin = (req, res) => {
 loginController.realizarLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     try {
-        const usuarioExiste = yield login_1.default.findOne({ email });
+        const usuarioExiste = yield login_1.login.findOne({ email });
         if (!usuarioExiste) {
             return res.status(200).send({ message: "email não cadastrado" });
         }
@@ -120,7 +122,7 @@ loginController.realizarLogin = (req, res) => __awaiter(void 0, void 0, void 0, 
 loginController.pesquisarEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;
     try {
-        const pesquisaEmail = yield login_1.default.findOne({ email });
+        const pesquisaEmail = yield login_1.login.findOne({ email });
         console.log(pesquisaEmail);
         if (!pesquisaEmail) {
             res.status(200).send({ emailExiste: false });
@@ -136,11 +138,11 @@ loginController.pesquisarEmail = (req, res) => __awaiter(void 0, void 0, void 0,
 loginController.pesquisarEmail_RetornarCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;
     try {
-        const pesquisaLogin = yield login_1.default.findOne({ email });
+        const pesquisaLogin = yield login_1.login.findOne({ email });
         console.log(pesquisaLogin === null || pesquisaLogin === void 0 ? void 0 : pesquisaLogin._id.toString());
-        const login = pesquisaLogin;
-        console.log(login);
-        const pesquisaCliente = yield cliente_1.default.findOne({ login });
+        const loginM = pesquisaLogin;
+        console.log(loginM);
+        const pesquisaCliente = yield cliente_1.cliente.findOne({ login: login_1.login });
         console.log(pesquisaCliente);
         const id = pesquisaCliente === null || pesquisaCliente === void 0 ? void 0 : pesquisaCliente._id.toString();
         api_1.default.get(`${url}/listar-cliente/${id}`).then(resposta => {
@@ -156,4 +158,3 @@ loginController.pesquisarEmail_RetornarCliente = (req, res) => __awaiter(void 0,
         res.status(500).json({ message: "Erro ao pesquisar o e-mail!" });
     }
 });
-exports.default = loginController;

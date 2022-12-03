@@ -1,20 +1,20 @@
-import loginM from '../../models/ModelLogin/login'
-import cliente from '../../models/ModelCliente/cliente';
+import {login} from '../../models/ModelLogin/login'
+import {cliente} from '../../models/ModelCliente/cliente';
 import {Request,Response} from 'express'
 import bcrypt from "bcrypt";
 import api from "../../config/api/api";
 const url = process.env.APP_URL
-class loginController {
+export class loginController {
     static cadastrarLogin = async (req:Request, res:Response) => {
         const { email, password, isAdmin } = req.body
         try {
-            const usuarioExiste = await loginM.findOne({ email })
+            const usuarioExiste = await login.findOne({ email })
             if (!usuarioExiste) {
                 bcrypt.hash(password, 10)
                     .then(hash => {
                         let encryptedPassowrd = hash
 
-                        let newLogin = new loginM({
+                        let newLogin = new login({
                             email: email,
                             password: encryptedPassowrd,
                             isAdmin: isAdmin
@@ -35,7 +35,7 @@ class loginController {
         }
     }
     static listarLogin = (req:Request, res:Response) => {
-        loginM.find((err:Error, loginBody:Response) => {
+        login.find((err:Error, loginBody:Response) => {
             try {
                 res.status(200).json(loginBody)
             } catch {
@@ -46,7 +46,7 @@ class loginController {
     static listarLoginID = (req:Request, res:Response) => {
         const id = req.params.id
 
-        loginM.findById(id, (err:Error, loginBody:Response) => {
+        login.findById(id, (err:Error, loginBody:Response) => {
             if (err) {
                 res.status(400).send({ menssage: `${err.message} - id do fornecedor não encotrado` });
             } else {
@@ -57,7 +57,7 @@ class loginController {
     static atualizarLogin = (req:Request, res:Response) => {
         const id = req.params.id;
 
-        loginM.findByIdAndUpdate(id, { $set: req.body }, (err:Error) => {
+        login.findByIdAndUpdate(id, { $set: req.body }, (err:Error) => {
             if (err) {
                 res.status(400).send({ menssage: `${err.message} - id do login não encontrado` });
             } else {
@@ -67,7 +67,7 @@ class loginController {
     }
     static excluirLogin = (req:Request, res:Response) => {
         const id = req.params.id;
-        loginM.findByIdAndDelete(id, (err:Error) => {
+        login.findByIdAndDelete(id, (err:Error) => {
             if (!err) {
                 res.status(200).send({ message: `login deletado` });
             } else {
@@ -78,7 +78,7 @@ class loginController {
     static realizarLogin = async (req:Request, res:Response) => {
         const { email, password } = req.body
         try {
-            const usuarioExiste = await loginM.findOne({ email })
+            const usuarioExiste = await login.findOne({ email })
             if (!usuarioExiste) {
                 return res.status(200).send({ message: "email não cadastrado" })
             } else {
@@ -96,7 +96,7 @@ class loginController {
     static pesquisarEmail = async (req:Request, res:Response) => {
         const { email } = req.body;
         try {
-            const pesquisaEmail = await loginM.findOne({ email });
+            const pesquisaEmail = await login.findOne({ email });
             console.log(pesquisaEmail)
             if (!pesquisaEmail) {
                 res.status(200).send({ emailExiste: false });
@@ -110,10 +110,10 @@ class loginController {
     static pesquisarEmail_RetornarCliente = async (req:Request, res:Response) => {
         const { email } = req.body;
         try {
-            const pesquisaLogin = await loginM.findOne({email})
+            const pesquisaLogin = await login.findOne({email})
             console.log(pesquisaLogin?._id.toString())
-            const login = pesquisaLogin
-            console.log(login)
+            const loginM = pesquisaLogin
+            console.log(loginM)
             const pesquisaCliente = await cliente.findOne({login})
             console.log(pesquisaCliente)
             const id = pesquisaCliente?._id.toString();
@@ -132,4 +132,3 @@ class loginController {
         }
     }
 }
-export default loginController;

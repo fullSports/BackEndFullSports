@@ -8,25 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const fornecedor_1 = __importDefault(require("../../models/ModelFornecedor/fornecedor"));
+exports.fornecedorController = void 0;
+const fornecedor_1 = require("../../models/ModelFornecedor/fornecedor");
 class fornecedorController {
 }
+exports.fornecedorController = fornecedorController;
 _a = fornecedorController;
 fornecedorController.listarFornecedor = (req, res) => {
-    fornecedor_1.default.find((err, fornecedor) => {
+    fornecedor_1.fornecedor.find((err, fornecedor) => {
         res.status(200).json(fornecedor);
     });
 };
 fornecedorController.cadastrarFornecedor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let fornecedors = new fornecedor_1.default(req.body);
+    let fornecedors = new fornecedor_1.fornecedor(req.body);
     const { cnpj } = req.body;
     try {
-        const fornecedorExiste = yield fornecedor_1.default.findOne({ cnpj });
+        const fornecedorExiste = yield fornecedor_1.fornecedor.findOne({ cnpj });
         if (!fornecedorExiste) {
             fornecedors.save((err) => {
                 if (err) {
@@ -48,7 +47,7 @@ fornecedorController.cadastrarFornecedor = (req, res) => __awaiter(void 0, void 
 });
 fornecedorController.atualizarfornecedor = (req, res) => {
     const id = req.params.id;
-    fornecedor_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    fornecedor_1.fornecedor.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'fornecedor atualizado com sucesso' });
         }
@@ -60,7 +59,7 @@ fornecedorController.atualizarfornecedor = (req, res) => {
 };
 fornecedorController.listarFornecedorId = (req, res) => {
     const id = req.params.id;
-    fornecedor_1.default.findById(id, (err, fornecedor) => {
+    fornecedor_1.fornecedor.findById(id, (err, fornecedor) => {
         if (err) {
             res.status(400).send({ menssage: `${err.message} - id do fornecedor não encotrado` });
         }
@@ -71,7 +70,7 @@ fornecedorController.listarFornecedorId = (req, res) => {
 };
 fornecedorController.excluirFornecedor = (req, res) => {
     const id = req.params.id;
-    fornecedor_1.default.findByIdAndDelete(id, (err) => {
+    fornecedor_1.fornecedor.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: 'fornecedor deletado com sucesso' });
         }
@@ -80,4 +79,3 @@ fornecedorController.excluirFornecedor = (req, res) => {
         }
     });
 };
-exports.default = fornecedorController;

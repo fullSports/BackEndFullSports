@@ -38,5 +38,4 @@ const clienteSchema = new mongoose.Schema(
      },
     });
 
-const cliente = mongoose.model("clientes", clienteSchema);
-export default cliente;
+export const cliente = mongoose.model("clientes", clienteSchema);

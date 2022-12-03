@@ -38,5 +38,4 @@ const calçadoSchema = new mongoose.Schema({
     ]
 })
 
-const calcado = mongoose.model("calcados", calçadoSchema);
-export default calcado;
+export const calcado = mongoose.model("calcados", calçadoSchema);

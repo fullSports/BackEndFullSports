@@ -1,7 +1,7 @@
-import produto from '../../models/ModelProduto/produto'
+import {produto} from '../../models/ModelProduto/produto'
 import {Response,Request} from 'express';
 import api from '../../config/api/api';
-class produtoController {
+export class produtoController {
     static listarProdutos = (req:Request, res:Response) => {
         produto.find()
             .populate({
@@ -177,4 +177,3 @@ class produtoController {
         })
     }
 }
-export default produtoController;

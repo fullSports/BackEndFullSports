@@ -1,6 +1,6 @@
 import express from "express";
-import suplementoController from "../../../controllers/categorias/ControllerSuplemento/controllerSuplemento.js";
-const routerSuplemento = express.Router();
+import {suplementoController} from "../../../controllers/categorias/ControllerSuplemento/controllerSuplemento.js";
+export const routerSuplemento = express.Router();
 
 routerSuplemento
     .get("/listar-suplementos", suplementoController.listarsuplementos)
@@ -9,4 +9,3 @@ routerSuplemento
     .put("/atualizar-suplemento/:id", suplementoController.atualizarsuplemento)
     .delete("/deletar-suplemento-e-imagem/:id",suplementoController.excluirsuplementoEimagem)
     .delete("/deletar-suplemento/:id",suplementoController.excluirsuplemento)
-export default routerSuplemento;

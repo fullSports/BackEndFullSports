@@ -3,14 +3,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pedidoController = void 0;
 const api_1 = __importDefault(require("../../config/api/api"));
-const pedido_1 = __importDefault(require("../../models/ModelPedidos/pedido"));
+const pedido_1 = require("../../models/ModelPedidos/pedido");
 require('dotenv').config();
 const url = process.env.APP_URL;
 class pedidoController {
 }
+exports.pedidoController = pedidoController;
 pedidoController.ListarPedido = (req, res) => {
-    pedido_1.default.find()
+    pedido_1.pedido.find()
         .populate({
         path: 'produto',
         populate: [
@@ -73,7 +75,7 @@ pedidoController.ListarPedido = (req, res) => {
 };
 pedidoController.ListaPedidoId = (req, res) => {
     const id = req.params.id;
-    pedido_1.default.findById(id).populate({
+    pedido_1.pedido.findById(id).populate({
         path: 'produto',
         populate: [
             {
@@ -154,7 +156,7 @@ pedidoController.RealizarPedido = (req, res) => {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
-                            let newPedido = new pedido_1.default({
+                            let newPedido = new pedido_1.pedido({
                                 quantidadePedido: quantidadePedido,
                                 produto: produto,
                                 cliente: cliente,
@@ -185,7 +187,7 @@ pedidoController.RealizarPedido = (req, res) => {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
-                            let newPedido = new pedido_1.default({
+                            let newPedido = new pedido_1.pedido({
                                 quantidadePedido: quantidadePedido,
                                 produto: produto,
                                 cliente: cliente,
@@ -215,7 +217,7 @@ pedidoController.RealizarPedido = (req, res) => {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
-                            let newPedido = new pedido_1.default({
+                            let newPedido = new pedido_1.pedido({
                                 quantidadePedido: quantidadePedido,
                                 produto: produto,
                                 cliente: cliente,
@@ -245,7 +247,7 @@ pedidoController.RealizarPedido = (req, res) => {
                             quantidade: newQuantidade
                         }).then(respoataCategoria => {
                             console.log(respoataCategoria.data);
-                            let newPedido = new pedido_1.default({
+                            let newPedido = new pedido_1.pedido({
                                 quantidadePedido: quantidadePedido,
                                 produto: produto,
                                 cliente: cliente,
@@ -284,7 +286,7 @@ pedidoController.CancelarPedido = (req, res) => {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
-                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                            pedido_1.pedido.findByIdAndDelete(id, (err) => {
                                 if (!err) {
                                     res.status(200).send({ message: `pedudo deletado` });
                                 }
@@ -305,7 +307,7 @@ pedidoController.CancelarPedido = (req, res) => {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
-                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                            pedido_1.pedido.findByIdAndDelete(id, (err) => {
                                 if (!err) {
                                     res.status(200).send({ message: `pedudo deletado` });
                                 }
@@ -326,7 +328,7 @@ pedidoController.CancelarPedido = (req, res) => {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
-                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                            pedido_1.pedido.findByIdAndDelete(id, (err) => {
                                 if (!err) {
                                     res.status(200).send({ message: `pedudo deletado` });
                                 }
@@ -347,7 +349,7 @@ pedidoController.CancelarPedido = (req, res) => {
                         quantidade: newQuantidade
                     }).then(() => {
                         setTimeout(function () {
-                            pedido_1.default.findByIdAndDelete(id, (err) => {
+                            pedido_1.pedido.findByIdAndDelete(id, (err) => {
                                 if (!err) {
                                     res.status(200).send({ message: `pedudo deletado` });
                                 }
@@ -373,4 +375,3 @@ pedidoController.CancelarPedido = (req, res) => {
         res.status(500).json({ message: "Erro na requisição" });
     }
 };
-exports.default = pedidoController;

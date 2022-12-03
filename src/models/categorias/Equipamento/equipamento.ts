@@ -38,5 +38,4 @@ const equipamentoSchema = new mongoose.Schema({
     ]
 })
 
-const equipamento = mongoose.model("equipamentos", equipamentoSchema);
-export default equipamento;
+export const equipamento = mongoose.model("equipamentos", equipamentoSchema);

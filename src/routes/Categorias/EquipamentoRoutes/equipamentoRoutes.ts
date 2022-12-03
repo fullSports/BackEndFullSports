@@ -1,6 +1,6 @@
 import express from "express";
-import equipamentoController from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento.js";
-const routerEquipamento = express.Router();
+import {equipamentoController} from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento.js";
+export const routerEquipamento = express.Router();
 
 routerEquipamento
     .get("/listar-equipamentos", equipamentoController.listarequipamento)
@@ -9,4 +9,3 @@ routerEquipamento
     .put("/atualizar-equipamento/:id", equipamentoController.atualizarequipamento)
     .delete("/deletar-equipamento-e-imagem/:id",equipamentoController.excluirEquipamentoEimagem)
     .delete("/deletar-equipamento/:id",equipamentoController.excluirEquipamento)
-export default routerEquipamento;

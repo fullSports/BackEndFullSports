@@ -13,16 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.clienteController = void 0;
 const api_1 = __importDefault(require("../../config/api/api"));
-const cliente_1 = __importDefault(require("../../models/ModelCliente/cliente"));
+const cliente_1 = require("../../models/ModelCliente/cliente");
 const Imagem = require("../../models/imagem.js");
-const login_1 = __importDefault(require("../../models/ModelLogin/login"));
+const login_1 = require("../../models/ModelLogin/login");
 require('dotenv').config();
 class clienteController {
 }
+exports.clienteController = clienteController;
 _a = clienteController;
 clienteController.listarClientes = (req, res) => {
-    cliente_1.default.find()
+    cliente_1.cliente.find()
         .populate("imagemPerfil")
         .populate("login")
         .exec((err, cliente) => {
@@ -30,7 +32,7 @@ clienteController.listarClientes = (req, res) => {
     });
 };
 clienteController.cadastrarCliente = (req, res) => {
-    let clientes = new cliente_1.default(req.body);
+    let clientes = new cliente_1.cliente(req.body);
     clientes.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o cliente` }));
@@ -43,7 +45,7 @@ clienteController.cadastrarCliente = (req, res) => {
 };
 clienteController.atualizarCliente = (req, res) => {
     const id = req.params.id;
-    cliente_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    cliente_1.cliente.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'cliente atualizado com sucesso' });
         }
@@ -55,7 +57,7 @@ clienteController.atualizarCliente = (req, res) => {
 };
 clienteController.listarClienteId = (req, res) => {
     const id = req.params.id;
-    cliente_1.default.findById(id)
+    cliente_1.cliente.findById(id)
         .populate("imagemPerfil")
         .populate("login")
         .exec((err, clientes) => {
@@ -74,9 +76,9 @@ clienteController.excluirCliente = (req, res) => __awaiter(void 0, void 0, void 
         url: `listar-cliente/${id}`,
     }).then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
         if (resposta.data.imagemPerfil == null || resposta.data.imagemPerfil == undefined) {
-            const login = yield login_1.default.findById(resposta.data.login._id);
-            yield (login === null || login === void 0 ? void 0 : login.remove());
-            cliente_1.default.findByIdAndDelete(id, (err) => {
+            const Login = yield login_1.login.findById(resposta.data.login._id);
+            yield (Login === null || Login === void 0 ? void 0 : Login.remove());
+            cliente_1.cliente.findByIdAndDelete(id, (err) => {
                 if (!err) {
                     res.status(200).send({ message: 'cliente deletado com sucesso' });
                 }
@@ -89,9 +91,9 @@ clienteController.excluirCliente = (req, res) => __awaiter(void 0, void 0, void 
             console.log(resposta.data.imagemPerfil._id);
             const imagem = yield Imagem.findById(resposta.data.imagemPerfil._id);
             yield imagem.remove();
-            const login = yield login_1.default.findById(resposta.data.login._id);
-            yield (login === null || login === void 0 ? void 0 : login.remove());
-            const clienteId = yield cliente_1.default.findById(id);
+            const Login = yield login_1.login.findById(resposta.data.login._id);
+            yield (Login === null || Login === void 0 ? void 0 : Login.remove());
+            const clienteId = yield cliente_1.cliente.findById(id);
             yield (clienteId === null || clienteId === void 0 ? void 0 : clienteId.remove());
             console.log(resposta.data.imagemPerfil._id);
             return res.status(200).send({ message: 'cliente deletado com sucesso' });
@@ -101,4 +103,3 @@ clienteController.excluirCliente = (req, res) => __awaiter(void 0, void 0, void 
         res.status(500).send({ message: `${err.message} - erro ao deletar o cliente` });
     });
 });
-exports.default = clienteController;

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.roupa = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const roupaSchema = new mongoose_1.default.Schema({
     id: {
@@ -41,5 +42,4 @@ const roupaSchema = new mongoose_1.default.Schema({
         { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'imagem', index: true, default: [], required: true }
     ]
 });
-const roupa = mongoose_1.default.model("roupas", roupaSchema);
-exports.default = roupa;
+exports.roupa = mongoose_1.default.model("roupas", roupaSchema);

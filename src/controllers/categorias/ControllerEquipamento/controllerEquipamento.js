@@ -13,14 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const equipamento_1 = __importDefault(require("../../../models/categorias/Equipamento/equipamento"));
+exports.equipamentoController = void 0;
+const equipamento_1 = require("../../../models/categorias/Equipamento/equipamento");
 const Imagem = require("../../../models/imagem.js");
 const api_1 = __importDefault(require("../../../config/api/api"));
 class equipamentoController {
 }
+exports.equipamentoController = equipamentoController;
 _a = equipamentoController;
 equipamentoController.listarequipamento = (req, res) => {
-    equipamento_1.default.find()
+    equipamento_1.equipamento.find()
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, equipamentos) => {
@@ -28,7 +30,7 @@ equipamentoController.listarequipamento = (req, res) => {
     });
 };
 equipamentoController.cadastrarequipamento = (req, res) => {
-    let equipamentos = new equipamento_1.default(req.body);
+    let equipamentos = new equipamento_1.equipamento(req.body);
     equipamentos.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o equipamento` }));
@@ -41,7 +43,7 @@ equipamentoController.cadastrarequipamento = (req, res) => {
 };
 equipamentoController.atualizarequipamento = (req, res) => {
     const id = req.params.id;
-    equipamento_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    equipamento_1.equipamento.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'equipamento atualizado com sucesso' });
         }
@@ -53,7 +55,7 @@ equipamentoController.atualizarequipamento = (req, res) => {
 };
 equipamentoController.listarequipamentoId = (req, res) => {
     const id = req.params.id;
-    equipamento_1.default.findById(id)
+    equipamento_1.equipamento.findById(id)
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, equipamentos) => {
@@ -73,7 +75,7 @@ equipamentoController.excluirEquipamentoEimagem = (req, res) => {
     }).then(resposta => {
         if (resposta.status === 200) {
             if (resposta.data.imagemProduto === null) {
-                equipamento_1.default.findByIdAndDelete(id, (err) => {
+                equipamento_1.equipamento.findByIdAndDelete(id, (err) => {
                     if (!err) {
                         res.status(200).send({ message: 'equipamento  deletado com sucesso1' });
                     }
@@ -83,13 +85,13 @@ equipamentoController.excluirEquipamentoEimagem = (req, res) => {
                 });
             }
             else {
-                equipamento_1.default.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
+                equipamento_1.equipamento.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (!err) {
                         resposta.data.imagemProduto.map((item) => __awaiter(void 0, void 0, void 0, function* () {
                             const imagem = yield Imagem.findById(item._id);
                             yield imagem.remove();
                         }));
-                        const equipamentoDelete = yield equipamento_1.default.findById(id);
+                        const equipamentoDelete = yield equipamento_1.equipamento.findById(id);
                         equipamentoDelete === null || equipamentoDelete === void 0 ? void 0 : equipamentoDelete.remove();
                         res.status(200).send({ message: 'equipamento deletado com sucesso-' });
                     }
@@ -103,7 +105,7 @@ equipamentoController.excluirEquipamentoEimagem = (req, res) => {
 };
 equipamentoController.excluirEquipamento = (req, res) => {
     const id = req.params.id;
-    equipamento_1.default.findByIdAndDelete(id, (err) => {
+    equipamento_1.equipamento.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: 'equipamento  deletado com sucesso1' });
         }
@@ -112,4 +114,3 @@ equipamentoController.excluirEquipamento = (req, res) => {
         }
     });
 };
-exports.default = equipamentoController;

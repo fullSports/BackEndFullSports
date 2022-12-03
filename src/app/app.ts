@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express from "express"
 import cors from 'cors';
-import Routes from "../routes";
+import {Routes} from "../routes";
 
 import { Router } from 'express';
 import path from 'path';

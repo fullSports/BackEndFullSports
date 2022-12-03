@@ -1,6 +1,6 @@
 import api from "../../config/api/api";
-import pedido from "../../models/ModelPedidos/pedido";
-import produto from "../../models/ModelProduto/produto";
+import {pedido}from "../../models/ModelPedidos/pedido";
+import {produto} from "../../models/ModelProduto/produto";
 import { Request, Response } from 'express';
 import IPedido from "../../interfaces/IPedido";
 import IProduto from "../../interfaces/IProduto";
@@ -10,7 +10,7 @@ import ISuplementos from "../../interfaces/Produtos/ISuplementos";
 import ICacados from "../../interfaces/Produtos/ICalcados";
 require('dotenv').config();
 const url = process.env.APP_URL
-class pedidoController {
+export class pedidoController {
     static ListarPedido = (req: Request, res: Response) => {
         pedido.find()
             .populate({
@@ -351,4 +351,3 @@ class pedidoController {
         }
     }
 }
-export default pedidoController

@@ -1,6 +1,6 @@
 import express from "express";
-import clienteController from "../../controllers/ClienteController/clienteController.js";
-const routerCliente = express.Router();
+import {clienteController} from "../../controllers/ClienteController/clienteController.js";
+export const routerCliente = express.Router();
 
 routerCliente
     .get("/listar-clientes", clienteController.listarClientes)
@@ -8,4 +8,3 @@ routerCliente
     .post("/cadastrar-cliente", clienteController.cadastrarCliente)
     .put("/atualizar-cliente/:id", clienteController.atualizarCliente)
     .delete("/deletar-cliente/:id",clienteController.excluirCliente)
-export default routerCliente;

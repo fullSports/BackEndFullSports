@@ -1,6 +1,6 @@
-import fornecedor from "../../models/ModelFornecedor/fornecedor"
+import {fornecedor} from "../../models/ModelFornecedor/fornecedor"
 import {Request,Response} from "express"
-class fornecedorController {
+export class fornecedorController {
     static listarFornecedor = (req:Request, res:Response) => {
         fornecedor.find((err, fornecedor) => {
             res.status(200).json(fornecedor)
@@ -62,4 +62,3 @@ class fornecedorController {
         });
     }
 }
-export default fornecedorController;

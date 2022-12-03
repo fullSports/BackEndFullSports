@@ -13,13 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const produto_1 = __importDefault(require("../../models/ModelProduto/produto"));
+exports.produtoController = void 0;
+const produto_1 = require("../../models/ModelProduto/produto");
 const api_1 = __importDefault(require("../../config/api/api"));
 class produtoController {
 }
+exports.produtoController = produtoController;
 _a = produtoController;
 produtoController.listarProdutos = (req, res) => {
-    produto_1.default.find()
+    produto_1.produto.find()
         .populate({
         path: 'categoriaProduto',
         populate: [
@@ -71,7 +73,7 @@ produtoController.listarProdutos = (req, res) => {
     });
 };
 produtoController.cadastrarProduto = (req, res) => {
-    let produtos = new produto_1.default(req.body);
+    let produtos = new produto_1.produto(req.body);
     produtos.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o produto` }));
@@ -84,7 +86,7 @@ produtoController.cadastrarProduto = (req, res) => {
 };
 produtoController.atualizarProduto = (req, res) => {
     const id = req.params.id;
-    produto_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    produto_1.produto.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'produto atualizado com sucesso' });
         }
@@ -96,7 +98,7 @@ produtoController.atualizarProduto = (req, res) => {
 };
 produtoController.listarProdutoId = (req, res) => {
     const id = req.params.id;
-    produto_1.default.findById(id)
+    produto_1.produto.findById(id)
         .populate({
         path: 'categoriaProduto',
         populate: [
@@ -162,7 +164,7 @@ produtoController.excluirProduto = (req, res) => {
         if (categoria.roupa != undefined) {
             return api_1.default.delete(`deletar-roupa-e-imagem/${categoria.roupa._id}`)
                 .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.default.findById(id);
+                const produtoDelete = yield produto_1.produto.findById(id);
                 produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
                 res.status(200).send({ message: 'produto deletado com sucesso-' });
             })).catch((err) => console.log(err));
@@ -170,7 +172,7 @@ produtoController.excluirProduto = (req, res) => {
         if (categoria.suplemento != undefined) {
             return api_1.default.delete(`deletar-suplemento-e-imagem/${categoria.suplemento._id}`)
                 .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.default.findById(id);
+                const produtoDelete = yield produto_1.produto.findById(id);
                 produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
                 res.status(200).send({ message: 'produto deletado com sucesso-' });
             })).catch((err) => console.log(err));
@@ -178,7 +180,7 @@ produtoController.excluirProduto = (req, res) => {
         if (categoria.equipamento != undefined) {
             return api_1.default.delete(`deletar-equipamento-e-imagem/${categoria.equipamento._id}`)
                 .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.default.findById(id);
+                const produtoDelete = yield produto_1.produto.findById(id);
                 produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
                 res.status(200).send({ message: 'produto deletado com sucesso-' });
             })).catch((err) => console.log(err));
@@ -186,11 +188,10 @@ produtoController.excluirProduto = (req, res) => {
         if (categoria.calcado != undefined) {
             return api_1.default.delete(`deletar-calcado-e-imagem/${categoria.calcado._id}`)
                 .then((resposta) => __awaiter(void 0, void 0, void 0, function* () {
-                const produtoDelete = yield produto_1.default.findById(id);
+                const produtoDelete = yield produto_1.produto.findById(id);
                 produtoDelete === null || produtoDelete === void 0 ? void 0 : produtoDelete.remove();
                 res.status(200).send({ message: 'produto deletado com sucesso-' });
             })).catch((err) => console.log(err));
         }
     }));
 };
-exports.default = produtoController;

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pedido = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const pedidoSchema = new mongoose_1.default.Schema({
     quantidadePedido: {
@@ -30,5 +31,4 @@ const pedidoSchema = new mongoose_1.default.Schema({
 //     }
 // }, {
 // })
-const carrinho = mongoose_1.default.model("pedido", pedidoSchema);
-exports.default = carrinho;
+exports.pedido = mongoose_1.default.model("pedido", pedidoSchema);

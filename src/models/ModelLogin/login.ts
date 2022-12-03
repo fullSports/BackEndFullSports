@@ -19,5 +19,4 @@ const loginSchema = new mongoose.Schema(
         }
     }
 );
-const login = mongoose.model("login", loginSchema);
-export default login;
+export const login = mongoose.model("login", loginSchema);

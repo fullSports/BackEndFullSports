@@ -1,8 +1,8 @@
-import calcado from "../../../models/categorias/Calcados/calcado"
+import {calcado} from "../../../models/categorias/Calcados/calcado"
 const Imagem = require("../../../models/imagem.js");
 import {Request,Response} from 'express';
 import api from "../../../config/api/api";
-class calcadoController {
+export class calcadoController {
     static listarcalcado = (req:Request, res:Response) => {
         calcado.find()
             .populate('fornecedor')
@@ -98,4 +98,3 @@ class calcadoController {
         });
     }
 }
-export default calcadoController;

@@ -1,15 +1,15 @@
 import express,{Response,Request} from 'express';
-import routerCalcado from './Categorias/CalcadosRoutes/calcadoRoutes';
-import routerEquipamento from './Categorias/EquipamentoRoutes/equipamentoRoutes';
-import routerRoupa from './Categorias/RoupaRoutes/roupaRoutes';
-import routerSuplemento from './Categorias/SuplementoRoutes/suplementoRoutes';
-import routerCliente from './ClienteRoutes/clienteRoutes'
-import routeFornecedor from './FornecedorRoutes/fornecedorRoutes';
+import {routerCalcado} from './Categorias/CalcadosRoutes/calcadoRoutes';
+import {routerEquipamento} from './Categorias/EquipamentoRoutes/equipamentoRoutes';
+import {routerRoupa} from './Categorias/RoupaRoutes/roupaRoutes';
+import {routerSuplemento} from './Categorias/SuplementoRoutes/suplementoRoutes';
+import {routerCliente} from './ClienteRoutes/clienteRoutes'
+import {routeFornecedor} from './FornecedorRoutes/fornecedorRoutes';
 const routerImagem = require('./imagemRoutes.js')
-import routerlogin from './LoginRoutes/loginRoutes';
-import routerPedido from './PedidoRoutes/pedidoRoutes';
-import routeProduto from './ProdutoRoutes/produtoRoutes';
-const Routes = (app = express())=>{
+import {routerlogin} from './LoginRoutes/loginRoutes';
+import {routerPedido} from './PedidoRoutes/pedidoRoutes';
+import {routeProduto} from './ProdutoRoutes/produtoRoutes';
+export const Routes = (app = express())=>{
     app.route('/').get((req:Request,res:Response)=>{
         res.status(200).json({"status": "iniciado"})
     })
@@ -27,4 +27,3 @@ const Routes = (app = express())=>{
         routerPedido
     )
 }
-export default Routes;

@@ -1,6 +1,6 @@
 import express from "express";
-import loginController from "../../controllers/LoginController/loginControoller";
-const routerlogin = express.Router();
+import {loginController} from "../../controllers/LoginController/loginControoller";
+export const routerlogin = express.Router();
 
 routerlogin
     .post("/login", loginController.cadastrarLogin)
@@ -11,4 +11,3 @@ routerlogin
     .post("/realizar-login",loginController.realizarLogin)
     .post("/pesquisar-email", loginController.pesquisarEmail)
     .post("/pesquisar-email-cliente", loginController.pesquisarEmail_RetornarCliente)
-export default routerlogin;

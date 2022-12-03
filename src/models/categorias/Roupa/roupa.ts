@@ -37,5 +37,4 @@ const roupaSchema = new mongoose.Schema({
         {type: mongoose.Schema.Types.ObjectId,ref: 'imagem',index: true,default:[],required: true}
     ]
 })
-const roupa = mongoose.model("roupas", roupaSchema);
-export default roupa
+export const roupa = mongoose.model("roupas", roupaSchema);

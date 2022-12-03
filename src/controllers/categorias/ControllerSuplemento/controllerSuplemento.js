@@ -13,14 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const suplemento_1 = __importDefault(require("../../../models/categorias/Suplemento/suplemento"));
+exports.suplementoController = void 0;
+const suplemento_1 = require("../../../models/categorias/Suplemento/suplemento");
 const Imagem = require("../../../models/imagem.js");
 const api_1 = __importDefault(require("../../../config/api/api"));
 class suplementoController {
 }
+exports.suplementoController = suplementoController;
 _a = suplementoController;
 suplementoController.listarsuplementos = (req, res) => {
-    suplemento_1.default.find()
+    suplemento_1.suplemento.find()
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, suplementos) => {
@@ -28,7 +30,7 @@ suplementoController.listarsuplementos = (req, res) => {
     });
 };
 suplementoController.cadastrarsuplemento = (req, res) => {
-    let suplementos = new suplemento_1.default(req.body);
+    let suplementos = new suplemento_1.suplemento(req.body);
     suplementos.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o suplemento` }));
@@ -41,7 +43,7 @@ suplementoController.cadastrarsuplemento = (req, res) => {
 };
 suplementoController.atualizarsuplemento = (req, res) => {
     const id = req.params.id;
-    suplemento_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    suplemento_1.suplemento.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'suplemento atualizado com sucesso' });
         }
@@ -53,7 +55,7 @@ suplementoController.atualizarsuplemento = (req, res) => {
 };
 suplementoController.listarsuplementoId = (req, res) => {
     const id = req.params.id;
-    suplemento_1.default.findById(id)
+    suplemento_1.suplemento.findById(id)
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, suplementos) => {
@@ -73,7 +75,7 @@ suplementoController.excluirsuplementoEimagem = (req, res) => {
     }).then(resposta => {
         if (resposta.status === 200) {
             if (resposta.data.imagemProduto === null) {
-                suplemento_1.default.findByIdAndDelete(id, (err) => {
+                suplemento_1.suplemento.findByIdAndDelete(id, (err) => {
                     if (!err) {
                         res.status(200).send({ message: 'suplemento  deletado com sucesso1' });
                     }
@@ -83,13 +85,13 @@ suplementoController.excluirsuplementoEimagem = (req, res) => {
                 });
             }
             else {
-                suplemento_1.default.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
+                suplemento_1.suplemento.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (!err) {
                         resposta.data.imagemProduto.map((item) => __awaiter(void 0, void 0, void 0, function* () {
                             const imagem = yield Imagem.findById(item._id);
                             yield imagem.remove();
                         }));
-                        const suplementoDelete = yield suplemento_1.default.findById(id);
+                        const suplementoDelete = yield suplemento_1.suplemento.findById(id);
                         suplementoDelete === null || suplementoDelete === void 0 ? void 0 : suplementoDelete.remove();
                         res.status(200).send({ message: 'suplemento deletado com sucesso-' });
                     }
@@ -103,7 +105,7 @@ suplementoController.excluirsuplementoEimagem = (req, res) => {
 };
 suplementoController.excluirsuplemento = (req, res) => {
     const id = req.params.id;
-    suplemento_1.default.findByIdAndDelete(id, (err) => {
+    suplemento_1.suplemento.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: 'suplemento  deletado com sucesso1' });
         }
@@ -112,4 +114,3 @@ suplementoController.excluirsuplemento = (req, res) => {
         }
     });
 };
-exports.default = suplementoController;

@@ -13,14 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const calcado_1 = __importDefault(require("../../../models/categorias/Calcados/calcado"));
+exports.calcadoController = void 0;
+const calcado_1 = require("../../../models/categorias/Calcados/calcado");
 const Imagem = require("../../../models/imagem.js");
 const api_1 = __importDefault(require("../../../config/api/api"));
 class calcadoController {
 }
+exports.calcadoController = calcadoController;
 _a = calcadoController;
 calcadoController.listarcalcado = (req, res) => {
-    calcado_1.default.find()
+    calcado_1.calcado.find()
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, calcados) => {
@@ -28,7 +30,7 @@ calcadoController.listarcalcado = (req, res) => {
     });
 };
 calcadoController.cadastrarcalcado = (req, res) => {
-    let calcados = new calcado_1.default(req.body);
+    let calcados = new calcado_1.calcado(req.body);
     calcados.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o calcado` }));
@@ -41,7 +43,7 @@ calcadoController.cadastrarcalcado = (req, res) => {
 };
 calcadoController.atualizarcalcado = (req, res) => {
     const id = req.params.id;
-    calcado_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    calcado_1.calcado.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'calcado atualizado com sucesso' });
         }
@@ -53,7 +55,7 @@ calcadoController.atualizarcalcado = (req, res) => {
 };
 calcadoController.listarcalcadoId = (req, res) => {
     const id = req.params.id;
-    calcado_1.default.findById(id)
+    calcado_1.calcado.findById(id)
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, calcados) => {
@@ -79,7 +81,7 @@ calcadoController.excluirCalcadoEimagem = (req, res) => {
     }).then(reposta => {
         if (reposta.status === 200) {
             if (reposta.data.imagemProduto === null) {
-                calcado_1.default.findByIdAndDelete(id, (err) => {
+                calcado_1.calcado.findByIdAndDelete(id, (err) => {
                     if (!err) {
                         res.status(200).send({ message: 'calcado  deletado com sucesso1' });
                     }
@@ -89,13 +91,13 @@ calcadoController.excluirCalcadoEimagem = (req, res) => {
                 });
             }
             else {
-                calcado_1.default.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
+                calcado_1.calcado.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (!err) {
                         reposta.data.imagemProduto.map((item) => __awaiter(void 0, void 0, void 0, function* () {
                             const imagem = yield Imagem.findById(item._id);
                             yield imagem.remove();
                         }));
-                        const calcadoDelete = yield calcado_1.default.findById(id);
+                        const calcadoDelete = yield calcado_1.calcado.findById(id);
                         calcadoDelete === null || calcadoDelete === void 0 ? void 0 : calcadoDelete.remove();
                         res.status(200).send({ message: 'calcado deletado com sucesso-' });
                     }
@@ -109,7 +111,7 @@ calcadoController.excluirCalcadoEimagem = (req, res) => {
 };
 calcadoController.ExcluirCalcado = (req, res) => {
     const id = req.params.id;
-    calcado_1.default.findByIdAndDelete(id, (err) => {
+    calcado_1.calcado.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: 'calcado  deletado com sucesso1' });
         }
@@ -118,4 +120,3 @@ calcadoController.ExcluirCalcado = (req, res) => {
         }
     });
 };
-exports.default = calcadoController;

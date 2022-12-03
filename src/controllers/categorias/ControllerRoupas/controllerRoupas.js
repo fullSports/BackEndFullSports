@@ -13,14 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const roupa_1 = __importDefault(require("../../../models/categorias/Roupa/roupa"));
+exports.roupaController = void 0;
+const roupa_1 = require("../../../models/categorias/Roupa/roupa");
 const Imagem = require("../../../models/imagem.js");
 const api_1 = __importDefault(require("../../../config/api/api"));
 class roupaController {
 }
+exports.roupaController = roupaController;
 _a = roupaController;
 roupaController.listarRoupas = (req, res) => {
-    roupa_1.default.find()
+    roupa_1.roupa.find()
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, roupas) => {
@@ -28,7 +30,7 @@ roupaController.listarRoupas = (req, res) => {
     });
 };
 roupaController.cadastrarRoupa = (req, res) => {
-    let roupas = new roupa_1.default(req.body);
+    let roupas = new roupa_1.roupa(req.body);
     roupas.save((err) => {
         if (err) {
             res.status(500).send(({ message: `${err.message} - falha ao cadastrar o roupa` }));
@@ -41,7 +43,7 @@ roupaController.cadastrarRoupa = (req, res) => {
 };
 roupaController.atualizarRoupa = (req, res) => {
     const id = req.params.id;
-    roupa_1.default.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    roupa_1.roupa.findByIdAndUpdate(id, { $set: req.body }, (err) => {
         if (!err) {
             res.status(200).send({ message: 'roupa atualizado com sucesso' });
         }
@@ -53,7 +55,7 @@ roupaController.atualizarRoupa = (req, res) => {
 };
 roupaController.listarRoupaId = (req, res) => {
     const id = req.params.id;
-    roupa_1.default.findById(id)
+    roupa_1.roupa.findById(id)
         .populate('fornecedor')
         .populate('imagemProduto')
         .exec((err, roupas) => {
@@ -73,7 +75,7 @@ roupaController.excluirRoupaEimagem = (req, res) => {
     }).then(resposta => {
         if (resposta.status === 200) {
             if (resposta.data.imagemProduto === null) {
-                roupa_1.default.findByIdAndDelete(id, (err) => {
+                roupa_1.roupa.findByIdAndDelete(id, (err) => {
                     if (!err) {
                         res.status(200).send({ message: 'roupa  deletado com sucesso1' });
                     }
@@ -83,13 +85,13 @@ roupaController.excluirRoupaEimagem = (req, res) => {
                 });
             }
             else {
-                roupa_1.default.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
+                roupa_1.roupa.findById(id, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (!err) {
                         resposta.data.imagemProduto.map((item) => __awaiter(void 0, void 0, void 0, function* () {
                             const imagem = yield Imagem.findById(item._id);
                             yield imagem.remove();
                         }));
-                        const roupaDelete = yield roupa_1.default.findById(id);
+                        const roupaDelete = yield roupa_1.roupa.findById(id);
                         roupaDelete === null || roupaDelete === void 0 ? void 0 : roupaDelete.remove();
                         res.status(200).send({ message: 'roupa deletado com sucesso-' });
                     }
@@ -103,7 +105,7 @@ roupaController.excluirRoupaEimagem = (req, res) => {
 };
 roupaController.excluirRoupa = (req, res) => {
     const id = req.params.id;
-    roupa_1.default.findByIdAndDelete(id, (err) => {
+    roupa_1.roupa.findByIdAndDelete(id, (err) => {
         if (!err) {
             res.status(200).send({ message: 'roupa  deletado com sucesso1' });
         }
@@ -112,4 +114,3 @@ roupaController.excluirRoupa = (req, res) => {
         }
     });
 };
-exports.default = roupaController;
