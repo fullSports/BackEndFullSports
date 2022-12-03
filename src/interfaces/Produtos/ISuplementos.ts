@@ -1,6 +1,6 @@
-import IFornecedor from "../IFornecedor"
-import Iimagem from "../Iimagem"
-export default interface ISuplementos{
+import {IFornecedor} from "../IFornecedor"
+import {Iimagem} from "../Iimagem"
+export interface ISuplementos{
     _id: string,
     nome: string,
     fornecedor: IFornecedor,

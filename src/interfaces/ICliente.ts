@@ -1,6 +1,6 @@
-import Iimagem from "./Iimagem"
-import ILogin from "./ILogin"
-export default interface ICliente{
+import {Iimagem} from "./Iimagem"
+import {ILogin} from "./ILogin"
+export interface ICliente{
     _id: string
     cpf: string
     nome: string

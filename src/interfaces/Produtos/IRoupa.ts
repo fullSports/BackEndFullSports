@@ -1,6 +1,6 @@
-import IFornecedor from "../IFornecedor"
-import Iimagem from "../Iimagem"
-export default interface IRoupa{
+import {IFornecedor} from "../IFornecedor"
+import {Iimagem} from "../Iimagem"
+export interface IRoupa{
     _id: string,
     nome: string,
     fornecedor: IFornecedor,
