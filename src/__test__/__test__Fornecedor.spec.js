@@ -30,7 +30,6 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
     });
     it('• Deve execultar o método POST - Fornecedor já cadastrado e retorna-message', async () => {
         //método POST CNPJ Repetido
-        
         const CadastraFornecedorTeste = await fornecedor.post('/cadastrar-fornecedor')
             .send({
                 cnpj: CNPJ,

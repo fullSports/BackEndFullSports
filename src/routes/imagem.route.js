@@ -8,4 +8,4 @@ routerImagem
     .post("/imagem", multer(multerConfig).single('file'), imagemController.cadastrarImagem)
     .delete("/imagem/:id", imagemController.deletarImagem)
     .get("/imagem/:id", imagemController.listarImagemId)
-module.exports = routerImagem ;
+module.exports = routerImagem;

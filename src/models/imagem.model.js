@@ -37,7 +37,7 @@ ImagemSchema.pre('remove',function(){
         return promisify(
         fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.key)
         );
-    }
+    };
 });
 const imagem = mongoose.model("imagem", ImagemSchema);
 module.exports = imagem
