@@ -6,6 +6,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
     const fornecedor = request(app)
     const CNPJ = '58.144.984/0001-64';
     const newCNPJ = '40.162.358/0001-35'
+    jest.setTimeout(7000);
     it('• Deve execultar o método POST - Fornecedor', async () => {
         //método POST
         const CadastraFornecedor = await fornecedor.post('/cadastrar-fornecedor')
@@ -18,7 +19,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
             })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            expect(CadastraFornecedor.statusCode).toBe(200)
+        expect(CadastraFornecedor.statusCode).toBe(200)
         if (CadastraFornecedor.statusCode === 200) {
             FornededorID = CadastraFornecedor.body._id.toString()
             logger.info("ID do fornecedor Cadastrado: " + CadastraFornecedor.body._id.toString())
@@ -41,15 +42,19 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
         expect(CadastraFornecedorTeste.statusCode).toBe(200);
-        expect(CadastraFornecedorTeste.body).toHaveProperty('message');
-        logger.info('message:', CadastraFornecedorTeste.body);
+        if (CadastraFornecedorTeste.statusCode === 200) {
+            logger.info('message:', CadastraFornecedorTeste.body);
+        } else {
+            expect(CadastraFornecedorTeste.statusCode).toBe(500);
+            expect(CadastraFornecedorTeste.body).toHaveProperty('message');
+        }
     });
     it('• Deve execultar o método GET - Todos os Fornecedores Cadastrados', async () => {
         //método GET
         const ConsultaFornecedores = await fornecedor.get('/listar-fornecedores')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            expect(ConsultaFornecedores.statusCode).toBe(200)
+        expect(ConsultaFornecedores.statusCode).toBe(200)
         if (ConsultaFornecedores.statusCode === 200) {
             logger.info("Tabela com todos os Fornecedores Cadastrado: ");
             logger.info(console.table(ConsultaFornecedores.body, ["_id", "cnpj", "nomeEmpresa", "cep", "endereco", "dataCadastro"]));
@@ -64,7 +69,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
         const ConsultaFornecedorID = await fornecedor.get(`/listar-fornecedor/${FornededorID}`)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            expect(ConsultaFornecedorID.statusCode).toBe(200)
+        expect(ConsultaFornecedorID.statusCode).toBe(200)
         if (ConsultaFornecedorID.statusCode === 200) {
             logger.info("Tabela do Fornecedor Cadastrado: ");
             logger.info(console.table(ConsultaFornecedorID.body));
@@ -85,7 +90,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
             })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            expect(ATualizaFornecedor.statusCode).toBe(200)
+        expect(ATualizaFornecedor.statusCode).toBe(200)
         if (ATualizaFornecedor.statusCode === 200) {
             expect(ATualizaFornecedor.body).toHaveProperty('message');
             logger.info("Atualizou o  Fornecedor: " + true)
@@ -95,6 +100,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
         } else {
             expect(ATualizaFornecedor.statusCode).toBe(500);
             expect(ATualizaFornecedor.body).toHaveProperty('message');
+            logger.info("Atualizou o  Fornecedor: " + false)
             logger.error("Erro ao consultar Fornecedores: " + ATualizaFornecedor.body);
         };
     })
@@ -102,13 +108,13 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
         const ExcluirFornecedor = await fornecedor.delete(`/deletar-fornecedor/${FornededorID}`)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            expect(ExcluirFornecedor.statusCode).toBe(200)
+        expect(ExcluirFornecedor.statusCode).toBe(200);
+        expect(ExcluirFornecedor.body).toHaveProperty('message');
         if (ExcluirFornecedor.statusCode === 200) {
-            expect(ExcluirFornecedor.body).toHaveProperty('message');
             logger.info("Fornecedor Deletado: " + true);
+            logger.info(ExcluirFornecedor.body)
         } else {
             expect(ExcluirFornecedor.statusCode).toBe(500);
-            expect(ExcluirFornecedor.body).toHaveProperty('message');
             logger.error("Erro ao deletar o fornecedor: " + ExcluirFornecedor.body)
         };
     });

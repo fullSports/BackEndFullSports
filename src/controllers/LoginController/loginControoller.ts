@@ -48,7 +48,7 @@ export class loginController {
 
         login.findById(id, (err: Error, loginBody: Response) => {
             if (err) {
-                res.status(400).send({ menssage: `${err.message} - id do fornecedor não encotrado` });
+                res.status(400).send({ message: `${err.message} - id do fornecedor não encotrado` });
             } else {
                 res.status(200).send(loginBody);
             }
@@ -69,7 +69,7 @@ export class loginController {
                     });
                     login.findByIdAndUpdate(id, { $set: newLogin }, (err: Error) => {
                         if (err) {
-                            res.status(400).send({ menssage: `${err.message} - erro ao atualiar o login e senha` });
+                            res.status(400).send({ message: `${err.message} - erro ao atualiar o login e senha` });
                         } else {
                             res.status(200).send({ message: "login e senha atualizado com sucesso" });
                         }
@@ -78,7 +78,7 @@ export class loginController {
         } else {
             login.findByIdAndUpdate(id, { $set: req.body }, (err: Error) => {
                 if (err) {
-                    res.status(400).send({ menssage: `${err.message} - erro ao atualiar o logino` });
+                    res.status(400).send({ message: `${err.message} - erro ao atualiar o logino` });
                 } else {
                     res.status(200).send({ message: "login, mas não senhas atualizado com sucesso" });
                 }
@@ -101,13 +101,13 @@ export class loginController {
         try {
             const usuarioExiste = await login.findOne({ email })
             if (!usuarioExiste) {
-                return res.status(200).send({ message: "email não cadastrado" })
+                return res.status(200).send({ message: "email ou senha incorreta" })
             } else {
                 const comparaSenha = await bcrypt.compareSync(password, usuarioExiste.password)
                 if (comparaSenha) {
                     return res.status(200).json({ result: usuarioExiste })
                 } else {
-                    return res.status(200).send({ message: "senha incorreta" })
+                    return res.status(200).send({ message: "email ou senha senha incorreta" })
                 }
             }
         } catch (error) {
