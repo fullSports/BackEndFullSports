@@ -78,14 +78,35 @@ loginController.listarLoginID = (req, res) => {
 };
 loginController.atualizarLogin = (req, res) => {
     const id = req.params.id;
-    login_1.login.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-        if (err) {
-            res.status(400).send({ menssage: `${err.message} - id do login não encontrado` });
-        }
-        else {
-            res.status(200).send({ message: "login atualizado com sucesso" });
-        }
-    });
+    if (req.body.password) {
+        bcrypt_1.default.hash(req.body.password, 10)
+            .then(hash => {
+            let encryptedPassowrd = hash;
+            let newLogin = new login_1.login({
+                email: req.body.email,
+                password: encryptedPassowrd,
+                isAdmin: req.body.isAdmin
+            });
+            login_1.login.findByIdAndUpdate(id, { $set: newLogin }, (err) => {
+                if (err) {
+                    res.status(400).send({ menssage: `${err.message} - erro ao atualiar o login e senha` });
+                }
+                else {
+                    res.status(200).send({ message: "login e senha atualizado com sucesso" });
+                }
+            });
+        }).catch(err => res.status(500).json({ message: `erro ao cadastrar login- ${err}` }));
+    }
+    else {
+        login_1.login.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+            if (err) {
+                res.status(400).send({ menssage: `${err.message} - erro ao atualiar o logino` });
+            }
+            else {
+                res.status(200).send({ message: "login, mas não senhas atualizado com sucesso" });
+            }
+        });
+    }
 };
 loginController.excluirLogin = (req, res) => {
     const id = req.params.id;
