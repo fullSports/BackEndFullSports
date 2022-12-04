@@ -1,5 +1,5 @@
 import express from "express";
-import {suplementoController} from "../../../controllers/categorias/ControllerSuplemento/controllerSuplemento.js";
+import {suplementoController} from "../../../controllers/categorias/ControllerSuplemento/controllerSuplemento";
 export const routerSuplemento = express.Router();
 
 routerSuplemento

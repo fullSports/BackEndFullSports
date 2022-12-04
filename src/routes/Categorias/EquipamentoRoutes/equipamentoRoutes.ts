@@ -1,5 +1,5 @@
 import express from "express";
-import {equipamentoController} from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento.js";
+import {equipamentoController} from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento";
 export const routerEquipamento = express.Router();
 
 routerEquipamento

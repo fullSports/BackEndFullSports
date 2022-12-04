@@ -1,5 +1,5 @@
 import express from "express";
-import {pedidoController} from "../../controllers/PedidoController/pedidoController.js";
+import {pedidoController} from "../../controllers/PedidoController/pedidoController";
 export const routerPedido = express.Router();
 routerPedido
 .post("/realizar-pedido", pedidoController.RealizarPedido)

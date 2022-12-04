@@ -5,7 +5,7 @@ import { routerRoupa } from './Categorias/RoupaRoutes/roupaRoutes';
 import { routerSuplemento } from './Categorias/SuplementoRoutes/suplementoRoutes';
 import { routerCliente } from './ClienteRoutes/clienteRoutes'
 import { routeFornecedor } from './FornecedorRoutes/fornecedorRoutes';
-const routerImagem = require('./imagemRoutes.js')
+const routerImagem = require('./imagem.route.js')
 import { routerlogin } from './LoginRoutes/loginRoutes';
 import { routerPedido } from './PedidoRoutes/pedidoRoutes';
 import { routeProduto } from './ProdutoRoutes/produtoRoutes';

@@ -1,5 +1,5 @@
 import express from "express";
-import {roupaController} from "../../../controllers/categorias/ControllerRoupas/controllerRoupas.js";
+import {roupaController} from "../../../controllers/categorias/ControllerRoupas/controllerRoupas";
 export const routerRoupa = express.Router();
 
 routerRoupa

@@ -1,6 +1,6 @@
 import api from "../../config/api/api";
 import {cliente} from "../../models/ModelCliente/cliente";
-const Imagem = require("../../models/imagem.js");
+const Imagem = require("../../models/imagem.model.js");
 import {login} from '../../models/ModelLogin/login';
 import {Request,Response} from 'express'
 require('dotenv').config()
