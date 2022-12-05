@@ -1,6 +1,10 @@
-const { app } = require("../app/app")
-const request = require('supertest');
-const { logger } = require('../logger/index');
+const {app} = require ("../build/src/app/app");
+const request = require ('supertest');
+const { logger } = require ('../build/src/logger/index');
+jest.mock('../src/app/app')
+jest.mock("../src/logger/index")
+
+
 var FornededorID = String;
 describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
     const fornecedor = request(app)
@@ -21,7 +25,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
             .expect('Content-Type', /json/)
         expect(CadastraFornecedor.statusCode).toBe(200)
         if (CadastraFornecedor.statusCode === 200) {
-            FornededorID = CadastraFornecedor.body._id.toString()
+            FornededorID = CadastraFornecedor.body._id
             logger.info("ID do fornecedor Cadastrado: " + CadastraFornecedor.body._id.toString())
         } else {
             expect(CadastraFornecedor.statusCode).toBe(500)

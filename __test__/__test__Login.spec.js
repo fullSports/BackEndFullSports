@@ -1,6 +1,6 @@
-const { app } = require("../app/app");
-const request = require('supertest');
-const { logger } = require('../logger/index');
+const { app } = require ("../build/src/app/app");
+const request = require ('supertest');
+const { logger } = require ('../build/src/logger/index');
 var LoginID = String;
 var passwordHash = String;
 describe('Teste do Backend do Fullsports - Login ', () => {

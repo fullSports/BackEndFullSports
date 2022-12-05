@@ -1,13 +1,16 @@
 require("dotenv").config();
-import express from "express"
+import  express  from "express";
+import {Request,Response ,NextFunction} from "express"
 import cors from 'cors';
 import {Routes} from "../routes";
 
 import { Router } from 'express';
 import path from 'path';
-export const app = express(); 
+
+
+export const app = express()
 const route = Router();
-app.use((req, res, next)=>{
+app.use((req:Request, res:Response, next:NextFunction)=>{
     res.header("Access-Control-Allow-Headers", '*');
     res.header("Access-Control-Allow-Origin", '*');
     res.header("'Content-Type'", "'multipart/form-data'");
