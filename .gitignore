@@ -3,4 +3,3 @@
 .env
 /info.log
 /error.log
-**/*.js

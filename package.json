@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc",
-    "start": "node index.js",
+    "build": "tsc --build",
+    "start": "node ./build/index.js",
     "dev": "nodemon index.ts"
   },
   "author": "",
@@ -20,6 +20,7 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/supertest": "^2.0.12",
     "@types/winston": "^2.4.4",
+    "@types/bcrypt": "^2.4.4",
     "assert": "^2.0.0",
     "aws-sdk": "^2.1238.0",
     "axios": "^1.1.3",
