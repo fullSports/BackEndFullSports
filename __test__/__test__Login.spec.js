@@ -65,6 +65,26 @@ describe('Teste do Backend do Fullsports - Login ', () => {
             logger.error("Erro ao Consultar o Login: " + ConsultaLogin.body);
         }
     })
+    it("• Deve execultar o método POST- Realizar o Login com email e senha Correta", async () => {
+        const RealizaLogin = await login.post("/realizar-login")
+            .send({
+                email: email,
+                password: password
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+        expect(RealizaLogin.statusCode).toBe(200);
+        if (RealizaLogin.statusCode === 200) {
+            expect(RealizaLogin.body).toHaveProperty('result');
+            logger.info("Tabela Dados ao Realizar o Login: ");
+            expect(RealizaLogin.body.result.email === email).toBe(true)
+            logger.info(console.table(RealizaLogin.body.result));
+        } else {
+            expect(RealizaLogin.statusCode).toBe(500);
+            expect(RealizaLogin.body).toHaveProperty('message');
+            logger.error("Erro a oo realizar o login: " + RealizaLogin.body)
+        }
+    })
     it("• Deve Execultar o método PUT - Login + Senha", async () => {
         const PutLogin = await login.put(`/login/${LoginID}`)
             .send({
@@ -88,26 +108,6 @@ describe('Teste do Backend do Fullsports - Login ', () => {
             logger.error("Erro ao atualizar o login: " + PutLogin.body)
         }
     })
-    it("• Deve execultar o método POST- Realizar o Login com email e senha Correta", async () => {
-        const RealizaLogin = await login.post("/realizar-login")
-            .send({
-                email: newEmail,
-                password: newPassword
-            })
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-        expect(RealizaLogin.statusCode).toBe(200);
-        if (RealizaLogin.statusCode === 200) {
-            expect(RealizaLogin.body).toHaveProperty('result');
-            logger.info("Tabela Dados ao Realizar o Login: ");
-            expect(RealizaLogin.body.result.email === newEmail).toBe(true)
-            logger.info(console.table(RealizaLogin.body.result));
-        } else {
-            expect(RealizaLogin.statusCode).toBe(500);
-            expect(RealizaLogin.body).toHaveProperty('message');
-            logger.error("Erro a oo realizar o login: " + RealizaLogin.body)
-        }
-    })
     it("• Deve execultar o método POST - Realizar o Login com enail ou senha incorreta", async () => {
         const RealizarLoginS = await login.post("/realizar-login")
         .send({
@@ -129,7 +129,7 @@ describe('Teste do Backend do Fullsports - Login ', () => {
     it("• Deve execultar o método POST - pesquisar o email cadastrado",async()=>{
         const PesquisaEmail = await login.post("/pesquisar-email")
         .send({
-            email: newEmail
+            email: email
         })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)

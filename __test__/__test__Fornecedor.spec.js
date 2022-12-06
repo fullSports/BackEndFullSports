@@ -25,7 +25,7 @@ describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
             .expect('Content-Type', /json/)
         expect(CadastraFornecedor.statusCode).toBe(200)
         if (CadastraFornecedor.statusCode === 200) {
-            FornededorID = CadastraFornecedor.body._id
+            FornededorID = CadastraFornecedor.body._id.toString()
             logger.info("ID do fornecedor Cadastrado: " + CadastraFornecedor.body._id.toString())
         } else {
             expect(CadastraFornecedor.statusCode).toBe(500)
