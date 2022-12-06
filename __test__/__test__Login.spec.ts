@@ -1,6 +1,6 @@
-const { app } = require ("../build/src/app/app");
-const request = require ('supertest');
-const { logger } = require ('../build/src/logger/index');
+import app from "../src/app/app";
+import request from 'supertest'
+import logger from "../src/logger";
 var LoginID = String;
 var passwordHash = String;
 describe('Teste do Backend do Fullsports - Login ', () => {
