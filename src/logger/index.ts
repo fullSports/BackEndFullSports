@@ -1,6 +1,6 @@
 const winston = require('winston');
  
-export const logger = winston.createLogger({
+const logger = winston.createLogger({
     format: winston.format.combine(
         winston.format.errors({ stack: true }),
         winston.format.json()
@@ -16,3 +16,4 @@ if (process.env.NODE_ENV !== 'prod') {
         format: winston.format.simple()
     }));
 }
+export  default logger;

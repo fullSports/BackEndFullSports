@@ -1,13 +1,11 @@
 const {app} = require ("../build/src/app/app");
 const request = require ('supertest');
 const { logger } = require ('../build/src/logger/index');
-jest.mock('../src/app/app')
-jest.mock("../src/logger/index")
 
 
 var FornededorID = String;
 describe('Teste do Backend do Fullsports - Rotas de Fornecedores ', () => {
-    const fornecedor = request(app)
+    const fornecedor = request(app);
     const CNPJ = '58.144.984/0001-64';
     const newCNPJ = '40.162.358/0001-35'
     jest.setTimeout(7000);

@@ -1,8 +1,8 @@
-import {suplemento} from "../../../models/categorias/Suplemento/suplemento";
+import suplemento from "../../../models/categorias/Suplemento/suplemento";
 const Imagem = require("../../../models/imagem.model.js");
 import {Request,Response} from "express"
 import api from "../../../config/api/api";
-export class suplementoController {
+class suplementoController {
     static listarsuplementos = (req:Request, res:Response) => {
         suplemento.find()
             .populate('fornecedor')
@@ -92,3 +92,4 @@ export class suplementoController {
         });
     }
 }
+export  default suplementoController;

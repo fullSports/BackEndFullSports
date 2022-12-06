@@ -38,4 +38,5 @@ const suplementoSchema = new mongoose.Schema({
     ]
 })
 
-export const suplemento = mongoose.model("suplementos", suplementoSchema);
+const suplemento = mongoose.model("suplementos", suplementoSchema);
+export default suplemento;

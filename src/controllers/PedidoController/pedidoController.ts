@@ -1,16 +1,16 @@
 import api from "../../config/api/api";
-import {pedido}from "../../models/ModelPedidos/pedido";
-import {produto} from "../../models/ModelProduto/produto";
-import { Request, Response } from 'express';
-import {IPedido} from "../../interfaces/IPedido";
-import {IProduto} from "../../interfaces/IProduto";
-import {IRoupa} from "../../interfaces/Produtos/IRoupa";
-import {IEquipamentos} from "../../interfaces/Produtos/IEquipamentos";
-import {ISuplementos} from "../../interfaces/Produtos/ISuplementos";
-import {ICacados} from "../../interfaces/Produtos/ICalcados";
+import pedido from "../../models/ModelPedidos/pedido";
+import produto from "../../models/ModelProduto/produto";
+import  {Request, Response}  from 'express';
+import IPedido from "../../interfaces/IPedido";
+import IProduto from "../../interfaces/IProduto";
+import IRoupa from "../../interfaces/Produtos/IRoupa";
+import IEquipamentos from "../../interfaces/Produtos/IEquipamentos";
+import ISuplementos from "../../interfaces/Produtos/ISuplementos";
+import ICacados from "../../interfaces/Produtos/ICalcados";
 require('dotenv').config();
 const url = process.env.APP_URL
-export class pedidoController {
+class pedidoController {
     static ListarPedido = (req: Request, res: Response) => {
         pedido.find()
             .populate({
@@ -351,3 +351,4 @@ export class pedidoController {
         }
     }
 }
+export default pedidoController;

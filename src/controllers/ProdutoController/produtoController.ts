@@ -1,8 +1,8 @@
-import { produto } from '../../models/ModelProduto/produto'
+import  produto  from '../../models/ModelProduto/produto'
 import { Response, Request } from 'express';
 import api from '../../config/api/api';
 const { logger } = require("../../logger/index")
-export class produtoController {
+class produtoController {
     static listarProdutos = (req: Request, res: Response) => {
         produto.find()
             .populate({
@@ -263,3 +263,4 @@ export class produtoController {
         })
     }
 }
+export  default produtoController;

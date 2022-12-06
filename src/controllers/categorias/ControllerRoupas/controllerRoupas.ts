@@ -1,8 +1,8 @@
-import {roupa} from "../../../models/categorias/Roupa/roupa";
+import roupa from "../../../models/categorias/Roupa/roupa";
 const Imagem = require("../../../models/imagem.model.js");
 import { Request, Response } from "express";
 import api from "../../../config/api/api";
-export class roupaController {
+class roupaController {
     static listarRoupas = (req: Request, res: Response) => {
         roupa.find()
             .populate('fornecedor')
@@ -91,3 +91,4 @@ export class roupaController {
         });
     }
 }
+export default roupaController;

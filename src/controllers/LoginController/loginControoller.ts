@@ -1,10 +1,10 @@
-import { login } from '../../models/ModelLogin/login'
-import { cliente } from '../../models/ModelCliente/cliente';
+import  login  from '../../models/ModelLogin/login'
+import  cliente from '../../models/ModelCliente/cliente';
 import { Request, Response } from 'express'
 import bcrypt from "bcrypt";
 import api from "../../config/api/api";
 const url = process.env.APP_URL
-export class loginController {
+class loginController {
     static cadastrarLogin = async (req: Request, res: Response) => {
         const { email, password, isAdmin } = req.body
         try {
@@ -153,3 +153,4 @@ export class loginController {
         }
     }
 }
+export default loginController;

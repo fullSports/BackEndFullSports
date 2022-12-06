@@ -1,11 +1,11 @@
 import api from "../../config/api/api";
-import {cliente} from "../../models/ModelCliente/cliente";
+import cliente  from "../../models/ModelCliente/cliente";
 const Imagem = require("../../models/imagem.model.js");
-import {login} from '../../models/ModelLogin/login';
-import {Request,Response} from 'express'
+import  login from '../../models/ModelLogin/login';
+import { Request, Response } from 'express'
 require('dotenv').config()
-export class clienteController {
-    static listarClientes = (req:Request, res:Response) => {
+class clienteController {
+    static listarClientes = (req: Request, res: Response) => {
         cliente.find()
             .populate("imagemPerfil")
             .populate("login")
@@ -13,7 +13,7 @@ export class clienteController {
                 res.status(200).json(cliente)
             })
     }
-    static cadastrarCliente = (req:Request, res:Response) => {
+    static cadastrarCliente = (req: Request, res: Response) => {
         let clientes = new cliente(req.body);
         clientes.save((err) => {
             if (err) {
@@ -23,7 +23,7 @@ export class clienteController {
             };
         });
     }
-    static atualizarCliente = (req:Request, res:Response) => {
+    static atualizarCliente = (req: Request, res: Response) => {
         const id = req.params.id;
 
         cliente.findByIdAndUpdate(id, { $set: req.body }, (err: Error) => {
@@ -34,11 +34,11 @@ export class clienteController {
             };
         });
     }
-    static listarClienteId = (req:Request, res:Response) => {
+    static listarClienteId = (req: Request, res: Response) => {
         const id = req.params.id;
         cliente.findById(id)
-        .populate("imagemPerfil")
-        .populate("login")
+            .populate("imagemPerfil")
+            .populate("login")
             .exec((err, clientes) => {
                 if (err) {
                     res.status(400).send({ menssage: `${err.message} - id do cliente não encotrado` });
@@ -47,7 +47,7 @@ export class clienteController {
                 }
             })
     }
-    static excluirCliente = async (req:Request, res:Response) => {
+    static excluirCliente = async (req: Request, res: Response) => {
         const id = req.params.id;
         api.request({
             method: "GET",
@@ -80,7 +80,5 @@ export class clienteController {
             res.status(500).send({ message: `${err.message} - erro ao deletar o cliente` });
         })
     }
-
-
-
 }
+export default clienteController;

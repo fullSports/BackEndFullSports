@@ -1,4 +1,4 @@
-export const login = async (creds:{
+const login = async (creds:{
     email: string
     password: string
     isAdmin: boolean
@@ -13,3 +13,4 @@ export const login = async (creds:{
       }, 1000);
     });
   };
+  export default login;

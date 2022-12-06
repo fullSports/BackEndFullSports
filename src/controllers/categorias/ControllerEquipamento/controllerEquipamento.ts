@@ -1,8 +1,8 @@
-import {equipamento} from "../../../models/categorias/Equipamento/equipamento";
+import equipamento from "../../../models/categorias/Equipamento/equipamento";
 const Imagem = require("../../../models/imagem.model.js");
 import {Request,Response} from "express";
 import api from "../../../config/api/api";
-export class equipamentoController {
+class equipamentoController {
     static listarequipamento = (req:Request, res:Response) => {
         equipamento.find()
             .populate('fornecedor')
@@ -93,3 +93,4 @@ export class equipamentoController {
         });
     }
 }
+export default equipamentoController;

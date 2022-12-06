@@ -1,10 +1,10 @@
-import {ICacados} from "./Produtos/ICalcados";
-import {IEquipamentos} from "./Produtos/IEquipamentos";
-import {IRoupa} from "./Produtos/IRoupa";
-import {ISuplementos} from "./Produtos/ISuplementos";
+import ICacados from "./Produtos/ICalcados";
+import IEquipamentos from "./Produtos/IEquipamentos";
+import IRoupa from "./Produtos/IRoupa";
+import ISuplementos from "./Produtos/ISuplementos";
 
 
-export interface IProduto {
+export default interface IProduto {
     categoriaProduto: {
         roupa: IRoupa
         equipamento: IEquipamentos,

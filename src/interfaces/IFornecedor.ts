@@ -1,4 +1,4 @@
-export interface IFornecedor{
+export default interface IFornecedor{
     _id: string,
     cnpj: string,
     nomeEmpresa: string,

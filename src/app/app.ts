@@ -8,7 +8,7 @@ import { Router } from 'express';
 import path from 'path';
 
 
-export const app = express()
+const app = express()
 const route = Router();
 app.use((req:Request, res:Response, next:NextFunction)=>{
     res.header("Access-Control-Allow-Headers", '*');
@@ -25,4 +25,4 @@ app.use(route)
 Routes(app)
 
 app.use('/files',express.static(path.resolve(__dirname,'..','..','tmp','uploads')))
-
+export default app;
