@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2017",                                
     "outDir": "./build",
-    "module": "commonjs",  
+    "module": "CommonJS",  
     "allowJs": true,
     "rootDir": "./",
     "removeComments": true,
