@@ -7,6 +7,6 @@ routerCalcado
     .get("/listar-calcado/:id", calcadoController.listarcalcadoId)
     .post("/cadastrar-calcado", calcadoController.cadastrarcalcado)
     .put("/atualizar-calcado/:id", calcadoController.atualizarcalcado)
-    .delete("/deletar-calcado-e-imagem/:id",calcadoController.excluirCalcadoEimagem)
-    .delete("/deletar-calcado/:id",calcadoController.ExcluirCalcado)
+    .delete("/deletar-calcado-e-imagem/:id", calcadoController.excluirCalcadoEimagem)
+    .delete("/deletar-calcado/:id", calcadoController.ExcluirCalcado)
 export default routerCalcado;

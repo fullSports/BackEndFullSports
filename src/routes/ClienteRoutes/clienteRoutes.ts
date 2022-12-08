@@ -1,5 +1,5 @@
 import express from "express";
-import clienteController from "../../controllers/ClienteController/clienteController.js";
+import  clienteController  from "../../controllers/ClienteController/clienteController";
 const routerCliente = express.Router();
 
 routerCliente
@@ -7,5 +7,5 @@ routerCliente
     .get("/listar-cliente/:id", clienteController.listarClienteId)
     .post("/cadastrar-cliente", clienteController.cadastrarCliente)
     .put("/atualizar-cliente/:id", clienteController.atualizarCliente)
-    .delete("/deletar-cliente/:id",clienteController.excluirCliente)
+    .delete("/deletar-cliente/:id", clienteController.excluirCliente)
 export default routerCliente;

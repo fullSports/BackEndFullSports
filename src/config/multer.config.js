@@ -13,7 +13,7 @@ const s3 = new AWS.S3({
 const storageTypes = {
     local: multer.diskStorage({
         destination: (req,file,cb) =>{
-            cb(null, path.resolve(__dirname,"..","..","..","tmp","uploads"));
+            cb(null, path.resolve(__dirname,"..","..","tmp","uploads"));
         },
         filename: (req, file, cb)=>{
             crypto.randomBytes(16, (err, hash)=>{

@@ -27,5 +27,5 @@ const pedidoSchema = new mongoose.Schema(
 //     }
 // }, {
 // })
-const carrinho = mongoose.model("pedido", pedidoSchema);
-export default carrinho;
+const pedido = mongoose.model("pedido", pedidoSchema);
+export default pedido;

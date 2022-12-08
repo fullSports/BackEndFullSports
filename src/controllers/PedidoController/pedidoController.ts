@@ -1,7 +1,7 @@
 import api from "../../config/api/api";
 import pedido from "../../models/ModelPedidos/pedido";
 import produto from "../../models/ModelProduto/produto";
-import { Request, Response } from 'express';
+import  {Request, Response}  from 'express';
 import IPedido from "../../interfaces/IPedido";
 import IProduto from "../../interfaces/IProduto";
 import IRoupa from "../../interfaces/Produtos/IRoupa";
@@ -351,4 +351,4 @@ class pedidoController {
         }
     }
 }
-export default pedidoController
+export default pedidoController;

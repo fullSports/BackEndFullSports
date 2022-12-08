@@ -1,6 +1,6 @@
 import express from "express";
-import equipamentoController from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento.js";
-const routerEquipamento = express.Router();
+import equipamentoController from "../../../controllers/categorias/ControllerEquipamento/controllerEquipamento";
+export const routerEquipamento = express.Router();
 
 routerEquipamento
     .get("/listar-equipamentos", equipamentoController.listarequipamento)

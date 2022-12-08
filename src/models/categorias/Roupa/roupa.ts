@@ -38,4 +38,4 @@ const roupaSchema = new mongoose.Schema({
     ]
 })
 const roupa = mongoose.model("roupas", roupaSchema);
-export default roupa
+export default roupa;

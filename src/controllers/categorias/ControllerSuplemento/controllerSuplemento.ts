@@ -1,5 +1,5 @@
 import suplemento from "../../../models/categorias/Suplemento/suplemento";
-const Imagem = require("../../../models/imagem.js");
+const Imagem = require("../../../models/imagem.model.js");
 import {Request,Response} from "express"
 import api from "../../../config/api/api";
 class suplementoController {
@@ -92,4 +92,4 @@ class suplementoController {
         });
     }
 }
-export default suplementoController;
+export  default suplementoController;

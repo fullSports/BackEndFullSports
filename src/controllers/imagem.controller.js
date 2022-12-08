@@ -1,4 +1,4 @@
-const Imagem = require("../models/imagem.js")
+const Imagem = require("../models/imagem.model.js")
 class imagemController {
     static listarImagem = (req,res)=>{
         Imagem.find((err,imagens)=>{
@@ -13,7 +13,7 @@ class imagemController {
             } else {
                 res.status(200).send(clientes);
             }
-        })
+        });
     }
     static cadastrarImagem = async (req, res) => {
         const { originalname: name, size, key, location: url = "" } = req.file;
@@ -26,7 +26,6 @@ class imagemController {
         })
         res.json(imagemPost)
     }
-    
     static deletarImagem= async(req,res)=>{
         const imagem = await Imagem.findById(req.params.id);
         await imagem.remove();
