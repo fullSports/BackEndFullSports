@@ -1,32 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2017",                                
-    "outDir": "./build",
-    "module": "CommonJS",  
-    "allowJs": true,
-    "rootDir": "./",
+    "module": "commonjs",
+    "declaration": true,
     "removeComments": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types"
-    ],                  
-    "esModuleInterop": true,           
-    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    
-    "skipDefaultLibCheck": true,
-
-    
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,                       
-    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
     "sourceMap": true,
-    "moduleResolution": "node",
-  },
-  "typeAcquisition": {
-    "enable": false,
-    "disableFilenameBasedTypeAcquisition": true
-  },
-  "include": ["./**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts","**/*.spec.js"],
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }
