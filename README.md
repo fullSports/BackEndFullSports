@@ -25,8 +25,17 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[docker](https://docs.docker.com/get-docker/)
+[docker compose](https://docs.docker.com/compose/install/)
 
-## Installation
+## automatic installation with docker
+```bash
+# run local api
+$ docker compose up --build
+# DELETE THE CONTAINERS
+$ docker compose down -v
+```
+## Installation manual
 
 ```bash
 $ npm install
