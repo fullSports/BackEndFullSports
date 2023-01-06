@@ -6,7 +6,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
   app.useGlobalPipes(new ValidationPipe());
   const HOST = '0.0.0.0';
-  var path = __dirname + '/views/';
   await app.listen(process.env.PORT, HOST);
   Logger.log(`server on in http://localhost:${process.env.PORT}`)
 }

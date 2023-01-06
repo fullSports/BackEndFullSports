@@ -1,15 +1,10 @@
-version: '3.5'
+version: '3'
 
 services:
-
-  api:
-    container_name: nest_api
+  app:
     build: .
+    entrypoint: .docker/entrypoint.sh
     ports:
       - ${PORT}:${PORT}
     volumes:
-      - .:/home/api
-      - /home/api/node_modules
-    environment:
-      DB_HOST: database
-      DB_PORT: 5432
+      - .:/home/node/app

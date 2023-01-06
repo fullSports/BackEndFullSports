@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param } from '@nestjs/common';
 import { Delete, Post, Put } from '@nestjs/common/decorators/http/request-mapping.decorator';
 import { Users } from './Schema/user.schema';
 import { UserService } from './user.service';
-
 @Controller()
 export class UserController {
     constructor(private userService: UserService) { }

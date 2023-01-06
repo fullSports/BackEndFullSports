@@ -1,5 +1,9 @@
-FROM node:16
+FROM node:18.12.1
 
-WORKDIR /home/api
+# RUN apk add --no-cache bash
 
-CMD npm run start:docker:dev
+RUN npm install -g @nestjs/cli
+
+USER node
+
+WORKDIR /home/node/app
