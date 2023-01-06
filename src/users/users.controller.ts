@@ -21,11 +21,11 @@ export class UserController {
     }
     @Get('listar-cliente/:id')
     async SearchUserById(@Param('id') id: string): Promise<Users> {
-        return await this.SearchUserById(id);
+        return this.userService.searchId(id);
     }
     @Put('atualizar-cliente/:id')
     async UpdateUserById(@Param('id') id: string, @Body() updateUser: Users) {
-        const updateUserId = await this.UpdateUserById(id, updateUser);
+        const updateUserId = await this.userService.updateUser(id, updateUser);
         return {
             usuario: updateUserId,
             messagem: 'usuario atualizado com sucesso'
@@ -33,7 +33,10 @@ export class UserController {
     }
     @Delete('deletar-cliente/:id')
     async DeleteUserById(@Param('id') id: string) {
-        return await this.DeleteUserById(id);
+        await this.userService.deleteUser(id);
+        return {
+            messagem: "usuario deletado com sucesso"
+        }
     }
 
 }

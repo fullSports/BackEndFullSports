@@ -29,7 +29,7 @@ export class UserService {
 
     async deleteUser(id: string): Promise<Users> {
         const deletedUser = await this.userModel
-            .findByIdAndRemove({ _id: id }).exec()
+            .findByIdAndRemove({ _id: id }).exec();
         return deletedUser;
     }
 }

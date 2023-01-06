@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:nest": "nest start",
     "start": "ts-node-dev ./src/main.ts",
+    "start:docker:dev": "npm install && nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -20,6 +21,15 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "commit": "git-cz"
   },
+  "configurations": [
+    {
+      "name": "Launch Node.js in Docker",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "Run Docker Container",
+      "platform": "node"
+    }
+  ],
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
