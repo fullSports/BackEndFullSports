@@ -19,11 +19,11 @@ export class UserController {
             messagem: 'usuario cadastrado com sucesso'
         }
     }
-    @Get('/listar-cliente/:id')
+    @Get('listar-cliente/:id')
     async SearchUserById(@Param('id') id: string): Promise<Users> {
-        return this.SearchUserById(id);
+        return await this.SearchUserById(id);
     }
-    @Put('/atualizar-cliente/:id')
+    @Put('atualizar-cliente/:id')
     async UpdateUserById(@Param('id') id: string, @Body() updateUser: Users) {
         const updateUserId = await this.UpdateUserById(id, updateUser);
         return {
@@ -31,9 +31,9 @@ export class UserController {
             messagem: 'usuario atualizado com sucesso'
         }
     }
-    @Delete('/deletar-cliente/:id')
+    @Delete('deletar-cliente/:id')
     async DeleteUserById(@Param('id') id: string) {
-        const deleteUser = await this.DeleteUserById(id);
+        return await this.DeleteUserById(id);
     }
 
 }

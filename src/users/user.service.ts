@@ -18,11 +18,13 @@ export class UserService {
     }
 
     async searchId(id: string): Promise<Users> {
-        return this.userModel.findOne({ _id: id }).exec();
+        const searchId = await this.userModel.findById({ _id: id }).exec();
+        return searchId;
     }
 
     async updateUser(id: string, updateUser: Users): Promise<Users> {
-        return this.userModel.findByIdAndUpdate(id, { $set: updateUser })
+        const updateUserId = await this.userModel.findByIdAndUpdate(id, { $set: updateUser })
+        return updateUserId;
     }
 
     async deleteUser(id: string): Promise<Users> {
