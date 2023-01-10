@@ -16,8 +16,8 @@ export class Users {
     @Length(5, 50, { message: 'nome precisa ter entr 5 e 50 caracteres' })
     nome: string
 
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'login' }] })
-    login: Login
+    // @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Login' }] })
+    // login: Login[]
 
 
     @Prop({ required: true })
