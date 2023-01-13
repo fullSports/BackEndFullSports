@@ -40,7 +40,6 @@ export class Users {
   endereco: string;
 
   @Prop({ required: true })
-  @IsNotEmpty({ message: "campo data vazio" })
   dataCadastro: Date;
 }
 export const UserSchema = SchemaFactory.createForClass(Users);

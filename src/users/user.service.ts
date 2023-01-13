@@ -3,7 +3,8 @@ import { Body, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { Login, LoginDocument } from "./Schema/login.shema";
-import { RealizarLogin } from "./dto/realizarLogin.dto";
+import { RealizarLogin } from "./dto/SingIn.dto";
+import { UpdateUserDTO } from "./dto/updateUser.dto";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
@@ -21,6 +22,7 @@ export class UserService {
     if (!usuarioExiste) {
       return bcrypt.hash(password, 10).then((hash) => {
         let encryptedPassowrd = hash;
+        const dateNow = new Date().toISOString();
         const newUser = this.userModel.create({
           cpf: createUser.cpf,
           nome: createUser.nome,
@@ -33,7 +35,7 @@ export class UserService {
           sexo: createUser.sexo,
           cep: createUser.cep,
           endereco: createUser.endereco,
-          dataCadastro: createUser.dataCadastro,
+          dataCadastro: dateNow,
         });
         return newUser;
       });
@@ -47,9 +49,14 @@ export class UserService {
     return searchId;
   }
 
-  async updateUser(id: string, updateUserBoy: Users): Promise<Users> {
+  async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
+    const c
+    const BodyUpedateUser ={
+      cpf: updateUserBoy.cep? updateUserBoy.cep : undefined,
+      enderec: 
+    } 
     const updateUserId = await this.userModel.findByIdAndUpdate(id, {
-      $set: updateUserBoy,
+      $set: ,
     });
     return updateUserId;
   }

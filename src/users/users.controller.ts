@@ -4,7 +4,8 @@ import {
   Post,
   Put,
 } from "@nestjs/common/decorators/http/request-mapping.decorator";
-import { RealizarLogin } from "./dto/realizarLogin.dto";
+import { RealizarLogin } from "./dto/SingIn.dto";
+import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
 import { UserService } from "./user.service";
 @Controller()
@@ -37,7 +38,10 @@ export class UserController {
   }
 
   @Put("atualizar-cliente/:id")
-  async UpdateUserById(@Param("id") id: string, @Body() updateUser: Users) {
+  async UpdateUserById(
+    @Param("id") id: string,
+    @Body() updateUser: UpdateUserDTO
+  ) {
     const updateUserId = await this.userService.updateUser(id, updateUser);
     return {
       usuario: updateUserId,
