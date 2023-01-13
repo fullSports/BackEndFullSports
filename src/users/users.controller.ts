@@ -46,11 +46,20 @@ export class UserController {
   }
 
   @Delete("deletar-cliente/:id")
-  async DeleteUserById(@Param("id") id: string) {
-    await this.userService.deleteUser(id);
-    return {
-      messagem: "usuario deletado com sucesso",
-    };
+  async DeleteUserById(
+    @Param("id") id: string,
+    @Body() singInBody: RealizarLogin
+  ) {
+    const deleteUser = await this.userService.deleteUser(id, singInBody);
+
+    if (deleteUser)
+      return {
+        messagem: "usuario deletado com sucesso",
+      };
+    else
+      return {
+        messagem: "email ou senha invaliza",
+      };
   }
 
   @Post("realizar-login")

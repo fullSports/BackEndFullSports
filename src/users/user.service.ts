@@ -54,11 +54,19 @@ export class UserService {
     return updateUserId;
   }
 
-  async deleteUser(id: string): Promise<Users> {
-    const deletedUser = await this.userModel
-      .findByIdAndRemove({ _id: id })
-      .exec();
-    return deletedUser;
+  async deleteUser(id: string, realizarLogin: RealizarLogin): Promise<Users> {
+    const { email, password } = realizarLogin;
+    const userTrue = await this.userModel.findOne({ email });
+    if (!userTrue) return null;
+    else {
+      const comparePassword = await bcrypt.compareSync(
+        password,
+        userTrue.login.password
+      );
+      if (comparePassword)
+        return await this.userModel.findByIdAndRemove({ _id: id }).exec();
+      else return null;
+    }
   }
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
