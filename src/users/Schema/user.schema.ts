@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsNotEmpty, Length } from "class-validator";
 import mongoose, { HydratedDocument, ObjectId } from "mongoose";
-import { Login } from "src/auth/schema/login.shema";
+import { Login } from "src/users/Schema/login.shema";
 
 export type UsersDocument = HydratedDocument<Users>;
+//Model de usuario
 @Schema()
 export class Users {
   @Prop({ required: true })
@@ -16,7 +17,8 @@ export class Users {
   @Length(5, 50, { message: "nome precisa ter entr 5 e 50 caracteres" })
   nome: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Login" }] })
+  @Prop({ required: true })
+  @IsNotEmpty({ message: "campo(objeto) login estar vazio vazio" })
   login: Login;
 
   @Prop({ required: true })
@@ -40,7 +42,5 @@ export class Users {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo data vazio" })
   dataCadastro: Date;
-
-  // imagemPerfil
 }
 export const UserSchema = SchemaFactory.createForClass(Users);

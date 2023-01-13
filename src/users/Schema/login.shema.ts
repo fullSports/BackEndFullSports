@@ -1,13 +1,19 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsEmail, IsNotEmpty, Length } from "class-validator";
+import { isEmail, IsEmail, IsNotEmpty, Length } from "class-validator";
 import mongoose, { HydratedDocument } from "mongoose";
-export type UsersDocument = HydratedDocument<Login>;
+export type LoginDocument = HydratedDocument<Login>;
 
 @Schema()
 export class Login {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo email vazio" })
   @IsEmail({ ignore_max_length: true }, { message: "email invalido" })
+  @IsEmail(
+    {},
+    {
+      message: "email precisa ser um endereço de email válido.",
+    }
+  )
   email: string;
 
   @Prop({ required: true })
