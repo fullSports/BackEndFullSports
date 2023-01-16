@@ -59,10 +59,10 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
+# test controllers
 $ npm run test
 
-# e2e tests
+# test requests
 $ npm run test:e2e
 
 # test coverage
