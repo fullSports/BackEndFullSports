@@ -2,8 +2,7 @@ const multer = require("multer");
 const path = require("path");
 import crypto from "crypto";
 const multerS3 = require("multer-s3");
-const AWS = require("aws-sdk");
-import AwS from "aws-sdk";
+import AWS from "aws-sdk";
 require("dotenv").config();
 const s3 = new AWS.S3({
   accessKeyId: process.env.KEY_ID,
