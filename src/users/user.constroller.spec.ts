@@ -1,7 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import { Model } from "mongoose";
-import { LoginDocument } from "./Schema/login.shema";
 import { UsersDocument } from "./Schema/user.schema";
 import { UserService } from "./user.service";
 import { UserController } from "./users.controller";
@@ -9,9 +8,8 @@ describe("UserController", () => {
   let userController: UserController;
   let useService: UserService;
   let userModel: Model<UsersDocument>;
-  let loginModel: Model<LoginDocument>;
   beforeEach(() => {
-    useService = new UserService(userModel, loginModel);
+    useService = new UserService(userModel);
     userController = new UserController(useService);
   });
 

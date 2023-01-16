@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsNotEmpty, Length } from "class-validator";
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
-import { Login } from "src/users/Schema/login.shema";
+import mongoose, { HydratedDocument } from "mongoose";
+import { Login } from "./login.shema";
 
 export type UsersDocument = HydratedDocument<Users>;
 //Model de usuario

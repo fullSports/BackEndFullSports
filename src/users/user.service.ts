@@ -2,15 +2,13 @@ import { Model } from "mongoose";
 import { Body, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
-import { Login, LoginDocument } from "./Schema/login.shema";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
-    @InjectModel(Login.name) private readonly loginModel: Model<LoginDocument>
+    @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>
   ) {}
   async ListUsers(): Promise<Users[]> {
     return this.userModel.find().exec();
@@ -50,13 +48,8 @@ export class UserService {
   }
 
   async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
-    const c
-    const BodyUpedateUser ={
-      cpf: updateUserBoy.cep? updateUserBoy.cep : undefined,
-      enderec: 
-    } 
     const updateUserId = await this.userModel.findByIdAndUpdate(id, {
-      $set: ,
+      $set: updateUserBoy,
     });
     return updateUserId;
   }
