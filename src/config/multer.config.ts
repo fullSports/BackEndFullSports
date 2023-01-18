@@ -1,13 +1,22 @@
+import { S3Client } from "@aws-sdk/client-s3";
+
 const multer = require("multer");
 const path = require("path");
 const crypto = require("crypto");
 const multerS3 = require("multer-s3");
 const AWS = require("aws-sdk");
 require("dotenv").config();
-const s3 = new AWS.S3({
-  accessKeyId: process.env.KEY_ID,
-  secretAccessKey: process.env.ACCESS_KEY,
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.KEY_ID,
+//   secretAccessKey: process.env.ACCESS_KEY,
+//   region: process.env.REGIONAWS,
+// });
+let s3 = new S3Client({
   region: process.env.REGIONAWS,
+  credentials: {
+    accessKeyId: process.env.KEY_ID,
+    secretAccessKey: process.env.ACCESS_KEY,
+  }
 });
 const storageTypes = {
   local: multer.diskStorage({
