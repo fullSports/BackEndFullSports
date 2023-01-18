@@ -1,8 +1,8 @@
 const multer = require("multer");
 const path = require("path");
-import crypto from "crypto";
+const crypto = require("crypto");
 const multerS3 = require("multer-s3");
-import AWS from "aws-sdk";
+const AWS = require("aws-sdk");
 require("dotenv").config();
 const s3 = new AWS.S3({
   accessKeyId: process.env.KEY_ID,
@@ -37,7 +37,7 @@ const storageTypes = {
   }),
 };
 
-module.exports = {
+export default {
   dest: path.resolve(__dirname, "..", "..", "..", "tmp", "uploads"),
   storage: storageTypes[process.env.STORAGE_TYPE],
   limits: {
