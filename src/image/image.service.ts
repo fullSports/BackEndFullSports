@@ -1,7 +1,7 @@
 import { Model } from "mongoose";
 import { Body, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { ImageDocument,imagem } from "./Schema/image.schema";
+import { ImageDocument,imagem, ImagesList } from "./Schema/image.schema";
 
 @Injectable()
 export class ImageService{
@@ -14,7 +14,19 @@ export class ImageService{
             size:size,
             key:key,    
             url:url,
-        })
-        return imagemPost
+        });
+        return imagemPost;
+    }
+    
+    async getImages():Promise<ImagesList[]>{
+      return this.imageModel.find().exec();
+    }
+
+    async getImageByID(id:string):Promise<ImagesList>{
+        return this.imageModel.findById({_id: id}).exec();
+    }
+
+    async deleteImage(id:string):Promise<ImagesList>{
+        return this.imageModel.findByIdAndDelete({_id:id}).exec();
     }
 }

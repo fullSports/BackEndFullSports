@@ -35,8 +35,15 @@ ImagemSchema.pre('remove',function(){
         }).promise()
     }else{
         return promisify(
-        fs.unlink)(path.resolve(__dirname,"..","..","tmp","uploads",this.key)
+        fs.unlink)(path.resolve(__dirname,"..","..","..","tmp","uploads",this.key)
         );
     };
 });
 export const imagem = mongoose.model("imagem", ImagemSchema);
+export class ImagesList {
+    name: String;
+    size: Number;
+    key: String;
+    url: String;
+    createAt: Object;
+}
