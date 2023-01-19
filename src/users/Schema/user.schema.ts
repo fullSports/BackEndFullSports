@@ -40,6 +40,11 @@ export class Users {
   endereco: string;
 
   @Prop({ required: true })
+  @IsNotEmpty({ message: "campo imagem vazio" })
+  @Length(24, 24, { message: "id da imagem invalida" })
+  imagemPerfil: string;
+
+  @Prop({ required: true })
   dataCadastro: Date;
 }
 export const UserSchema = SchemaFactory.createForClass(Users);

@@ -19,6 +19,7 @@ export class UpdateUserDTO {
   @Prop()
   sexo: string;
 
+  @Prop()
   // @Length(9, 9, { message: "cep invalido" })
   cep: string;
 
@@ -26,5 +27,5 @@ export class UpdateUserDTO {
   endereco: string;
 
   @Prop()
-  dataCadastro: Date;
+  imagemPerfil: String;
 }
