@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsNotEmpty, Length } from "class-validator";
-import mongoose, { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument, ObjectId } from "mongoose";
 import { Login } from "./login.shema";
-
+import { imagem } from "../../image/Schema/image.schema";
 export type UsersDocument = HydratedDocument<Users>;
 //Model de usuario
 @Schema()
@@ -39,10 +39,8 @@ export class Users {
   @IsNotEmpty({ message: "campo endereco vazio" })
   endereco: string;
 
-  @Prop({ required: true })
-  @IsNotEmpty({ message: "campo imagem vazio" })
-  @Length(24, 24, { message: "id da imagem invalida" })
-  imagemPerfil: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "model" })
+  imagemPerfil: ObjectId;
 
   @Prop({ required: true })
   dataCadastro: Date;

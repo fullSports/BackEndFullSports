@@ -11,7 +11,7 @@ export class UserService {
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>
   ) {}
   async ListUsers(): Promise<Users[]> {
-    return this.userModel.find().exec();
+    return this.userModel.find().populate("imagemPerfil").exec();
   }
 
   async RegisterUsers(createUser: Users): Promise<Users> {
@@ -33,6 +33,7 @@ export class UserService {
           sexo: createUser.sexo,
           cep: createUser.cep,
           endereco: createUser.endereco,
+          imagemPerfil: createUser.imagemPerfil,
           dataCadastro: dateNow,
         });
         return newUser;
@@ -43,11 +44,14 @@ export class UserService {
   }
 
   async searchId(id: string): Promise<Users> {
-    const searchId = await this.userModel.findById({ _id: id }).exec();
+    const searchId = await this.userModel
+      .findById({ _id: id })
+      .populate("imagemPerfil")
+      .exec();
     return searchId;
   }
 
-  async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
+  async updateUser(id: string, updateUserBoy: UpdateUserDTO) {
     const updateUserId = await this.userModel.findByIdAndUpdate(id, {
       $set: updateUserBoy,
     });
