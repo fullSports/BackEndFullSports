@@ -40,7 +40,7 @@ export class Users {
   endereco: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "model" })
-  imagemPerfil: ObjectId;
+  imagemPerfil: ObjectId | null;
 
   @Prop({ required: true })
   dataCadastro: Date;

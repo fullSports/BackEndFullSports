@@ -1,26 +1,57 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { isEmail, IsEmail, isEmpty, IsNotEmpty, Length } from "class-validator";
+import { Exclude } from "class-transformer";
+import {
+  isEmail,
+  IsEmail,
+  isEmpty,
+  IsMongoId,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
+import { Login } from "../Schema/login.shema";
 export class UpdateUserDTO {
-  // @Length(14, 14, { message: "Cpf incompleto" })
+  @IsOptional()
+  @Exclude()
+  _id: string;
+  @IsString()
+  @IsOptional()
+  @Exclude()
   cpf: string;
 
-  // @Length(5, 50, { message: "nome precisa ter entr 5 e 50 caracteres" })
+  @IsOptional()
+  @IsString()
+  @Exclude()
   nome: string;
 
-  //
-  // login: Login;
+  @IsOptional()
+  @Exclude()
+  login: Login;
 
-  // @Length(10, 10, { message: "data de nascimento invalida" })
+  @IsOptional()
+  @IsString()
+  @Exclude()
   dataNascimento: string;
 
+  @IsOptional()
+  @IsString()
+  @Exclude()
   sexo: string;
 
-  // @Length(9, 9, { message: "cep invalido" })
+  @IsOptional()
+  @IsString()
+  @Exclude()
   cep: string;
 
+  @IsOptional()
+  @IsString()
+  @Exclude()
   endereco: string;
 
+  @IsOptional()
+  @Exclude()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "model" })
-  imagemPerfil: ObjectId;
+  imagemPerfil: ObjectId | null;
 }
