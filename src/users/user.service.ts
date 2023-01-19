@@ -4,6 +4,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
+import { Login } from "./Schema/login.shema";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
@@ -16,8 +17,13 @@ export class UserService {
 
   async RegisterUsers(createUser: Users): Promise<Users> {
     const { email, password, isAdmin } = createUser.login;
-    const usuarioExiste = await this.userModel.findOne({ email });
-    if (!usuarioExiste) {
+    const listUser = this.ListUsers();
+
+    const userTrue = (await listUser).filter(function (item) {
+      return item.login.email == email;
+    });
+
+    if (userTrue.length === 0) {
       return bcrypt.hash(password, 10).then((hash) => {
         let encryptedPassowrd = hash;
         const dateNow = new Date().toISOString();
@@ -52,15 +58,7 @@ export class UserService {
   }
 
   async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
-    // const updateUser = await this.userModel
-    //   .findByIdAndUpdate(id, updateUserBoy)
-    //   .setOptions({ overwrite: false, new: false });
-    // if (!updateUser) {
-    //   throw new NotFoundException();
-    // }
-    // return updateUser;
     const findByIDUser = await this.userModel.findById(id);
-    Logger.debug(findByIDUser);
     const imagemPerfilBody = updateUserBoy.imagemPerfil;
     let ImgPerfil;
     if (!imagemPerfilBody) ImgPerfil = null;
@@ -83,7 +81,6 @@ export class UserService {
         : findByIDUser.endereco,
       imagemPerfil: ImgPerfil,
     };
-    Logger.warn(newUser);
     const updateUser = await this.userModel
       .findByIdAndUpdate(id, newUser)
       .setOptions({ overwrite: false, new: true });
@@ -109,15 +106,35 @@ export class UserService {
   }
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
-    const userTrue = await this.userModel.findOne({ email });
-    if (!userTrue) return { messagem: "email não encontrado" };
+    const listUser = this.ListUsers();
+
+    const userTrue = (await listUser).filter(function (item) {
+      return item.login.email == email;
+    });
+    Logger.debug(userTrue.length);
+
+    if (userTrue.length == 0)
+      return {
+        messagem: "email não encontrado",
+        emailExists: false,
+        emailAndPassword: false,
+      };
     else {
       const comparePassword = await bcrypt.compareSync(
         password,
-        userTrue.login.password
+        userTrue[0].login.password
       );
-      if (comparePassword) return { result: userTrue };
-      else return { messagem: "senha incorreta" };
+      if (comparePassword)
+        return {
+          result: userTrue[0],
+          emailExists: true,
+          emailAndPassword: true,
+        };
+      else
+        return {
+          messagem: "email ou senha incorreta",
+          emailAndPassword: false,
+        };
     }
   }
 }

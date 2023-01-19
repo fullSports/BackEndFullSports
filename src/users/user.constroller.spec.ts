@@ -30,6 +30,7 @@ describe("UserController", () => {
       sexo: "M",
       cep: "20321-000",
       endereco: "Rua João do Test",
+      imagemPerfil: null,
       dataCadastro: new Date(),
     };
     expect(userController.CreateUser(newUser));
