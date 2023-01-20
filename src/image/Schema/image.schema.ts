@@ -55,9 +55,6 @@ ImagemSchema.pre("remove", function () {
         } else return null;
       }
     );
-    // promisify(fs.unlink)(
-    //     path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key)
-    //   );
   }
 });
 export const imagem = mongoose.model("imagem", ImagemSchema);
