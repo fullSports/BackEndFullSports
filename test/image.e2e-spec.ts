@@ -1,10 +1,11 @@
 import { INestApplication, Logger } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
-import { async } from "rxjs";
 import * as request from "supertest";
+import axios, { AxiosError } from "axios";
 const path = require("path");
 import { AppModule } from "../src/app.module";
 var Id = String;
+var urlImg = String;
 describe("Images", () => {
   let app: INestApplication;
   beforeEach(async () => {
@@ -15,7 +16,7 @@ describe("Images", () => {
     await app.init();
   });
   it("• /imagem (POST)", async () => {
-    const PostImage = await request(app.getHttpServer())
+    return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
       .attach(
@@ -26,8 +27,8 @@ describe("Images", () => {
         expect(response.body).toHaveProperty("messsagem" && "image");
         expect(response.status).toBe(201);
         Id = response.body.image._id;
+        urlImg = response.body.image.url;
       });
-    return PostImage;
   });
   it("• /imagem (GET)", async () => {
     return request(app.getHttpServer())
@@ -43,10 +44,18 @@ describe("Images", () => {
     expect(Object);
     return ListImageId;
   });
+  it("• url-image (GET) return status 200", async () => {
+    console.log(urlImg);
+    const getUrlImg = await axios.get(`${urlImg}`);
+    expect(getUrlImg.status).toBe(200);
+  });
   it("• /imagem/:id (DELETE)", async () => {
     const deleteImage = await request(app.getHttpServer())
       .delete(`/imagem/${Id}`)
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");
+  });
+  it("• url-image (GET)", async () => {
+    expect(await (await axios.get(`${urlImg}`)).status).toBe(200);
   });
 });
