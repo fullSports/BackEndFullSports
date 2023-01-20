@@ -4,12 +4,11 @@ import mongoose, { HydratedDocument, ObjectId } from "mongoose";
 import { Login } from "./login.shema";
 import { imagem } from "../../image/Schema/image.schema";
 export type UsersDocument = HydratedDocument<Users>;
-//Model de usuario
 @Schema()
 export class Users {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cpf vazio" })
-  @Length(14, 14, { message: "Cpf incompleto" })
+  @Length(14, 14, { message: "cpf invalido" })
   cpf: string;
 
   @Prop({ required: true })

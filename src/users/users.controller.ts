@@ -24,11 +24,13 @@ export class UserController {
     if (!createdUser) {
       return {
         messagem: "email de usuario já cadastrado",
+        registeredSuccess: false,
       };
     } else {
       return {
         usuario: createdUser,
         messagem: "usuario cadastrado com sucesso",
+        registeredSuccess: true,
       };
     }
   }
