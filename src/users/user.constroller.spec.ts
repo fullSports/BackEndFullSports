@@ -15,7 +15,8 @@ describe("UserController", () => {
 
   it("•Execulta ListUsers()", async () => {
     const listUser = userController.ListUsers();
-    console.log(listUser);
+    expect(userController.ListUsers());
+    Logger.log(listUser);
   });
   it("•Execultar CreateUser()", async () => {
     let newUser = {

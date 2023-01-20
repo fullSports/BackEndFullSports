@@ -2,7 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication, Logger } from "@nestjs/common";
 import * as request from "supertest";
 import { AppModule } from "./../src/app.module";
-describe("UserController", () => {
+describe("Users", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({

@@ -40,7 +40,6 @@ ImagemSchema.pre("remove", function () {
       path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key),
       (err, fd) => {
         if (!err) {
-          console.error("myfile already exists");
           return promisify(fs.unlink)(
             path.resolve(
               __dirname,
