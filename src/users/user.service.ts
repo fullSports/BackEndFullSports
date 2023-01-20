@@ -5,6 +5,7 @@ import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Login } from "./Schema/login.shema";
+import { UpdatePasswordUser } from "./dto/updatePasswordLogin.dtp";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
@@ -104,15 +105,13 @@ export class UserService {
       else return null;
     }
   }
+
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
     const listUser = this.ListUsers();
-
     const userTrue = (await listUser).filter(function (item) {
       return item.login.email == email;
     });
-    Logger.debug(userTrue.length);
-
     if (userTrue.length == 0)
       return {
         messagem: "email não encontrado",
@@ -124,13 +123,66 @@ export class UserService {
         password,
         userTrue[0].login.password
       );
-      if (comparePassword)
+      if (comparePassword) {
         return {
           result: userTrue[0],
           emailExists: true,
           emailAndPassword: true,
         };
-      else
+      } else {
+        return {
+          messagem: "email ou senha incorreta",
+          emailExists: true,
+          emailAndPassword: false,
+        };
+      }
+    }
+  }
+
+  async updatePassworUser(id: string, UpdatePasswordBody: UpdatePasswordUser) {
+    const { email, OldPassword, newPassoWord } = UpdatePasswordBody;
+    const listUser = this.ListUsers();
+
+    const userTrue = (await listUser).filter(function (item) {
+      return item.login.email == email;
+    });
+    if (userTrue.length == 0)
+      return {
+        messagem: "email ou senha incorreta",
+        emailExists: false,
+      };
+    else {
+      const comparePassword = await bcrypt.compareSync(
+        OldPassword,
+        userTrue[0].login.password
+      );
+      if (comparePassword) {
+        return bcrypt.hash(newPassoWord, 10).then(async (hash) => {
+          let encryptedPassowrd = hash;
+          const findByIDUser = await this.userModel.findById(id);
+          const newUser = {
+            cpf: findByIDUser.cpf,
+            nome: findByIDUser.nome,
+            login: {
+              email: findByIDUser.login.email,
+              password: encryptedPassowrd,
+              isAdmin: findByIDUser.login.isAdmin,
+            },
+            dataNascimento: findByIDUser.dataNascimento,
+            sexo: findByIDUser.sexo,
+            cep: findByIDUser.cep,
+            endereco: findByIDUser.endereco,
+            imagemPerfil: findByIDUser.imagemPerfil,
+          };
+          const updateUser = await this.userModel
+            .findByIdAndUpdate(id, newUser)
+            .setOptions({ overwrite: false, new: true });
+          if (!updateUser) {
+            throw new NotFoundException();
+          }
+          return updateUser;
+        });
+      } else
         return {
           messagem: "email ou senha incorreta",
           emailAndPassword: false,

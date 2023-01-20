@@ -5,6 +5,7 @@ import {
   Put,
 } from "@nestjs/common/decorators/http/request-mapping.decorator";
 import { RealizarLogin } from "./dto/SingIn.dto";
+import { UpdatePasswordUser } from "./dto/updatePasswordLogin.dtp";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
 import { UserService } from "./user.service";
@@ -70,5 +71,17 @@ export class UserController {
   async SingIn(@Body() singInBody: RealizarLogin) {
     const SingIn = await this.userService.signIn(singInBody);
     return SingIn;
+  }
+
+  @Put("atualizar-login/:id")
+  async UpdatePassowdLogin(
+    @Param("id") id: string,
+    @Body() UpdatePasswordBody: UpdatePasswordUser
+  ) {
+    const updatePassword = await this.userService.updatePassworUser(
+      id,
+      UpdatePasswordBody
+    );
+    return updatePassword;
   }
 }
