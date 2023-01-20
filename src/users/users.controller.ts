@@ -5,7 +5,7 @@ import {
   Put,
 } from "@nestjs/common/decorators/http/request-mapping.decorator";
 import { RealizarLogin } from "./dto/SingIn.dto";
-import { UpdatePasswordUser } from "./dto/updatePasswordLogin.dtp";
+import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
 import { UserService } from "./user.service";
@@ -28,7 +28,7 @@ export class UserController {
       };
     } else {
       return {
-        usuario: createdUser,
+        user: createdUser,
         messagem: "usuario cadastrado com sucesso",
         registeredSuccess: true,
       };
@@ -47,7 +47,7 @@ export class UserController {
   ) {
     const updateUserId = await this.userService.updateUser(id, updateUser);
     return {
-      usuario: updateUserId,
+      user: updateUserId,
       messagem: "usuario atualizado com sucesso",
     };
   }
@@ -84,6 +84,9 @@ export class UserController {
       id,
       UpdatePasswordBody
     );
-    return updatePassword;
+    return {
+      messagem: "login atualizado com suceeso",
+      user: updatePassword,
+    };
   }
 }

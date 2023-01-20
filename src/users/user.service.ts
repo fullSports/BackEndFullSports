@@ -5,7 +5,7 @@ import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Login } from "./Schema/login.shema";
-import { UpdatePasswordUser } from "./dto/updatePasswordLogin.dtp";
+import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
@@ -157,31 +157,39 @@ export class UserService {
         userTrue[0].login.password
       );
       if (comparePassword) {
-        return bcrypt.hash(newPassoWord, 10).then(async (hash) => {
-          let encryptedPassowrd = hash;
-          const findByIDUser = await this.userModel.findById(id);
-          const newUser = {
-            cpf: findByIDUser.cpf,
-            nome: findByIDUser.nome,
-            login: {
-              email: findByIDUser.login.email,
-              password: encryptedPassowrd,
-              isAdmin: findByIDUser.login.isAdmin,
-            },
-            dataNascimento: findByIDUser.dataNascimento,
-            sexo: findByIDUser.sexo,
-            cep: findByIDUser.cep,
-            endereco: findByIDUser.endereco,
-            imagemPerfil: findByIDUser.imagemPerfil,
-          };
-          const updateUser = await this.userModel
-            .findByIdAndUpdate(id, newUser)
-            .setOptions({ overwrite: false, new: true });
-          if (!updateUser) {
-            throw new NotFoundException();
-          }
-          return updateUser;
-        });
+        return bcrypt
+          .hash(newPassoWord ? newPassoWord : "2", 10)
+          .then(async (hash) => {
+            let encryptedPassowrd = hash;
+            const findByIDUser = await this.userModel.findById(id);
+            const newUser = {
+              cpf: findByIDUser.cpf,
+              nome: findByIDUser.nome,
+              login: {
+                email: UpdatePasswordBody.newEmail
+                  ? UpdatePasswordBody.newEmail
+                  : findByIDUser.login.email,
+                password: newPassoWord
+                  ? encryptedPassowrd
+                  : findByIDUser.login.password,
+                isAdmin: UpdatePasswordBody.isAdmin
+                  ? UpdatePasswordBody.isAdmin
+                  : findByIDUser.login.isAdmin,
+              },
+              dataNascimento: findByIDUser.dataNascimento,
+              sexo: findByIDUser.sexo,
+              cep: findByIDUser.cep,
+              endereco: findByIDUser.endereco,
+              imagemPerfil: findByIDUser.imagemPerfil,
+            };
+            const updateUser = await this.userModel
+              .findByIdAndUpdate(id, newUser)
+              .setOptions({ overwrite: false, new: true });
+            if (!updateUser) {
+              throw new NotFoundException();
+            }
+            return updateUser;
+          });
       } else
         return {
           messagem: "email ou senha incorreta",

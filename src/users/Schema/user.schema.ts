@@ -3,6 +3,7 @@ import { IsNotEmpty, Length } from "class-validator";
 import mongoose, { HydratedDocument, ObjectId } from "mongoose";
 import { Login } from "./login.shema";
 import { imagem } from "../../image/Schema/image.schema";
+import { Exclude } from "class-transformer";
 export type UsersDocument = HydratedDocument<Users>;
 @Schema()
 export class Users {
