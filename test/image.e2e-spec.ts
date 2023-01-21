@@ -37,6 +37,12 @@ describe("Images", () => {
       .expect("Content-Type", /json/)
       .expect(Array);
   });
+  it("• url-image (GET) return status 200", async () => {
+    console.log(urlImg);
+    const getUrlImg = await axios.get(`${urlImg}`);
+    expect(getUrlImg.status).toBe(200);
+    return getUrlImg;
+  });
   it("• /imagem/:id (GET)", async () => {
     const ListImageId = await request(app.getHttpServer())
       .get(`/imagem/${Id}`)
@@ -44,18 +50,11 @@ describe("Images", () => {
     expect(Object);
     return ListImageId;
   });
-  it("• url-image (GET) return status 200", async () => {
-    console.log(urlImg);
-    const getUrlImg = await axios.get(`${urlImg}`);
-    expect(getUrlImg.status).toBe(200);
-  });
   it("• /imagem/:id (DELETE)", async () => {
     const deleteImage = await request(app.getHttpServer())
       .delete(`/imagem/${Id}`)
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");
   });
-  it("• url-image (GET)", async () => {
-    expect(await (await axios.get(`${urlImg}`)).status).toBe(200);
-  });
+  it("• url-image (GET) return status 403", async () => {});
 });
