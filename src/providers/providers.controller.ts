@@ -21,6 +21,7 @@ export class ProviderController {
 
   @Post("/cadastrar-fornecedor")
   async CreateProvider(@Body() createProvider: Provider) {
+    createProvider["dataCadastro"] = new Date();
     const createdProvider = await this.providerService.RegisterProvider(
       createProvider
     );
@@ -31,7 +32,7 @@ export class ProviderController {
       };
     } else {
       return {
-        usuario: createdProvider,
+        provider: createdProvider,
         messagem: "fornecedor cadastrado com sucesso",
         registeredSuccess: true,
       };
@@ -53,7 +54,7 @@ export class ProviderController {
       updateProvider
     );
     return {
-      fornecedor: updateProviderId,
+      provider: updateProviderId,
       messagem: "fornecedor atualizado com sucesso",
     };
   }
@@ -61,6 +62,9 @@ export class ProviderController {
   @Delete("/deletar-fornecedor/:id")
   async DeleteProviderById(@Param("id") id: string) {
     const deleteProvider = await this.providerService.deleteProvider(id);
-    return deleteProvider;
+    if (deleteProvider)
+      return {
+        messagem: "fornecedor deletado com sucesso",
+      };
   }
 }
