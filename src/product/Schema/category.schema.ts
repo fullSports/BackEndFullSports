@@ -31,8 +31,6 @@ export class category {
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: "model",
-    index: true,
-    default: [],
   })
   imagemProduto: Array<ObjectId> | null;
 }

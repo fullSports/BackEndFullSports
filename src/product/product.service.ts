@@ -11,66 +11,12 @@ export class ProductServices {
     private readonly productModel: Model<ProductDocument>
   ) {}
   async listProducts(): Promise<Product[]> {
-    return (
-      this.productModel
-        .find()
-        //   .populate({
-        //     path: "categoriaProduto",
-        //     populate: [
-        //       {
-        //         path: "roupa",
-        //         populate: [
-        //           {
-        //             path: "imagemProduto",
-        //           },
-        //           {
-        //             path: "fornecedor",
-        //           },
-        //         ],
-        //       },
-        //       {
-        //         path: "calcado",
-        //         populate: [
-        //           {
-        //             path: "imagemProduto",
-        //           },
-        //           {
-        //             path: "fornecedor",
-        //           },
-        //         ],
-        //       },
-        //       {
-        //         path: "equipamento",
-        //         populate: [
-        //           {
-        //             path: "imagemProduto",
-        //           },
-        //           {
-        //             path: "fornecedor",
-        //           },
-        //         ],
-        //       },
-        //       {
-        //         path: "suplemento",
-        //         populate: [
-        //           {
-        //             path: "imagemProduto",
-        //           },
-        //           {
-        //             path: "fornecedor",
-        //           },
-        //         ],
-        //       },
-        //       {
-        //         path: "imagemProduto",
-        //       },
-        //       {
-        //         path: "fornecedor",
-        //       },
-        //     ],
-        //   })
-        .exec()
-    );
+    const listProducts = await this.productModel
+      .find()
+      .populate("categoriaProduto.roupa.fornecedor")
+      .exec();
+    if (!listProducts) throw new NotFoundException();
+    else return listProducts;
   }
   async RegisterProduct(createProduct: Product): Promise<Product> {
     const RegisterProduct = await this.productModel.create(createProduct);

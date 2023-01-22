@@ -7,10 +7,5 @@ export class updateProductDTO {
   @Exclude()
   _id: string;
   @IsNotEmpty({ message: "campo object(categoriaProduto) vazio" })
-  categoriaProduto: {
-    roupa: categoryDTO | undefined;
-    equipamento: categoryDTO | undefined;
-    suplemento: categoryDTO | undefined;
-    calcado: categoryDTO | undefined;
-  };
+  categoriaProduto: string;
 }
