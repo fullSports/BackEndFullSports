@@ -13,7 +13,6 @@ export default class ProductController {
 
   @Post("/cadastrar-produto")
   async CreateProduct(@Body() creatProduct: Product) {
-    creatProduct["dataCadastro"] = new Date();
     const createdProduct = await this.productService.RegisterProduct(
       creatProduct
     );

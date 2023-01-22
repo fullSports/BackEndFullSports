@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { Body, Injectable } from "@nestjs/common";
+import { Body, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { ImageDocument, imagem, ImagesList } from "./Schema/image.schema";
 
@@ -17,20 +17,29 @@ export class ImageService {
       key: key,
       url: url,
     });
-    return imagemPost;
+    if (!imagemPost) throw new NotFoundException();
+    else return imagemPost;
   }
 
   async getImages(): Promise<ImagesList[]> {
-    return this.imageModel.find().exec();
+    const getImages = await this.imageModel.find().exec();
+    if (!getImages) throw new NotFoundException();
+    else return getImages;
   }
 
   async getImageByID(id: string): Promise<ImagesList> {
-    return this.imageModel.findById({ _id: id }).exec();
+    const getImageByID = await this.imageModel.findById({ _id: id }).exec();
+    if (!getImageByID) throw new NotFoundException();
+    else return getImageByID;
   }
 
   async deleteImage(id: string): Promise<ImagesList> {
     const deleteImage = await this.imageModel.findById({ _id: id });
-    await deleteImage.remove();
-    return deleteImage;
+    if (!deleteImage) throw new NotFoundException();
+    else {
+      const deleteImageRemove = await deleteImage.remove();
+      if (!deleteImageRemove) throw new NotFoundException();
+      else return deleteImageRemove;
+    }
   }
 }

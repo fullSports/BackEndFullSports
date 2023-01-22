@@ -11,7 +11,9 @@ export class ProviderService {
   ) {}
 
   async ListProviders(): Promise<Provider[]> {
-    return this.providerMode.find().exec();
+    const ListProviders = await this.providerMode.find().exec();
+    if (!ListProviders) throw new NotFoundException();
+    else return ListProviders;
   }
 
   async RegisterProvider(createProvider: Provider): Promise<Provider> {
@@ -24,13 +26,15 @@ export class ProviderService {
 
     if (providerTrue.length === 0) {
       const newProvider = await this.providerMode.create(createProvider);
-      return newProvider;
+      if (!newProvider) throw new NotFoundException();
+      else return newProvider;
     } else return null;
   }
 
   async searchIdProvider(id: string): Promise<Provider> {
     const searchId = await this.providerMode.findById({ _id: id }).exec();
-    return searchId;
+    if (!searchId) throw new NotFoundException();
+    else return searchId;
   }
 
   async updateProvider(
@@ -65,6 +69,7 @@ export class ProviderService {
     const deleteProvider = await this.providerMode
       .findByIdAndRemove({ _id: id })
       .exec();
-    return deleteProvider;
+    if (!deleteProvider) throw new NotFoundException();
+    else return deleteProvider;
   }
 }

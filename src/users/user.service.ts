@@ -13,7 +13,12 @@ export class UserService {
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>
   ) {}
   async ListUsers(): Promise<Users[]> {
-    return this.userModel.find().populate("imagemPerfil").exec();
+    const listUser = await this.userModel
+      .find()
+      .populate("imagemPerfil")
+      .exec();
+    if (!listUser) throw new NotFoundException();
+    else return listUser;
   }
 
   async RegisterUsers(createUser: Users): Promise<Users> {
@@ -43,7 +48,8 @@ export class UserService {
           imagemPerfil: createUser.imagemPerfil,
           dataCadastro: dateNow,
         });
-        return newUser;
+        if (!newUser) throw new NotFoundException();
+        else return newUser;
       });
     } else {
       return null;
@@ -100,9 +106,13 @@ export class UserService {
         password,
         userTrue.login.password
       );
-      if (comparePassword)
-        return await this.userModel.findByIdAndRemove({ _id: id }).exec();
-      else return null;
+      if (comparePassword) {
+        const deleteUser = await this.userModel
+          .findByIdAndRemove({ _id: id })
+          .exec();
+        if (!deleteUser) throw new NotFoundException();
+        else return deleteUser;
+      } else return null;
     }
   }
 
