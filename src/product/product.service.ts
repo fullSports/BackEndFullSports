@@ -1,6 +1,11 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { ImageDocument, imagem } from "src/image/Schema/image.schema";
+import {
+  Provider,
+  ProviderDocument,
+} from "src/providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { Product, ProductDocument } from "./Schema/product.schema";
 
@@ -8,14 +13,35 @@ import { Product, ProductDocument } from "./Schema/product.schema";
 export class ProductServices {
   constructor(
     @InjectModel(Product.name)
-    private readonly productModel: Model<ProductDocument>
+    private readonly productModel: Model<ProductDocument>,
+    @InjectModel(imagem.name)
+    private readonly imageModel: Model<ImageDocument>,
+    @InjectModel(Provider.name)
+    private readonly ProviderModel: Model<ProviderDocument>
   ) {}
   async listProducts(): Promise<Product[]> {
-    const listProducts = await this.productModel
-      .find()
-      .populate("fornecedor")
-      .populate("imagemProduto")
-      .exec();
+    const listProducts = await this.productModel.find().exec();
+    var imgId = [];
+    var img = [];
+    var ProviderId = String;
+    for (let i of listProducts) {
+      const obj = Object.keys(i.categoriaProduto)[0].toString();
+      imgId.push(i.categoriaProduto[obj].imagemProduto);
+      ProviderId = i.categoriaProduto[obj].fornecedor;
+    }
+    for (let i of imgId[0]) {
+      const searchImgId = await this.imageModel.findById({ _id: i }).exec();
+      img.push(searchImgId);
+    }
+    const searchProductId = await this.ProviderModel.findById({
+      _id: ProviderId,
+    }).exec();
+    for (let i of listProducts) {
+      const obj = Object.keys(i.categoriaProduto)[0].toString();
+      i.categoriaProduto[obj].imagemProduto = [];
+      i.categoriaProduto[obj].imagemProduto = img;
+      i.categoriaProduto[obj].fornecedor = searchProductId;
+    }
     if (!listProducts) throw new NotFoundException();
     else return listProducts;
   }
@@ -25,23 +51,27 @@ export class ProductServices {
     else return RegisterProduct;
   }
   async searchProductId(id: string): Promise<Product> {
-    const searchId = await this.productModel
-      .findById({ _id: id })
-      .populate({
-        path: "categoriaProduto",
-        populate: [
-          {
-            path: "calcado",
-            populate: [
-              {
-                path: "fornecedor",
-              },
-            ],
-          },
-        ],
-      })
-      .exec();
-    return searchId;
+    const searchId = await this.productModel.findById({ _id: id }).exec();
+    var imgId = [];
+    var img = [];
+    var ProviderId = String;
+    const obj = Object.keys(searchId.categoriaProduto)[0].toString();
+    imgId.push(searchId.categoriaProduto[obj].imagemProduto);
+    ProviderId = searchId.categoriaProduto[obj].fornecedor;
+    for (let i of imgId[0]) {
+      const searchImgId = await this.imageModel.findById({ _id: i }).exec();
+      img.push(searchImgId);
+    }
+    const searchProductId = await this.ProviderModel.findById({
+      _id: ProviderId,
+    }).exec();
+
+    searchId.categoriaProduto[obj].imagemProduto = [];
+    searchId.categoriaProduto[obj].imagemProduto = img;
+    searchId.categoriaProduto[obj].fornecedor = searchProductId;
+
+    if (!searchId) throw new NotFoundException();
+    else return searchId;
   }
 
   async updateProduct(

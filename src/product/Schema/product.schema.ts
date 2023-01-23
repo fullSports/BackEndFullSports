@@ -28,21 +28,6 @@ export class Product {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) login estar vazio vazio" })
   categoriaProduto: categoryProduct;
-
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Provider.name })
-  @IsNotEmpty({ message: "campo fornceder(id) vazio" })
-  fornecedor: ObjectId | null;
-  @Prop({ required: true })
-  @IsNotEmpty({ message: "campo imagem de produo do produto vazio" })
-  @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "model",
-    index: true,
-    default: [],
-    required: true,
-  })
-  imagemProduto: Array<ObjectId>;
-
   @Prop({ required: true })
   dataCadastro: Date;
 }

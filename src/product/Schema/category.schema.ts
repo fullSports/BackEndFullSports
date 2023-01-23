@@ -9,6 +9,10 @@ export class category {
   @IsNotEmpty({ message: "campo nome do produto vazio" })
   nome: string;
 
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Provider.name })
+  @IsNotEmpty({ message: "campo fornceder(id) vazio" })
+  fornecedor: ObjectId | null;
+
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cor do produto vazio" })
   cor: string;
@@ -25,4 +29,15 @@ export class category {
 
   @Min(1, { message: "minimo de 1 de quantidade de estoque" })
   quantidade: number;
+
+  @Prop({ required: true })
+  @IsNotEmpty({ message: "campo imagem de produo do produto vazio" })
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: imagem.name,
+    index: true,
+    default: [],
+    required: true,
+  })
+  imagemProduto: Array<ObjectId>;
 }
