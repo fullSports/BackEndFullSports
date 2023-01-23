@@ -38,7 +38,6 @@ describe("Images", () => {
       .expect(Array);
   });
   it("• url-image (GET) return status 200", async () => {
-    console.log(urlImg);
     const getUrlImg = await axios.get(`${urlImg}`);
     expect(getUrlImg.status).toBe(200);
     return getUrlImg;
