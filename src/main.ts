@@ -5,7 +5,7 @@ import { ValidationPipe } from "@nestjs/common";
 const express = require("express");
 const path = require("path");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: false });
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe());
   const HOST = "0.0.0.0";
   app.use(

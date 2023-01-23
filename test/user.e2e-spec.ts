@@ -67,9 +67,9 @@ describe("Users", () => {
     expect(updateUser.body.user.cpf !== client.cpf);
     expect(updateUser.body.user.nome == client.nome);
   });
-  it("• /realizar-login (GET) ", async () => {
+  it("• /realizar-login (POST ) ", async () => {
     const SingIn = await request(app.getHttpServer())
-      .get("/realizar-login")
+      .post("/realizar-login")
       .send({
         email: client.login.email,
         password: client.login.password,

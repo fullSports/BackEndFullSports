@@ -69,7 +69,7 @@ export class UserController {
       };
   }
 
-  @Get("realizar-login")
+  @Post("realizar-login")
   async SingIn(@Body() singInBody: RealizarLogin) {
     const SingIn = await this.userService.signIn(singInBody);
     return SingIn;
