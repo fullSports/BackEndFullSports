@@ -24,7 +24,7 @@ export class ProviderService {
       return (item.cnpj = cnpj);
     });
 
-    if (providerTrue.length === 0) {
+    if (providerTrue.length !== 0) {
       const newProvider = await this.providerMode.create(createProvider);
       if (!newProvider) throw new NotFoundException();
       else return newProvider;
