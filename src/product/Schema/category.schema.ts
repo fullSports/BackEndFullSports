@@ -27,7 +27,8 @@ export class category {
   @IsNotEmpty({ message: "campo preço do produto vazio" })
   preco: string;
 
-  @Min(1, { message: "minimo de 1 de quantidade de estoque" })
+  @IsNumber()
+  @IsNotEmpty({ message: "campo tamanho do produto vazio" })
   quantidade: number;
 
   @Prop({ required: true })
@@ -39,5 +40,5 @@ export class category {
     default: [],
     required: true,
   })
-  imagemProduto: Array<ObjectId>;
+  imagemProduto: Array<ObjectId> | null;
 }

@@ -102,9 +102,9 @@ export class ProductServices {
           preco: updateProduct.categoriaProduto[ObjUpdate].preco
             ? updateProduct.categoriaProduto[ObjUpdate].preco
             : findByIdProduct.categoriaProduto[obj].preco,
-          quantidate: updateProduct.categoriaProduto[ObjUpdate].quantidade
-            ? updateProduct.categoriaProduto[ObjUpdate].quantidade
-            : findByIdProduct.categoriaProduto[obj].quantidade,
+          quantidate: updateProduct.categoriaProduto[ObjUpdate].quantidate
+            ? updateProduct.categoriaProduto[ObjUpdate].quantidate
+            : findByIdProduct.categoriaProduto[obj].quantidate,
           imagemProduto: updateProduct.categoriaProduto[ObjUpdate].imagemProduto
             ? updateProduct.categoriaProduto[ObjUpdate].imagemProduto
             : findByIdProduct.categoriaProduto[obj].imagemProduto,

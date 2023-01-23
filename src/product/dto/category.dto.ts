@@ -36,7 +36,8 @@ export class categoryDTO {
 
   @IsOptional()
   @Exclude()
-  @Min(1, { message: "minimo de 1 de quantidade de estoque" })
+  @IsNumber()
+  @IsNotEmpty({ message: "campo quantidade do produto vazio" })
   quantidade: number;
 
   @IsOptional()
