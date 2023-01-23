@@ -14,7 +14,7 @@ describe("Providers", () => {
   });
   var ID = String;
   const Provider = {
-    cnpj: "71.476.474/0001-52",
+    cnpj: "40.386.172/0001-60",
     nomeEmpresa: "TDD S.A",
     cep: "08452-000",
     endereco: "Rua joão do Teste",
@@ -51,7 +51,7 @@ describe("Providers", () => {
 
   it("• /atualizar-fornecedor/:id (PUT)", async () => {
     const newProvider = {
-      cnpj: "59.343.654/0001-60",
+      cnpj: "75.121.012/0001-73",
     };
     const updateProvider = await request(app.getHttpServer())
       .put(`/atualizar-fornecedor/${ID}`)
