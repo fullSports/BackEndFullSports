@@ -48,7 +48,7 @@ export default class ProductController {
     );
     return {
       product: updateProductId,
-      messsagem: "produto atualizado com sucesso",
+      messagem: "produto atualizado com sucesso",
     };
   }
   @Delete("/deletar-produto/:id")

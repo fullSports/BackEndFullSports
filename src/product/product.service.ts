@@ -1,11 +1,11 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { ImageDocument, imagem } from "src/image/Schema/image.schema";
+import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import {
   Provider,
   ProviderDocument,
-} from "src/providers/Schema/providers.schema";
+} from "../providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { Product, ProductDocument } from "./Schema/product.schema";
 

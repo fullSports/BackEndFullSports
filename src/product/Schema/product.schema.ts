@@ -1,9 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Exclude, Type } from "class-transformer";
 import { IsNotEmpty } from "class-validator";
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
-import { imagem } from "src/image/Schema/image.schema";
-import { Provider } from "src/providers/Schema/providers.schema";
+import { HydratedDocument } from "mongoose";
 import { category } from "./category.schema";
 export type ProductDocument = HydratedDocument<Product>;
 class categoryProduct {

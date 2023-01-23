@@ -1,8 +1,8 @@
 import { Prop } from "@nestjs/mongoose";
 import { IsNotEmpty, IsNumber, Min } from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
-import { imagem } from "src/image/Schema/image.schema";
-import { Provider } from "src/providers/Schema/providers.schema";
+import { imagem } from "../../image/Schema/image.schema";
+import { Provider } from "../../providers/Schema/providers.schema";
 
 export class category {
   @Prop({ required: true })
