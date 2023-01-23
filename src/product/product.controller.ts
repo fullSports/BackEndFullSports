@@ -40,7 +40,7 @@ export default class ProductController {
   @Put("/atualizar-produto/:id")
   async updateProductId(
     @Param("id") id: string,
-    updateProduct: updateProductDTO
+    @Body() updateProduct: updateProductDTO
   ) {
     const updateProductId = await this.productService.updateProduct(
       id,

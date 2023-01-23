@@ -26,7 +26,7 @@ class categoryProduct {
 @Schema()
 export class Product {
   @Prop({ required: true })
-  @IsNotEmpty({ message: "campo(objeto) login estar vazio vazio" })
+  @IsNotEmpty({ message: "campo(objeto) categoriaProduto estar vazio vazio" })
   categoriaProduto: categoryProduct;
   @Prop({ required: true })
   dataCadastro: Date;
