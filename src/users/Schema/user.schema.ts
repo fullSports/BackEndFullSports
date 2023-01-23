@@ -39,7 +39,7 @@ export class Users {
   @IsNotEmpty({ message: "campo endereco vazio" })
   endereco: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "model" })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: imagem.name })
   imagemPerfil: ObjectId | null;
 
   @Prop({ required: true })

@@ -13,7 +13,8 @@ export class ProductServices {
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel
       .find()
-      .populate("categoriaProduto.roupa.fornecedor")
+      .populate("fornecedor")
+      .populate("imagemProduto")
       .exec();
     if (!listProducts) throw new NotFoundException();
     else return listProducts;
@@ -30,54 +31,12 @@ export class ProductServices {
         path: "categoriaProduto",
         populate: [
           {
-            path: "roupa",
-            populate: [
-              {
-                path: "imagemProduto",
-              },
-              {
-                path: "fornecedor",
-              },
-            ],
-          },
-          {
             path: "calcado",
             populate: [
               {
-                path: "imagemProduto",
-              },
-              {
                 path: "fornecedor",
               },
             ],
-          },
-          {
-            path: "equipamento",
-            populate: [
-              {
-                path: "imagemProduto",
-              },
-              {
-                path: "fornecedor",
-              },
-            ],
-          },
-          {
-            path: "suplemento",
-            populate: [
-              {
-                path: "imagemProduto",
-              },
-              {
-                path: "fornecedor",
-              },
-            ],
-          },
-          {
-            path: "imagemProduto",
-          },
-          {
-            path: "fornecedor",
           },
         ],
       })
@@ -91,9 +50,7 @@ export class ProductServices {
   ): Promise<Product> {
     const findByIdProduct = await this.productModel.findById(id);
     let newProduct;
-    let categoryProduct = Object.keys(findByIdProduct.categoriaProduto);
 
-    Logger.debug(categoryProduct);
     // if(findByIdProduct.categoriaProduto.calcado !== null) categoryProduct = "calcado"
     // else if(findByIdProduct.categoriaProduto.equipamento !== null) categoryProduct = "equipamento"
     // else if(findByIdProduct.categoriaProduto.roupa ! == null) c
@@ -209,5 +166,13 @@ export class ProductServices {
     // }
 
     return;
+  }
+
+  async deleteProduct(id: string): Promise<Product> {
+    const deleteProduct = await this.productModel
+      .findByIdAndDelete({ _id: id })
+      .exec();
+    if (!deleteProduct) throw new NotFoundException();
+    else return deleteProduct;
   }
 }

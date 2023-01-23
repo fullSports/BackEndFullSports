@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
@@ -41,6 +49,13 @@ export default class ProductController {
     return {
       product: updateProductId,
       messsagem: "produto atualizado com sucesso",
+    };
+  }
+  @Delete("/deletar-produto/:id")
+  async deleteProduct(@Param("id") id: string) {
+    await this.productService.deleteProduct(id);
+    return {
+      messagem: "Produto deletado com sucesso ",
     };
   }
 }
