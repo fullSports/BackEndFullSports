@@ -68,5 +68,6 @@ describe("Providers", () => {
       .delete(`/deletar-fornecedor/${ID}`)
       .expect(200);
     expect(deleteProvider.body).toHaveProperty("messagem");
+    return deleteProvider;
   });
 });

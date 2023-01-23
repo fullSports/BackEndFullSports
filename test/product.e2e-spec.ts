@@ -73,5 +73,7 @@ describe("Product", () => {
       .delete(`/deletar-produto/${ID}`)
       .expect(200);
     expect(deleteProduct.body).toHaveProperty("messagem");
+
+    return deleteProduct;
   });
 });

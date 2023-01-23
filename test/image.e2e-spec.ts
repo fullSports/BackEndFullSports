@@ -54,6 +54,7 @@ describe("Images", () => {
       .delete(`/imagem/${Id}`)
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");
+    return deleteImage;
   });
   it("• url-image (GET) return status 403", async () => {});
 });

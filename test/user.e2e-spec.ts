@@ -116,5 +116,6 @@ describe("Users", () => {
       })
       .expect(200);
     expect(deletedUser.body).toHaveProperty("messagem");
+    return deletedUser;
   });
 });
