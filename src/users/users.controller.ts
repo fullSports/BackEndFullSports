@@ -59,6 +59,7 @@ export class UserController {
   ) {
     const deleteUser = await this.userService.deleteUser(id, singInBody);
     return deleteUser
+    
   }
 
   @Post("realizar-login")
