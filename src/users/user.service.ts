@@ -6,11 +6,13 @@ import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Login } from "./Schema/login.shema";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
+import { ImageDocument, imagem } from "src/image/Schema/image.schema";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>
+    @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
+    @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>
   ) {}
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
@@ -97,22 +99,35 @@ export class UserService {
     return updateUser;
   }
 
-  async deleteUser(id: string, realizarLogin: RealizarLogin): Promise<Users> {
+  async deleteUser(id: string, realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
-    const userTrue = await this.userModel.findOne({ email });
-    if (!userTrue) return null;
+    const userTrue = await this.userModel.findById({_id: id}).exec();
+    if (userTrue.login.email !== email) return {
+      messgem: "email ou senha invalida"
+    }
     else {
       const comparePassword = await bcrypt.compareSync(
         password,
         userTrue.login.password
       );
       if (comparePassword) {
-        const deleteUser = await this.userModel
-          .findByIdAndRemove({ _id: id })
+        const searchId = await this.userModel
+          .findById({ _id: id })
           .exec();
-        if (!deleteUser) throw new NotFoundException();
-        else return deleteUser;
-      } else return null;
+        if (!searchId) throw new NotFoundException();
+        else{
+          const deleteImage = await this.imageModel.findByIdAndDelete({_id: searchId.imagemPerfil})
+          if(!deleteImage) throw new NotFoundException()
+          else{
+            deleteImage;
+            const deleteUser = await this.userModel.findByIdAndDelete({_id: id}).exec()
+            if(!deleteUser) throw new NotFoundException()
+            else return deleteUser
+          }
+        }
+      } else return {
+        messgem: "email ou senha invalida"
+      }
     }
   }
 
@@ -122,6 +137,7 @@ export class UserService {
     const userTrue = (await listUser).filter(function (item) {
       return item.login.email == email;
     });
+    Logger.warn(userTrue.length)
     if (userTrue.length == 0)
       return {
         messagem: "email não encontrado",

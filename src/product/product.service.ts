@@ -24,6 +24,11 @@ export class ProductServices {
     var imgId = [];
     var img = [];
     var ProviderId = String;
+    if (!listProducts) throw new NotFoundException();
+    else
+    if(listProducts.length === 0){
+      return listProducts
+    }else
     for (let i of listProducts) {
       const obj = Object.keys(i.categoriaProduto)[0].toString();
       imgId.push(i.categoriaProduto[obj].imagemProduto);
@@ -42,8 +47,8 @@ export class ProductServices {
       i.categoriaProduto[obj].imagemProduto = img;
       i.categoriaProduto[obj].fornecedor = searchProductId;
     }
-    if (!listProducts) throw new NotFoundException();
-    else return listProducts;
+
+     return listProducts;
   }
   async RegisterProduct(createProduct: Product): Promise<Product> {
     const RegisterProduct = await this.productModel.create(createProduct);
@@ -52,6 +57,8 @@ export class ProductServices {
   }
   async searchProductId(id: string): Promise<Product> {
     const searchId = await this.productModel.findById({ _id: id }).exec();
+    if (!searchId) throw new NotFoundException();
+    else
     var imgId = [];
     var img = [];
     var ProviderId = String;
@@ -70,8 +77,7 @@ export class ProductServices {
     searchId.categoriaProduto[obj].imagemProduto = img;
     searchId.categoriaProduto[obj].fornecedor = searchProductId;
 
-    if (!searchId) throw new NotFoundException();
-    else return searchId;
+     return searchId;
   }
 
   async updateProduct(
@@ -79,6 +85,8 @@ export class ProductServices {
     updateProduct: updateProductDTO
   ): Promise<Product> {
     const findByIdProduct = await this.productModel.findById({ _id: id });
+    if(!findByIdProduct) throw new NotFoundException()
+    else{
     const obj = Object.keys(findByIdProduct.categoriaProduto)[0].toString();
     const ObjUpdate = Object.keys(updateProduct.categoriaProduto)[0].toString();
     const newProduct = {
@@ -117,12 +125,25 @@ export class ProductServices {
     if (!updateNewProduct) throw new NotFoundException();
     else return updateNewProduct;
   }
+  }
 
-  async deleteProduct(id: string): Promise<Product> {
-    const deleteProduct = await this.productModel
-      .findByIdAndDelete({ _id: id })
+  async deleteProduct(id: string) {
+    const searchId = await this.productModel
+      .findById({ _id: id })
       .exec();
-    if (!deleteProduct) throw new NotFoundException();
+      if(!searchId) throw new NotFoundException()
+      else{
+      const obj = Object.keys(searchId.categoriaProduto)[0].toString();
+      searchId.categoriaProduto[obj].imagemProduto.map(async item=>{
+        if(item){
+       const deleteImageProduto = await this.imageModel.findByIdAndRemove({_id: item}).exec()
+       return deleteImageProduto
+        }
+      })
+      const deleteProduct = await this.productModel.findByIdAndDelete({_id: id}).exec()
+
+    if (!searchId || !deleteProduct) throw new NotFoundException();
     else return deleteProduct;
+      }
   }
 }
