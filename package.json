@@ -12,7 +12,7 @@
     "start": "ts-node-dev ./src/main.ts",
     "start:docker:dev": "npm install && nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "start:dev": "nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
