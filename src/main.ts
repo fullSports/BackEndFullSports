@@ -12,7 +12,7 @@ async function bootstrap() {
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
-  await app.listen(process.env.PORT, HOST);
+  await app.listen(process.env.PORT);
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
 }
 bootstrap();
