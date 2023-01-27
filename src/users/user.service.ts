@@ -1,19 +1,18 @@
 import { Model } from "mongoose";
-import { Body, Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
-import { Login } from "./Schema/login.shema";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
-import { ImageDocument, imagem } from "src/image/Schema/image.schema";
+import { ImageDocument, imagem } from "../image/Schema/image.schema";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>
-  ) {}
+  ) { }
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
@@ -101,7 +100,7 @@ export class UserService {
 
   async deleteUser(id: string, realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
-    const userTrue = await this.userModel.findById({_id: id}).exec();
+    const userTrue = await this.userModel.findById({ _id: id }).exec();
     if (userTrue.login.email !== email) return {
       messgem: "email ou senha invalida"
     }
@@ -115,15 +114,15 @@ export class UserService {
           .findById({ _id: id })
           .exec();
         if (!searchId) throw new NotFoundException();
-        else{
-          const deleteImage = await this.imageModel.findByIdAndDelete({_id: searchId.imagemPerfil})
-          if(!deleteImage) throw new NotFoundException()
-          else{
+        else {
+          if(searchId.imagemPerfil){
+          const deleteImage = await this.imageModel.findByIdAndDelete({ _id: searchId.imagemPerfil })
             deleteImage;
-            const deleteUser = await this.userModel.findByIdAndDelete({_id: id}).exec()
-            if(!deleteUser) throw new NotFoundException()
-            else return deleteUser
           }
+            const deleteUser = await this.userModel.findByIdAndDelete({ _id: id }).exec()
+            if (!deleteUser) throw new NotFoundException()
+            else return deleteUser
+          
         }
       } else return {
         messgem: "email ou senha invalida"

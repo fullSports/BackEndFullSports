@@ -58,7 +58,9 @@ export class UserController {
     @Body() singInBody: RealizarLogin
   ) {
     const deleteUser = await this.userService.deleteUser(id, singInBody);
-    return deleteUser
+    return {
+      messagem: "cliente deletado com sucesso "
+    }
     
   }
 
