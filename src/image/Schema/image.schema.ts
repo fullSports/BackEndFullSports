@@ -57,3 +57,10 @@ ImagemSchema.pre("remove", function () {
   }
 });
 export const imagem = mongoose.model("imagem", ImagemSchema);
+export class ImagesList {
+  name: string;
+  size: number;
+  key: string;
+  url: string;
+  createAt: Object;
+}
