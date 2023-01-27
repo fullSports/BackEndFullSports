@@ -88,7 +88,10 @@ export class OrderService {
                 else {
                     const createOrder = await this.OrderModel.create(RegisterOrder)
                     if (!createOrder) throw new NotFoundException();
-                    else return createOrder
+                    else {
+                        createOrder["total"] = findByIdProduct.categoriaProduto[obj].preco * quantidade
+                        return createOrder
+                    }
                 }
             }
         }
@@ -118,17 +121,22 @@ export class OrderService {
         const findByIdOrder = await this.OrderModel.findById({ _id: id }).exec();
         if (!findByIdOrder) throw new NotFoundException();
         else {
+            const findByIdProduct = await this.productModel.findById({_id: updateOrderBody.produto ? updateOrderBody.produto : findByIdOrder.produto})
+            if(!findByIdProduct) throw new NotFoundException()
+            else{
+                const obj = Object.keys(findByIdProduct.categoriaProduto)[0].toString();
             const newOrder = {
                 quantidadePedido: updateOrderBody.quantidadePedido ? updateOrderBody.quantidadePedido : findByIdOrder.quantidadePedido,
                 produto: updateOrderBody.produto ? updateOrderBody.produto : findByIdOrder.produto,
                 cliente: updateOrderBody.cliente ? updateOrderBody.cliente : findByIdOrder.cliente,
-                total: updateOrderBody.total ? updateOrderBody.total : findByIdOrder.total
+                total: updateOrderBody.quantidadePedido ?  updateOrderBody.quantidadePedido * findByIdProduct.categoriaProduto[obj].quantidade : findByIdOrder.total
             }
             const updateOrder = await this.OrderModel.findByIdAndUpdate(id, newOrder)
                 .setOptions({ overwrite: false, new: true });
             if (!updateOrder) throw new NotFoundException()
             else return updateOrder
         }
+    }
     }
 
     async deleteOrder(id: string) {

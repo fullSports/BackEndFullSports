@@ -26,6 +26,7 @@ export class OrderController {
     async ListOrderByID(@Param("id")id:string){
         const listOrder = await this.orderService.searchIdOrder(id)
         return {
+            messagem: "pedido realizado com sucesso",
             order: listOrder
         }
     }
