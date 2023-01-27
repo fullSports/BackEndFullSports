@@ -11,12 +11,12 @@ require("dotenv").config();
 //   secretAccessKey: process.env.ACCESS_KEY,
 //   region: process.env.REGIONAWS,
 // });
-let s3 = new S3Client({
+const s3 = new S3Client({
   region: process.env.REGIONAWS,
   credentials: {
     accessKeyId: process.env.KEY_ID,
     secretAccessKey: process.env.ACCESS_KEY,
-  }
+  },
 });
 const storageTypes = {
   local: multer.diskStorage({

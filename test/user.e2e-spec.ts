@@ -1,8 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { INestApplication, Logger } from "@nestjs/common";
+import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { AppModule } from "./../src/app.module";
-import { async } from "rxjs";
 describe("Users", () => {
   let app: INestApplication;
   beforeEach(async () => {
@@ -12,7 +11,7 @@ describe("Users", () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-  var ID = String;
+  let ID = String;
   const client = {
     cpf: "909.068.780-71",
     nome: "TDD user.controller",

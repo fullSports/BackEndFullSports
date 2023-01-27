@@ -13,7 +13,7 @@ describe("UserController", () => {
     useService = new UserService(userModel);
     userController = new UserController(useService);
   });
-  var Id = String;
+  const Id = String;
   it("•Execulta ListUsers()", async () => {
     const listUser = userController.ListUsers();
     expect(userController.ListUsers());

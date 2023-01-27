@@ -4,8 +4,8 @@ import * as request from "supertest";
 import axios, { AxiosError } from "axios";
 const path = require("path");
 import { AppModule } from "../src/app.module";
-var Id = String;
-var urlImg = String;
+let Id = String;
+let urlImg = String;
 describe("Images", () => {
   let app: INestApplication;
   beforeEach(async () => {
@@ -56,5 +56,7 @@ describe("Images", () => {
     expect(deleteImage.body).toHaveProperty("messagem");
     return deleteImage;
   });
-  it("• url-image (GET) return status 403", async () => {});
+  it("• url-image (GET) return status 403", async () => {
+    await request(app.getHttpServer()).get("/imagem");
+  });
 });

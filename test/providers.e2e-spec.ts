@@ -12,7 +12,7 @@ describe("Providers", () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-  var ID = String;
+  let ID = String;
   const Provider = {
     cnpj: "40.386.172/0001-60",
     nomeEmpresa: "TDD S.A",

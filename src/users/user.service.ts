@@ -12,7 +12,7 @@ export class UserService {
   constructor(
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>
-  ) { }
+  ) {}
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
@@ -32,7 +32,7 @@ export class UserService {
 
     if (userTrue.length === 0) {
       return bcrypt.hash(password, 10).then((hash) => {
-        let encryptedPassowrd = hash;
+        const encryptedPassowrd = hash;
         const dateNow = new Date().toISOString();
         const newUser = this.userModel.create({
           cpf: createUser.cpf,
@@ -101,32 +101,35 @@ export class UserService {
   async deleteUser(id: string, realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
     const userTrue = await this.userModel.findById({ _id: id }).exec();
-    if (userTrue.login.email !== email) return {
-      messgem: "email ou senha invalida"
-    }
+    if (userTrue.login.email !== email)
+      return {
+        messgem: "email ou senha invalida",
+      };
     else {
       const comparePassword = await bcrypt.compareSync(
         password,
         userTrue.login.password
       );
       if (comparePassword) {
-        const searchId = await this.userModel
-          .findById({ _id: id })
-          .exec();
+        const searchId = await this.userModel.findById({ _id: id }).exec();
         if (!searchId) throw new NotFoundException();
         else {
-          if(searchId.imagemPerfil){
-          const deleteImage = await this.imageModel.findByIdAndDelete({ _id: searchId.imagemPerfil })
+          if (searchId.imagemPerfil) {
+            const deleteImage = await this.imageModel.findByIdAndDelete({
+              _id: searchId.imagemPerfil,
+            });
             deleteImage;
           }
-            const deleteUser = await this.userModel.findByIdAndDelete({ _id: id }).exec()
-            if (!deleteUser) throw new NotFoundException()
-            else return deleteUser
-          
+          const deleteUser = await this.userModel
+            .findByIdAndDelete({ _id: id })
+            .exec();
+          if (!deleteUser) throw new NotFoundException();
+          else return deleteUser;
         }
-      } else return {
-        messgem: "email ou senha invalida"
-      }
+      } else
+        return {
+          messgem: "email ou senha invalida",
+        };
     }
   }
 
@@ -136,7 +139,7 @@ export class UserService {
     const userTrue = (await listUser).filter(function (item) {
       return item.login.email == email;
     });
-    Logger.warn(userTrue.length)
+    Logger.warn(userTrue.length);
     if (userTrue.length == 0)
       return {
         messagem: "email não encontrado",
@@ -185,7 +188,7 @@ export class UserService {
         return bcrypt
           .hash(newPassoWord ? newPassoWord : "2", 10)
           .then(async (hash) => {
-            let encryptedPassowrd = hash;
+            const encryptedPassowrd = hash;
             const findByIDUser = await this.userModel.findById(id);
             const newUser = {
               cpf: findByIDUser.cpf,

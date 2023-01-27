@@ -7,7 +7,7 @@ import { ImageModule } from "./image/image.module";
 import { ProductModule } from "./product/product.module";
 import { ProviderModule } from "./providers/providers.module";
 import { OderModule } from "./order/order.module";
-var MongoUrl = "";
+let MongoUrl = "";
 if (process.env.ENV_AMB === "PROD") MongoUrl = process.env.mongoPROD;
 else if (process.env.ENV_AMB === "QA") MongoUrl = process.env.mongoQA;
 else MongoUrl = null;
@@ -18,7 +18,7 @@ else MongoUrl = null;
     ImageModule,
     ProductModule,
     ProviderModule,
-    OderModule
+    OderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

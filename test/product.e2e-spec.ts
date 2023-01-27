@@ -12,7 +12,7 @@ describe("Product", () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-  var ID = String;
+  let ID = String;
   const Product = {
     categoriaProduto: {
       equipamento: {
@@ -35,7 +35,7 @@ describe("Product", () => {
     return ListProduct;
   });
 
-  it("• /caadastrar-produto (POST)", async () => {
+  it("• /cadastrar-produto (POST)", async () => {
     const createdProduct = await request(app.getHttpServer())
       .post("/cadastrar-produto")
       .send(Product)
