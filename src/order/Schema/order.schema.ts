@@ -13,10 +13,10 @@ export class Order {
   quantidadePedido: number;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Product.name })
-  produto: ObjectId;
+  produto: ObjectId | string | Object; 
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Users.name })
-  cliente: ObjectId;
+  cliente: ObjectId | string;
 
   @Prop({ required: true })
   @IsNumber()

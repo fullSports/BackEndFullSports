@@ -37,7 +37,7 @@ describe("Users", () => {
       .post("/cadastrar-cliente")
       .send(client)
       .expect(201);
-    expect(RegisterUsers.body).toHaveProperty("usuario" && "messagem");
+    expect(RegisterUsers.body).toHaveProperty("user" && "messagem");
     ID = RegisterUsers.body.user._id;
     return RegisterUsers;
   });

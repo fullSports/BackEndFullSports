@@ -21,6 +21,7 @@ export class OrderController {
     return {
       messagem: "pedido realizado com suceeso",
       order: RegisterOrder,
+      orderPlaced: true
     };
   }
 
@@ -39,14 +40,14 @@ export class OrderController {
     };
   }
 
-  @Put("/atualizar-pedido/:id")
-  async UpdateOrder(@Param("id") id: string, updateOrderDTO: UpdateOrderDTO) {
-    const updateOrder = await this.orderService.updateOrder(id, updateOrderDTO);
-    return {
-      messagem: "pedido atualizado com sucesso",
-      order: updateOrder,
-    };
-  }
+  // @Put("/atualizar-pedido/:id")
+  // async UpdateOrder(@Param("id") id: string, updateOrderDTO: UpdateOrderDTO) {
+  //   const updateOrder = await this.orderService.updateOrder(id, updateOrderDTO);
+  //   return {
+  //     messagem: "pedido atualizado com sucesso",
+  //     order: updateOrder,
+  //   };
+  // }
 
   @Delete("/deletar-pedido/:id")
   async DeleteOrder(@Param("id") id: string) {
