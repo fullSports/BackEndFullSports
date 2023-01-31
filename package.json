@@ -37,6 +37,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.4",
     "aws-sdk": "^2.1296.0",
     "axios": "^1.2.3",
     "bcrypt": "^5.1.0",

@@ -4,21 +4,25 @@ import {
   Post,
   Put,
 } from "@nestjs/common/decorators/http/request-mapping.decorator";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
 import { UserService } from "./user.service";
 @Controller()
+@ApiTags("Users")
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Get("listar-clientes")
+  @ApiOperation({summary: "list all users"})
   async ListUsers(): Promise<Users[]> {
     return this.userService.ListUsers();
   }
 
   @Post("cadastrar-cliente")
+  @ApiOperation({summary: "register a new user"})
   async CreateUser(@Body() createUser: Users) {
     const createdUser = await this.userService.RegisterUsers(createUser);
     if (!createdUser) {
@@ -36,11 +40,13 @@ export class UserController {
   }
 
   @Get("listar-cliente/:id")
+  @ApiOperation({summary: "list user by id"})
   async SearchUserById(@Param("id") id: string): Promise<Users> {
     return this.userService.searchId(id);
   }
 
   @Put("atualizar-cliente/:id")
+  @ApiOperation({summary: "update user by id"})
   async UpdateUserById(
     @Param("id") id: string,
     @Body() updateUser: UpdateUserDTO
@@ -52,6 +58,7 @@ export class UserController {
     };
   }
 
+  @ApiOperation({summary: "delete user with id"})
   @Delete("deletar-cliente/:id")
   async DeleteUserById(
     @Param("id") id: string,
@@ -65,11 +72,13 @@ export class UserController {
   }
 
   @Post("realizar-login")
+  @ApiOperation({summary: "login with password and email"})
   async SingIn(@Body() singInBody: RealizarLogin) {
     const SingIn = await this.userService.signIn(singInBody);
     return SingIn;
   }
 
+  @ApiOperation({summary: "update user login or password"})
   @Put("atualizar-login/:id")
   async UpdatePassowdLogin(
     @Param("id") id: string,

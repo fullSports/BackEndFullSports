@@ -7,10 +7,12 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 @Controller()
+@ApiTags('Products')
 export default class ProductController {
   constructor(private readonly productService: ProductServices) {}
 

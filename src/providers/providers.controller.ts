@@ -7,10 +7,12 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { updateProviderDTO } from "./dto/updateProviderr.dto";
 import { ProviderService } from "./providers.service";
 import { Provider } from "./Schema/providers.schema";
 @Controller()
+@ApiTags('Providers')
 export class ProviderController {
   constructor(private readonly providerService: ProviderService) {}
 

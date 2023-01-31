@@ -1,4 +1,5 @@
 import { Prop } from "@nestjs/mongoose";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
 import {
   isEmail,
@@ -15,21 +16,33 @@ export class updateProviderDTO {
   @Exclude()
   _id: string;
 
-  @Prop({ required: true })
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @Exclude()
   @IsNotEmpty({ message: "campo cnpj vazio" })
   @Length(18, 18, { message: "cnpj invalido" })
   cnpj: string;
 
-  @Prop({ required: true })
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @Exclude()
   @IsNotEmpty({ message: "campo nome da empresa  vazio" })
   nomeEmpresa: string;
 
-  @Prop({ required: true })
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @Exclude()
   @Length(9, 9, { message: "cep invalido" })
   @IsNotEmpty({ message: "campo cep vazio" })
   cep: string;
 
-  @Prop({ required: true })
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @Exclude()
   @IsNotEmpty({ message: "campo endereco vazio" })
   endereco: string;
 }

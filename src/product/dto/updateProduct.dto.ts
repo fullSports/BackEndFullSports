@@ -1,9 +1,11 @@
 import { Prop } from "@nestjs/mongoose";
+import { ApiProperty } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
 import { IsNotEmpty, IsOptional } from "class-validator";
 import { categoryDTO } from "./category.dto";
 
 class categoryProduct {
+  @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) roupa estar vazio vazio" })
   roupa: categoryDTO | undefined;
@@ -25,6 +27,7 @@ export class updateProductDTO {
   @Exclude()
   _id: string;
   @Prop({ required: true })
+  @ApiProperty()
   @IsNotEmpty({ message: "campo(objeto) login estar vazio vazio" })
   categoriaProduto: categoryProduct;
 }
