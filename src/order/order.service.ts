@@ -29,8 +29,22 @@ export class OrderService {
   ) { }
 
   async ListOrders(): Promise<Order[]> {
-    const ListOrders = await this.OrderModel.find().populate("cliente").populate("produto").exec();
-    return ListOrders
+    const ListOrders = await this.OrderModel.find().exec();
+    const newListOrders = [];
+    for(let i of ListOrders){
+       const product = await this.ServiceProduct.searchProductId(i.produto as any)
+       const client = await this.UserModel.findById({_id: i.cliente as any}).populate("imagemPerfil").exec();
+       const order ={
+        _id: i._id,
+        quantidadePedido: i.quantidadePedido,
+        produto: product,
+        cliente: client,
+        total: i.total,
+        __v: i.__v
+       }
+    newListOrders.push(order);
+    }
+    return newListOrders
   }
 
   async RegisterOrder(createOrderBody: Order) {
@@ -66,10 +80,20 @@ export class OrderService {
   }
 
   async searchIdOrder(id: string) {
-    const ListOrders = await this.OrderModel.findById(id).populate("cliente").populate("produto").exec();
-    return ListOrders
-  }
-
+    const ListOrder = await this.OrderModel.findById(id).exec();
+       const product = await this.ServiceProduct.searchProductId(ListOrder.produto as any)
+       const client = await this.UserModel.findById({_id: ListOrder.cliente as any}).populate("imagemPerfil").exec();
+       const order ={
+        _id: ListOrder._id,
+        quantidadePedido: ListOrder.quantidadePedido,
+        produto: product,
+        cliente: client,
+        total: ListOrder.total,
+        __v: ListOrder.__v
+       }
+      return order
+    }
+  
   async deleteOrder(id: string) {
     const findBydIdOrder = await this.OrderModel.findById({_id: id}).exec();
     if(!findBydIdOrder) throw new NotFoundException();
