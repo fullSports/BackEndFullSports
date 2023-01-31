@@ -30,8 +30,6 @@ export class OrderService {
 
   async ListOrders(): Promise<Order[]> {
     const ListOrders = await this.OrderModel.find().populate("cliente").populate("produto").exec();
-
-
     return ListOrders
   }
 
@@ -41,7 +39,7 @@ export class OrderService {
     const findBydIdProduct = await this.ServiceProduct.searchProductId(productId)
 
     const obj = Object.keys(findBydIdProduct.categoriaProduto)[0].toString();
-    const quantidate = findBydIdProduct.categoriaProduto[obj].quantidate as number
+    const quantidate = findBydIdProduct.categoriaProduto[obj].quantidate as number;
     if (quantidate === 0) return { messagem: "produto  sem estoque", orderPlaced: false }
     else if (quantidate - createOrderBody.quantidadePedido <= 0) return { messagem: "estoque insuficiente", orderPlaced: false }
     const newProduct = {
@@ -68,17 +66,45 @@ export class OrderService {
   }
 
   async searchIdOrder(id: string) {
-
+    const ListOrders = await this.OrderModel.findById(id).populate("cliente").populate("produto").exec();
+    return ListOrders
   }
 
-  // async updateOrder(
-  //   id: string,
-  //   updateOrderBody: UpdateOrderDTO
-  // ): Promise<Order> {
-  // return
-  // }
-
   async deleteOrder(id: string) {
+    const findBydIdOrder = await this.OrderModel.findById({_id: id}).exec();
+    if(!findBydIdOrder) throw new NotFoundException();
+    const findBydIdProduct = await this.ServiceProduct.searchProductId(findBydIdOrder.produto as any);
 
+    const obj = Object.keys(findBydIdProduct.categoriaProduto)[0].toString();
+    const quantidate = findBydIdProduct.categoriaProduto[obj].quantidate as number;
+    if(quantidate <= 0){
+      findBydIdOrder.remove();
+      return {
+        messagem: "pedido deletado com sucesso",
+        ProductUpdate: false
+      }
+    }else{
+      const newProduct = {
+        categoriaProduto: {
+          [obj]: {
+            quantidate: quantidate + findBydIdOrder.quantidadePedido as number
+          }
+        }
+      } as any
+      const updateProduct = await this.ServiceProduct.updateProduct(findBydIdOrder.produto as any,newProduct)
+      if(!updateProduct){
+        findBydIdOrder.remove();
+        return {
+          messagem: "pedido deletado com sucesso",
+          ProductUpdate: false
+        }
+      }else{
+        findBydIdOrder.remove();
+        return {
+          messagem: "pedido deletado com sucesso",
+          ProductUpdate: true
+        }
+      }
+    }
   }
 }

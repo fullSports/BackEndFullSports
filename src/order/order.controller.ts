@@ -34,10 +34,7 @@ export class OrderController {
   @Get("/listar-pedido/:id")
   async ListOrderByID(@Param("id") id: string) {
     const listOrder = await this.orderService.searchIdOrder(id);
-    return {
-      messagem: "pedido realizado com sucesso",
-      order: listOrder,
-    };
+    return listOrder;
   }
 
   // @Put("/atualizar-pedido/:id")
@@ -51,9 +48,7 @@ export class OrderController {
 
   @Delete("/deletar-pedido/:id")
   async DeleteOrder(@Param("id") id: string) {
-    await this.orderService.deleteOrder(id);
-    return {
-      messagem: "pedido deletado com sucesso ",
-    };
+   const deleteOrder =  await this.orderService.deleteOrder(id);
+    return deleteOrder;
   }
 }
