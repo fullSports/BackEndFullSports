@@ -3,7 +3,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-
+const { resolve } = require('path');
 
 const express = require("express");
 const path = require("path");
@@ -22,7 +22,7 @@ async function bootstrap() {
     .build();
     const document = SwaggerModule.createDocument(app,config);
     SwaggerModule.setup("document",app,document);
-
+    app.use('/document',express.static(resolve(__dirname,"./build")));
       await app.listen(process.env.PORT);
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
 }
