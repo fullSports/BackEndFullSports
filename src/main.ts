@@ -21,7 +21,7 @@ async function bootstrap() {
     .setVersion("0.1.5")
     .build();
     const document = SwaggerModule.createDocument(app,config);
-    SwaggerModule.setup("swagger",app,document);
+    SwaggerModule.setup("swagger.html",app,document);
 
       await app.listen(process.env.PORT);
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
