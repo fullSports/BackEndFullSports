@@ -17,7 +17,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription('api da loja full sports e suas requisições')
-    .setVersion("0.1.5")
+    .setVersion("0.1.6")
     .build();
     const document = SwaggerModule.createDocument(app,config);
     SwaggerModule.setup("document",app,document);
