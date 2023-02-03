@@ -3,6 +3,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { NextFunction, Request, Response } from "express";
 const { resolve } = require('path');
 const express = require("express");
 const path = require("path");
@@ -15,7 +16,7 @@ async function bootstrap() {
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
-  app.use((req, res, next)=>{
+  app.use((req: Request, res: Response, next: NextFunction)=>{
     res.header("Access-Control-Allow-Headers", '*');
     res.header("Access-Control-Allow-Origin", '*');
     res.header("'Content-Type'", "'multipart/form-data'");
