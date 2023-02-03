@@ -6,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 const { resolve } = require('path');
 const express = require("express");
 const path = require("path");
+const cors = require ("cors");
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe());
@@ -14,6 +15,14 @@ async function bootstrap() {
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
+  app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Headers", '*');
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("'Content-Type'", "'multipart/form-data'");
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors())
+    next()
+})
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription('api da loja full sports e suas requisições')
