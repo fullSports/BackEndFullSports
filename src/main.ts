@@ -16,14 +16,15 @@ async function bootstrap() {
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
-//   app.use((req: Request, res: Response, next: NextFunction)=>{
-//     res.header("Access-Control-Allow-Headers", '*');
-//     res.header("Access-Control-Allow-Origin", '*');
-//     res.header("'Content-Type'", "'multipart/form-data'");
-//     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-//     app.use(cors())
-//     next()
-// })
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'https://fullsports.dev.br',
+      'https://sig3-components.vercel.app'
+    ],
+    methods: ["GET", "POST","DELETE","PUT"],
+    credentials: true,
+  });
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription('api da loja full sports e suas requisições')
