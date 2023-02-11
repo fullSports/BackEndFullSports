@@ -9,21 +9,21 @@ const express = require("express");
 const path = require("path");
 const cors = require ("cors");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, { cors: false });
   app.useGlobalPipes(new ValidationPipe());
   const HOST = "0.0.0.0";
   app.use(
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
-  app.use((req: Request, res: Response, next: NextFunction)=>{
-    res.header("Access-Control-Allow-Headers", '*');
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("'Content-Type'", "'multipart/form-data'");
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    app.use(cors())
-    next()
-})
+//   app.use((req: Request, res: Response, next: NextFunction)=>{
+//     res.header("Access-Control-Allow-Headers", '*');
+//     res.header("Access-Control-Allow-Origin", '*');
+//     res.header("'Content-Type'", "'multipart/form-data'");
+//     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+//     app.use(cors())
+//     next()
+// })
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription('api da loja full sports e suas requisições')
