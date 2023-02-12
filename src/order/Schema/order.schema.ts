@@ -23,8 +23,7 @@ export class Order {
   cliente: ObjectId | string;
 
   @ApiProperty()
-  @Prop({ required: true })
-  @IsNumber()
+  @Prop({ required: false })
   total: number;
 }
 export const OrderSchema = SchemaFactory.createForClass(Order);

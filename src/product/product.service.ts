@@ -18,7 +18,7 @@ export class ProductServices {
     private readonly imageModel: Model<ImageDocument>,
     @InjectModel(Provider.name)
     private readonly ProviderModel: Model<ProviderDocument>
-  ) {}
+  ) { }
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
     const imgId = [];
@@ -112,9 +112,9 @@ export class ProductServices {
             preco: updateProduct.categoriaProduto[ObjUpdate].preco
               ? updateProduct.categoriaProduto[ObjUpdate].preco
               : findByIdProduct.categoriaProduto[obj].preco,
-            quantidate: updateProduct.categoriaProduto[ObjUpdate].quantidate
-              ? updateProduct.categoriaProduto[ObjUpdate].quantidate
-              : findByIdProduct.categoriaProduto[obj].quantidate,
+            quantidade: updateProduct.categoriaProduto[ObjUpdate].quantidade
+              ? updateProduct.categoriaProduto[ObjUpdate].quantidade
+              : findByIdProduct.categoriaProduto[obj].quantidade,
             imagemProduto: updateProduct.categoriaProduto[ObjUpdate]
               .imagemProduto
               ? updateProduct.categoriaProduto[ObjUpdate].imagemProduto
@@ -138,9 +138,11 @@ export class ProductServices {
       searchId.categoriaProduto[obj].imagemProduto.map(async (item) => {
         if (item) {
           const deleteImageProduto = await this.imageModel
-            .findByIdAndRemove({ _id: item })
+            .findById({ _id: item })
             .exec();
-          return deleteImageProduto;
+          if (deleteImageProduto) {
+            await deleteImageProduto.remove()
+          }
         }
       });
       const deleteProduct = await this.productModel

@@ -9,7 +9,7 @@ export class Provider {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cnpj vazio" })
-  @Length(18, 18, { message: "cnpj invalido" })
+  @Length(17, 17, { message: "cnpj invalido" })
   cnpj: string;
 
   @ApiProperty()
@@ -29,7 +29,7 @@ export class Provider {
   endereco: string;
 
   @ApiProperty()
-  @Prop({ required: true })
+  @Prop({ required: false })
   dataCadastro: Date;
 }
 export const ProviderSchema = SchemaFactory.createForClass(Provider);

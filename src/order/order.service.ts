@@ -67,8 +67,7 @@ export class OrderService {
     if (!updateProduct) throw new NotFoundException();
     else {
       const preco = findBydIdProduct.categoriaProduto[obj].preco
-      const splitPreco = preco.split("R$");
-      const floatPreco = parseFloat(splitPreco[1].replace(",", "."))
+      const floatPreco = parseFloat(preco.replace(",", "."))
       Logger.warn(floatPreco)
       createOrderBody["total"] = floatPreco * createOrderBody.quantidadePedido;
 

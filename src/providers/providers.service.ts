@@ -24,7 +24,7 @@ export class ProviderService {
       return (item.cnpj = cnpj);
     });
 
-    if (providerTrue.length !== 0) {
+    if (providerTrue.length === 0) {
       const newProvider = await this.providerMode.create(createProvider);
       if (!newProvider) throw new NotFoundException();
       else return newProvider;
@@ -43,8 +43,8 @@ export class ProviderService {
   ): Promise<Provider> {
     const findBydIdProvider = await this.providerMode.findById(id);
     const newProvider = {
-      cnpj: updateProviderBody.cep
-        ? updateProviderBody.cep
+      cnpj: updateProviderBody.cnpj
+        ? updateProviderBody.cnpj
         : findBydIdProvider.cnpj,
       nomeEmpresa: updateProviderBody.nomeEmpresa
         ? updateProviderBody.nomeEmpresa

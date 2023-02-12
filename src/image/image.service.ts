@@ -38,8 +38,7 @@ export class ImageService {
     if (!deleteImage) throw new NotFoundException();
     else {
       const deleteImageRemove = await deleteImage.remove();
-      if (!deleteImageRemove) throw new NotFoundException();
-      else return deleteImageRemove;
+      if (deleteImageRemove) return deleteImageRemove;
     }
   }
 }
