@@ -33,7 +33,7 @@
 ## automatic installation with docker
 ```bash
 # run local api
-$ docker compose up --build
+$ docker compose up ou $ docker compose up --build
 # DELETE THE CONTAINERS
 $ docker compose down -v
 ```
