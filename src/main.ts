@@ -15,10 +15,7 @@ async function bootstrap() {
   );
   app.enableCors({
     origin: [
-      "http://localhost:3000",
-      "https://fullsports.dev.br",
-      "https://sig3-components.vercel.app",
-      "https://sig3-components-qa.vercel.app/"
+      "*"
     ],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
