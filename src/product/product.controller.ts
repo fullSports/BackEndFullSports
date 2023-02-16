@@ -12,7 +12,7 @@ import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 @Controller()
-@ApiTags('Products')
+@ApiTags("Products")
 export default class ProductController {
   constructor(private readonly productService: ProductServices) {}
 

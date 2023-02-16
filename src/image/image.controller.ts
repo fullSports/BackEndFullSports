@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   Param,
@@ -7,15 +6,14 @@ import {
   UseInterceptors,
   Post,
   Delete,
-  ParseFilePipeBuilder,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiNoContentResponse, ApiProduces, ApiTags } from "@nestjs/swagger";
+import { ApiTags } from "@nestjs/swagger";
 import multerConfig from "./../config/multer.config";
 import { ImageService } from "./image.service";
 import { ImagesList } from "./Schema/image.schema";
 
-@ApiTags('Images')
+@ApiTags("Images")
 @Controller()
 export class ImageController {
   constructor(private imageService: ImageService) {}

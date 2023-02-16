@@ -1,4 +1,3 @@
-import { Logger } from "@nestjs/common";
 import { HydratedDocument } from "mongoose";
 export type ImageDocument = HydratedDocument<typeof ImagemSchema>;
 const mongoose = require("mongoose");
@@ -38,7 +37,7 @@ ImagemSchema.pre("remove", function () {
   } else {
     fs.open(
       path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key),
-      (err, fd) => {
+      (err: Error) => {
         if (!err) {
           return promisify(fs.unlink)(
             path.resolve(
@@ -62,5 +61,5 @@ export class ImagesList {
   size: number;
   key: string;
   url: string;
-  createAt: Object;
+  createAt: unknown;
 }

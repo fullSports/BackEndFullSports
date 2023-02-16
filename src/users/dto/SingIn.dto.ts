@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { isEmail, IsEmail, IsNotEmpty, Length } from "class-validator";
+import { Prop } from "@nestjs/mongoose";
+import { IsEmail, IsNotEmpty } from "class-validator";
 export class RealizarLogin {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo email vazio" })

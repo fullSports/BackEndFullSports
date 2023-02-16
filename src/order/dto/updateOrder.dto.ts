@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop } from "@nestjs/mongoose";
 import { Exclude } from "class-transformer";
 import { IsNumber, IsOptional, Min } from "class-validator";
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import { Product } from "src/product/Schema/product.schema";
 import { Users } from "src/users/Schema/user.schema";
 

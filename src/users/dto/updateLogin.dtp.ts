@@ -1,14 +1,7 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop } from "@nestjs/mongoose";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
-import {
-  isEmail,
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-} from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 export class UpdatePasswordUser {
   @ApiProperty()
   @Prop({ required: true })
@@ -31,7 +24,7 @@ export class UpdatePasswordUser {
     }
   )
   newEmail: string;
-  
+
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo sennha vazio" })

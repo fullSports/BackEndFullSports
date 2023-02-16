@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { Body, Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { ImageDocument, imagem, ImagesList } from "./Schema/image.schema";
 

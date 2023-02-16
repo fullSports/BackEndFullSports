@@ -1,6 +1,6 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, ObjectId } from "mongoose";
+import { Model } from "mongoose";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import {
   Provider,
@@ -18,7 +18,7 @@ export class ProductServices {
     private readonly imageModel: Model<ImageDocument>,
     @InjectModel(Provider.name)
     private readonly ProviderModel: Model<ProviderDocument>
-  ) { }
+  ) {}
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
     const imgId = [];
@@ -141,7 +141,7 @@ export class ProductServices {
             .findById({ _id: item })
             .exec();
           if (deleteImageProduto) {
-            await deleteImageProduto.remove()
+            await deleteImageProduto.remove();
           }
         }
       });

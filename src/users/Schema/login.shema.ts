@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
-import { isEmail, IsEmail, IsNotEmpty, Length } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 export class Login {
   @ApiProperty()
   @Prop({ required: true })

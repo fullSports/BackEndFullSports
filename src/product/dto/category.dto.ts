@@ -1,7 +1,7 @@
 import { Prop } from "@nestjs/mongoose";
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsOptional, Min } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
 
 export class categoryDTO {

@@ -1,6 +1,6 @@
 import { Prop } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, Min } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
 import { imagem } from "../../image/Schema/image.schema";
 import { Provider } from "../../providers/Schema/providers.schema";

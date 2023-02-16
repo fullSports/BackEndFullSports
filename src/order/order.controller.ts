@@ -1,19 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { UpdateOrderDTO } from "./dto/updateOrder.dto";
 import { OrderService } from "./order.service";
 import { Order } from "./Schema/order.schema";
 
 @Controller()
-@ApiTags('Orders')
+@ApiTags("Orders")
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
@@ -23,7 +14,7 @@ export class OrderController {
     return {
       messagem: "pedido realizado com suceeso",
       order: RegisterOrder,
-      orderPlaced: true
+      orderPlaced: true,
     };
   }
 
@@ -50,7 +41,7 @@ export class OrderController {
 
   @Delete("/deletar-pedido/:id")
   async DeleteOrder(@Param("id") id: string) {
-   const deleteOrder =  await this.orderService.deleteOrder(id);
+    const deleteOrder = await this.orderService.deleteOrder(id);
     return deleteOrder;
   }
 }

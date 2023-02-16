@@ -14,11 +14,9 @@ class categoryProduct {
   @IsNotEmpty({ message: "campo(objeto) equipamento estar vazio vazio" })
   equipamento: category | undefined;
 
-
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) suplemento estar vazio vazio" })
   suplemento: category | undefined;
-
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) calcado estar vazio vazio" })

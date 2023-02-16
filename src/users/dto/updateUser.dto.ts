@@ -1,16 +1,7 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { Prop } from "@nestjs/mongoose";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
-import {
-  isEmail,
-  IsEmail,
-  isEmpty,
-  IsMongoId,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-} from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
 import { Login } from "../Schema/login.shema";
 export class UpdateUserDTO {

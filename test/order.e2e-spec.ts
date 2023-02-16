@@ -60,29 +60,28 @@ describe("Product", () => {
     expect(createdProduct.body).toHaveProperty("product" && "messagem");
   });
 
-
   it("• /listar-pedidos (GET)", async () => {
     const ListOders = await request(app.getHttpServer())
       .get("/listar-pedidos")
       .expect(200)
       .expect(Array);
-      console.log(IdCLient)
-      console.log(IdPorduct)
+    console.log(IdCLient);
+    console.log(IdPorduct);
     return ListOders;
   });
-  const Order= {
+  const Order = {
     quantidadePedido: 20,
     produto: IdPorduct,
     cliente: IdCLient,
-  }
+  };
   it("• /realizar-pedido (POST) ", async () => {
     const createdOrder = await request(app.getHttpServer())
       .post("/realizar-pedido")
       .send(Order)
-      .expect(201)
+      .expect(201);
     IdOrder = createdOrder.body.order._id;
     expect(createdOrder.body).toHaveProperty("order" && "messagem");
-    console.log(IdOrder)
+    console.log(IdOrder);
   });
 
   it("• /listar-pedido/:id ", async () => {

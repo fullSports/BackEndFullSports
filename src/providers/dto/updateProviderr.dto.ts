@@ -1,16 +1,6 @@
-import { Prop } from "@nestjs/mongoose";
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
-import {
-  isEmail,
-  IsEmail,
-  isEmpty,
-  IsMongoId,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-} from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
 export class updateProviderDTO {
   @IsOptional()
   @Exclude()
