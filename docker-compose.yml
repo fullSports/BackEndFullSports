@@ -6,6 +6,6 @@ services:
     command: npm run start:dev
     entrypoint: .docker/entrypoint.sh
     ports:
-      - "5000:5000"
+      - "${PORT}:${PORT}"
     volumes:
       - .:/home/node/app
