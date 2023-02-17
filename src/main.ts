@@ -13,7 +13,10 @@ async function bootstrap() {
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
-
+  app.enableCors({
+    origin: ['*', 'http://localhost:3000/'],
+    methods: ['POST', 'PUT', 'DELETE', 'GET']
+  });
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription("api da loja full sports e suas requisições")
