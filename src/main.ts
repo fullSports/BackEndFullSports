@@ -6,8 +6,17 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
+const cors = require("cors")
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+  app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Headers", '*');
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("'Content-Type'", "'multipart/form-data'");
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors())
+    next()
+})
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
