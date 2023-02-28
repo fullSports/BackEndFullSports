@@ -9,15 +9,7 @@ const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors:true});
-  // app.use((req: Request, res: Response, next: NextFunction) => {
-  //   res.header("Access-Control-Allow-Headers", '*');
-  //   res.header("Access-Control-Allow-Origin", '*');
-  //   res.header("'Content-Type'", "'multipart/form-data'");
-  //   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-  //   app.use(cors())
-  //   next()
-  // })
+  const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
@@ -30,7 +22,10 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("document", app, document);
-
+  app.enableCors({
+    origin: '*',
+    credentials: true,
+  });
   await app.listen(process.env.PORT);
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
