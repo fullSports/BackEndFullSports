@@ -7,7 +7,7 @@ const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors:true});
+  const app = await NestFactory.create(AppModule,{cors:false});
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
