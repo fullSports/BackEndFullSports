@@ -3,8 +3,8 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import {Request,Response ,NextFunction} from "express"
-const cors = require ('cors');
+import { Request, Response, NextFunction } from "express"
+const cors = require('cors');
 const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
@@ -22,10 +22,14 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("document", app, document);
-  app.enableCors({
-    origin: '*',
-    credentials: true,
-  });
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.header("Access-Control-Allow-Headers", '*');
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors())
+    next()
+  })
+  app.use(express.json());
   await app.listen(process.env.PORT);
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
