@@ -19,17 +19,5 @@
             { "key": "Access-Control-Allow-Origin", "value": "*" }
           ]
         }  
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "src/main.ts",
-            "methods": [
-                "GET",
-                "POST",
-                "PUT",
-                "DELETE"
-            ]
-        }
     ]
 }
