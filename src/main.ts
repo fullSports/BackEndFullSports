@@ -7,12 +7,22 @@ const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
+  app.enableCors({
+     origin: [
+       "http://localhost:3000",
+       "https://fullsports.dev.br",
+       "https://sig3-components.vercel.app",
+       "https://sig3-components-qa.vercel.app"
+     ],
+     methods: ["GET", "POST", "DELETE", "PUT"],
+     credentials: true,
+   });
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription("api da loja full sports e suas requisições")
