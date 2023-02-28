@@ -6,6 +6,17 @@
             "use": "@vercel/node"
         }
     ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "access-control-allow-origin",
+                    "value": "*"
+                }
+            ]
+        }
+    ],
     "routes": [
         {
             "src": "/(.*)",
@@ -16,7 +27,6 @@
                 "PUT",
                 "DELETE"
             ]
-            
         }
     ]
 }
