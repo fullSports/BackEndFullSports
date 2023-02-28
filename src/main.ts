@@ -3,11 +3,21 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import {Request,Response ,NextFunction} from "express"
+const cors = require ('cors');
 const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors:true});
+  const app = await NestFactory.create(AppModule);
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    res.header("Access-Control-Allow-Headers", '*');
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("'Content-Type'", "'multipart/form-data'");
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors())
+    next()
+  })
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
