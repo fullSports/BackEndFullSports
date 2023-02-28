@@ -21,7 +21,7 @@ async function bootstrap() {
        "https://sig3-components-qa.vercel.app"
      ],
      methods: ["GET", "POST", "DELETE", "PUT"],
-     credentials: true,
+     credentials: false,
    });
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
