@@ -9,26 +9,18 @@ const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Headers", '*');
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("'Content-Type'", "'multipart/form-data'");
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    app.use(cors())
-    next()
-})
-  app.useGlobalPipes(new ValidationPipe());
-  app.use(
-    "/files",
-    express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
-  );
   app.enableCors({
-    origin: ['*', 'http://localhost:3000/'],
+    origin: ['*', 'http://localhost:3000'],
     methods: ['POST', 'PUT', 'DELETE', 'GET'],
     credentials: false,
     optionsSuccessStatus: 204,
     allowedHeaders:'*',
   });
+  app.useGlobalPipes(new ValidationPipe());
+  app.use(
+    "/files",
+    express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+  );
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
     .setDescription("api da loja full sports e suas requisições")
