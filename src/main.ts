@@ -24,7 +24,8 @@ async function bootstrap() {
   );
   app.enableCors({
     origin: ['*', 'http://localhost:3000/'],
-    methods: ['POST', 'PUT', 'DELETE', 'GET']
+    methods: ['POST', 'PUT', 'DELETE', 'GET'],
+    credentials: true
   });
   const config = new DocumentBuilder()
     .setTitle("Api Full Sports")
