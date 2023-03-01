@@ -3,21 +3,19 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { Request, Response, NextFunction } from "express"
-const cors = require("cors");
 const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
-
-
+const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(
-    { 
-      origin: ['http://localhost:3000', 'https://www.google.com'],
-      methods: ['POST', 'PUT', 'DELETE', 'GET']
-    }
-  );
+  app.enableCors({
+    origin: ['*', 'http://localhost:3000'],
+    methods: ['POST', 'PUT', 'DELETE', 'GET'],
+    credentials: false,
+    optionsSuccessStatus: 204,
+    allowedHeaders:'*',
+  });
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
@@ -30,7 +28,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("document", app, document);
-  app.use(express.json());
+
   await app.listen(process.env.PORT);
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
