@@ -8,7 +8,12 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule,{cors:true});
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: '*',
+  });
+  console.log(app);
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
