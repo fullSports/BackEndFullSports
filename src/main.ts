@@ -9,20 +9,18 @@ const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.enableCors({
-    
-  //   origin: '*',
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  //   allowedHeaders: ['Authorization', 'Content-Type'],
-  //   exposedHeaders: ['Content-Length'],
-  //   credentials: true,
-  //   maxAge: 3600,
-  // });
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  });
+
   app.enableCors({
     allowedHeaders: '*',
     origin: '*',
-    credentials: true,
   });
+  console.log(app);
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
