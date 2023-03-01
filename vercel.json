@@ -6,19 +6,8 @@
             "use": "@vercel/node"
         }
     ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "src/main.ts",
-            "methods": [
-                "POST",
-                "GET",
-                "PUT",
-                "DELETE"
-            ]
-        }
-    ],
     "headers": [{
+        "dest": "src/main.ts",
         "source": "/(.*)",
         "headers": [{
                 "key": "Access-Control-Allow-Credentials",
