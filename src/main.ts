@@ -9,18 +9,6 @@ const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    next();
-  });
-
-  app.enableCors({
-    allowedHeaders: '*',
-    origin: '*',
-  });
-  console.log(app);
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
@@ -35,6 +23,7 @@ async function bootstrap() {
   SwaggerModule.setup("document", app, document);
 
   await app.listen(process.env.PORT);
+  app.use(cors())
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
   Logger.log(
