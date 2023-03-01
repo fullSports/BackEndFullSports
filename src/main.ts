@@ -8,7 +8,7 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,{cors:true});
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
@@ -23,7 +23,6 @@ async function bootstrap() {
   SwaggerModule.setup("document", app, document);
 
   await app.listen(process.env.PORT);
-  app.use(cors())
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
   Logger.log(
