@@ -13,7 +13,11 @@
         {
           "source": "/(.*)",
           "headers": [
-            { "key": "Access-Control-Allow-Origin", "value": "*" }
+            { "key": "Access-Control-Allow-Origin", "value": [
+                "http:localhost:3000",
+                "https:www.fullsports.dev.br",
+                "https://sig3-components-qa.vercel.app"
+            ] }
           ]
         },
         {
