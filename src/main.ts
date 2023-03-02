@@ -29,5 +29,4 @@ async function bootstrap() {
     `application document in http://localhost:${process.env.PORT}/document`
   );
 }
-
 bootstrap();
