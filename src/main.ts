@@ -1,5 +1,5 @@
 import { Logger } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
+import { NestApplication, NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
@@ -8,19 +8,8 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors")
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-    next();
-  });
-
-  app.enableCors({
-    allowedHeaders: '*',
-    origin: '*',
-  });
-  console.log(app);
+  const app = await NestFactory.create<NestApplication>(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",
@@ -33,7 +22,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("document", app, document);
-
   await app.listen(process.env.PORT);
   app.use("/ducument", express.static(resolve(__dirname, "./build")));
   Logger.log(`server on in http://localhost:${process.env.PORT}`);
