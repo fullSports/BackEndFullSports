@@ -37,15 +37,11 @@ $ docker compose up ou $ docker compose up --build
 # DELETE THE CONTAINERS
 $ docker compose down -v
 ```
-## Installation manual
+## Running the app and Installation manual
 
 ```bash
 $ npm install
-```
-
-## Running the app
-
-```bash
+bash
 # development
 $ npm run start
 
