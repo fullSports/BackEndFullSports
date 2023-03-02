@@ -9,7 +9,6 @@ export class Provider {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cnpj vazio" })
-  @Length(17, 17, { message: "cnpj invalido" })
   cnpj: string;
 
   @ApiProperty()
