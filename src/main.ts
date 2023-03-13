@@ -10,14 +10,6 @@ const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule);
   app.enableCors(
-    { 
-      origin: [
-        "http:localhost:3000",
-        "https:www.fullsports.dev.br",
-        "https://sig3-components-qa.vercel.app"
-    ],
-      methods: ['POST', 'PUT', 'DELETE', 'GET']
-    }
   );
   app.useGlobalPipes(new ValidationPipe());
   app.use(

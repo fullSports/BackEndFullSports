@@ -21,33 +21,32 @@ export class ProductServices {
   ) {}
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
-    const imgId = [];
-    const img = [];
-    let ProviderId = String;
-    if (!listProducts) throw new NotFoundException();
-    else if (listProducts.length === 0) {
-      return listProducts;
-    } else
-      for (const i of listProducts) {
-        const obj = Object.keys(i.categoriaProduto)[0].toString();
-        imgId.push(i.categoriaProduto[obj].imagemProduto);
-        ProviderId = i.categoriaProduto[obj].fornecedor;
+    let products:Product[] = []
+    for(const i of listProducts){
+      const searchId = await this.productModel.findById({ _id: i._id }).exec();
+      if (searchId) {
+        const imgId = [];
+        const img = [];
+        let ProviderId = String;
+        const obj = Object.keys(searchId.categoriaProduto)[0].toString();
+        imgId.push(searchId.categoriaProduto[obj].imagemProduto);
+        ProviderId = searchId.categoriaProduto[obj].fornecedor;
+        for (const i of imgId[0]) {
+          const searchImgId = await this.imageModel.findById({ _id: i }).exec();
+          img.push(searchImgId);
+        }
+        const searchProductId = await this.ProviderModel.findById({
+          _id: ProviderId,
+        }).exec();
+  
+        searchId.categoriaProduto[obj].imagemProduto = [];
+        searchId.categoriaProduto[obj].imagemProduto = img;
+        searchId.categoriaProduto[obj].fornecedor = searchProductId;
+  
+        products.push(searchId)
       }
-    for (const i of imgId[0]) {
-      const searchImgId = await this.imageModel.findById({ _id: i }).exec();
-      img.push(searchImgId);
     }
-    const searchProductId = await this.ProviderModel.findById({
-      _id: ProviderId,
-    }).exec();
-    for (const i of listProducts) {
-      const obj = Object.keys(i.categoriaProduto)[0].toString();
-      i.categoriaProduto[obj].imagemProduto = [];
-      i.categoriaProduto[obj].imagemProduto = img;
-      i.categoriaProduto[obj].fornecedor = searchProductId;
-    }
-
-    return listProducts;
+    return products
   }
   async RegisterProduct(createProduct: Product): Promise<Product> {
     const RegisterProduct = await this.productModel.create(createProduct);
