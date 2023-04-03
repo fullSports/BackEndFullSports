@@ -192,7 +192,7 @@ classDiagram
 > O diagrama de sequência descreve como os varios componentes arquiteturais colaboram para manipular uma operação de sistema (exemplo para operação consultaTodos())
 ```mermaid
 sequenceDiagram 
-Usuario ->> APIClienteController: GET /api/v1/clientes
+Usuario ->> APIClienteController: GET /listar-clientes/
 APIClienteController ->> ClienteServiceI: consultaTodos ( )
 ClienteServiceI ->> ClienteRepository: findAll ( )
 ClienteRepository -->> ClienteServiceI: ArrayList[]
