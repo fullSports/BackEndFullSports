@@ -61,6 +61,9 @@ $ npm run test
 # test requests
 $ npm run test:e2e
 
+# test request per module
+$ npm run test:e2e -t <test_name>
+
 # test coverage
 $ npm run test:cov
 ```
