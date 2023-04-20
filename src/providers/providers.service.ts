@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { updateProviderDTO } from "./dto/updateProviderr.dto";
@@ -18,12 +18,11 @@ export class ProviderService {
 
   async RegisterProvider(createProvider: Provider): Promise<Provider> {
     const { cnpj } = createProvider;
-    const ListProviders = this.ListProviders();
-
-    const providerTrue = (await ListProviders).filter(function (item) {
-      return (item.cnpj = cnpj);
+    const ListProviders = await this.ListProviders();
+    const providerTrue = (ListProviders).filter(function (item) {
+      return item.cnpj == cnpj;
     });
-
+    Logger.debug(providerTrue)
     if (providerTrue.length === 0) {
       const newProvider = await this.providerMode.create(createProvider);
       if (!newProvider) throw new NotFoundException();
