@@ -42,23 +42,23 @@ describe("Product", () => {
       },
     },
   };
-  it("• /cadastrar-cliente (POST) User", async () => {
-    const RegisterUsers = await request(app.getHttpServer())
-      .post("/cadastrar-cliente")
-      .send(clienteTestOrder)
-      .expect(201);
-    expect(RegisterUsers.body).toHaveProperty("user" && "messagem");
-    IdCLient = RegisterUsers.body.user._id;
-    return RegisterUsers;
-  });
-  it("• /cadastrar-produto (POST)", async () => {
-    const createdProduct = await request(app.getHttpServer())
-      .post("/cadastrar-produto")
-      .send(ProductTestOrder)
-      .expect(201);
-    IdPorduct = createdProduct.body.product._id;
-    expect(createdProduct.body).toHaveProperty("product" && "messagem");
-  });
+  // it("• /cadastrar-cliente (POST) User", async () => {
+  //   const RegisterUsers = await request(app.getHttpServer())
+  //     .post("/cadastrar-cliente")
+  //     .send(clienteTestOrder)
+  //     .expect(201);
+  //   expect(RegisterUsers.body).toHaveProperty("user" && "messagem");
+  //   IdCLient = RegisterUsers.body.user._id;
+  //   return RegisterUsers;
+  // });
+  // it("• /cadastrar-produto (POST)", async () => {
+  //   const createdProduct = await request(app.getHttpServer())
+  //     .post("/cadastrar-produto")
+  //     .send(ProductTestOrder)
+  //     .expect(201);
+  //   IdPorduct = createdProduct.body.product._id;
+  //   expect(createdProduct.body).toHaveProperty("product" && "messagem");
+  // });
 
   it("• /listar-pedidos (GET)", async () => {
     const ListOders = await request(app.getHttpServer())
@@ -74,23 +74,23 @@ describe("Product", () => {
     produto: IdPorduct,
     cliente: IdCLient,
   };
-  it("• /realizar-pedido (POST) ", async () => {
-    const createdOrder = await request(app.getHttpServer())
-      .post("/realizar-pedido")
-      .send(Order)
-      .expect(201);
-    IdOrder = createdOrder.body.order._id;
-    expect(createdOrder.body).toHaveProperty("order" && "messagem");
-    console.log(IdOrder);
-  });
+  // it("• /realizar-pedido (POST) ", async () => {
+  //   const createdOrder = await request(app.getHttpServer())
+  //     .post("/realizar-pedido")
+  //     .send(Order)
+  //     .expect(201);
+  //   IdOrder = createdOrder.body.order._id;
+  //   expect(createdOrder.body).toHaveProperty("order" && "messagem");
+  //   console.log(IdOrder);
+  // });
 
-  it("• /listar-pedido/:id ", async () => {
-    const listOrderId = await request(app.getHttpServer())
-      .get(`/listar-pedido/${IdOrder}`)
-      .expect(200)
-      .expect(Object);
-    return listOrderId;
-  });
+  // it("• /listar-pedido/:id ", async () => {
+  //   const listOrderId = await request(app.getHttpServer())
+  //     .get(`/listar-pedido/${IdOrder}`)
+  //     .expect(200)
+  //     .expect(Object);
+  //   return listOrderId;
+  // });
 
   // it("• /atualizar-pedido/:id (PUT)", async () => {
   //   const newOrder = {

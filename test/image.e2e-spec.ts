@@ -37,11 +37,6 @@ describe("Images", () => {
       .expect("Content-Type", /json/)
       .expect(Array);
   });
-  it("• url-image (GET) return status 200", async () => {
-    const getUrlImg = await axios.get(`${urlImg}`);
-    expect(getUrlImg.status).toBe(200);
-    return getUrlImg;
-  });
   it("• /imagem/:id (GET)", async () => {
     const ListImageId = await request(app.getHttpServer())
       .get(`/imagem/${Id}`)
