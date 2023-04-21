@@ -61,6 +61,9 @@ $ npm run test
 # test requests
 $ npm run test:e2e
 
+# test request per module
+$ npm run test:e2e -t <test_name>
+
 # test coverage
 $ npm run test:cov
 ```
@@ -192,7 +195,7 @@ classDiagram
 > O diagrama de sequência descreve como os varios componentes arquiteturais colaboram para manipular uma operação de sistema (exemplo para operação consultaTodos())
 ```mermaid
 sequenceDiagram 
-Usuario ->> APIClienteController: GET /api/v1/clientes
+Usuario ->> APIClienteController: GET /listar-clientes/
 APIClienteController ->> ClienteServiceI: consultaTodos ( )
 ClienteServiceI ->> ClienteRepository: findAll ( )
 ClienteRepository -->> ClienteServiceI: ArrayList[]

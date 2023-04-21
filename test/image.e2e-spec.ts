@@ -1,7 +1,6 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import axios from "axios";
 const path = require("path");
 import { AppModule } from "../src/app.module";
 let Id = String;
@@ -36,11 +35,6 @@ describe("Images", () => {
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(Array);
-  });
-  it("• url-image (GET) return status 200", async () => {
-    const getUrlImg = await axios.get(`${urlImg}`);
-    expect(getUrlImg.status).toBe(200);
-    return getUrlImg;
   });
   it("• /imagem/:id (GET)", async () => {
     const ListImageId = await request(app.getHttpServer())

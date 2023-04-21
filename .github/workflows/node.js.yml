@@ -1,0 +1,52 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.12.1]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Get secret from base64
+      env:
+        ACCESS_KEY: ${{ BackendFullSportsEnvs.ACCESS_KEY }}
+        BUCKET: ${{ BackendFullSportsEnvs.BUCKET }}
+        ENV_AMB: ${{ BackendFullSportsEnvs.ENV_AMB }}
+        KEY_ID: ${{ BackendFullSportsEnvs.ENV_AMB }}
+        MONGOPROD: ${{ BackendFullSportsEnvs.MONGOPROD }}
+        MONGOQA: ${{ BackendFullSportsEnvs.MONGOQA }}
+        REGIONAWS: ${{ BackendFullSportsEnvs.REGIONAWS }}
+        STORAGE_TYPE: ${{ BackendFullSportsEnvs.STORAGE_TYPE }}
+        
+      run: |
+        echo import certificate from secrets and regenerate the file
+        echo $ACCESS_KEY | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $BUCKET | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $ENV_AMB | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $KEY_ID | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $MONGOPROD | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $MONGOQA | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $REGIONAWS | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $STORAGE_TYPE | base64 -d > $RUNNER_TEMP/my_production.keystore
+        
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm run test:e2e
