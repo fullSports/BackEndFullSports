@@ -19,10 +19,10 @@ export class ProviderService {
   async RegisterProvider(createProvider: Provider): Promise<Provider> {
     const { cnpj } = createProvider;
     const ListProviders = await this.ListProviders();
-    const providerTrue = (ListProviders).filter(function (item) {
+    const providerTrue = ListProviders.filter(function (item) {
       return item.cnpj == cnpj;
     });
-    Logger.debug(providerTrue)
+    Logger.debug(providerTrue);
     if (providerTrue.length === 0) {
       const newProvider = await this.providerMode.create(createProvider);
       if (!newProvider) throw new NotFoundException();

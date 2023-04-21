@@ -81,7 +81,7 @@ describe("Product", () => {
         quantidadePedido: 20,
         produto: IdPorduct,
         cliente: IdCLient,
-        total: 20
+        total: 20,
       })
       .expect(201);
     IdOrder = createdOrder.body.order._id;
@@ -126,7 +126,7 @@ describe("Product", () => {
       .expect(200);
     expect(deleteOrder.body).toHaveProperty("messagem");
     return deleteOrder;
-  })
+  });
 
   it("• /deletar-cleinte/:id && /deletar-produto/:id", async () => {
     await request(app.getHttpServer())
@@ -136,8 +136,8 @@ describe("Product", () => {
       .delete(`/deletar-cliente/${IdCLient}`)
       .send({
         email: "testOrderClient@outlook.com",
-        password: "test68909"
+        password: "test68909",
       })
       .expect(200);
-  })
+  });
 });
