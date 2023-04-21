@@ -24,9 +24,6 @@ jobs:
       JOB_VARIABLE: JOB
     steps:
       - name: Run Commands with various variables
-        if: ${{ env.ENV_AMB == 'QA' }} # Example using context env
-        env:
-          STEP_VARIABLE: STEP
         run: |
           echo "Hello World"
           echo "This is the $ACCESS_KEY environment variable"
