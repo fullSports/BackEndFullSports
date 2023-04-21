@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
-import { AppModule } from "./app.module";
+import { AppModule } from "../src/app.module";
 describe("Users", () => {
   let app: INestApplication;
   beforeEach(async () => {
