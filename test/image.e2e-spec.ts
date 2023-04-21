@@ -1,7 +1,6 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import axios from "axios";
 const path = require("path");
 import { AppModule } from "../src/app.module";
 let Id = String;
