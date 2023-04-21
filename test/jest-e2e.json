@@ -1,5 +1,9 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
@@ -13,6 +17,16 @@
     "**/*.(t|j)s"
   ],
   "coverageDirectory": "../../coverage",
-  "bail": 1,
-  "verbose": true
+  "bail": true,
+  "verbose": true,
+  "clearMocks": true,
+  "collectCoverage": false,
+  "errorOnDeprecated": false,
+  "globals": {
+    "ENV_AMB": true,
+    "mongoPROD": true,
+    "mongoQA": true,
+    "ee": true
+  },
+  "notify":false
 }
