@@ -18,36 +18,15 @@ on:
     branches: [ "master","development" ]
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [18.12.1]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    env:
+      JOB_VARIABLE: JOB
     steps:
-    - name: Get secret from base64
-      env:
-        ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-        BUCKET: ${{ secrets.BUCKET }}
-        ENV_AMB: ${{ secrets.ENV_AMB }}
-        KEY_ID: ${{ secrets.ENV_AMB }}
-        MONGOPROD: ${{ secrets.MONGOPROD }}
-        MONGOQA: ${{ secrets.MONGOQA }}
-        REGIONAWS: ${{ secrets.REGIONAWS }}
-        STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
-        
-      run: |
-        echo import certificate from secrets and regenerate the file
-        echo $ENV_AMB | base64 -d > $RUNNER_TEMP/my_production.keystore
-        
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run test:e2e
+      - name: Run Commands with various variables
+        if: ${{ env.ENV_AMB == 'QA' }} # Example using context env
+        env:
+          STEP_VARIABLE: STEP
+        run: |
+          echo "Hello World"
+          echo "This is the $ACCESS_KEY environment variable"
