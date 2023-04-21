@@ -21,8 +21,8 @@ export class ProductServices {
   ) {}
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
-    let products:Product[] = []
-    for(const i of listProducts){
+    const products: Product[] = [];
+    for (const i of listProducts) {
       const searchId = await this.productModel.findById({ _id: i._id }).exec();
       if (searchId) {
         const imgId = [];
@@ -38,15 +38,15 @@ export class ProductServices {
         const searchProductId = await this.ProviderModel.findById({
           _id: ProviderId,
         }).exec();
-  
+
         searchId.categoriaProduto[obj].imagemProduto = [];
         searchId.categoriaProduto[obj].imagemProduto = img;
         searchId.categoriaProduto[obj].fornecedor = searchProductId;
-  
-        products.push(searchId)
+
+        products.push(searchId);
       }
     }
-    return products
+    return products;
   }
   async RegisterProduct(createProduct: Product): Promise<Product> {
     const RegisterProduct = await this.productModel.create(createProduct);

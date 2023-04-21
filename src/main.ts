@@ -6,11 +6,9 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 const { resolve } = require("path");
 const express = require("express");
 const path = require("path");
-const cors = require("cors")
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule);
-  app.enableCors(
-  );
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.use(
     "/files",

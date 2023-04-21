@@ -4,7 +4,6 @@ import * as request from "supertest";
 const path = require("path");
 import { AppModule } from "../src/app.module";
 let Id = String;
-let urlImg = String;
 describe("Images", () => {
   let app: INestApplication;
   beforeEach(async () => {
@@ -26,7 +25,6 @@ describe("Images", () => {
         expect(response.body).toHaveProperty("messsagem" && "image");
         expect(response.status).toBe(201);
         Id = response.body.image._id;
-        urlImg = response.body.image.url;
       });
   });
   it("• /imagem (GET)", async () => {

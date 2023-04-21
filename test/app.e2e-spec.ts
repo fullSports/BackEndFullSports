@@ -16,7 +16,7 @@ describe("AppController (e2e)", () => {
   });
 
   it("/ (GET)", async () => {
-    const getApp = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .get("/")
       .expect(200)
       .expect({ menssage: "servidor iniciado" });
