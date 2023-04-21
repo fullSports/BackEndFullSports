@@ -13,13 +13,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     strategy:
       matrix:
         node-version: [18.12.1]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Get secret from base64
+      env:
+        KEYSTORE_BASE64: ${{ secrets.BackendFullSportsEnvs }}
+      run: |
+        echo import certificate from secrets and regenerate the file
+        echo $KEYSTORE_BASE64 | base64 -d > $RUNNER_TEMP/my_production.keystore
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
