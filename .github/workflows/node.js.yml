@@ -6,7 +6,7 @@ env:
   ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
   BUCKET: ${{ secrets.BUCKET }}
   ENV_AMB: ${{ secrets.ENV_AMB }}
-  KEY_ID: ${{ secrets.ENV_AMB }}
+  KEY_ID: ${{ secrets.KEY_ID }}
   MONGOPROD: ${{ secrets.MONGOPROD }}
   MONGOQA: ${{ secrets.MONGOQA }}
   REGIONAWS: ${{ secrets.REGIONAWS }}
@@ -21,12 +21,18 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     env:
-      JOB_VARIABLE: JOB
+      ACCESS_KEY: "$ACCESS_KEY"
+      BUCKET: "$BUCKET"
+      ENV_AMB: "$ENV_AMB"
+      KEY_ID: "$KEY_ID"
+      MONGOPROD: "$MONGOPROD"
+      MONGOQA: "$MONGOQA"
+      REGIONAWS: "$REGIONAWS"
+      STORAGE_TYPE: "$STORAGE_TYPE"
     steps:
       - name: Run Commands with various variables
         run: |
-          echo "Hello World"
-          echo "This is the $ACCESS_KEY environment variable"
+          echo "This is the $ENV_AMB, $MONGOQA environment variable"
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -34,5 +40,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
+      - run: npm install -g @nestjs/cli
+      - run: npm install
       - run: npm run build --if-present
       - run: npm run test:e2e
