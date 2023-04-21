@@ -22,10 +22,26 @@ jobs:
     steps:
     - name: Get secret from base64
       env:
-        KEYSTORE_BASE64: ${{ secrets.BackendFullSportsEnvs }}
+        ACCESS_KEY: ${{ BackendFullSportsEnvs.ACCESS_KEY }}
+        BUCKET: ${{ BackendFullSportsEnvs.BUCKET }}
+        ENV_AMB: ${{ BackendFullSportsEnvs.ENV_AMB }}
+        KEY_ID: ${{ BackendFullSportsEnvs.ENV_AMB }}
+        MONGOPROD: ${{ BackendFullSportsEnvs.MONGOPROD }}
+        MONGOQA: ${{ BackendFullSportsEnvs.MONGOQA }}
+        REGIONAWS: ${{ BackendFullSportsEnvs.REGIONAWS }}
+        STORAGE_TYPE: ${{ BackendFullSportsEnvs.STORAGE_TYPE }}
+        
       run: |
         echo import certificate from secrets and regenerate the file
-        echo $KEYSTORE_BASE64 | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $ACCESS_KEY | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $BUCKET | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $ENV_AMB | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $KEY_ID | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $MONGOPROD | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $MONGOQA | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $REGIONAWS | base64 -d > $RUNNER_TEMP/my_production.keystore
+        echo $STORAGE_TYPE | base64 -d > $RUNNER_TEMP/my_production.keystore
+        
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
