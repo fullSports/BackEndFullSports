@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master","releases/**" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master","releases/**" ]
 
 jobs:
   build:
@@ -30,4 +30,4 @@ jobs:
     - run: npm install -g @nestjs/cli
     - run: npm install
     - run: npm run build
-    - run: npm test:e2e
+    - run: npm run test:e2e
