@@ -2,15 +2,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
-env:
-  ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-  BUCKET: ${{ secrets.BUCKET }}
-  ENV_AMB: ${{ secrets.ENV_AMB }}
-  KEY_ID: ${{ secrets.ENV_AMB }}
-  MONGOPROD: ${{ secrets.MONGOPROD }}
-  MONGOQA: ${{ secrets.MONGOQA }}
-  REGIONAWS: ${{ secrets.REGIONAWS }}
-  STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
 
 on:
   push:
@@ -34,10 +25,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: echo "Hello $ENV_AMB. $BUILD. Using Java Version $JAVA_VERSION"
       env:
-        BUILD: 'We are currently running the Build job'
+        ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+        BUCKET: ${{ secrets.BUCKET }}
+        ENV_AMB: ${{ secrets.ENV_AMB }}
+        KEY_ID: ${{ secrets.ENV_AMB }}
+        MONGOPROD: ${{ secrets.MONGOPROD }}
+        MONGOQA: ${{ secrets.MONGOQA }}
+        REGIONAWS: ${{ secrets.REGIONAWS }}
+        STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
+    - run: echo "Hello $ENV_AMB"
     - run: npm ci
+    - run: npm install -g @nestjs/cli
     - run: npm install
     - run: npm run build --if-present
     - run: npm run test:e2e
