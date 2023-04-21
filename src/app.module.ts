@@ -13,7 +13,7 @@ else if (process.env.ENV_AMB === "QA") MongoUrl = process.env.mongoQA;
 else MongoUrl = null;
 @Module({
   imports: [
-    MongooseModule.forRoot(MongoUrl),
+    MongooseModule.forRoot("mongodb+srv://fs:123@cluster0.glzg07s.mongodb.net/?retryWrites=true&w=majority"),
     UserModule,
     ImageModule,
     ProductModule,
