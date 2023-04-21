@@ -3,11 +3,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Use Node.js ${{ matrix.node-version }}
-        with:
-          cache: npm
-          node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         env:
           ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
           BUCKET: ${{ secrets.BUCKET }}
@@ -17,6 +13,10 @@ jobs:
           MONGOQA: ${{ secrets.MONGOQA }}
           REGIONAWS: ${{ secrets.REGIONAWS }}
           STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
+        uses: actions/checkout@v3
+        with:
+          cache: npm
+          node-version: ${{ matrix.node-version }}
       - run: echo "Hello $ENV_AMB"
       - run: npm ci
       - run: npm install -g @nestjs/cli
