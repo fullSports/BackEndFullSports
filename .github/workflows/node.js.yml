@@ -20,19 +20,10 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    env:
-      ACCESS_KEY: "$ACCESS_KEY"
-      BUCKET: "$BUCKET"
-      ENV_AMB: "$ENV_AMB"
-      KEY_ID: "$KEY_ID"
-      MONGOPROD: "$MONGOPROD"
-      MONGOQA: "$MONGOQA"
-      REGIONAWS: "$REGIONAWS"
-      STORAGE_TYPE: "$STORAGE_TYPE"
     steps:
       - name: Run Commands with various variables
         run: |
-          echo "This is the $ENV_AMB, $MONGOQA environment variable"
+          echo "This is the $ENV_AMB and $MONGOQA environment variable"
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
