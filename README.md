@@ -40,7 +40,8 @@ $ docker compose down -v
 ## Running the app and Installation manual
 ```bash
 $ npm install
-bash
+# build
+$ npm run build
 # development
 $ npm run start
 ```
