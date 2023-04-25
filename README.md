@@ -38,7 +38,6 @@ $ docker compose up or $ docker compose up --build
 $ docker compose down -v
 ```
 ## Running the app and Installation manual
-
 ```bash
 $ npm install
 bash
