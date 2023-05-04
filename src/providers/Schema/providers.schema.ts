@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, Length } from "class-validator";
 import { HydratedDocument } from "mongoose";
+import { IsCNPJ } from "../validator/cnpj.validator";
 
 export type ProviderDocument = HydratedDocument<Provider>;
 @Schema()
@@ -9,6 +10,7 @@ export class Provider {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cnpj vazio" })
+  @IsCNPJ({ message: "cnpj invalido" })
   cnpj: string;
 
   @ApiProperty()

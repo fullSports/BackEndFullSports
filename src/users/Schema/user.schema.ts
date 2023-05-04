@@ -4,6 +4,8 @@ import mongoose, { HydratedDocument, ObjectId } from "mongoose";
 import { Login } from "./login.shema";
 import { imagem } from "../../image/Schema/image.schema";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsCPF } from "../validator/cpf.validator";
+import { IsBrithDate } from "../validator/birthDate.validator";
 export type UsersDocument = HydratedDocument<Users>;
 @Schema()
 export class Users {
@@ -11,6 +13,7 @@ export class Users {
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cpf vazio" })
   @Length(14, 14, { message: "cpf invalido" })
+  @IsCPF({ message: "cpf invalido" })
   cpf: string;
 
   @ApiProperty()
@@ -27,7 +30,7 @@ export class Users {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo data de nascimento vazio" })
-  @Length(10, 10, { message: "data de nascimento invalida" })
+  @IsBrithDate({ message: "data de nascimento invalida" })
   dataNascimento: string;
 
   @ApiProperty()
