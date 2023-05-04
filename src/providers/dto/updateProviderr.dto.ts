@@ -1,6 +1,7 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Exclude } from "class-transformer";
 import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
+import { IsCNPJ } from "../validator/cnpj.validator";
 export class updateProviderDTO {
   @IsOptional()
   @Exclude()
@@ -11,7 +12,7 @@ export class updateProviderDTO {
   @IsString()
   @Exclude()
   @IsNotEmpty({ message: "campo cnpj vazio" })
-  @Length(18, 18, { message: "cnpj invalido" })
+  @IsCNPJ({ message: "cnpj invalido" })
   cnpj: string;
 
   @ApiPropertyOptional()

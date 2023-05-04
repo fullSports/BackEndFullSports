@@ -4,6 +4,8 @@ import { Exclude } from "class-transformer";
 import { IsOptional, IsString } from "class-validator";
 import mongoose, { ObjectId } from "mongoose";
 import { Login } from "../Schema/login.shema";
+import { IsCPF } from "../validator/cpf.validator";
+import { IsBrithDate } from "../validator/birthDate.validator";
 export class UpdateUserDTO {
   @IsOptional()
   @Exclude()
@@ -12,6 +14,7 @@ export class UpdateUserDTO {
   @IsString()
   @IsOptional()
   @Exclude()
+  @IsCPF({ message: "cpf invalido" })
   cpf: string;
 
   @ApiPropertyOptional()
@@ -29,6 +32,7 @@ export class UpdateUserDTO {
   @IsOptional()
   @IsString()
   @Exclude()
+  @IsBrithDate({ message: "data de nascimento invalida" })
   dataNascimento: string;
 
   @ApiPropertyOptional()
