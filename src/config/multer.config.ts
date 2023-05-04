@@ -52,6 +52,7 @@ export default {
       "image/pjpeg",
       "image/png",
       "image/gif",
+      "image/svg+xml",
     ];
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);
