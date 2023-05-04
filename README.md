@@ -33,19 +33,24 @@
 ## automatic installation with docker
 ```bash
 # run local api
-$ docker compose up ou $ docker compose up --build
+$ docker compose up or $ docker compose up --build
 # DELETE THE CONTAINERS
 $ docker compose down -v
 ```
-## Running the app and Installation manual
 
+## Running the app and Installation manual
 ```bash
 $ npm install
-bash
+# build
+$ npm run build
 # development
-$ npm run start
+$ npm run start:dev
+# production
+$ npm run start:prod
+```
 
 # watch mode
+```bash
 $ npm run start:dev
 
 # production mode
@@ -53,7 +58,6 @@ $ npm run start:prod
 ```
 
 ## Test
-
 ```bash
 # test controllers
 $ npm run test
@@ -67,13 +71,12 @@ $ npm run test:e2e -t <test_name>
 # test coverage
 $ npm run test:cov
 ```
-## Commit
 
+## Commit
 ```bash
 #accomplish commit
 $npm run commit
 $git push
-
 ```
 
 ## Support
