@@ -62,7 +62,8 @@ export class UserService {
       .findById({ _id: id })
       .populate("imagemPerfil")
       .exec();
-    return searchId;
+    if (!searchId) throw new NotFoundException();
+    else return searchId;
   }
 
   async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
@@ -88,6 +89,7 @@ export class UserService {
         ? updateUserBoy.endereco
         : findByIDUser.endereco,
       imagemPerfil: ImgPerfil,
+      dataCadastro: findByIDUser.dataCadastro,
     };
     const updateUser = await this.userModel
       .findByIdAndUpdate(id, newUser)

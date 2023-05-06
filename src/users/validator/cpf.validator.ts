@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import validator from "cpf-cnpj-validator";
 import {
   registerDecorator,

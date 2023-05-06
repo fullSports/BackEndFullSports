@@ -54,6 +54,6 @@ export class Users {
   imagemPerfil: ObjectId | null;
 
   @Prop({ required: true })
-  dataCadastro: Date;
+  dataCadastro: string;
 }
 export const UserSchema = SchemaFactory.createForClass(Users);
