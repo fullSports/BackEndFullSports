@@ -2,7 +2,6 @@ import { Test, TestingModule } from "@nestjs/testing";
 import ProductController from "./product.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ProductServices } from "./product.service";
-import { describe } from "node:test";
 import { Product, ProductSchema } from "./Schema/product.schema";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import {
@@ -10,6 +9,9 @@ import {
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
+import { ImageController } from "src/image/image.controller";
+import { ProviderController } from "src/providers/providers.controller";
+import { ImageService } from "src/image/image.service";
 const urlConfig = require("../globalConfig.json");
 describe("ProductController", () => {
   let productController: ProductController;
