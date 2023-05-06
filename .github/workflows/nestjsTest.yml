@@ -18,7 +18,7 @@ env:
 #     branches: [ "master","development" ]
 on: [push]
 jobs:
-  test-e2e:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Run Commands with various variables
