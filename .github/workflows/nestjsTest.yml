@@ -3,6 +3,15 @@
 
 name: Nestjs Test
 on: [push]
+env:
+  ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+  BUCKET: ${{ secrets.BUCKET }}
+  ENV_AMB: ${{ secrets.ENV_AMB }}
+  KEY_ID: ${{ secrets.KEY_ID }}
+  MONGOPROD: ${{ secrets.MONGOPROD }}
+  MONGOQA: ${{ secrets.MONGOQA }}
+  REGIONAWS: ${{ secrets.REGIONAWS }}
+  STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
 jobs:
   test:
     runs-on: ubuntu-latest
