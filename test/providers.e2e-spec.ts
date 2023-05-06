@@ -83,4 +83,7 @@ describe("Providers", () => {
     expect(deleteProvider.body).toHaveProperty("messagem");
     return deleteProvider;
   });
+  afterAll(async () => {
+    await app.close();
+  });
 });

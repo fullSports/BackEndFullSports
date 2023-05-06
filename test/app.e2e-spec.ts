@@ -25,4 +25,7 @@ describe("AppController (e2e)", () => {
       .expect(200)
       .expect({ menssage: "servidor iniciado" });
   });
+  afterAll(async () => {
+    await app.close();
+  });
 });

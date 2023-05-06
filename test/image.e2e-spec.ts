@@ -62,4 +62,7 @@ describe("Images", () => {
   it("• url-image (GET) return status 403", async () => {
     await request(app.getHttpServer()).get("/imagem");
   });
+  afterAll(async () => {
+    await app.close();
+  });
 });

@@ -97,4 +97,7 @@ describe("Product", () => {
 
     return deleteProduct;
   });
+  afterAll(async () => {
+    await app.close();
+  });
 });
