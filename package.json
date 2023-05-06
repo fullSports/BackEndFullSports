@@ -59,6 +59,7 @@
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
+    "@shelf/jest-mongodb": "^4.1.7",
     "@types/aws-sdk": "^2.7.0",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
@@ -100,6 +101,17 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "preset": "@shelf/jest-mongodb",
+    "mongodbMemoryServerOptions": {
+      "binary": {
+        "version": "4.0.3",
+        "skipMD5": true
+      },
+      "instance": {
+        "dbName": "jest"
+      },
+      "autoStart": false
+    }
   }
 }

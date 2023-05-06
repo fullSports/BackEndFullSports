@@ -5,13 +5,15 @@ import { Users, UserSchema } from "./Schema/user.schema";
 import { MongooseModule } from "@nestjs/mongoose";
 import { imagem, ImagemSchema } from "../image/Schema/image.schema";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
+const urlConfig = require("../globalConfig.json");
 describe("UserController", () => {
   let userController: UserController;
+
   beforeEach(async () => {
-    const MongoUrl = String(process.env.mongoQA);
+    // db = await connection.db(globalThis.__MONGO_DB_NAME__);
     const app: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot(MongoUrl),
+        MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
         MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
@@ -23,6 +25,7 @@ describe("UserController", () => {
 
     userController = app.get<UserController>(UserController);
   });
+
   const client: Users = {
     cpf: "909.068.780-71",
     nome: "TDD user.controller",
