@@ -10,7 +10,6 @@ describe("UserController", () => {
   let userController: UserController;
 
   beforeEach(async () => {
-    // db = await connection.db(globalThis.__MONGO_DB_NAME__);
     const app: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
