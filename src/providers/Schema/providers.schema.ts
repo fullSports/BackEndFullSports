@@ -31,6 +31,6 @@ export class Provider {
 
   @ApiProperty()
   @Prop({ required: false })
-  dataCadastro: Date;
+  dataCadastro: string;
 }
 export const ProviderSchema = SchemaFactory.createForClass(Provider);

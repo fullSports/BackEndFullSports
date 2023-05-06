@@ -15,7 +15,7 @@
     "start:prod": "node dist/src/main",
     "start:dev": "nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest -runInBand --detectOpenHandles --force-exit",
+    "test": "jest -runInBand --force-exit",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage --detectOpenHandles --force-exit",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",

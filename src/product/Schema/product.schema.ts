@@ -8,19 +8,19 @@ class categoryProduct {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) roupa estar vazio vazio" })
-  roupa: category | undefined;
+  roupa: category | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) equipamento estar vazio vazio" })
-  equipamento: category | undefined;
+  equipamento: category | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) suplemento estar vazio vazio" })
-  suplemento: category | undefined;
+  suplemento: category | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) calcado estar vazio vazio" })
-  calcado: category | undefined;
+  calcado: category | undefined | null;
 }
 @Schema()
 export class Product {
@@ -29,6 +29,6 @@ export class Product {
   @IsNotEmpty({ message: "campo(objeto) categoriaProduto estar vazio vazio" })
   categoriaProduto: categoryProduct;
   @Prop({ required: true })
-  dataCadastro: Date;
+  dataCadastro: string;
 }
 export const ProductSchema = SchemaFactory.createForClass(Product);

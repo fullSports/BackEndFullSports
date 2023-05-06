@@ -23,7 +23,7 @@ export class ProviderController {
 
   @Post("/cadastrar-fornecedor")
   async CreateProvider(@Body() createProvider: Provider) {
-    createProvider["dataCadastro"] = new Date();
+    createProvider["dataCadastro"] = new Date().toISOString();
     const createdProvider = await this.providerService.RegisterProvider(
       createProvider
     );

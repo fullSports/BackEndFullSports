@@ -8,19 +8,19 @@ class categoryProduct {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) roupa estar vazio vazio" })
-  roupa: categoryDTO | undefined;
+  roupa: categoryDTO | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) equipamento estar vazio vazio" })
-  equipamento: categoryDTO | undefined;
+  equipamento: categoryDTO | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) suplemento estar vazio vazio" })
-  suplemento: categoryDTO | undefined;
+  suplemento: categoryDTO | undefined | null;
 
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) calcado estar vazio vazio" })
-  calcado: categoryDTO | undefined;
+  calcado: categoryDTO | undefined | null;
 }
 export class updateProductDTO {
   @IsOptional()
