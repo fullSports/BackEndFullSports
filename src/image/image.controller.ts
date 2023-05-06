@@ -9,7 +9,7 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
-import multerConfig from "./../config/multer.config";
+import multerConfig from "./config/multer.config";
 import { ImageService } from "./image.service";
 import { ImagesList } from "./Schema/image.schema";
 

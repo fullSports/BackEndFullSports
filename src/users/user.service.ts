@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
@@ -62,7 +62,8 @@ export class UserService {
       .findById({ _id: id })
       .populate("imagemPerfil")
       .exec();
-    return searchId;
+    if (!searchId) throw new NotFoundException();
+    else return searchId;
   }
 
   async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
@@ -88,6 +89,7 @@ export class UserService {
         ? updateUserBoy.endereco
         : findByIDUser.endereco,
       imagemPerfil: ImgPerfil,
+      dataCadastro: findByIDUser.dataCadastro,
     };
     const updateUser = await this.userModel
       .findByIdAndUpdate(id, newUser)
@@ -139,7 +141,6 @@ export class UserService {
     const userTrue = (await listUser).filter(function (item) {
       return item.login.email == email;
     });
-    Logger.warn(userTrue.length);
     if (userTrue.length == 0)
       return {
         messagem: "email não encontrado",

@@ -1,13 +1,56 @@
 import { INestApplication } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
+import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
+import { ImageController } from "src/image/image.controller";
+import { ImageService } from "src/image/image.service";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
+import { OrderController } from "src/order/order.controller";
+import { OrderService } from "src/order/order.service";
+import { Product, ProductSchema } from "src/product/Schema/product.schema";
+import ProductController from "src/product/product.controller";
+import { ProductServices } from "src/product/product.service";
+import {
+  Provider,
+  ProviderSchema,
+} from "src/providers/Schema/providers.schema";
+import { UserSchema, Users } from "src/users/Schema/user.schema";
+import { UserService } from "src/users/user.service";
+import { UserController } from "src/users/users.controller";
 import * as request from "supertest";
-import { AppModule } from "../src/app.module";
+const urlConfig = require("./globalConfig.json");
 const path = require("path");
 describe("Product", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        MongooseModule.forRoot(urlConfig.mongoUri),
+        MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
+        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        MongooseModule.forFeature([
+          { name: Product.name, schema: ProductSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: imagem.name, schema: ImagemSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: Provider.name, schema: ProviderSchema },
+        ]),
+      ],
+      controllers: [
+        OrderController,
+        UserController,
+        ProductController,
+        ImageController,
+      ],
+      providers: [
+        OrderService,
+        ProductServices,
+        UserService,
+        ProductServices,
+        ImageService,
+      ],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

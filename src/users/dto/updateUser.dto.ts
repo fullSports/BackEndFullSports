@@ -15,43 +15,43 @@ export class UpdateUserDTO {
   @IsOptional()
   @Exclude()
   @IsCPF({ message: "cpf invalido" })
-  cpf: string;
+  cpf: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  nome: string;
+  nome: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @Exclude()
-  login: Login;
+  login: Login | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
   @IsBrithDate({ message: "data de nascimento invalida" })
-  dataNascimento: string;
+  dataNascimento: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  sexo: string;
+  sexo: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  cep: string;
+  cep: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  endereco: string;
+  endereco: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()

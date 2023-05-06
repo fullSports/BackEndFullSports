@@ -15,12 +15,13 @@
     "start:prod": "node dist/src/main",
     "start:dev": "nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "jest -runInBand --detectOpenHandles --force-exit",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:cov": "jest -runInBand --coverage --detectOpenHandles --force-exit",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e:workflow": "jest --config ./test/jest-e2e.json --detectOpenHandles",
-    "test:e2e": "jest --config ./test/jest-e2e.json ",
+    "test:workflow": "jest --detectOpenHandles",
+    "test:e2e": "jest --config ./test/jest-e2e.json -runInBand --detectOpenHandles --force-exit",
+    "test:e2e:cov": "jest --config ./test/jest-e2e.json  -runInBand --coverage --detectOpenHandles --force-exit",
     "commit": "git-cz"
   },
   "configurations": [
@@ -59,6 +60,7 @@
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
+    "@shelf/jest-mongodb": "^4.1.7",
     "@types/aws-sdk": "^2.7.0",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
@@ -100,6 +102,7 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "preset": "@shelf/jest-mongodb"
   }
 }
