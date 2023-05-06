@@ -9,9 +9,6 @@ import {
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
-import { ImageController } from "src/image/image.controller";
-import { ProviderController } from "src/providers/providers.controller";
-import { ImageService } from "src/image/image.service";
 const urlConfig = require("../globalConfig.json");
 describe("ProductController", () => {
   let productController: ProductController;

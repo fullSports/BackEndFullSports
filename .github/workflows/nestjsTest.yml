@@ -11,7 +11,7 @@ env:
   MONGOPROD: ${{ secrets.MONGOPROD }}
   MONGOQA: ${{ secrets.MONGOQA }}
   REGIONAWS: ${{ secrets.REGIONAWS }}
-  STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
+  STORAGE_TYPE: local
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -28,5 +28,5 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm run test:cov
+      - run: npm run test
 
