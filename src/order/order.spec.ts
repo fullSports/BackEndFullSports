@@ -62,7 +62,7 @@ describe("OrderController", () => {
     let registeredCustomerOrder;
     let registeredCustomerCLient;
     let registeredCustomerPorduct: any;
-    let registeredCustomerImagem;
+    let registeredCustomerImagem: any;
     const clienteTestOrder = {
       cpf: "567.904.554-00",
       nome: "TDD order- client",
@@ -111,8 +111,7 @@ describe("OrderController", () => {
         path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
       );
       expect(UploadedFile).toHaveProperty("messagem" && "image");
-      console.log(UploadedFile);
-      registeredCustomerImagem = UploadedFile.image;
+      registeredCustomerImagem == UploadedFile.image;
     });
     it("• CreateProduct()", async () => {
       const RegisterProduct = await productController.CreateProduct(IProduct);
@@ -153,7 +152,6 @@ describe("OrderController", () => {
       expect(RegisterOrder).toHaveProperty(
         "messagem" && "order" && "orderPlaced"
       );
-      console.log(RegisterOrder.order);
       registeredCustomerOrder = RegisterOrder.order;
     });
     it("• ListOrders()", async () => {
@@ -162,7 +160,6 @@ describe("OrderController", () => {
       expect(ListOders[0].quantidadePedido == 4440);
     });
     it("• ListOrderByID()", async () => {
-      console.log(registeredCustomerOrder);
       const ListOrderByID = await orderController.ListOrderByID(
         registeredCustomerOrder._id
       );

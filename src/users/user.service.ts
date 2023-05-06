@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
@@ -141,7 +141,6 @@ export class UserService {
     const userTrue = (await listUser).filter(function (item) {
       return item.login.email == email;
     });
-    Logger.warn(userTrue.length);
     if (userTrue.length == 0)
       return {
         messagem: "email não encontrado",
