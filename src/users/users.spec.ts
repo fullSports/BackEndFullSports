@@ -24,7 +24,7 @@ describe("UserController", () => {
 
     userController = app.get<UserController>(UserController);
   });
-  describe("👨‍💻 Methods:", () => {
+  describe("👨‍💻 MethodsUsers:", () => {
     const client: Users = {
       cpf: "909.068.780-71",
       nome: "TDD user.controller",
@@ -51,7 +51,14 @@ describe("UserController", () => {
     });
     it("• run the method ListUsers()", async () => {
       const ListUsers = await userController.ListUsers();
-      expect(ListUsers);
+      expect(ListUsers[0].cpf == client.cpf);
+      expect(ListUsers[0].nome == client.nome);
+      expect(ListUsers[0].login.email == client.login.email);
+      expect(ListUsers[0].login.password == client.login.password);
+      expect(ListUsers[0].login.isAdmin == client.login.isAdmin);
+      expect(ListUsers[0].dataNascimento == client.dataNascimento);
+      expect(ListUsers[0].endereco == client.endereco);
+      expect(ListUsers[0].imagemPerfil == client.imagemPerfil);
     });
     it("• run the method SearchUserById()", async () => {
       const _id = registeredCustomer._id;
