@@ -130,7 +130,4 @@ describe("Users", () => {
     expect(deletedUser.body).toHaveProperty("messagem");
     return deletedUser;
   });
-  afterAll(async () => {
-    await app.close();
-  });
 });
