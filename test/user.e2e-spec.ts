@@ -1,12 +1,25 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
-import { AppModule } from "../src/app.module";
+import { MongooseModule } from "@nestjs/mongoose";
+import { UserSchema, Users } from "src/users/Schema/user.schema";
+import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
+import { UserController } from "src/users/users.controller";
+import { UserService } from "src/users/user.service";
+const urlConfig = require("./globalConfig.json");
 describe("Users", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        MongooseModule.forRoot(urlConfig.mongoUri),
+        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        MongooseModule.forFeature([
+          { name: imagem.name, schema: ImagemSchema },
+        ]),
+      ],
+      controllers: [UserController],
+      providers: [UserService],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

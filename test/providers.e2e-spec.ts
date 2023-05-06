@@ -1,19 +1,32 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import { AppModule } from "../src/app.module";
-
+import { MongooseModule } from "@nestjs/mongoose";
+import {
+  Provider,
+  ProviderSchema,
+} from "src/providers/Schema/providers.schema";
+import { ProviderController } from "src/providers/providers.controller";
+import { ProviderService } from "src/providers/providers.service";
+const urlConfig = require("./globalConfig.json");
 describe("Providers", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        MongooseModule.forRoot(urlConfig.mongoUri),
+        MongooseModule.forFeature([
+          { name: Provider.name, schema: ProviderSchema },
+        ]),
+      ],
+      controllers: [ProviderController],
+      providers: [ProviderService],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();
   });
   let ID = String;
-  const Provider = {
+  const IProvider = {
     cnpj: "40.386.172/0001-60",
     nomeEmpresa: "TDD S.A",
     cep: "08452-000",
@@ -31,7 +44,7 @@ describe("Providers", () => {
   it("• /cadastrar-fornecedor (POST)", async () => {
     const createdProvider = await request(app.getHttpServer())
       .post("/cadastrar-fornecedor")
-      .send(Provider)
+      .send(IProvider)
       .expect(201);
     ID = createdProvider.body.provider._id;
     expect(createdProvider.body).toHaveProperty(
@@ -59,7 +72,7 @@ describe("Providers", () => {
       .expect(200);
     expect(Object);
     expect(updateProvider.body).toHaveProperty("provider" && "messagem");
-    expect(updateProvider.body.provider.cnpj !== Provider.cnpj);
+    expect(updateProvider.body.provider.cnpj !== IProvider.cnpj);
     return updateProvider;
   });
 

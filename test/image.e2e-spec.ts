@@ -1,14 +1,25 @@
 import { INestApplication } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
+import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
+import { ImageController } from "src/image/image.controller";
+import { ImageService } from "src/image/image.service";
 import * as request from "supertest";
 const path = require("path");
-import { AppModule } from "../src/app.module";
+const urlConfig = require("./globalConfig.json");
 let Id = String;
 describe("Images", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        MongooseModule.forRoot(urlConfig.mongoUri),
+        MongooseModule.forFeature([
+          { name: imagem.name, schema: ImagemSchema },
+        ]),
+      ],
+      controllers: [ImageController],
+      providers: [ImageService],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();
