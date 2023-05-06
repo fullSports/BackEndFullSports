@@ -13,7 +13,7 @@ export class UpdatePasswordUser {
       message: "email precisa ser um endereço de email válido.",
     }
   )
-  email: string;
+  email: string | undefined;
 
   @ApiPropertyOptional()
   @IsEmail({ ignore_max_length: true }, { message: "email invalido" })
@@ -23,22 +23,22 @@ export class UpdatePasswordUser {
       message: "email precisa ser um endereço de email válido.",
     }
   )
-  newEmail: string;
+  newEmail: string | undefined;
 
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo sennha vazio" })
-  OldPassword: string;
+  OldPassword: string | undefined;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  newPassoWord: string;
+  newPassoWord: string | undefined;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  isAdmin: boolean;
+  isAdmin: boolean | undefined;
 }

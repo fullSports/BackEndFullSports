@@ -28,5 +28,6 @@
     "mongoQA": true,
     "ee": true
   },
-  "notify":false
+  "notify":false,
+  "preset": "@shelf/jest-mongodb"
 }

@@ -14,7 +14,7 @@ export class category {
   @ApiProperty()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Provider.name })
   @IsNotEmpty({ message: "campo fornceder(id) vazio" })
-  fornecedor: ObjectId | null;
+  fornecedor: ObjectId | null | string;
 
   @ApiProperty()
   @Prop({ required: true })
@@ -48,5 +48,5 @@ export class category {
     default: [],
     required: true,
   })
-  imagemProduto: Array<ObjectId> | null;
+  imagemProduto: Array<ObjectId> | Array<string>;
 }

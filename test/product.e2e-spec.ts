@@ -1,19 +1,40 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import { AppModule } from "../src/app.module";
-
+import { MongooseModule } from "@nestjs/mongoose";
+import { Product, ProductSchema } from "src/product/Schema/product.schema";
+import { imagem, ImagemSchema } from "src/image/Schema/image.schema";
+import {
+  Provider,
+  ProviderSchema,
+} from "src/providers/Schema/providers.schema";
+import ProductController from "src/product/product.controller";
+import { ProductServices } from "src/product/product.service";
+const urlConfig = require("./globalConfig.json");
 describe("Product", () => {
   let app: INestApplication;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        MongooseModule.forRoot(urlConfig.mongoUri),
+        MongooseModule.forFeature([
+          { name: Product.name, schema: ProductSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: imagem.name, schema: ImagemSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: Provider.name, schema: ProviderSchema },
+        ]),
+      ],
+      controllers: [ProductController],
+      providers: [ProductServices],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();
   });
   let ID = String;
-  const Product = {
+  const IProduct = {
     categoriaProduto: {
       equipamento: {
         nome: "suplemento eee",
@@ -38,7 +59,7 @@ describe("Product", () => {
   it("• /cadastrar-produto (POST)", async () => {
     const createdProduct = await request(app.getHttpServer())
       .post("/cadastrar-produto")
-      .send(Product)
+      .send(IProduct)
       .expect(201);
     ID = createdProduct.body.product._id;
     expect(createdProduct.body).toHaveProperty("product" && "messagem");

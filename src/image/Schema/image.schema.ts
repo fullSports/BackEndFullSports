@@ -36,19 +36,11 @@ ImagemSchema.pre("remove", function () {
       .promise();
   } else {
     fs.open(
-      path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key),
+      path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key),
       (err: Error) => {
         if (!err) {
           return promisify(fs.unlink)(
-            path.resolve(
-              __dirname,
-              "..",
-              "..",
-              "..",
-              "tmp",
-              "uploads",
-              this.key
-            )
+            path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key)
           );
         } else return null;
       }

@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { ImageDocument, imagem } from "src/image/Schema/image.schema";
@@ -80,7 +80,6 @@ export class OrderService {
     else {
       const preco = findBydIdProduct.categoriaProduto[obj].preco;
       const floatPreco = parseFloat(preco.replace(",", "."));
-      Logger.warn(floatPreco);
       createOrderBody["total"] = floatPreco * createOrderBody.quantidadePedido;
 
       const createOrder = await this.OrderModel.create(createOrderBody);

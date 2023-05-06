@@ -15,7 +15,7 @@ export class categoryDTO {
   @IsOptional()
   @Exclude()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "provider" })
-  fornecedor: ObjectId | null;
+  fornecedor: ObjectId | string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
@@ -59,5 +59,5 @@ export class categoryDTO {
     index: true,
     default: [],
   })
-  imagemProduto: Array<ObjectId> | null;
+  imagemProduto: Array<ObjectId> | Array<string> | null;
 }
