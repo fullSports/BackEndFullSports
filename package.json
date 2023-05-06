@@ -102,16 +102,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
-    "preset": "@shelf/jest-mongodb",
-    "mongodbMemoryServerOptions": {
-      "binary": {
-        "version": "4.0.3",
-        "skipMD5": true
-      },
-      "instance": {
-        "dbName": "jest"
-      },
-      "autoStart": false
-    }
+    "preset": "@shelf/jest-mongodb"
   }
 }
