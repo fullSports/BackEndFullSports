@@ -14,8 +14,8 @@ describe("AppController", () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe("Funções:", () => {
-    it("Deve execultar getHello()", () => {
+  describe("👨‍💻 Methods:", () => {
+    it("run the method getHello()", () => {
       expect(appController.getHello()).toHaveProperty("menssage");
     });
   });
