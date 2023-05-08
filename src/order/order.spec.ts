@@ -62,7 +62,19 @@ describe("OrderController", () => {
     let registeredCustomerOrder;
     let registeredCustomerCLient;
     let registeredCustomerPorduct: any;
-    let registeredCustomerImagem: any;
+    const registeredCustomerImagem = [];
+    it("• uploudImage()", async () => {
+      const UploadImage = await imageController.uploudImage(
+        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
+      );
+      expect(UploadImage).toHaveProperty("messagem" && "image");
+      registeredCustomerImagem.push(UploadImage.image._id);
+      const UploadImage2 = await imageController.uploudImage(
+        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
+      );
+      expect(UploadImage2).toHaveProperty("messagem" && "image");
+      registeredCustomerImagem.push(UploadImage2.image._id);
+    });
     const clienteTestOrder = {
       cpf: "567.904.554-00",
       nome: "TDD order- client",
@@ -88,10 +100,7 @@ describe("OrderController", () => {
           tamanho: 20,
           preco: "222",
           quantidade: 2222,
-          imagemProduto: [
-            "63cb60018de1a6e6a313806a",
-            "63ccb02155b414ecfdc1e607",
-          ],
+          imagemProduto: registeredCustomerImagem,
         },
         roupa: null,
         suplemento: null,
@@ -105,13 +114,6 @@ describe("OrderController", () => {
         "messagem" && "registeredSuccess" && "user"
       );
       registeredCustomerCLient = CreateUser.user;
-    });
-    it("• run the uploudImage()", async () => {
-      const UploadedFile = await imageController.uploudImage(
-        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
-      );
-      expect(UploadedFile).toHaveProperty("messagem" && "image");
-      registeredCustomerImagem == UploadedFile.image;
     });
     it("• CreateProduct()", async () => {
       const RegisterProduct = await productController.CreateProduct(IProduct);

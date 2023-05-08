@@ -9,9 +9,13 @@ import {
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
+import { ImageController } from "src/image/image.controller";
+import { ImageService } from "src/image/image.service";
+const path = require("path");
 const urlConfig = require("../globalConfig.json");
 describe("ProductController", () => {
   let productController: ProductController;
+  let imagemController: ImageController;
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [
@@ -26,13 +30,27 @@ describe("ProductController", () => {
           { name: Provider.name, schema: ProviderSchema },
         ]),
       ],
-      controllers: [ProductController],
-      providers: [ProductServices],
+      controllers: [ProductController, ImageController],
+      providers: [ProductServices, ImageService],
     }).compile();
     productController = app.get<ProductController>(ProductController);
+    imagemController = app.get<ImageController>(ImageController);
   });
   describe("👨‍💻 MethodsProduct:", () => {
     let registeredCustomer;
+    const registeredCustomerImagem = [];
+    it("• uploudImage()", async () => {
+      const UploadImage = await imagemController.uploudImage(
+        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
+      );
+      expect(UploadImage).toHaveProperty("messagem" && "image");
+      registeredCustomerImagem.push(UploadImage.image._id);
+      const UploadImage2 = await imagemController.uploudImage(
+        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
+      );
+      expect(UploadImage2).toHaveProperty("messagem" && "image");
+      registeredCustomerImagem.push(UploadImage2.image._id);
+    });
     const IProduct: Product = {
       categoriaProduto: {
         equipamento: {
@@ -43,10 +61,7 @@ describe("ProductController", () => {
           tamanho: 20,
           preco: "222",
           quantidade: 2222,
-          imagemProduto: [
-            "63cb60018de1a6e6a313806a",
-            "63ccb02155b414ecfdc1e607",
-          ],
+          imagemProduto: registeredCustomerImagem,
         },
         roupa: null,
         suplemento: null,
