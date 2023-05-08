@@ -1,6 +1,6 @@
 {
   "name": "api-full-sports_nestjs",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "author": "",
   "private": true,
@@ -101,8 +101,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "bail": true,
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": false,
+    "errorOnDeprecated": false,
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
+    "notify":false,
     "preset": "@shelf/jest-mongodb"
   }
 }

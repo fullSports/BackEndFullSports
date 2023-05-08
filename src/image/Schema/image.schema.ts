@@ -35,16 +35,18 @@ ImagemSchema.pre("remove", function () {
       })
       .promise();
   } else {
-    fs.open(
-      path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key),
-      (err: Error) => {
-        if (!err) {
-          return promisify(fs.unlink)(
-            path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key)
-          );
-        } else return null;
-      }
-    );
+    if (this.key) {
+      fs.open(
+        path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key),
+        (err: Error) => {
+          if (!err) {
+            return promisify(fs.unlink)(
+              path.resolve(__dirname, "..", "..", "..", "test", "tmp", this.key)
+            );
+          } else return null;
+        }
+      );
+    }
   }
 });
 export const imagem = mongoose.model("imagem", ImagemSchema);
