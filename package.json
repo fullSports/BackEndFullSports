@@ -101,8 +101,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "bail": true,
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": false,
+    "errorOnDeprecated": false,
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
+    "notify":false,
     "preset": "@shelf/jest-mongodb"
   }
 }
