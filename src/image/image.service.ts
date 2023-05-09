@@ -1,5 +1,9 @@
 import { Model } from "mongoose";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import {
+  Injectable,
+  NotFoundException,
+  NotImplementedException,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { ImageDocument, imagem, ImagesList } from "./Schema/image.schema";
 
@@ -39,6 +43,7 @@ export class ImageService {
     else {
       const deleteImageRemove = await deleteImage.remove();
       if (deleteImageRemove) return deleteImageRemove;
+      else throw new NotImplementedException();
     }
   }
 }
