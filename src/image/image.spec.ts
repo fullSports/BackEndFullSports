@@ -24,6 +24,9 @@ describe("ImageController", () => {
   });
   describe("👨‍💻 MethodsImage:", () => {
     it("• uploudImage()", async () => {
+      console.log(
+        path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
+      );
       const UploadImage = await imagemController.uploudImage(
         path.resolve(__dirname, "..", "..", "test", "tmp", "e2e_nestjs.jpg")
       );
