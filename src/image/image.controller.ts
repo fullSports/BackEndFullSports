@@ -38,9 +38,11 @@ export class ImageController {
 
   @Delete("imagem/:id")
   async deleteImage(@Param("id") id: string) {
-    this.imageService.deleteImage(id);
-    return {
-      messagem: "imagem deletada com sucesso",
-    };
+    const removeImg = await this.imageService.deleteImage(id);
+    if (removeImg) {
+      return {
+        messagem: "imagem deletada com sucesso",
+      };
+    }
   }
 }

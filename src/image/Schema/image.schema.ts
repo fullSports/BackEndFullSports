@@ -34,13 +34,15 @@ ImagemSchema.pre("save", function () {
 ImagemSchema.pre("remove", async function () {
   Logger.debug(this.key);
   if (process.env.STORAGE_TYPE === "s3") {
-    return s3.deleteObject({
+    const removeImage = await s3.deleteObject({
       Bucket: process.env.BUCKET,
       Key: this.key,
     });
+    if (removeImage) return true;
+    else return false;
   } else {
     try {
-      fs.rm(
+      await fs.rm(
         path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key),
         { recursive: true },
         (err) => {

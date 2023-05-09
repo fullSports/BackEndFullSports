@@ -38,7 +38,7 @@ export class ImageService {
   }
 
   async deleteImage(id: string): Promise<ImagesList> {
-    const deleteImage = await this.imageModel.findById({ _id: id });
+    const deleteImage = await this.imageModel.findByIdAndRemove({ _id: id });
     if (!deleteImage) throw new NotFoundException();
     else {
       const deleteImageRemove = await deleteImage.remove();
