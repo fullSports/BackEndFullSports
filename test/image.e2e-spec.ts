@@ -5,7 +5,6 @@ import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
 import * as request from "supertest";
-import axios from "axios";
 const path = require("path");
 const urlConfig = require("./globalConfig.json");
 describe("Images", () => {

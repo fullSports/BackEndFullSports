@@ -6,7 +6,6 @@ env.config();
 import { S3 } from "@aws-sdk/client-s3";
 const fs = require("fs");
 const path = require("path");
-const { promisify } = require("util");
 const s3 = new S3({
   credentials: {
     accessKeyId: process.env.KEY_ID,
