@@ -8,7 +8,7 @@ import {
   Put,
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { updateProviderDTO } from "./dto/updateProviderr.dto";
+import { updateProviderDTO } from "./dto/updateProvider.dto";
 import { ProviderService } from "./providers.service";
 import { Provider } from "./Schema/providers.schema";
 @Controller()

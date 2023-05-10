@@ -1,4 +1,5 @@
 import { S3Client } from "@aws-sdk/client-s3";
+import { NotAcceptableException } from "@nestjs/common";
 
 const multer = require("multer");
 const path = require("path");
@@ -57,7 +58,7 @@ export default {
     if (allowedMimes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error("Tipo da imagem invalida"));
+      cb(new NotAcceptableException("Tipo da imagem invalida"));
     }
   },
 };

@@ -6,9 +6,6 @@ env.config();
 import { S3 } from "@aws-sdk/client-s3";
 const fs = require("fs");
 const path = require("path");
-import { Logger } from "@nestjs/common";
-const { promisify } = require("util");
-const unlink = promisify(fs.unlink);
 const s3 = new S3({
   credentials: {
     accessKeyId: process.env.KEY_ID,
@@ -32,15 +29,16 @@ ImagemSchema.pre("save", function () {
   }
 });
 ImagemSchema.pre("remove", async function () {
-  Logger.debug(this.key);
   if (process.env.STORAGE_TYPE === "s3") {
-    return s3.deleteObject({
+    const removeImage = await s3.deleteObject({
       Bucket: process.env.BUCKET,
       Key: this.key,
     });
+    if (removeImage) return true;
+    else return false;
   } else {
     try {
-      fs.rm(
+      await fs.rm(
         path.resolve(__dirname, "..", "..", "..", "tmp", "uploads", this.key),
         { recursive: true },
         (err) => {
@@ -51,7 +49,6 @@ ImagemSchema.pre("remove", async function () {
         }
       );
     } catch (e) {
-      Logger.error(e);
       return false;
     }
   }
