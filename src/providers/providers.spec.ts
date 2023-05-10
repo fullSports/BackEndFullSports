@@ -3,7 +3,7 @@ import { ProviderController } from "./providers.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ProviderService } from "./providers.service";
 import { Provider, ProviderSchema } from "./Schema/providers.schema";
-import { updateProviderDTO } from "./dto/updateProviderr.dto";
+import { updateProviderDTO } from "./dto/updateProvider.dto";
 const urlConfig = require("../globalConfig.json");
 describe("ProvidersController", () => {
   let providersController: ProviderController;

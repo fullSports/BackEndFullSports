@@ -5,11 +5,12 @@ import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
 import * as request from "supertest";
+import axios from "axios";
 const path = require("path");
 const urlConfig = require("./globalConfig.json");
-let Id = String;
 describe("Images", () => {
   let app: INestApplication;
+  let registerImage;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
@@ -32,10 +33,10 @@ describe("Images", () => {
         "file",
         path.resolve(__dirname, "..", "test", "tmp", "e2e_nestjs.jpg")
       )
-      .then(function (response) {
+      .then((response) => {
         expect(response.body).toHaveProperty("messsagem" && "image");
         expect(response.status).toBe(201);
-        Id = response.body.image._id;
+        registerImage = response.body.image;
       });
   });
   it("• /imagem (GET)", async () => {
@@ -46,20 +47,16 @@ describe("Images", () => {
       .expect(Array);
   });
   it("• /imagem/:id (GET)", async () => {
-    const ListImageId = await request(app.getHttpServer())
-      .get(`/imagem/${Id}`)
+    await request(app.getHttpServer())
+      .get(`/imagem/${registerImage._id}`)
       .expect(200);
     expect(Object);
-    return ListImageId;
   });
   it("• /imagem/:id (DELETE)", async () => {
     const deleteImage = await request(app.getHttpServer())
-      .delete(`/imagem/${Id}`)
+      .delete(`/imagem/${registerImage._id}`)
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");
     return deleteImage;
-  });
-  it("• url-image (GET) return status 403", async () => {
-    await request(app.getHttpServer()).get("/imagem");
   });
 });
