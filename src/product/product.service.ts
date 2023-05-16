@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
@@ -151,5 +151,20 @@ export class ProductServices {
       if (!searchId || !deleteProduct) throw new NotFoundException();
       else return deleteProduct;
     }
+  }
+
+  async searchProducts(search: string): Promise<Product[]> {
+    Logger.debug(search);
+    const searchFormat = search
+      .normalize("NFD")
+      .replace(/[^a-zA-Z\s]/g, "")
+      .toLowerCase();
+    Logger.debug(searchFormat);
+    const listProducts = await this.listProducts();
+    // for(let i=0;i < listarTodosProdutos.length; i++){
+    //   if()
+    // }
+
+    return listProducts;
   }
 }
