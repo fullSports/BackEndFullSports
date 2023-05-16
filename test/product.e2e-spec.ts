@@ -88,7 +88,13 @@ describe("Product", () => {
     expect(Object);
     expect(updateProduct.body).toHaveProperty("product" && "messagem");
   });
-
+  it("• /buscar-produto/:busca", async () => {
+    const searchProduct = await request(app.getHttpServer())
+      .get('/buscar-produto/suplemento')
+      .expect(200)
+    expect(Array)
+    expect(searchProduct.body.length).toBe(1)
+  })
   it("• /deletar-produto/:id", async () => {
     const deleteProduct = await request(app.getHttpServer())
       .delete(`/deletar-produto/${ID}`)

@@ -60,4 +60,9 @@ export default class ProductController {
       messagem: "Produto deletado com sucesso ",
     };
   }
+
+  @Get("/buscar-produto/:busca")
+  async searchProducts(@Param("busca") search: string) {
+    return await this.productService.searchProducts(search);
+  }
 }

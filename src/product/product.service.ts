@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
@@ -18,7 +18,7 @@ export class ProductServices {
     private readonly imageModel: Model<ImageDocument>,
     @InjectModel(Provider.name)
     private readonly ProviderModel: Model<ProviderDocument>
-  ) {}
+  ) { }
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
     const products: Product[] = [];
@@ -151,5 +151,37 @@ export class ProductServices {
       if (!searchId || !deleteProduct) throw new NotFoundException();
       else return deleteProduct;
     }
+  }
+
+  async searchProducts(search: string): Promise<Product[]> {
+    Logger.debug(search);
+    const searchFormat = search
+      .normalize("NFD")
+      .replace(/[^a-zA-Z\s]/g, "")
+      .toLowerCase();
+    Logger.debug(searchFormat);
+    const listProducts = await this.listProducts();
+    const ListProductResult: Product[] = [];
+    for (let i = 0; i < listProducts.length; i++) {
+      if (searchFormat.includes('calcado') && Object.keys(listProducts[i].categoriaProduto)[0] == 'calcado') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('equipamento') && Object.keys(listProducts[i].categoriaProduto)[0] == 'equipamento') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('suplemento') && Object.keys(listProducts[i].categoriaProduto)[0] == 'suplemento') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('roupa') && Object.keys(listProducts[i].categoriaProduto)[0] == 'roupa') {
+        ListProductResult.push(listProducts[i]);
+      } else {
+        const nameProdut = listProducts[i].categoriaProduto[Object.keys(listProducts[i].categoriaProduto)[0]].nome.normalize("NFD")
+          .replace(/[^a-zA-Z\s]/g, "")
+          .toLowerCase();
+        if (nameProdut.includes(searchFormat)) {
+          ListProductResult.push(listProducts[i]);
+        }
+      }
+    }
+    Logger.debug(ListProductResult)
+
+    return ListProductResult;
   }
 }
