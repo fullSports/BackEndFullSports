@@ -18,7 +18,7 @@ export class ProductServices {
     private readonly imageModel: Model<ImageDocument>,
     @InjectModel(Provider.name)
     private readonly ProviderModel: Model<ProviderDocument>
-  ) {}
+  ) { }
   async listProducts(): Promise<Product[]> {
     const listProducts = await this.productModel.find().exec();
     const products: Product[] = [];
@@ -161,10 +161,27 @@ export class ProductServices {
       .toLowerCase();
     Logger.debug(searchFormat);
     const listProducts = await this.listProducts();
-    // for(let i=0;i < listarTodosProdutos.length; i++){
-    //   if()
-    // }
+    const ListProductResult: Product[] = [];
+    for (let i = 0; i < listProducts.length; i++) {
+      if (searchFormat.includes('calcado') && Object.keys(listProducts[i].categoriaProduto)[0] == 'calcado') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('equipamento') && Object.keys(listProducts[i].categoriaProduto)[0] == 'equipamento') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('suplemento') && Object.keys(listProducts[i].categoriaProduto)[0] == 'suplemento') {
+        ListProductResult.push(listProducts[i]);
+      } else if (searchFormat.includes('roupa') && Object.keys(listProducts[i].categoriaProduto)[0] == 'roupa') {
+        ListProductResult.push(listProducts[i]);
+      } else {
+        const nameProdut = listProducts[i].categoriaProduto[Object.keys(listProducts[i].categoriaProduto)[0]].nome.normalize("NFD")
+          .replace(/[^a-zA-Z\s]/g, "")
+          .toLowerCase();
+        if (nameProdut.includes(searchFormat)) {
+          ListProductResult.push(listProducts[i]);
+        }
+      }
+    }
+    Logger.debug(ListProductResult)
 
-    return listProducts;
+    return ListProductResult;
   }
 }
