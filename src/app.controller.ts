@@ -1,7 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { AppService } from "./app.service";
-require("dotenv").config();
 @Controller()
 @ApiTags("Home")
 export class AppController {
