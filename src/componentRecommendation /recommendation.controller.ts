@@ -1,7 +1,11 @@
-import { Controller } from "@nestjs/common";
-
+import { Controller, Get } from "@nestjs/common";
+import { RrecommendationService } from "./recommendation.service";
 
 @Controller()
-export class RrecommendationController{
-    
+export class RrecommendationController {
+  constructor(private readonly recommendationService: RrecommendationService) {}
+  @Get("/teste")
+  async teste() {
+    return await this.recommendationService.Recommendation("ee");
+  }
 }
