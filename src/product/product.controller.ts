@@ -18,7 +18,7 @@ export default class ProductController {
 
   @Get("/listar-produtos")
   async ListProduct(): Promise<Product[]> {
-    return this.productService.listProducts();
+    return await this.productService.listProducts();
   }
 
   @Post("/cadastrar-produto")
