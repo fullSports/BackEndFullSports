@@ -8,7 +8,7 @@ import {
   Recommendation,
   RrecommendationSchema,
 } from "src/componentRecommendation /Schema/Rrecommendation.schema";
-import { RrecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationService } from "src/componentRecommendation /recommendation.service";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import {
   Provider,
@@ -32,6 +32,6 @@ import { ProductServices } from "src/product/product.service";
     ]),
   ],
   controllers: [UserController],
-  providers: [UserService, RrecommendationService, ProductServices],
+  providers: [UserService, RecommendationService, ProductServices],
 })
 export class UserModule {}

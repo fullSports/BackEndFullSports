@@ -6,14 +6,14 @@ import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
-import { RrecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationService } from "src/componentRecommendation /recommendation.service";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>,
-    private readonly recommendationService: RrecommendationService
+    private readonly recommendationService: RecommendationService
   ) {}
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel

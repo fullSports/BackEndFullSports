@@ -7,15 +7,15 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { RrecommendationService } from "./recommendation.service";
+import { RecommendationService } from "./recommendation.service";
 import { ApiTags } from "@nestjs/swagger";
 import { Recommendation } from "./Schema/Rrecommendation.schema";
 import { Product } from "src/product/Schema/product.schema";
 
 @Controller()
 @ApiTags("Recommendation Component")
-export class RrecommendationController {
-  constructor(private readonly recommendationService: RrecommendationService) {}
+export class RecommendationController {
+  constructor(private readonly recommendationService: RecommendationService) {}
   @Get("/listar-recomendacoes")
   async ListRecommendations(): Promise<Recommendation[]> {
     return await this.recommendationService.listRecommedations();
@@ -37,7 +37,7 @@ export class RrecommendationController {
   async ListRecommedationById(
     @Param("id") id: string
   ): Promise<Recommendation> {
-    return await this.ListRecommedationById(id);
+    return await this.recommendationService.ListRecommedationById(id);
   }
 
   @Put("/atualizar-recomendacao/:id")

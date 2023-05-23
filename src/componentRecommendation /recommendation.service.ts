@@ -9,7 +9,7 @@ import { Product } from "src/product/Schema/product.schema";
 import { ProductServices } from "src/product/product.service";
 
 @Injectable()
-export class RrecommendationService {
+export class RecommendationService {
   constructor(
     @InjectModel(Recommendation.name)
     private readonly RecommendationModel: Model<RecommendationDocumnet>,
