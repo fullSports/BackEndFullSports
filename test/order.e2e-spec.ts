@@ -1,6 +1,12 @@
 import { INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
+import {
+  Recommendation,
+  RrecommendationSchema,
+} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
+import { RecommendationService } from "src/componentRecommendation /recommendation.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
@@ -28,6 +34,7 @@ describe("Product", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
         MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
         ]),
@@ -36,6 +43,9 @@ describe("Product", () => {
         ]),
         MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: Recommendation.name, schema: RrecommendationSchema },
         ]),
       ],
       controllers: [
@@ -47,9 +57,11 @@ describe("Product", () => {
       providers: [
         OrderService,
         ProductServices,
+        RecommendationController,
         UserService,
         ProductServices,
         ImageService,
+        RecommendationService,
       ],
     }).compile();
     app = moduleFixture.createNestApplication();

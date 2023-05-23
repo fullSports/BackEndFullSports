@@ -5,6 +5,18 @@ import { Users, UserSchema } from "./Schema/user.schema";
 import { MongooseModule } from "@nestjs/mongoose";
 import { imagem, ImagemSchema } from "../image/Schema/image.schema";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
+import {
+  Recommendation,
+  RrecommendationSchema,
+} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+import { Product, ProductSchema } from "src/product/Schema/product.schema";
+import {
+  Provider,
+  ProviderSchema,
+} from "src/providers/Schema/providers.schema";
+import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { ProductServices } from "src/product/product.service";
+import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
 const urlConfig = require("../globalConfig.json");
 describe("UserController", () => {
   let userController: UserController;
@@ -17,9 +29,18 @@ describe("UserController", () => {
         MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
         ]),
+        MongooseModule.forFeature([
+          { name: Recommendation.name, schema: RrecommendationSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: Product.name, schema: ProductSchema },
+        ]),
+        MongooseModule.forFeature([
+          { name: Provider.name, schema: ProviderSchema },
+        ]),
       ],
-      controllers: [UserController],
-      providers: [UserService],
+      controllers: [UserController, RecommendationController],
+      providers: [UserService, RecommendationService, ProductServices],
     }).compile();
 
     userController = app.get<UserController>(UserController);
