@@ -74,27 +74,27 @@ describe("ProductController", () => {
       expect(RegisterProduct).toHaveProperty("product" && "messagem");
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.nome ==
-        IProduct.categoriaProduto.equipamento.nome
+          IProduct.categoriaProduto.equipamento.nome
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.cor ==
-        IProduct.categoriaProduto.equipamento.cor
+          IProduct.categoriaProduto.equipamento.cor
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.sexo ==
-        IProduct.categoriaProduto.equipamento.sexo
+          IProduct.categoriaProduto.equipamento.sexo
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.tamanho ==
-        IProduct.categoriaProduto.equipamento.tamanho
+          IProduct.categoriaProduto.equipamento.tamanho
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.preco ==
-        IProduct.categoriaProduto.equipamento.preco
+          IProduct.categoriaProduto.equipamento.preco
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.quantidade ==
-        IProduct.categoriaProduto.equipamento.quantidade
+          IProduct.categoriaProduto.equipamento.quantidade
       );
       registeredCustomer = RegisterProduct.product;
     });
@@ -102,27 +102,27 @@ describe("ProductController", () => {
       const ListProduct = await productController.ListProduct();
       expect(
         ListProduct[0].categoriaProduto.equipamento.nome ==
-        IProduct.categoriaProduto.equipamento.nome
+          IProduct.categoriaProduto.equipamento.nome
       );
       expect(
         ListProduct[0].categoriaProduto.equipamento.cor ==
-        IProduct.categoriaProduto.equipamento.cor
+          IProduct.categoriaProduto.equipamento.cor
       );
       expect(
         ListProduct[0].categoriaProduto.equipamento.sexo ==
-        IProduct.categoriaProduto.equipamento.sexo
+          IProduct.categoriaProduto.equipamento.sexo
       );
       expect(
         ListProduct[0].categoriaProduto.equipamento.tamanho ==
-        IProduct.categoriaProduto.equipamento.tamanho
+          IProduct.categoriaProduto.equipamento.tamanho
       );
       expect(
         ListProduct[0].categoriaProduto.equipamento.preco ==
-        IProduct.categoriaProduto.equipamento.preco
+          IProduct.categoriaProduto.equipamento.preco
       );
       expect(
         ListProduct[0].categoriaProduto.equipamento.quantidade ==
-        IProduct.categoriaProduto.equipamento.quantidade
+          IProduct.categoriaProduto.equipamento.quantidade
       );
     });
     it("• SearchProductById()", async () => {
@@ -131,27 +131,27 @@ describe("ProductController", () => {
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.nome ==
-        IProduct.categoriaProduto.equipamento.nome
+          IProduct.categoriaProduto.equipamento.nome
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.cor ==
-        IProduct.categoriaProduto.equipamento.cor
+          IProduct.categoriaProduto.equipamento.cor
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.sexo ==
-        IProduct.categoriaProduto.equipamento.sexo
+          IProduct.categoriaProduto.equipamento.sexo
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.tamanho ==
-        IProduct.categoriaProduto.equipamento.tamanho
+          IProduct.categoriaProduto.equipamento.tamanho
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.preco ==
-        IProduct.categoriaProduto.equipamento.preco
+          IProduct.categoriaProduto.equipamento.preco
       );
       expect(
         SearchProductById.categoriaProduto.equipamento.quantidade ==
-        IProduct.categoriaProduto.equipamento.quantidade
+          IProduct.categoriaProduto.equipamento.quantidade
       );
     });
     it("• updateProductId()", async () => {
@@ -183,17 +183,19 @@ describe("ProductController", () => {
       expect(updateProduct).toHaveProperty("product" && "messagem");
       expect(
         updateProduct.product.categoriaProduto.equipamento.nome ==
-        UpdateProduct.categoriaProduto.equipamento.nome
+          UpdateProduct.categoriaProduto.equipamento.nome
       );
       expect(
         updateProduct.product.categoriaProduto.equipamento.nome !=
-        IProduct.categoriaProduto.equipamento.nome
+          IProduct.categoriaProduto.equipamento.nome
       );
     });
     it("• searchProducts()", async () => {
-      const searchProduct = await productController.searchProducts('suplemento')
-      expect(searchProduct.length).toBe(1);
-    })
+      const searchProduct = await productController.searchProducts(
+        "suplemento"
+      );
+      expect(searchProduct.length == 1);
+    });
     it("• deleteProduct()", async () => {
       const deleteProductById = await productController.deleteProduct(
         registeredCustomer._id
