@@ -6,12 +6,14 @@ import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
+import { RecommendationService } from "src/componentRecommendation /recommendation.service";
 const bcrypt = require("bcrypt");
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>,
-    @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>
+    @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>,
+    private readonly recommendationService: RecommendationService
   ) {}
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
@@ -31,7 +33,7 @@ export class UserService {
     });
 
     if (userTrue.length === 0) {
-      return bcrypt.hash(password, 10).then((hash) => {
+      return bcrypt.hash(password, 10).then(async (hash) => {
         const encryptedPassowrd = hash;
         const dateNow = new Date().toISOString();
         const newUser = this.userModel.create({
@@ -50,7 +52,17 @@ export class UserService {
           dataCadastro: dateNow,
         });
         if (!newUser) throw new NotFoundException();
-        else return newUser;
+        else {
+          const _id = await newUser.then((res) => res._id.toString());
+          await this.recommendationService.RegisterRecommedations({
+            click_calcados: 1,
+            click_equipamentos: 1,
+            click_roupas: 1,
+            click_suplementos: 1,
+            user: _id,
+          });
+          return newUser;
+        }
       });
     } else {
       return null;
@@ -121,6 +133,18 @@ export class UserService {
               _id: searchId.imagemPerfil,
             });
             deleteImage;
+          }
+          const searchRecommedation =
+            await this.recommendationService.listRecommedations();
+          for (let i = 0; i < searchRecommedation.length; i++) {
+            const user = searchRecommedation[i]["user"] as any;
+            const _id = searchRecommedation[i]["_id"] as any;
+            if (_id && user._id.toString() == searchId._id) {
+              await this.recommendationService.DeleteRecommendation(
+                _id.toString()
+              );
+              break;
+            }
           }
           const deleteUser = await this.userModel
             .findByIdAndDelete({ _id: id })
