@@ -115,7 +115,7 @@ describe("Recommendation", () => {
     return request(app.getHttpServer())
       .get(`/recomendacao/${RecommendationCreated._id}`)
       .expect(200)
-      .expect(Array);
+      .expect(Object);
   });
   it("• /deletar-recomendacao/:id", async () => {
     const DeleteRecommedation = await request(app.getHttpServer())
