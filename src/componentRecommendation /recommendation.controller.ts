@@ -65,7 +65,9 @@ export class RecommendationController {
   }
 
   @Get("/recomendacao/:id")
-  async Recommendation(@Param("id") id: string): Promise<Product[]> {
+  async Recommendation(
+    @Param("id") id: string
+  ): Promise<{ recommendations: Product[]; producstRemains: Product[] }> {
     return await this.recommendationService.Recommendation(id);
   }
 }

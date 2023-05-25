@@ -153,7 +153,11 @@ describe("RecommendationController", () => {
       const recommendation = await recommendationController.Recommendation(
         Recommendation._id
       );
-      expect(recommendation.length == 0);
+      expect(recommendation).toHaveProperty(
+        "recommendations" && "producstRemains"
+      );
+      expect(recommendation.recommendations.length == 0);
+      expect(recommendation.producstRemains.length == 0);
     });
 
     it("• DeleteRecommedation()", async () => {
