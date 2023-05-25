@@ -81,7 +81,9 @@ export class RecommendationService {
     else return DeleteRecommendation;
   }
 
-  async Recommendation(id: string): Promise<Product[]> {
+  async Recommendation(
+    id: string
+  ): Promise<{ recommendations: Product[]; producstRemains: Product[] }> {
     const findBydId = await this.ListRecommedationById(id);
     const higherNumber = Math.max(
       findBydId.click_calcados,
@@ -92,6 +94,7 @@ export class RecommendationService {
     if (higherNumber == findBydId.click_calcados) {
       const findAllProducts = await this.ProductService.listProducts();
       const Products: Product[] = [];
+      const producstRemains: Product[] = [];
       for (let i = 0; i < findAllProducts.length; i++) {
         const categoriaDeproduto = findAllProducts[i].categoriaProduto;
         const obj = Object.keys(categoriaDeproduto)[0].toString() as
@@ -101,12 +104,18 @@ export class RecommendationService {
           | "calcado";
         if (obj == "calcado") {
           Products.push(findAllProducts[i]);
+        } else {
+          producstRemains.push(findAllProducts[i]);
         }
       }
-      return Products;
+      return {
+        recommendations: Products,
+        producstRemains: producstRemains,
+      };
     } else if (higherNumber == findBydId.click_equipamentos) {
       const findAllProducts = await this.ProductService.listProducts();
       const Products: Product[] = [];
+      const producstRemains: Product[] = [];
       for (let i = 0; i < findAllProducts.length; i++) {
         const categoriaDeproduto = findAllProducts[i].categoriaProduto;
         const obj = Object.keys(categoriaDeproduto)[0].toString() as
@@ -116,12 +125,18 @@ export class RecommendationService {
           | "calcado";
         if (obj == "equipamento") {
           Products.push(findAllProducts[i]);
+        } else {
+          producstRemains.push(findAllProducts[i]);
         }
       }
-      return Products;
+      return {
+        recommendations: Products,
+        producstRemains: producstRemains,
+      };
     } else if (higherNumber == findBydId.click_roupas) {
       const findAllProducts = await this.ProductService.listProducts();
       const Products: Product[] = [];
+      const producstRemains: Product[] = [];
       for (let i = 0; i < findAllProducts.length; i++) {
         const categoriaDeproduto = findAllProducts[i].categoriaProduto;
         const obj = Object.keys(categoriaDeproduto)[0].toString() as
@@ -131,12 +146,18 @@ export class RecommendationService {
           | "calcado";
         if (obj == "roupa") {
           Products.push(findAllProducts[i]);
+        } else {
+          producstRemains.push(findAllProducts[i]);
         }
       }
-      return Products;
+      return {
+        recommendations: Products,
+        producstRemains: producstRemains,
+      };
     } else if (higherNumber == findBydId.click_suplementos) {
       const findAllProducts = await this.ProductService.listProducts();
       const Products: Product[] = [];
+      const producstRemains: Product[] = [];
       for (let i = 0; i < findAllProducts.length; i++) {
         const categoriaDeproduto = findAllProducts[i].categoriaProduto;
         const obj = Object.keys(categoriaDeproduto)[0].toString() as
@@ -146,9 +167,14 @@ export class RecommendationService {
           | "calcado";
         if (obj == "suplemento") {
           Products.push(findAllProducts[i]);
+        } else {
+          producstRemains.push(findAllProducts[i]);
         }
       }
-      return Products;
+      return {
+        recommendations: Products,
+        producstRemains: producstRemains,
+      };
     }
   }
 }
