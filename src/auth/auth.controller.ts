@@ -6,19 +6,17 @@ import { RealizarLogin } from '../users/dto/SingIn.dto';
 
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
-    @Post('login')
-    async login(@Body() loginDto: RealizarLogin) {
-
-        const user = await this.authService.validateUser(loginDto.email, loginDto.password);
-
+    @Post('login-app')
+    async loginUser(@Body() loginDto: {
+        clientID: string,
+        clientSecret: string
+    }) {
+        const user = await this.authService.validateApp(loginDto.clientID, loginDto.clientSecret);
         if (!user) {
 
             throw new UnauthorizedException();
-
         }
-
         return this.authService.generateToken(user);
 
     }
-
 }

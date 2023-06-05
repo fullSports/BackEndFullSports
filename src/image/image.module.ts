@@ -7,7 +7,6 @@ import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: imagem.name, schema: ImagemSchema }]),
-    PassportModule,
   ],
   controllers: [ImageController],
   providers: [ImageService],

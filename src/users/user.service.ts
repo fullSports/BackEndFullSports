@@ -7,7 +7,7 @@ import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import { RecommendationService } from "src/componentRecommendation /recommendation.service";
-const bcrypt = require("bcrypt");
+import * as bcrypt from "bcrypt";
 @Injectable()
 export class UserService {
   constructor(

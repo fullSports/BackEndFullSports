@@ -19,7 +19,7 @@ import { AuthGuard } from "@nestjs/passport";
 export class ImageController {
   constructor(private imageService: ImageService) { }
   @Get("imagem")
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async ListImages(): Promise<ImagesList[]> {
     return this.imageService.getImages();
   }
