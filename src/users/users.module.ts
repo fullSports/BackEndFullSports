@@ -23,9 +23,6 @@ import { ProductServices } from "src/product/product.service";
     MongooseModule.forFeature([
       { name: Recommendation.name, schema: RrecommendationSchema },
     ]),
-    MongooseModule.forFeature([
-      { name: Recommendation.name, schema: RrecommendationSchema },
-    ]),
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
     MongooseModule.forFeature([
       { name: Provider.name, schema: ProviderSchema },
@@ -34,4 +31,4 @@ import { ProductServices } from "src/product/product.service";
   controllers: [UserController],
   providers: [UserService, RecommendationService, ProductServices],
 })
-export class UserModule {}
+export class UserModule { }

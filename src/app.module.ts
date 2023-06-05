@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -8,6 +8,8 @@ import { ProductModule } from "./product/product.module";
 import { ProviderModule } from "./providers/providers.module";
 import { OderModule } from "./order/order.module";
 import { RecommendationModule } from "./componentRecommendation /recommendation.module";
+import { AuthModule } from "./auth/auth.module";
+import { AuthGuard } from '@nestjs/passport';
 let MongoUrl = "";
 if (process.env.ENV_AMB === "PROD") MongoUrl = process.env.mongoPROD;
 else if (process.env.ENV_AMB === "QA") MongoUrl = process.env.mongoQA;
@@ -20,9 +22,16 @@ else MongoUrl = null;
     ProductModule,
     ProviderModule,
     OderModule,
-    RecommendationModule
+    RecommendationModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthGuard('jwt'))
+      .forRoutes('*');
+  }
+}

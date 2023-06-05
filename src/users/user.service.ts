@@ -184,7 +184,7 @@ export class UserService {
         };
       } else {
         return {
-          messagem: "email ou senha incorreta",
+          messagem: "email ou senha incorretos",
           emailExists: true,
           emailAndPassword: false,
         };
@@ -201,7 +201,7 @@ export class UserService {
     });
     if (userTrue.length == 0)
       return {
-        messagem: "email ou senha incorreta",
+        messagem: "email ou senha incorretos",
         emailExists: false,
       };
     else {
@@ -245,7 +245,7 @@ export class UserService {
           });
       } else
         return {
-          messagem: "email ou senha incorreta",
+          messagem: "email ou senha incorretos",
           emailAndPassword: false,
         };
     }
