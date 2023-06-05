@@ -6,18 +6,20 @@ import {
   UseInterceptors,
   Post,
   Delete,
+  UseGuards,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
 import multerConfig from "./config/multer.config";
 import { ImageService } from "./image.service";
 import { ImagesList } from "./Schema/image.schema";
-
+import { AuthGuard } from "@nestjs/passport";
 @ApiTags("Images")
 @Controller()
 export class ImageController {
-  constructor(private imageService: ImageService) {}
+  constructor(private imageService: ImageService) { }
   @Get("imagem")
+  @UseGuards(AuthGuard())
   async ListImages(): Promise<ImagesList[]> {
     return this.imageService.getImages();
   }

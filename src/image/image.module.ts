@@ -3,12 +3,13 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { ImageController } from "./image.controller";
 import { ImageService } from "./image.service";
 import { ImagemSchema, imagem } from "./Schema/image.schema";
-
+import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: imagem.name, schema: ImagemSchema }]),
+    PassportModule,
   ],
   controllers: [ImageController],
   providers: [ImageService],
 })
-export class ImageModule {}
+export class ImageModule { }
