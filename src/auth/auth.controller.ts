@@ -7,7 +7,7 @@ import { RealizarLogin } from '../users/dto/SingIn.dto';
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
     @Post('login-app')
-    async loginUser(@Body() loginDto: {
+    async LoginApp(@Body() loginDto: {
         clientID: string,
         clientSecret: string
     }) {
