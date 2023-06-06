@@ -29,6 +29,7 @@ export class ImageController {
   }
 
   @UseInterceptors(FileInterceptor("file", multerConfig))
+  @UseGuards(AuthGuard('jwt'))
   @Post("imagem")
   async uploudImage(@UploadedFile() file) {
     const newImage = await this.imageService.registerImage(file);
