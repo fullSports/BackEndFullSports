@@ -46,6 +46,7 @@ export class OrderService {
         produto: product,
         cliente: client,
         total: i.total,
+        dataCadastro: i.dataCadastro,
         __v: i.__v,
       };
       newListOrders.push(order);
@@ -83,7 +84,7 @@ export class OrderService {
       const preco = findBydIdProduct.categoriaProduto[obj].preco;
       const floatPreco = parseFloat(preco.replace(",", "."));
       createOrderBody["total"] = floatPreco * createOrderBody.quantidadePedido;
-
+      createOrderBody["dataCadastro"] = new Date().toISOString();
       const createOrder = await this.OrderModel.create(createOrderBody);
       return createOrder;
     }
@@ -105,6 +106,7 @@ export class OrderService {
       produto: product,
       cliente: client,
       total: ListOrder.total,
+      dataCadastro: ListOrder.dataCadastro,
       __v: ListOrder.__v,
     };
     return order;
