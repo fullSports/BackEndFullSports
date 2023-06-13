@@ -6,12 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from "@nestjs/common";
 import { RecommendationService } from "./recommendation.service";
 import { ApiTags } from "@nestjs/swagger";
 import { Recommendation } from "./Schema/Rrecommendation.schema";
 import { Product } from "src/product/Schema/product.schema";
-
+import { AuthGuard } from "@nestjs/passport";
+@UseGuards(AuthGuard('jwt'))
 @Controller()
 @ApiTags("Recommendation Component")
 export class RecommendationController {
@@ -20,7 +22,7 @@ export class RecommendationController {
   async ListRecommendations(): Promise<Recommendation[]> {
     return await this.recommendationService.listRecommedations();
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Post("/cadastrar-recomendacao")
   async CreateRecommendation(@Body() craateRecommendaton: Recommendation) {
     const createRecommedation =
@@ -32,14 +34,14 @@ export class RecommendationController {
       messagem: "Recomendação criada com sucesso",
     };
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get("/listar-recomendacao/:id")
   async ListRecommedationById(
     @Param("id") id: string
   ): Promise<Recommendation> {
     return await this.recommendationService.ListRecommedationById(id);
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Put("/atualizar-recomendacao/:id")
   async UpdateRecommedation(
     @Param("id") id: string,
@@ -56,6 +58,7 @@ export class RecommendationController {
       messagem: "Recomendação atualizada com sucesso",
     };
   }
+  @UseGuards(AuthGuard('jwt'))
   @Delete("/deletar-recomendacao/:id")
   async DeleteRecommedation(@Param("id") id: string) {
     await this.recommendationService.DeleteRecommendation(id);
@@ -63,7 +66,7 @@ export class RecommendationController {
       messagem: "Recomendação deletada com sucesso",
     };
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get("/recomendacao/:id")
   async Recommendation(
     @Param("id") id: string
