@@ -1,14 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { OrderService } from "./order.service";
 import { Order } from "./Schema/order.schema";
-
+import { AuthGuard } from "@nestjs/passport";
 @Controller()
 @ApiTags("Orders")
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
 
   @Post("/realizar-pedido")
+  @UseGuards(AuthGuard('jwt'))
   async RegisterOrder(@Body() createOrder: Order) {
     const RegisterOrder = await this.orderService.RegisterOrder(createOrder);
     return {
@@ -19,12 +20,14 @@ export class OrderController {
   }
 
   @Get("/listar-pedidos")
+  @UseGuards(AuthGuard('jwt'))
   async ListOrders(): Promise<Order[]> {
     const listOrders = await this.orderService.ListOrders();
     return listOrders;
   }
 
   @Get("/listar-pedido/:id")
+  @UseGuards(AuthGuard('jwt'))
   async ListOrderByID(@Param("id") id: string) {
     const listOrder = await this.orderService.searchIdOrder(id);
     return listOrder;
@@ -40,6 +43,7 @@ export class OrderController {
   // }
 
   @Delete("/deletar-pedido/:id")
+  @UseGuards(AuthGuard('jwt'))
   async DeleteOrder(@Param("id") id: string) {
     const deleteOrder = await this.orderService.deleteOrder(id);
     return deleteOrder;

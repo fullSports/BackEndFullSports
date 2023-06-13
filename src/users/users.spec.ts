@@ -162,10 +162,6 @@ describe("UserController", () => {
         updatePassword
       );
       expect(updatePasswordLogin).toHaveProperty("messagem" && "user");
-      expect(
-        updatePasswordLogin.user.login.password !==
-          registeredCustomer.login.password
-      );
     });
     it("• run the method UpdatePassowdLogin() - just email change", async () => {
       const _id = registeredCustomer._id;
@@ -181,9 +177,6 @@ describe("UserController", () => {
         updatePassword
       );
       expect(updatePasswordLogin).toHaveProperty("messagem" && "user");
-      expect(
-        updatePasswordLogin.user.login.email !== registeredCustomer.login.email
-      );
     });
     it("• run the method DeleteUserById()", async () => {
       const _id = registeredCustomer._id;

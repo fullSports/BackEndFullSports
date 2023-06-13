@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, UseGuards } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
@@ -7,7 +7,8 @@ import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import { RecommendationService } from "src/componentRecommendation /recommendation.service";
-const bcrypt = require("bcrypt");
+import { AuthGuard } from "@nestjs/passport";
+import * as bcrypt from "bcrypt";
 @Injectable()
 export class UserService {
   constructor(
@@ -15,6 +16,7 @@ export class UserService {
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>,
     private readonly recommendationService: RecommendationService
   ) {}
+  @UseGuards(AuthGuard('jwt'))
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
@@ -23,7 +25,7 @@ export class UserService {
     if (!listUser) throw new NotFoundException();
     else return listUser;
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async RegisterUsers(createUser: Users): Promise<Users> {
     const { email, password, isAdmin } = createUser.login;
     const listUser = this.ListUsers();
@@ -68,7 +70,7 @@ export class UserService {
       return null;
     }
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async searchId(id: string): Promise<Users> {
     const searchId = await this.userModel
       .findById({ _id: id })
@@ -77,7 +79,7 @@ export class UserService {
     if (!searchId) throw new NotFoundException();
     else return searchId;
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
     const findByIDUser = await this.userModel.findById(id);
     const imagemPerfilBody = updateUserBoy.imagemPerfil;
@@ -111,7 +113,7 @@ export class UserService {
     }
     return updateUser;
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async deleteUser(id: string, realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
     const userTrue = await this.userModel.findById({ _id: id }).exec();
@@ -158,7 +160,7 @@ export class UserService {
         };
     }
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
     const listUser = this.ListUsers();
@@ -184,14 +186,14 @@ export class UserService {
         };
       } else {
         return {
-          messagem: "email ou senha incorreta",
+          messagem: "email ou senha incorretos",
           emailExists: true,
           emailAndPassword: false,
         };
       }
     }
   }
-
+  @UseGuards(AuthGuard('jwt'))
   async updatePassworUser(id: string, UpdatePasswordBody: UpdatePasswordUser) {
     const { email, OldPassword, newPassoWord } = UpdatePasswordBody;
     const listUser = this.ListUsers();
@@ -201,7 +203,7 @@ export class UserService {
     });
     if (userTrue.length == 0)
       return {
-        messagem: "email ou senha incorreta",
+        messagem: "email ou senha incorretos",
         emailExists: false,
       };
     else {
@@ -245,7 +247,7 @@ export class UserService {
           });
       } else
         return {
-          messagem: "email ou senha incorreta",
+          messagem: "email ou senha incorretos",
           emailAndPassword: false,
         };
     }

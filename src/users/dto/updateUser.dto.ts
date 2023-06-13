@@ -17,7 +17,7 @@ export class UpdateUserDTO {
   @IsCPF({ message: "cpf invalido" })
   cpf: string | null;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional() 
   @IsOptional()
   @IsString()
   @Exclude()
