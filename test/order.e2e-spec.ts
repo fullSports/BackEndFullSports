@@ -91,13 +91,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    return await request(app.getHttpServer())
+      .post("/imagem")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    return await request(app.getHttpServer())
-      .post("/imagem")
       .field("file", "img")
       .attach(
         "file",
@@ -114,13 +112,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const RegisterUsers = await request(app.getHttpServer())
+      .post("/cadastrar-cliente")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const RegisterUsers = await request(app.getHttpServer())
-      .post("/cadastrar-cliente")
       .send(clienteTestOrder)
       .expect(201);
     expect(RegisterUsers.body).toHaveProperty("user" && "messagem");
@@ -132,13 +128,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const createdProduct = await request(app.getHttpServer())
+      .post("/cadastrar-produto")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const createdProduct = await request(app.getHttpServer())
-      .post("/cadastrar-produto")
       .send({
         categoriaProduto: {
           equipamento: {
@@ -163,13 +157,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const createdOrder = await request(app.getHttpServer())
+      .post("/realizar-pedido")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const createdOrder = await request(app.getHttpServer())
-      .post("/realizar-pedido")
       .send({
         quantidadePedido: 20,
         produto: IdPorduct,
@@ -187,13 +179,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const ListOders = await request(app.getHttpServer())
+      .get("/listar-pedidos")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const ListOders = await request(app.getHttpServer())
-      .get("/listar-pedidos")
       .expect(200)
       .expect(Array);
     return ListOders;
@@ -203,13 +193,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const listOrderId = await request(app.getHttpServer())
+      .get(`/listar-pedido/${IdOrder}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const listOrderId = await request(app.getHttpServer())
-      .get(`/listar-pedido/${IdOrder}`)
       .expect(200)
       .expect(Object);
     return listOrderId;
@@ -236,13 +224,11 @@ describe("Product", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const deleteOrder = await request(app.getHttpServer())
+      .delete(`/deletar-pedido/${IdOrder}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const deleteOrder = await request(app.getHttpServer())
-      .delete(`/deletar-pedido/${IdOrder}`)
       .expect(200);
     expect(deleteOrder.body).toHaveProperty("messagem");
     return deleteOrder;
@@ -254,15 +240,16 @@ describe("Product", () => {
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
     await request(app.getHttpServer())
-      .get("/")
+      .delete(`/deletar-produto/${IdPorduct}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    await request(app.getHttpServer())
-      .delete(`/deletar-produto/${IdPorduct}`)
       .expect(200);
     await request(app.getHttpServer())
       .delete(`/deletar-cliente/${IdCLient}`)
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
       .send({
         email: "testOrderClient@outlook.com",
         password: "test68909",

@@ -66,13 +66,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    return request(app.getHttpServer())
+      .get("/listar-clientes")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    return request(app.getHttpServer())
-      .get("/listar-clientes")
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(Array);
@@ -82,14 +80,12 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
-      .auth(String(acessToke), {
-        type: 'bearer'
-      })
 
     const RegisterUsers = await request(app.getHttpServer())
       .post("/cadastrar-cliente")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
       .send(client)
       .expect(201);
     expect(RegisterUsers.body).toHaveProperty("user" && "messagem");
@@ -101,13 +97,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const ListUsersID = await request(app.getHttpServer())
+      .get(`/listar-cliente/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const ListUsersID = await request(app.getHttpServer())
-      .get(`/listar-cliente/${ID}`)
       .expect(200)
       .expect(Object);
     return ListUsersID;
@@ -117,11 +111,6 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
-      .auth(String(acessToke), {
-        type: 'bearer'
-      })
     const newClient = {
       cpf: "466.773.520-13",
       //   nome: "TDD user.controller",
@@ -132,6 +121,9 @@ describe("Users", () => {
     };
     const updateUser = await request(app.getHttpServer())
       .put(`/atualizar-cliente/${ID}`)
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
       .send(newClient)
       .expect(200)
       .expect(Object);
@@ -144,13 +136,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const SingIn = await request(app.getHttpServer())
+      .post("/realizar-login")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const SingIn = await request(app.getHttpServer())
-      .post("/realizar-login")
       .send({
         email: client.login.email,
         password: client.login.password,
@@ -165,13 +155,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const updateLogin = await request(app.getHttpServer())
+      .put(`/atualizar-login/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const updateLogin = await request(app.getHttpServer())
-      .put(`/atualizar-login/${ID}`)
       .send({
         email: client.login.email,
         OldPassword: client.login.password,
@@ -187,13 +175,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const updateLogin = await request(app.getHttpServer())
+      .put(`/atualizar-login/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const updateLogin = await request(app.getHttpServer())
-      .put(`/atualizar-login/${ID}`)
       .send({
         email: client.login.email,
         newEmail: "testteste@gmail.com",
@@ -211,13 +197,11 @@ describe("Users", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const deletedUser = await request(app.getHttpServer())
+      .delete(`/deletar-cliente/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const deletedUser = await request(app.getHttpServer())
-      .delete(`/deletar-cliente/${ID}`)
       .send({
         email: "testteste@gmail.com",
         password: "test5678910",

@@ -40,13 +40,11 @@ describe("Providers", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const ListProviders = await request(app.getHttpServer())
+      .get("/listar-fornecedores")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const ListProviders = await request(app.getHttpServer())
-      .get("/listar-fornecedores")
       .expect(200)
       .expect(Array);
     return ListProviders;
@@ -57,13 +55,11 @@ describe("Providers", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const createdProvider = await request(app.getHttpServer())
+      .post("/cadastrar-fornecedor")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const createdProvider = await request(app.getHttpServer())
-      .post("/cadastrar-fornecedor")
       .send(IProvider)
       .expect(201);
     ID = createdProvider.body.provider._id;
@@ -79,13 +75,11 @@ describe("Providers", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const ListProviderID = await request(app.getHttpServer())
+      .get(`/listar-fornecedor/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const ListProviderID = await request(app.getHttpServer())
-      .get(`/listar-fornecedor/${ID}`)
       .expect(200)
       .expect(Object);
     return ListProviderID;
@@ -96,16 +90,14 @@ describe("Providers", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
-      .auth(String(acessToke), {
-        type: 'bearer'
-      })
     const newProvider = {
       cnpj: "75.121.012/0001-73",
     };
     const updateProvider = await request(app.getHttpServer())
       .put(`/atualizar-fornecedor/${ID}`)
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
       .send(newProvider)
       .expect(200);
     expect(Object);
@@ -119,13 +111,11 @@ describe("Providers", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const deleteProvider = await request(app.getHttpServer())
+      .delete(`/deletar-fornecedor/${ID}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const deleteProvider = await request(app.getHttpServer())
-      .delete(`/deletar-fornecedor/${ID}`)
       .expect(200);
     expect(deleteProvider.body).toHaveProperty("messagem");
     return deleteProvider;

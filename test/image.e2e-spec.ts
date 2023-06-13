@@ -31,14 +31,13 @@ describe("Images", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
-      .auth(String(acessToke), {
-        type: 'bearer'
-      })
+    
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
       .attach(
         "file",
         path.resolve(__dirname, "..", "test", "tmp", "e2e_nestjs.jpg")
@@ -54,13 +53,11 @@ describe("Images", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    return request(app.getHttpServer())
+      .get("/imagem")
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    return request(app.getHttpServer())
-      .get("/imagem")
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(Array);
@@ -71,12 +68,10 @@ describe("Images", () => {
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
     await request(app.getHttpServer())
-      .get("/")
+      .get(`/imagem/${registerImage._id}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    await request(app.getHttpServer())
-      .get(`/imagem/${registerImage._id}`)
       .expect(200);
     expect(Object);
   });
@@ -85,13 +80,11 @@ describe("Images", () => {
       clientID: String(process.env.clientID),
       clientSecret: String(process.env.clientSecret)
     })).body.access_token;
-    await request(app.getHttpServer())
-      .get("/")
+    const deleteImage = await request(app.getHttpServer())
+      .delete(`/imagem/${registerImage._id}`)
       .auth(String(acessToke), {
         type: 'bearer'
       })
-    const deleteImage = await request(app.getHttpServer())
-      .delete(`/imagem/${registerImage._id}`)
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");
     return deleteImage;
