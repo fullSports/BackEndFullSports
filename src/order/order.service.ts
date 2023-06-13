@@ -36,6 +36,7 @@ export class OrderService {
       const product = await this.ServiceProduct.searchProductId(
         i.produto as any
       );
+      if(i.cliente){
       const client = await this.UserModel.findById({ _id: i.cliente as any })
         .populate("imagemPerfil")
         .exec();
@@ -48,6 +49,7 @@ export class OrderService {
         __v: i.__v,
       };
       newListOrders.push(order);
+    }
     }
     return newListOrders;
   }
