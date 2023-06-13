@@ -1,6 +1,7 @@
 import { INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
+import { AuthModule } from "src/auth/auth.module";
 import {
   Recommendation,
   RrecommendationSchema,
@@ -47,6 +48,7 @@ describe("Product", () => {
         MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
         ]),
+        AuthModule
       ],
       controllers: [
         OrderController,

@@ -1,9 +1,9 @@
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RealizarLogin } from '../users/dto/SingIn.dto';
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('auth')
-
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
     @Post('login-app')

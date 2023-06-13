@@ -10,6 +10,7 @@ import {
 } from "src/providers/Schema/providers.schema";
 import ProductController from "src/product/product.controller";
 import { ProductServices } from "src/product/product.service";
+import { AuthModule } from "src/auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Product", () => {
   let app: INestApplication;
@@ -26,6 +27,7 @@ describe("Product", () => {
         MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
+        AuthModule
       ],
       controllers: [ProductController],
       providers: [ProductServices],

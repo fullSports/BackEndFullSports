@@ -4,6 +4,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
+import { AuthModule } from "src/auth/auth.module";
 import * as request from "supertest";
 const path = require("path");
 const urlConfig = require("./globalConfig.json");
@@ -17,6 +18,7 @@ describe("Images", () => {
         MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
         ]),
+        AuthModule
       ],
       controllers: [ImageController],
       providers: [ImageService],

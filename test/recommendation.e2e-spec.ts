@@ -18,6 +18,7 @@ import {
 import { UserSchema, Users } from "src/users/Schema/user.schema";
 import { UserService } from "src/users/user.service";
 import { UserController } from "src/users/users.controller";
+import { AuthModule } from "src/auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Recommendation", () => {
   let app: INestApplication;
@@ -38,6 +39,7 @@ describe("Recommendation", () => {
           { name: Provider.name, schema: ProviderSchema },
         ]),
         MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        AuthModule
       ],
       controllers: [RecommendationController, UserController],
       providers: [RecommendationService, ProductServices, UserService],
