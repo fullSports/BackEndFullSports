@@ -48,6 +48,15 @@ describe("Recommendation", () => {
   let RecommendationCreated;
   let userCreated;
   it("• /cadastrar-recomendacao", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const _idUser = await request(app.getHttpServer())
       .post("/cadastrar-cliente")
       .send({
@@ -86,6 +95,15 @@ describe("Recommendation", () => {
     );
   });
   it("• /listar-recomendacoes", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return request(app.getHttpServer())
       .get("/listar-recomendacoes")
       .expect(200)
@@ -93,12 +111,30 @@ describe("Recommendation", () => {
       .expect(Array);
   });
   it("• /listar-recomendacao/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return request(app.getHttpServer())
       .get(`/listar-recomendacao/${RecommendationCreated._id}`)
       .expect(200)
       .expect(Object);
   });
   it("• /atualizar-recomendacao/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return await request(app.getHttpServer())
       .put(`/atualizar-recomendacao/${RecommendationCreated._id}`)
       .send({
@@ -112,12 +148,30 @@ describe("Recommendation", () => {
       .expect(200);
   });
   it("• /recomendacao/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return request(app.getHttpServer())
       .get(`/recomendacao/${RecommendationCreated._id}`)
       .expect(200)
       .expect(Object);
   });
   it("• /deletar-recomendacao/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const DeleteRecommedation = await request(app.getHttpServer())
       .delete(`/deletar-recomendacao/${RecommendationCreated._id}`)
       .expect(200);

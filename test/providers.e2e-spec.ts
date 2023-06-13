@@ -34,6 +34,15 @@ describe("Providers", () => {
   };
 
   it("• /listar-fornecedores (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const ListProviders = await request(app.getHttpServer())
       .get("/listar-fornecedores")
       .expect(200)
@@ -42,6 +51,15 @@ describe("Providers", () => {
   });
 
   it("• /cadastrar-fornecedor (POST)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const createdProvider = await request(app.getHttpServer())
       .post("/cadastrar-fornecedor")
       .send(IProvider)
@@ -55,6 +73,15 @@ describe("Providers", () => {
   });
 
   it("• /listar-fornecedor/:id (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const ListProviderID = await request(app.getHttpServer())
       .get(`/listar-fornecedor/${ID}`)
       .expect(200)
@@ -63,6 +90,15 @@ describe("Providers", () => {
   });
 
   it("• /atualizar-fornecedor/:id (PUT)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const newProvider = {
       cnpj: "75.121.012/0001-73",
     };
@@ -77,6 +113,15 @@ describe("Providers", () => {
   });
 
   it("• /deletar-fornecedor/:id (DELETE)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const deleteProvider = await request(app.getHttpServer())
       .delete(`/deletar-fornecedor/${ID}`)
       .expect(200);

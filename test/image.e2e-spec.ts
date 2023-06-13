@@ -25,6 +25,15 @@ describe("Images", () => {
     await app.init();
   });
   it("• /imagem (POST)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
@@ -39,6 +48,15 @@ describe("Images", () => {
       });
   });
   it("• /imagem (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return request(app.getHttpServer())
       .get("/imagem")
       .expect(200)
@@ -46,12 +64,30 @@ describe("Images", () => {
       .expect(Array);
   });
   it("• /imagem/:id (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     await request(app.getHttpServer())
       .get(`/imagem/${registerImage._id}`)
       .expect(200);
     expect(Object);
   });
   it("• /imagem/:id (DELETE)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const deleteImage = await request(app.getHttpServer())
       .delete(`/imagem/${registerImage._id}`)
       .expect(200);

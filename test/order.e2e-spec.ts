@@ -85,6 +85,15 @@ describe("Product", () => {
     endereco: "Rua João do Test",
   };
   it("• /imagem (POST)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
@@ -99,6 +108,15 @@ describe("Product", () => {
       });
   });
   it("• /cadastrar-cliente (POST) User", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const RegisterUsers = await request(app.getHttpServer())
       .post("/cadastrar-cliente")
       .send(clienteTestOrder)
@@ -108,6 +126,15 @@ describe("Product", () => {
     return RegisterUsers;
   });
   it("• /cadastrar-produto (POST)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const createdProduct = await request(app.getHttpServer())
       .post("/cadastrar-produto")
       .send({
@@ -130,6 +157,15 @@ describe("Product", () => {
   });
 
   it("• /realizar-pedido (POST) ", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const createdOrder = await request(app.getHttpServer())
       .post("/realizar-pedido")
       .send({
@@ -145,6 +181,15 @@ describe("Product", () => {
   });
 
   it("• /listar-pedidos (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const ListOders = await request(app.getHttpServer())
       .get("/listar-pedidos")
       .expect(200)
@@ -152,6 +197,15 @@ describe("Product", () => {
     return ListOders;
   });
   it("• /listar-pedido/:id ", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const listOrderId = await request(app.getHttpServer())
       .get(`/listar-pedido/${IdOrder}`)
       .expect(200)
@@ -176,6 +230,15 @@ describe("Product", () => {
   // });
 
   it("• /deletar-pedido/:id (DELETE)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const deleteOrder = await request(app.getHttpServer())
       .delete(`/deletar-pedido/${IdOrder}`)
       .expect(200);
@@ -184,6 +247,15 @@ describe("Product", () => {
   });
 
   it("• /deletar-cleinte/:id && /deletar-produto/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     await request(app.getHttpServer())
       .delete(`/deletar-produto/${IdPorduct}`)
       .expect(200);

@@ -49,6 +49,15 @@ describe("Product", () => {
     },
   };
   it("• /listar-produtos (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const ListProduct = await request(app.getHttpServer())
       .get("/listar-produtos")
       .expect(200)
@@ -56,7 +65,17 @@ describe("Product", () => {
     return ListProduct;
   });
 
+  
   it("• /cadastrar-produto (POST)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const createdProduct = await request(app.getHttpServer())
       .post("/cadastrar-produto")
       .send(IProduct)
@@ -66,6 +85,15 @@ describe("Product", () => {
   });
 
   it("• /listar-produto/:id (GET)", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const ListProductId = await request(app.getHttpServer())
       .get(`/listar-produto/${ID}`)
       .expect(200)
@@ -74,6 +102,15 @@ describe("Product", () => {
   });
 
   it("• /atualizar-produto/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const newProduct = {
       categoriaProduto: {
         roupa: {
@@ -89,13 +126,32 @@ describe("Product", () => {
     expect(updateProduct.body).toHaveProperty("product" && "messagem");
   });
   it("• /buscar-produto/:busca", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const searchProduct = await request(app.getHttpServer())
       .get('/buscar-produto/suplemento')
       .expect(200)
     expect(Array)
     expect(searchProduct.body.length).toBe(1)
   })
+  
   it("• /deletar-produto/:id", async () => {
+    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
+      clientID: String(process.env.clientID),
+      clientSecret: String(process.env.clientSecret)
+    })).body.access_token;
+    await request(app.getHttpServer())
+      .get("/")
+      .auth(String(acessToke), {
+        type: 'bearer'
+      })
     const deleteProduct = await request(app.getHttpServer())
       .delete(`/deletar-produto/${ID}`)
       .expect(200);
