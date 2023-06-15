@@ -132,27 +132,27 @@ describe("OrderController", () => {
       expect(RegisterProduct).toHaveProperty("product" && "messagem");
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.nome ==
-          IProduct.categoriaProduto.equipamento.nome
+        IProduct.categoriaProduto.equipamento.nome
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.cor ==
-          IProduct.categoriaProduto.equipamento.cor
+        IProduct.categoriaProduto.equipamento.cor
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.sexo ==
-          IProduct.categoriaProduto.equipamento.sexo
+        IProduct.categoriaProduto.equipamento.sexo
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.tamanho ==
-          IProduct.categoriaProduto.equipamento.tamanho
+        IProduct.categoriaProduto.equipamento.tamanho
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.preco ==
-          IProduct.categoriaProduto.equipamento.preco
+        IProduct.categoriaProduto.equipamento.preco
       );
       expect(
         RegisterProduct.product.categoriaProduto.equipamento.quantidade ==
-          IProduct.categoriaProduto.equipamento.quantidade
+        IProduct.categoriaProduto.equipamento.quantidade
       );
       registeredCustomerPorduct = RegisterProduct.product;
     });

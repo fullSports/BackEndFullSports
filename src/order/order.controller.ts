@@ -10,8 +10,7 @@ export class OrderController {
 
   @Post("/realizar-pedido")
   @UseGuards(AuthGuard('jwt'))
-  async RegisterOrder(@Body() createOrder: Order) {
-    createOrder["dataCadastro"] = new Date().toISOString();
+  async RegisterOrder(@Body() createOrder) {
     const RegisterOrder = await this.orderService.RegisterOrder(createOrder);
     return {
       messagem: "pedido realizado com suceeso",

@@ -25,8 +25,7 @@ export class Order {
   @ApiProperty()
   @Prop({ required: false })
   total: number;
-
-  @Prop({ required: true })
+  
   dataCadastro: string;
 }
 export const OrderSchema = SchemaFactory.createForClass(Order);
