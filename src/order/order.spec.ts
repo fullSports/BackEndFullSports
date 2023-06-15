@@ -162,6 +162,7 @@ describe("OrderController", () => {
         produto: registeredCustomerPorduct._id,
         cliente: registeredCustomerCLient._id,
         total: 20,
+        dataCadastro: ""
       });
       expect(RegisterOrder).toHaveProperty(
         "messagem" && "order" && "orderPlaced"
