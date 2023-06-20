@@ -12,10 +12,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - run: pnpm ci
-      - run: pnpm run build --if-present
-      - run: |
+      - name: Install PNPM
++       run: npm i -g pnpm
+      - name: Install & Build
+        run: pnpm ci
+        run: pnpm run build --if-present
+        run: |
           pnpm run lint
 
 
