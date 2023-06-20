@@ -21,9 +21,14 @@ export class BrithDateValidador implements ValidatorConstraintInterface {
           const ano = parseInt(DateSplit[2]);
           const mes = parseInt(DateSplit[1]);
           const dia = parseInt(DateSplit[0]);
-          if (ano >= 2000 && mes <= 12 && mes > 0 && dia <= 31 && dia > 0) {
-            return true;
+          try {
+            const data = new Date(`${ano}-${dia}-${mes}`)
+            if (data) return true
+            else return false;
+          } catch {
+            return false;
           }
+
         }
       }
       return false;

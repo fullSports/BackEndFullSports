@@ -36,6 +36,7 @@ export class OrderService {
       const product = await this.ServiceProduct.searchProductId(
         i.produto as any
       );
+      if(i.cliente){
       const client = await this.UserModel.findById({ _id: i.cliente as any })
         .populate("imagemPerfil")
         .exec();
@@ -45,9 +46,11 @@ export class OrderService {
         produto: product,
         cliente: client,
         total: i.total,
+        dataCadastro: i.dataCadastro,
         __v: i.__v,
       };
       newListOrders.push(order);
+    }
     }
     return newListOrders;
   }
@@ -81,7 +84,7 @@ export class OrderService {
       const preco = findBydIdProduct.categoriaProduto[obj].preco;
       const floatPreco = parseFloat(preco.replace(",", "."));
       createOrderBody["total"] = floatPreco * createOrderBody.quantidadePedido;
-
+      createOrderBody["dataCadastro"] = new Date().toISOString();
       const createOrder = await this.OrderModel.create(createOrderBody);
       return createOrder;
     }
@@ -103,6 +106,7 @@ export class OrderService {
       produto: product,
       cliente: client,
       total: ListOrder.total,
+      dataCadastro: ListOrder.dataCadastro,
       __v: ListOrder.__v,
     };
     return order;
