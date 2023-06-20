@@ -12,10 +12,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install PNPM
-+       run: npm i -g pnpm
-      - name: Install & Build
-        run: pnpm ci
+      - run: npm install -g pnpm
+      - run: pnpm install
         run: pnpm run build --if-present
         run: |
           pnpm run lint
