@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -13,11 +14,12 @@ import { ApiTags } from "@nestjs/swagger";
 import { Recommendation } from "./Schema/Rrecommendation.schema";
 import { Product } from "src/product/Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
+import { Cron, CronExpression } from '@nestjs/schedule';
 @UseGuards(AuthGuard('jwt'))
 @Controller()
 @ApiTags("Recommendation Component")
 export class RecommendationController {
-  constructor(private readonly recommendationService: RecommendationService) {}
+  constructor(private readonly recommendationService: RecommendationService) { }
   @Get("/listar-recomendacoes")
   async ListRecommendations(): Promise<Recommendation[]> {
     return await this.recommendationService.listRecommedations();
@@ -72,5 +74,24 @@ export class RecommendationController {
     @Param("id") id: string
   ): Promise<{ recommendations: Product[]; producstRemains: Product[] }> {
     return await this.recommendationService.Recommendation(id);
+  }
+
+  @Cron(CronExpression.MONDAY_TO_FRIDAY_AT_9PM)
+  async ReiniciaREcomendacao() {
+    Logger.debug('Called when the current second is 45');
+    const list = await this.recommendationService.listRecommedations();
+    for (const i of list) {
+      const i2 = i as any;
+      const id = i2._id as string;
+      const user_id = i2.user._id as string;
+      const updateRecommedation = await this.recommendationService.updateRecommedation(id, {
+        click_calcados: 1,
+        click_roupas: 1,
+        click_equipamentos: 1,
+        click_suplementos: 1,
+        user: user_id
+      });
+      Logger.log(updateRecommedation);
+    }
   }
 }
