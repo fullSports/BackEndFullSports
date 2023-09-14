@@ -36,21 +36,21 @@ export class OrderService {
       const product = await this.ServiceProduct.searchProductId(
         i.produto as any
       );
-      if(i.cliente){
-      const client = await this.UserModel.findById({ _id: i.cliente as any })
-        .populate("imagemPerfil")
-        .exec();
-      const order = {
-        _id: i._id,
-        quantidadePedido: i.quantidadePedido,
-        produto: product,
-        cliente: client,
-        total: i.total,
-        dataCadastro: i.dataCadastro,
-        __v: i.__v,
-      };
-      newListOrders.push(order);
-    }
+      if (i.cliente) {
+        const client = await this.UserModel.findById({ _id: i.cliente as any })
+          .populate("imagemPerfil")
+          .exec();
+        const order = {
+          _id: i._id,
+          quantidadePedido: i.quantidadePedido,
+          produto: product,
+          cliente: client,
+          total: i.total,
+          dataCadastro: i.dataCadastro,
+          __v: i.__v,
+        };
+        newListOrders.push(order);
+      }
     }
     return newListOrders;
   }

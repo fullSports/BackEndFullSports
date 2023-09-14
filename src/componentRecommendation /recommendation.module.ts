@@ -27,7 +27,7 @@ import { ScheduleModule } from "@nestjs/schedule";
       { name: Provider.name, schema: ProviderSchema },
     ]),
     MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-    ScheduleModule.forRoot()
+    ScheduleModule.forRoot(),
   ],
   controllers: [RecommendationController],
   providers: [RecommendationService, ProductServices],
