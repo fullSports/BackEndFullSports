@@ -5,10 +5,10 @@ import { AuthGuard } from "@nestjs/passport";
 @Controller()
 @ApiTags("Home")
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @ApiOperation({ summary: "access the home" })
   getHello(): object {
     return this.appService.getIndex();

@@ -15,13 +15,13 @@ import { AuthGuard } from "@nestjs/passport";
 @ApiTags("Users")
 export class UserController {
   constructor(private userService: UserService) {}
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Get("listar-clientes")
   @ApiOperation({ summary: "list all users" })
   async ListUsers(): Promise<Users[]> {
     return this.userService.ListUsers();
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Post("cadastrar-cliente")
   @ApiOperation({ summary: "register a new user" })
   async CreateUser(@Body() createUser: Users) {
@@ -39,13 +39,13 @@ export class UserController {
       };
     }
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Get("listar-cliente/:id")
   @ApiOperation({ summary: "list user by id" })
   async SearchUserById(@Param("id") id: string): Promise<Users> {
     return this.userService.searchId(id);
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Put("atualizar-cliente/:id")
   @ApiOperation({ summary: "update user by id" })
   async UpdateUserById(
@@ -58,7 +58,7 @@ export class UserController {
       messagem: "usuario atualizado com sucesso",
     };
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @ApiOperation({ summary: "delete user with id" })
   @Delete("deletar-cliente/:id")
   async DeleteUserById(
@@ -71,14 +71,14 @@ export class UserController {
         messagem: "cliente deletado com sucesso ",
       };
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Post("realizar-login")
   @ApiOperation({ summary: "login with password and email" })
   async SingIn(@Body() singInBody: RealizarLogin) {
     const SingIn = await this.userService.signIn(singInBody);
     return SingIn;
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @ApiOperation({ summary: "update user login or password" })
   @Put("atualizar-login/:id")
   async UpdatePassowdLogin(

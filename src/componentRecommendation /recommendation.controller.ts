@@ -14,17 +14,17 @@ import { ApiTags } from "@nestjs/swagger";
 import { Recommendation } from "./Schema/Rrecommendation.schema";
 import { Product } from "src/product/Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
-import { Cron, CronExpression } from '@nestjs/schedule';
-@UseGuards(AuthGuard('jwt'))
+import { Cron, CronExpression } from "@nestjs/schedule";
+@UseGuards(AuthGuard("jwt"))
 @Controller()
 @ApiTags("Recommendation Component")
 export class RecommendationController {
-  constructor(private readonly recommendationService: RecommendationService) { }
+  constructor(private readonly recommendationService: RecommendationService) {}
   @Get("/listar-recomendacoes")
   async ListRecommendations(): Promise<Recommendation[]> {
     return await this.recommendationService.listRecommedations();
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Post("/cadastrar-recomendacao")
   async CreateRecommendation(@Body() craateRecommendaton: Recommendation) {
     const createRecommedation =
@@ -36,14 +36,14 @@ export class RecommendationController {
       messagem: "Recomendação criada com sucesso",
     };
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Get("/listar-recomendacao/:id")
   async ListRecommedationById(
     @Param("id") id: string
   ): Promise<Recommendation> {
     return await this.recommendationService.ListRecommedationById(id);
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Put("/atualizar-recomendacao/:id")
   async UpdateRecommedation(
     @Param("id") id: string,
@@ -60,7 +60,7 @@ export class RecommendationController {
       messagem: "Recomendação atualizada com sucesso",
     };
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Delete("/deletar-recomendacao/:id")
   async DeleteRecommedation(@Param("id") id: string) {
     await this.recommendationService.DeleteRecommendation(id);
@@ -68,7 +68,7 @@ export class RecommendationController {
       messagem: "Recomendação deletada com sucesso",
     };
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard("jwt"))
   @Get("/recomendacao/:id")
   async Recommendation(
     @Param("id") id: string
@@ -78,19 +78,20 @@ export class RecommendationController {
 
   @Cron(CronExpression.MONDAY_TO_FRIDAY_AT_9PM)
   async ReiniciaREcomendacao() {
-    Logger.debug('Called when the current second is 45');
+    Logger.debug("Called when the current second is 45");
     const list = await this.recommendationService.listRecommedations();
     for (const i of list) {
       const i2 = i as any;
       const id = i2._id as string;
       const user_id = i2.user._id as string;
-      const updateRecommedation = await this.recommendationService.updateRecommedation(id, {
-        click_calcados: 1,
-        click_roupas: 1,
-        click_equipamentos: 1,
-        click_suplementos: 1,
-        user: user_id
-      });
+      const updateRecommedation =
+        await this.recommendationService.updateRecommedation(id, {
+          click_calcados: 1,
+          click_roupas: 1,
+          click_equipamentos: 1,
+          click_suplementos: 1,
+          user: user_id,
+        });
       Logger.log(updateRecommedation);
     }
   }

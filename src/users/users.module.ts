@@ -31,4 +31,4 @@ import { ProductServices } from "src/product/product.service";
   controllers: [UserController],
   providers: [UserService, RecommendationService, ProductServices],
 })
-export class UserModule { }
+export class UserModule {}

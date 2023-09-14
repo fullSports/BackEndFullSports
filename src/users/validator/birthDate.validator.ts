@@ -22,13 +22,12 @@ export class BrithDateValidador implements ValidatorConstraintInterface {
           const mes = parseInt(DateSplit[1]);
           const dia = parseInt(DateSplit[0]);
           try {
-            const data = new Date(`${ano}-${dia}-${mes}`)
-            if (data) return true
+            const data = new Date(`${ano}-${dia}-${mes}`);
+            if (data) return true;
             else return false;
           } catch {
             return false;
           }
-
         }
       }
       return false;
