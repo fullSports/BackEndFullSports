@@ -4,7 +4,6 @@ import * as request from "supertest";
 import { AppService } from "src/app.service";
 import { AppController } from "src/app.controller";
 import { MongooseModule } from "@nestjs/mongoose";
-import { AppModule } from "src/app.module";
 import { AuthModule } from "src/auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("AppController (e2e)", () => {
@@ -22,14 +21,18 @@ describe("AppController (e2e)", () => {
   });
 
   it("/ (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     await request(app.getHttpServer())
       .get("/")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect({ menssage: "servidor iniciado" });

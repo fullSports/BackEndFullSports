@@ -39,7 +39,7 @@ describe("Users", () => {
         MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
-        AuthModule
+        AuthModule,
       ],
       controllers: [UserController, RecommendationController],
       providers: [UserService, RecommendationService, ProductServices],
@@ -62,29 +62,37 @@ describe("Users", () => {
     endereco: "Rua João do Test",
   };
   it("• /listar-clientes (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     return request(app.getHttpServer())
       .get("/listar-clientes")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(Array);
   });
   it("• /cadastrar-cliente (POST)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
 
     const RegisterUsers = await request(app.getHttpServer())
       .post("/cadastrar-cliente")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send(client)
       .expect(201);
@@ -93,24 +101,32 @@ describe("Users", () => {
     return RegisterUsers;
   });
   it("• /listar-cliente/:id (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const ListUsersID = await request(app.getHttpServer())
       .get(`/listar-cliente/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect(Object);
     return ListUsersID;
   });
   it("• /atualizar-cliente/:id", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const newClient = {
       cpf: "466.773.520-13",
       //   nome: "TDD user.controller",
@@ -122,7 +138,7 @@ describe("Users", () => {
     const updateUser = await request(app.getHttpServer())
       .put(`/atualizar-cliente/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send(newClient)
       .expect(200)
@@ -132,14 +148,18 @@ describe("Users", () => {
     expect(updateUser.body.user.nome == client.nome);
   });
   it("• /realizar-login (POST ) ", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const SingIn = await request(app.getHttpServer())
       .post("/realizar-login")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send({
         email: client.login.email,
@@ -151,14 +171,18 @@ describe("Users", () => {
   });
 
   it("• /atualizar-login/:id (PUT)- update password ", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
       .put(`/atualizar-login/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send({
         email: client.login.email,
@@ -171,14 +195,18 @@ describe("Users", () => {
     return updateLogin;
   });
   it("• /atualizar-login/:id (PUT)-- update email and isAdmin", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
       .put(`/atualizar-login/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send({
         email: client.login.email,
@@ -193,14 +221,18 @@ describe("Users", () => {
   });
 
   it("• /deletar-cleinte/:id", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const deletedUser = await request(app.getHttpServer())
       .delete(`/deletar-cliente/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send({
         email: "testteste@gmail.com",

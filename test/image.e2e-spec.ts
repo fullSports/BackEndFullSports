@@ -18,7 +18,7 @@ describe("Images", () => {
         MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
         ]),
-        AuthModule
+        AuthModule,
       ],
       controllers: [ImageController],
       providers: [ImageService],
@@ -27,16 +27,20 @@ describe("Images", () => {
     await app.init();
   });
   it("• /imagem (POST)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
-    
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
+
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .attach(
         "file",
@@ -49,41 +53,53 @@ describe("Images", () => {
       });
   });
   it("• /imagem (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     return request(app.getHttpServer())
       .get("/imagem")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect("Content-Type", /json/)
       .expect(Array);
   });
   it("• /imagem/:id (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     await request(app.getHttpServer())
       .get(`/imagem/${registerImage._id}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200);
     expect(Object);
   });
   it("• /imagem/:id (DELETE)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const deleteImage = await request(app.getHttpServer())
       .delete(`/imagem/${registerImage._id}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200);
     expect(deleteImage.body).toHaveProperty("messagem");

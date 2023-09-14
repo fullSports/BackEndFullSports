@@ -19,7 +19,7 @@ describe("Providers", () => {
         MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
-        AuthModule
+        AuthModule,
       ],
       controllers: [ProviderController],
       providers: [ProviderService],
@@ -36,14 +36,18 @@ describe("Providers", () => {
   };
 
   it("• /listar-fornecedores (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const ListProviders = await request(app.getHttpServer())
       .get("/listar-fornecedores")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect(Array);
@@ -51,14 +55,18 @@ describe("Providers", () => {
   });
 
   it("• /cadastrar-fornecedor (POST)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const createdProvider = await request(app.getHttpServer())
       .post("/cadastrar-fornecedor")
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send(IProvider)
       .expect(201);
@@ -71,14 +79,18 @@ describe("Providers", () => {
   });
 
   it("• /listar-fornecedor/:id (GET)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const ListProviderID = await request(app.getHttpServer())
       .get(`/listar-fornecedor/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200)
       .expect(Object);
@@ -86,17 +98,21 @@ describe("Providers", () => {
   });
 
   it("• /atualizar-fornecedor/:id (PUT)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const newProvider = {
       cnpj: "75.121.012/0001-73",
     };
     const updateProvider = await request(app.getHttpServer())
       .put(`/atualizar-fornecedor/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .send(newProvider)
       .expect(200);
@@ -107,14 +123,18 @@ describe("Providers", () => {
   });
 
   it("• /deletar-fornecedor/:id (DELETE)", async () => {
-    const acessToke = (await request(app.getHttpServer()).post('/auth/login-app').send({
-      clientID: String(process.env.clientID),
-      clientSecret: String(process.env.clientSecret)
-    })).body.access_token;
+    const acessToke = (
+      await request(app.getHttpServer())
+        .post("/auth/login-app")
+        .send({
+          clientID: String(process.env.clientID),
+          clientSecret: String(process.env.clientSecret),
+        })
+    ).body.access_token;
     const deleteProvider = await request(app.getHttpServer())
       .delete(`/deletar-fornecedor/${ID}`)
       .auth(String(acessToke), {
-        type: 'bearer'
+        type: "bearer",
       })
       .expect(200);
     expect(deleteProvider.body).toHaveProperty("messagem");
