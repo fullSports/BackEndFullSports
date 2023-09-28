@@ -9,14 +9,21 @@ export class AuthService {
     // private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) {}
-  async validateApp(clientID: string, clientSecret: string) {
+  private accessToken: string;
+  setAccessToken(token: string) {
+    this.accessToken = token;
+  }
+  getAccessToken() {
+    return this.accessToken;
+  }
+  async validateApp(clientId: string, clientSecret: string) {
     if (
-      clientID != String(process.env.clientID) ||
+      clientId != String(process.env.clientId) ||
       clientSecret != String(process.env.clientSecret)
     ) {
       return null;
     } else {
-      const id = `${new Date().getUTCDate()}-${process.env.clientID}-${
+      const id = `${new Date().getUTCDate()}-${process.env.clientId}-${
         process.env.clientSecret
       }`;
       const hash = id
@@ -42,7 +49,7 @@ export class AuthService {
   //     return null;
   // }
   async validateUserById(userId: string) {
-    const id = `${new Date().getUTCDate()}-${process.env.clientID}-${
+    const id = `${new Date().getUTCDate()}-${process.env.clientId}-${
       process.env.clientSecret
     }`;
     const hash = id

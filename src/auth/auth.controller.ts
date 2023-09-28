@@ -1,20 +1,26 @@
-import { Controller, Post, Body, UnauthorizedException } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  UnauthorizedException,
+  Logger,
+} from "@nestjs/common";
 import { AuthService } from "./auth.service";
-// import { RealizarLogin } from "../users/dto/SingIn.dto";
-// import { AuthGuard } from "@nestjs/passport";
-
 @Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post("login-app")
-  async LoginApp(@Body() loginDto: { clientID: string; clientSecret: string }) {
+  async LoginApp(@Body() body: { client_id: string; client_secret: string }) {
     const user = await this.authService.validateApp(
-      loginDto.clientID,
-      loginDto.clientSecret
+      body.client_id,
+      body.client_secret
     );
     if (!user) {
       throw new UnauthorizedException();
     }
-    return this.authService.generateToken(user);
+    const token = await this.authService.generateToken(user);
+    this.authService.setAccessToken(token.access_token);
+    Logger.debug(token);
+    return token;
   }
 }

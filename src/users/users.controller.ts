@@ -4,7 +4,7 @@ import {
   Post,
   Put,
 } from "@nestjs/common/decorators/http/request-mapping.decorator";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
@@ -13,6 +13,7 @@ import { UserService } from "./user.service";
 import { AuthGuard } from "@nestjs/passport";
 @Controller()
 @ApiTags("Users")
+@ApiBearerAuth()
 export class UserController {
   constructor(private userService: UserService) {}
   @UseGuards(AuthGuard("jwt"))
