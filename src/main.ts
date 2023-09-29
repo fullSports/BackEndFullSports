@@ -19,7 +19,7 @@ async function bootstrap() {
     .setDescription(
       "Api da loja full sports e suas requisições.\n Para realizazr o login, selecione request-body no campo 'credentials location' após clicar em 'Authorize'"
     )
-    .setVersion("0.1.11")
+    .setVersion("0.1.17")
     .addOAuth2({
       type: "oauth2",
       bearerFormat: "JWT",
