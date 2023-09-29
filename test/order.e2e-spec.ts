@@ -33,19 +33,12 @@ describe("Product", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-
         MongooseModule.forFeature([
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
         ]),
         AuthModule,

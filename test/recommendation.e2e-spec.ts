@@ -28,17 +28,11 @@ describe("Recommendation", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
         AuthModule,
       ],
       controllers: [RecommendationController, UserController],

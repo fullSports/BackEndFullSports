@@ -20,11 +20,7 @@ describe("Product", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
         AuthModule,

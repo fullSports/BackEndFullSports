@@ -29,23 +29,16 @@ describe("Auth", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        MongooseModule.forFeature([]),
         MongooseModule.forFeature([
+          { name: Users.name, schema: UserSchema },
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
         PassportModule,
         JwtModule.register(jwtConfig),
-        // Outros módulos necessários para o AuthModule
       ],
       controllers: [AuthController],
       providers: [

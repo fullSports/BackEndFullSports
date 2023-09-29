@@ -11,11 +11,11 @@ import { Order, OrderSchema } from "./Schema/order.schema";
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
-    MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
-    MongooseModule.forFeature([{ name: imagem.name, schema: ImagemSchema }]),
     MongooseModule.forFeature([
+      { name: Order.name, schema: OrderSchema },
+      { name: Users.name, schema: UserSchema },
+      { name: Product.name, schema: ProductSchema },
+      { name: imagem.name, schema: ImagemSchema },
       { name: Provider.name, schema: ProviderSchema },
     ]),
   ],
