@@ -91,8 +91,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return await request(app.getHttpServer())
@@ -116,8 +116,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const RegisterUsers = await request(app.getHttpServer())
@@ -136,8 +136,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProduct = await request(app.getHttpServer())
@@ -169,8 +169,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdOrder = await request(app.getHttpServer())
@@ -195,8 +195,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListOders = await request(app.getHttpServer())
@@ -213,8 +213,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const listOrderId = await request(app.getHttpServer())
@@ -248,8 +248,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteOrder = await request(app.getHttpServer())
@@ -267,8 +267,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     await request(app.getHttpServer())

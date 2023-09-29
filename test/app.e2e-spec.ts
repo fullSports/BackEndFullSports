@@ -25,8 +25,8 @@ describe("AppController (e2e)", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     await request(app.getHttpServer())

@@ -54,8 +54,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const _idUser = await request(app.getHttpServer())
@@ -106,8 +106,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -124,8 +124,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -141,8 +141,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return await request(app.getHttpServer())
@@ -165,8 +165,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -182,8 +182,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const DeleteRecommedation = await request(app.getHttpServer())

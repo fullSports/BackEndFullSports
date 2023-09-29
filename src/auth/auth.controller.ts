@@ -20,7 +20,6 @@ export class AuthController {
     }
     const token = await this.authService.generateToken(user);
     this.authService.setAccessToken(token.access_token);
-    Logger.debug(token);
     return token;
   }
 }

@@ -65,8 +65,8 @@ describe("Auth", () => {
     const loginApp = await request(app.getHttpServer())
       .post("/auth/login-app")
       .send({
-        clientID: String(process.env.clientID),
-        clientSecret: String(process.env.clientSecret),
+        client_id: String(process.env.clientId),
+        client_secret: String(process.env.clientSecret),
       })
       .expect(201);
     expect(loginApp.body).toHaveProperty("access_token");
