@@ -5,6 +5,7 @@ import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as express from "express";
 import * as path from "path";
+import { useContainer } from "class-validator";
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule);
   app.enableCors();
@@ -14,26 +15,43 @@ async function bootstrap() {
     express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
   );
   const config = new DocumentBuilder()
-    .setTitle("Api Full Sports")
-    .setDescription("api da loja full sports e suas requisições")
+    .setTitle("Api FullSports")
+    .setDescription(
+      "Api da loja full sports e suas requisições.\n Para realizazr o login, selecione request-body no campo 'credentials location' após clicar em 'Authorize'"
+    )
     .setVersion("0.1.11")
     .addOAuth2({
       type: "oauth2",
       bearerFormat: "JWT",
       flows: {
         password: {
-          authorizationUrl: `http://localhost:${process.env.PORT}/auth/login-app`,
-          tokenUrl: `http://localhost:${process.env.PORT}/auth/login-app`,
+          authorizationUrl: `${process.env.URL_AUTHORIZATION}`,
+          tokenUrl: `${process.env.URL_AUTHORIZATION}`,
           scopes: {},
         },
       },
     })
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("swagger", app, document);
+  SwaggerModule.setup("swagger", app, document, {
+    customSiteTitle: "Api FullSports",
+    customfavIcon: "https://avatars.githubusercontent.com/u/6936373?s=200&v=4",
+    customJs: [
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.min.js",
+    ],
+    customCssUrl: [
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css",
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.min.css",
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.css",
+    ],
+  });
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
   await app.listen(process.env.PORT);
-  Logger.log(`server on in http://localhost:${process.env.PORT}`);
-  Logger.log(
+  Logger.debug(`server on in http://localhost:${process.env.PORT}`);
+  Logger.debug(
     `application document in http://localhost:${process.env.PORT}/swagger`
   );
 }
