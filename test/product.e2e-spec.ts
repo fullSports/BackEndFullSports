@@ -20,11 +20,7 @@ describe("Product", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
         AuthModule,
@@ -55,8 +51,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProduct = await request(app.getHttpServer())
@@ -74,8 +70,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProduct = await request(app.getHttpServer())
@@ -94,8 +90,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProductId = await request(app.getHttpServer())
@@ -113,8 +109,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newProduct = {
@@ -139,8 +135,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const searchProduct = await request(app.getHttpServer())
@@ -158,8 +154,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteProduct = await request(app.getHttpServer())

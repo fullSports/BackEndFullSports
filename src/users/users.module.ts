@@ -18,13 +18,11 @@ import { ProductServices } from "src/product/product.service";
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: imagem.name, schema: ImagemSchema }]),
     MongooseModule.forFeature([
+      { name: Users.name, schema: UserSchema },
+      { name: imagem.name, schema: ImagemSchema },
       { name: Recommendation.name, schema: RrecommendationSchema },
-    ]),
-    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
-    MongooseModule.forFeature([
+      { name: Product.name, schema: ProductSchema },
       { name: Provider.name, schema: ProviderSchema },
     ]),
   ],

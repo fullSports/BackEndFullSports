@@ -26,17 +26,11 @@ describe("Users", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
         MongooseModule.forFeature([
+          { name: Users.name, schema: UserSchema },
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
         AuthModule,
@@ -66,8 +60,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -84,8 +78,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
 
@@ -105,8 +99,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListUsersID = await request(app.getHttpServer())
@@ -123,8 +117,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newClient = {
@@ -152,8 +146,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const SingIn = await request(app.getHttpServer())
@@ -175,8 +169,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
@@ -199,8 +193,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
@@ -225,8 +219,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientID: String(process.env.clientID),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deletedUser = await request(app.getHttpServer())
