@@ -11,6 +11,8 @@ import {
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
+import { QueueServiceProduct } from "./queues/queuesCache.service";
+import { CacheModule } from "@nestjs/common";
 const path = require("path");
 const urlConfig = require("../globalConfig.json");
 describe("ProductController", () => {
@@ -29,9 +31,12 @@ describe("ProductController", () => {
         MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
+        CacheModule.register({
+          ttl: 900000,
+        }),
       ],
       controllers: [ProductController, ImageController],
-      providers: [ProductServices, ImageService],
+      providers: [ProductServices, ImageService, QueueServiceProduct],
     }).compile();
     productController = app.get<ProductController>(ProductController);
     imagemController = app.get<ImageController>(ImageController);

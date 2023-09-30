@@ -1,10 +1,11 @@
-import { Module } from "@nestjs/common";
+import { CacheModule, Module } from "@nestjs/common";
 import ProductController from "./product.controller";
 import { ProductServices } from "./product.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Product, ProductSchema } from "./Schema/product.schema";
 import { imagem, ImagemSchema } from "../image/Schema/image.schema";
 import { Provider, ProviderSchema } from "../providers/Schema/providers.schema";
+import { QueueServiceProduct } from "./queues/queuesCache.service";
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -12,8 +13,11 @@ import { Provider, ProviderSchema } from "../providers/Schema/providers.schema";
       { name: imagem.name, schema: ImagemSchema },
       { name: Provider.name, schema: ProviderSchema },
     ]),
+    CacheModule.register({
+      ttl: 900000,
+    }),
   ],
   controllers: [ProductController],
-  providers: [ProductServices],
+  providers: [ProductServices, QueueServiceProduct],
 })
 export class ProductModule {}
