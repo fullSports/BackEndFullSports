@@ -17,8 +17,8 @@ import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
 import { Cache } from "cache-manager";
-import { QueueCacheService } from "src/queue/jobs/queue.cache.service";
-import { RequestsEnum } from "src/queue/enum/request.enum";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { RequestsEnum } from "src/queues/enum/request.enum";
 @Controller()
 @ApiTags("Products")
 export default class ProductController {

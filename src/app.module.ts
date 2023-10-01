@@ -13,7 +13,7 @@ import { OderModule } from "./order/order.module";
 import { RecommendationModule } from "./componentRecommendation/recommendation.module";
 import { AuthModule } from "./auth/auth.module";
 import { JwtInjectionMiddleware } from "./auth/jwt-injection.middleware";
-import { QueueModule } from "./queue/queue.module";
+import { QueueModule } from "./queues/queue.module";
 import { EventEmitterModule } from "@nestjs/event-emitter";
 let MongoUrl = "";
 if (process.env.ENV_AMB === "PROD") MongoUrl = process.env.mongoPROD;

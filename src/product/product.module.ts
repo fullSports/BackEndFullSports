@@ -5,7 +5,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { Product, ProductSchema } from "./Schema/product.schema";
 import { imagem, ImagemSchema } from "../image/Schema/image.schema";
 import { Provider, ProviderSchema } from "../providers/Schema/providers.schema";
-import { QueueCacheService } from "src/queue/jobs/queue.cache.service";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
 import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ImageService } from "src/image/image.service";
 import { OrderService } from "src/order/order.service";
