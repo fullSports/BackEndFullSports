@@ -5,6 +5,7 @@ import {
   Delete,
   Get,
   Inject,
+  Logger,
   Param,
   Post,
   Put,
@@ -16,12 +17,14 @@ import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
 import { Cache } from "cache-manager";
+import { QueueCacheService } from "src/queue/jobs/queue.cache.service";
 @Controller()
 @ApiTags("Products")
 export default class ProductController {
   constructor(
     private readonly productService: ProductServices,
-    @Inject(CACHE_MANAGER) private readonly cache: Cache
+    @Inject(CACHE_MANAGER) private readonly cache: Cache,
+    private readonly queueCacheService: QueueCacheService
   ) {}
   @UseGuards(AuthGuard("jwt"))
   @Get("/listar-produtos")
@@ -50,6 +53,7 @@ export default class ProductController {
   @UseGuards(AuthGuard("jwt"))
   @Get("/listar-produto/:id")
   async SearchProductById(@Param("id") id: string): Promise<Product> {
+    this.queueCacheService.addItem("produtos-cache");
     return await this.productService.searchProductId(id);
   }
   @UseGuards(AuthGuard("jwt"))

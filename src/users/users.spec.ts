@@ -8,15 +8,15 @@ import { UpdateUserDTO } from "./dto/updateUser.dto";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import {
   Provider,
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ProductServices } from "src/product/product.service";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
+import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
 const urlConfig = require("../globalConfig.json");
 describe("UserController", () => {
   let userController: UserController;

@@ -8,13 +8,13 @@ import { JwtStrategy } from "./strategies/jwt.strategy";
 import { UserService } from "src/users/user.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserSchema, Users } from "src/users/Schema/user.schema";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ProductServices } from "src/product/product.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import {
   Provider,

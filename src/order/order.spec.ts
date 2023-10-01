@@ -16,12 +16,12 @@ import { OrderService } from "./order.service";
 import { ProductServices } from "src/product/product.service";
 import { UserService } from "src/users/user.service";
 import { ImageService } from "src/image/image.service";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 const urlConfig = require("../globalConfig.json");
 const path = require("path");
 describe("OrderController", () => {

@@ -12,5 +12,6 @@ import { Provider, ProviderSchema } from "./Schema/providers.schema";
   ],
   controllers: [ProviderController],
   providers: [ProviderService],
+  exports: [ProviderService],
 })
 export class ProviderModule {}

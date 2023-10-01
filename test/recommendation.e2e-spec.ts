@@ -4,10 +4,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 import * as request from "supertest";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import { ProductServices } from "src/product/product.service";

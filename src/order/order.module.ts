@@ -21,5 +21,6 @@ import { Order, OrderSchema } from "./Schema/order.schema";
   ],
   controllers: [OrderController],
   providers: [OrderService, ProductServices],
+  exports: [OrderService],
 })
 export class OderModule {}

@@ -5,9 +5,9 @@ import { AuthModule } from "src/auth/auth.module";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
