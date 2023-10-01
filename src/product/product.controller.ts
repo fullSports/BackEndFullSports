@@ -15,14 +15,12 @@ import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
-import { QueueServiceProduct } from "./queues/queuesCache.service";
 import { Cache } from "cache-manager";
 @Controller()
 @ApiTags("Products")
 export default class ProductController {
   constructor(
     private readonly productService: ProductServices,
-    private readonly queueServiceProduct: QueueServiceProduct,
     @Inject(CACHE_MANAGER) private readonly cache: Cache
   ) {}
   @UseGuards(AuthGuard("jwt"))
@@ -44,7 +42,6 @@ export default class ProductController {
     const createdProduct = await this.productService.RegisterProduct(
       creatProduct
     );
-    this.queueServiceProduct.addToQueue("produtos-cache");
     return {
       product: createdProduct,
       messagem: "produto cadastrado com sucesso",
@@ -65,7 +62,6 @@ export default class ProductController {
       id,
       updateProduct
     );
-    this.queueServiceProduct.addToQueue("produtos-cache");
     return {
       product: updateProductId,
       messagem: "produto atualizado com sucesso",
@@ -75,7 +71,6 @@ export default class ProductController {
   @Delete("/deletar-produto/:id")
   async deleteProduct(@Param("id") id: string) {
     await this.productService.deleteProduct(id);
-    await this.queueServiceProduct.addToQueue("produtos-cache");
     return {
       messagem: "Produto deletado com sucesso ",
     };

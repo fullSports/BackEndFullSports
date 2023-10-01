@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
+import {
+  CacheModule,
+  MiddlewareConsumer,
+  Module,
+  RequestMethod,
+} from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -17,6 +22,9 @@ else MongoUrl = null;
 @Module({
   imports: [
     MongooseModule.forRoot(MongoUrl),
+    CacheModule.register({
+      ttl: 900000,
+    }),
     UserModule,
     ImageModule,
     ProductModule,
