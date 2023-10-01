@@ -15,6 +15,11 @@ import {
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
 import { ProductServices } from "src/product/product.service";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { ImageService } from "src/image/image.service";
+import { OrderService } from "src/order/order.service";
+import { ProviderService } from "src/providers/providers.service";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
 
 @Module({
   imports: [
@@ -24,10 +29,19 @@ import { ProductServices } from "src/product/product.service";
       { name: Recommendation.name, schema: RrecommendationSchema },
       { name: Product.name, schema: ProductSchema },
       { name: Provider.name, schema: ProviderSchema },
+      { name: Order.name, schema: OrderSchema },
     ]),
   ],
   controllers: [UserController],
-  providers: [UserService, RecommendationService, ProductServices],
+  providers: [
+    UserService,
+    RecommendationService,
+    ProductServices,
+    QueueCacheService,
+    ImageService,
+    OrderService,
+    ProviderService,
+  ],
   exports: [UserService],
 })
 export class UserModule {}
