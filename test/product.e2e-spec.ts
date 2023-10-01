@@ -1,4 +1,4 @@
-import { INestApplication } from "@nestjs/common";
+import { CacheModule, INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
@@ -11,6 +11,18 @@ import {
 import ProductController from "src/product/product.controller";
 import { ProductServices } from "src/product/product.service";
 import { AuthModule } from "src/auth/auth.module";
+import {
+  Recommendation,
+  RrecommendationSchema,
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
+import { UserSchema, Users } from "src/users/Schema/user.schema";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
+import { ImageService } from "src/image/image.service";
+import { OrderService } from "src/order/order.service";
+import { UserService } from "src/users/user.service";
+import { ProviderService } from "src/providers/providers.service";
 const urlConfig = require("./globalConfig.json");
 describe("Product", () => {
   let app: INestApplication;
@@ -22,11 +34,26 @@ describe("Product", () => {
           { name: Product.name, schema: ProductSchema },
           { name: imagem.name, schema: ImagemSchema },
           { name: Provider.name, schema: ProviderSchema },
+          { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
         AuthModule,
       ],
       controllers: [ProductController],
-      providers: [ProductServices],
+      providers: [
+        ProductServices,
+        QueueCacheService,
+        RecommendationService,
+        ImageService,
+        OrderService,
+        ProviderService,
+        UserService,
+      ],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

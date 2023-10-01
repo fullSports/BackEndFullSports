@@ -1,4 +1,4 @@
-import { INestApplication } from "@nestjs/common";
+import { CacheModule, INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
 import { AuthModule } from "src/auth/auth.module";
@@ -21,6 +21,8 @@ import {
   Provider,
   ProviderSchema,
 } from "src/providers/Schema/providers.schema";
+import { ProviderService } from "src/providers/providers.service";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
 import { UserSchema, Users } from "src/users/Schema/user.schema";
 import { UserService } from "src/users/user.service";
 import { UserController } from "src/users/users.controller";
@@ -34,13 +36,17 @@ describe("Product", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
-          { name: Order.name, schema: OrderSchema },
-          { name: Users.name, schema: UserSchema },
           { name: Product.name, schema: ProductSchema },
           { name: imagem.name, schema: ImagemSchema },
           { name: Provider.name, schema: ProviderSchema },
           { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
         AuthModule,
       ],
       controllers: [
@@ -57,6 +63,8 @@ describe("Product", () => {
         ProductServices,
         ImageService,
         RecommendationService,
+        QueueCacheService,
+        ProviderService,
       ],
     }).compile();
     app = moduleFixture.createNestApplication();
