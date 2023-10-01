@@ -17,6 +17,12 @@ import {
 import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ProductServices } from "src/product/product.service";
 import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
+import { CacheModule } from "@nestjs/common";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { ImageService } from "src/image/image.service";
+import { OrderService } from "src/order/order.service";
+import { ProviderService } from "src/providers/providers.service";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
 const urlConfig = require("../globalConfig.json");
 describe("UserController", () => {
   let userController: UserController;
@@ -25,22 +31,29 @@ describe("UserController", () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
         MongooseModule.forFeature([
+          { name: Users.name, schema: UserSchema },
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
+          { name: Order.name, schema: OrderSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
       ],
       controllers: [UserController, RecommendationController],
-      providers: [UserService, RecommendationService, ProductServices],
+      providers: [
+        UserService,
+        RecommendationService,
+        ProductServices,
+        QueueCacheService,
+        ImageService,
+        OrderService,
+        ProviderService,
+      ],
     }).compile();
 
     userController = app.get<UserController>(UserController);

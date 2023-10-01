@@ -22,6 +22,9 @@ import {
   Recommendation,
   RrecommendationSchema,
 } from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { CacheModule } from "@nestjs/common";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { ProviderService } from "src/providers/providers.service";
 const urlConfig = require("../globalConfig.json");
 const path = require("path");
 describe("OrderController", () => {
@@ -33,21 +36,18 @@ describe("OrderController", () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
       ],
       controllers: [
         OrderController,
@@ -56,13 +56,13 @@ describe("OrderController", () => {
         ImageController,
       ],
       providers: [
-        OrderService,
         ProductServices,
-        RecommendationController,
-        UserService,
-        ProductServices,
-        ImageService,
+        QueueCacheService,
         RecommendationService,
+        ImageService,
+        OrderService,
+        ProviderService,
+        UserService,
       ],
     }).compile();
     orderController = app.get<OrderController>(OrderController);
