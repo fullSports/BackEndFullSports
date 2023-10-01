@@ -42,15 +42,16 @@ export class QueueCacheService {
         split.length == 3
           ? await this.requestsById(`${split[0]}-${split[1]}`, split[2])
           : await this.requestsAll(item);
-      Logger.debug(request);
+      Logger.debug("Request - " + request);
       const cache = await this.cache.get(item);
-      Logger.debug(cache);
+      Logger.debug("cache-antigo" + cache);
       if (cache) {
         await this.cache.del(item);
         await this.cache.set(item, request);
       } else {
         await this.cache.set(item, request);
       }
+      Logger.debug("novo-cache" + (await this.cache.get(item)));
       Logger.debug(`item - ${item} - processado `);
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
