@@ -6,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import * as express from "express";
 import * as path from "path";
 import { useContainer } from "class-validator";
+import workerCacheWriter from "./workerCacheWriter";
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule);
   app.enableCors();
@@ -19,7 +20,7 @@ async function bootstrap() {
     .setDescription(
       "Api da loja full sports e suas requisições.\n Para realizazr o login, selecione request-body no campo 'credentials location' após clicar em 'Authorize'"
     )
-    .setVersion("0.1.17")
+    .setVersion("0.1.18")
     .addOAuth2({
       type: "oauth2",
       bearerFormat: "JWT",
@@ -51,6 +52,7 @@ async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   await app.listen(process.env.PORT);
+  await workerCacheWriter();
   Logger.debug(`server on in http://localhost:${process.env.PORT}`);
   Logger.debug(
     `application document in http://localhost:${process.env.PORT}/swagger`

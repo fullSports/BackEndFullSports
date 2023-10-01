@@ -10,8 +10,8 @@ import { JwtStrategy } from "src/auth/strategies/jwt.strategy";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import { ProductServices } from "src/product/product.service";

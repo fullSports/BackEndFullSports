@@ -1,6 +1,6 @@
 {
   "name": "api-full-sports_nestjs",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "",
   "author": "",
   "private": true,
@@ -37,6 +37,7 @@
     "@aws-sdk/client-s3": "^3.252.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/event-emitter": "^2.0.2",
     "@nestjs/jwt": "^10.0.3",
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/passport": "^9.0.3",
@@ -48,6 +49,7 @@
     "aws-sdk": "^2.1296.0",
     "axios": "^1.2.3",
     "bcrypt": "^5.1.0",
+    "cache-manager": "^4.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cors": "^2.8.5",

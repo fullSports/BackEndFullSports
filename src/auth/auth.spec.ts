@@ -5,7 +5,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import {
@@ -18,7 +18,7 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { UserService } from "src/users/user.service";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ProductServices } from "src/product/product.service";
 const urlConfig = require("../globalConfig.json");
 describe("AuthController", () => {

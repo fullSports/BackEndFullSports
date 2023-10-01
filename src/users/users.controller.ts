@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  CACHE_MANAGER,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  UseGuards,
+} from "@nestjs/common";
 import {
   Delete,
   Post,
@@ -11,16 +19,30 @@ import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
 import { UserService } from "./user.service";
 import { AuthGuard } from "@nestjs/passport";
+import { Cache } from "cache-manager";
+import { RequestsEnum } from "src/queues/enum/request.enum";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
 @Controller()
 @ApiTags("Users")
 @ApiBearerAuth()
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    @Inject(CACHE_MANAGER) private readonly cache: Cache,
+    private readonly queueCacheService: QueueCacheService
+  ) {}
   @UseGuards(AuthGuard("jwt"))
   @Get("listar-clientes")
   @ApiOperation({ summary: "list all users" })
   async ListUsers(): Promise<Users[]> {
-    return this.userService.ListUsers();
+    const users_cache = await this.cache.get(RequestsEnum.users);
+    if (users_cache) {
+      return users_cache;
+    } else {
+      const users = await this.userService.ListUsers();
+      await this.cache.set(RequestsEnum.users, users);
+      return users;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Post("cadastrar-cliente")
@@ -33,6 +55,7 @@ export class UserController {
         registeredSuccess: false,
       };
     } else {
+      this.queueCacheService.addItem(RequestsEnum.users);
       return {
         user: createdUser,
         messagem: "usuario cadastrado com sucesso",
@@ -44,7 +67,14 @@ export class UserController {
   @Get("listar-cliente/:id")
   @ApiOperation({ summary: "list user by id" })
   async SearchUserById(@Param("id") id: string): Promise<Users> {
-    return this.userService.searchId(id);
+    const userId_cache = await this.cache.get(`${RequestsEnum.users}-${id}`);
+    if (userId_cache) {
+      return userId_cache;
+    } else {
+      const userId = await this.userService.searchId(id);
+      await this.cache.set(`${RequestsEnum.users}-${id}`);
+      return userId;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Put("atualizar-cliente/:id")
@@ -54,6 +84,8 @@ export class UserController {
     @Body() updateUser: UpdateUserDTO
   ) {
     const updateUserId = await this.userService.updateUser(id, updateUser);
+    this.queueCacheService.addItem(RequestsEnum.users);
+    this.queueCacheService.addItem(`${RequestsEnum.users}-${id}`);
     return {
       user: updateUserId,
       messagem: "usuario atualizado com sucesso",
@@ -67,6 +99,7 @@ export class UserController {
     @Body() singInBody: RealizarLogin
   ) {
     const deleteUser = await this.userService.deleteUser(id, singInBody);
+    this.queueCacheService.addItem(RequestsEnum.users);
     if (deleteUser)
       return {
         messagem: "cliente deletado com sucesso ",
@@ -90,6 +123,8 @@ export class UserController {
       id,
       UpdatePasswordBody
     );
+    this.queueCacheService.addItem(RequestsEnum.users);
+    this.queueCacheService.addItem(`${RequestsEnum.users}-${id}`);
     return {
       messagem: "login atualizado com suceeso",
       user: updatePassword,

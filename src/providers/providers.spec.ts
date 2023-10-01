@@ -4,6 +4,21 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { ProviderService } from "./providers.service";
 import { Provider, ProviderSchema } from "./Schema/providers.schema";
 import { updateProviderDTO } from "./dto/updateProvider.dto";
+import { UserService } from "src/users/user.service";
+import { OrderService } from "src/order/order.service";
+import { ImageService } from "src/image/image.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
+import { ProductServices } from "src/product/product.service";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { Product, ProductSchema } from "src/product/Schema/product.schema";
+import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
+import {
+  Recommendation,
+  RrecommendationSchema,
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
+import { UserSchema, Users } from "src/users/Schema/user.schema";
+import { CacheModule } from "@nestjs/common";
 const urlConfig = require("../globalConfig.json");
 describe("ProvidersController", () => {
   let providersController: ProviderController;
@@ -12,11 +27,28 @@ describe("ProvidersController", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
+          { name: Product.name, schema: ProductSchema },
+          { name: imagem.name, schema: ImagemSchema },
           { name: Provider.name, schema: ProviderSchema },
+          { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
       ],
       controllers: [ProviderController],
-      providers: [ProviderService],
+      providers: [
+        ProductServices,
+        QueueCacheService,
+        RecommendationService,
+        ImageService,
+        OrderService,
+        ProviderService,
+        UserService,
+      ],
     }).compile();
     providersController = app.get<ProviderController>(ProviderController);
   });

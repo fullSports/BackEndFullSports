@@ -1,13 +1,13 @@
-import { INestApplication } from "@nestjs/common";
+import { CacheModule, INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
 import * as request from "supertest";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
+import { RecommendationController } from "src/componentRecommendation/recommendation.controller";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
 import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
 import { Product, ProductSchema } from "src/product/Schema/product.schema";
 import { ProductServices } from "src/product/product.service";
@@ -19,6 +19,11 @@ import { UserSchema, Users } from "src/users/Schema/user.schema";
 import { UserService } from "src/users/user.service";
 import { UserController } from "src/users/users.controller";
 import { AuthModule } from "src/auth/auth.module";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { ImageService } from "src/image/image.service";
+import { OrderService } from "src/order/order.service";
+import { ProviderService } from "src/providers/providers.service";
 const urlConfig = require("./globalConfig.json");
 describe("Recommendation", () => {
   let app: INestApplication;
@@ -27,16 +32,29 @@ describe("Recommendation", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
-          { name: Recommendation.name, schema: RrecommendationSchema },
           { name: Product.name, schema: ProductSchema },
           { name: imagem.name, schema: ImagemSchema },
           { name: Provider.name, schema: ProviderSchema },
+          { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
           { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
         AuthModule,
       ],
       controllers: [RecommendationController, UserController],
-      providers: [RecommendationService, ProductServices, UserService],
+      providers: [
+        ProductServices,
+        QueueCacheService,
+        RecommendationService,
+        ImageService,
+        OrderService,
+        ProviderService,
+        UserService,
+      ],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

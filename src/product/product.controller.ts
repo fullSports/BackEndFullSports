@@ -1,8 +1,11 @@
 import {
   Body,
+  CACHE_MANAGER,
   Controller,
   Delete,
   Get,
+  Inject,
+  Logger,
   Param,
   Post,
   Put,
@@ -13,14 +16,28 @@ import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ProductServices } from "./product.service";
 import { Product } from "./Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
+import { Cache } from "cache-manager";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { RequestsEnum } from "src/queues/enum/request.enum";
 @Controller()
 @ApiTags("Products")
 export default class ProductController {
-  constructor(private readonly productService: ProductServices) {}
+  constructor(
+    private readonly productService: ProductServices,
+    @Inject(CACHE_MANAGER) private readonly cache: Cache,
+    private readonly queueCacheService: QueueCacheService
+  ) {}
   @UseGuards(AuthGuard("jwt"))
   @Get("/listar-produtos")
   async ListProduct(): Promise<Product[]> {
-    return await this.productService.listProducts();
+    const products_cache = await this.cache.get(RequestsEnum.product);
+    if (products_cache) {
+      return products_cache;
+    } else {
+      const products = await this.productService.listProducts();
+      await this.cache.set(RequestsEnum.product, products);
+      return products;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Post("/cadastrar-produto")
@@ -29,7 +46,7 @@ export default class ProductController {
     const createdProduct = await this.productService.RegisterProduct(
       creatProduct
     );
-
+    this.queueCacheService.addItem(RequestsEnum.product);
     return {
       product: createdProduct,
       messagem: "produto cadastrado com sucesso",
@@ -38,7 +55,16 @@ export default class ProductController {
   @UseGuards(AuthGuard("jwt"))
   @Get("/listar-produto/:id")
   async SearchProductById(@Param("id") id: string): Promise<Product> {
-    return this.productService.searchProductId(id);
+    const productId_cache = await this.cache.get(
+      `${RequestsEnum.product}-${id}`
+    );
+    if (productId_cache) {
+      return productId_cache;
+    } else {
+      const productId = await this.productService.searchProductId(id);
+      await this.cache.set(`${RequestsEnum.product}-${id}`);
+      return productId;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Put("/atualizar-produto/:id")
@@ -50,6 +76,8 @@ export default class ProductController {
       id,
       updateProduct
     );
+    this.queueCacheService.addItem(RequestsEnum.product);
+    this.queueCacheService.addItem(`${RequestsEnum.product}-${id}`);
     return {
       product: updateProductId,
       messagem: "produto atualizado com sucesso",
@@ -59,6 +87,7 @@ export default class ProductController {
   @Delete("/deletar-produto/:id")
   async deleteProduct(@Param("id") id: string) {
     await this.productService.deleteProduct(id);
+    this.queueCacheService.addItem(RequestsEnum.product);
     return {
       messagem: "Produto deletado com sucesso ",
     };

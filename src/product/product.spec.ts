@@ -11,6 +11,18 @@ import {
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ImageController } from "src/image/image.controller";
 import { ImageService } from "src/image/image.service";
+import { CacheModule } from "@nestjs/common";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { RecommendationService } from "src/componentRecommendation/recommendation.service";
+import { OrderService } from "src/order/order.service";
+import { ProviderService } from "src/providers/providers.service";
+import { UserService } from "src/users/user.service";
+import {
+  Recommendation,
+  RrecommendationSchema,
+} from "src/componentRecommendation/Schema/Rrecommendation.schema";
+import { Order, OrderSchema } from "src/order/Schema/order.schema";
+import { UserSchema, Users } from "src/users/Schema/user.schema";
 const path = require("path");
 const urlConfig = require("../globalConfig.json");
 describe("ProductController", () => {
@@ -22,16 +34,27 @@ describe("ProductController", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
+          { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Order.name, schema: OrderSchema },
+          { name: Users.name, schema: UserSchema },
         ]),
+        CacheModule.register({
+          ttl: 999999,
+          isGlobal: true,
+        }),
       ],
       controllers: [ProductController, ImageController],
-      providers: [ProductServices, ImageService],
+      providers: [
+        ProductServices,
+        QueueCacheService,
+        RecommendationService,
+        ImageService,
+        OrderService,
+        ProviderService,
+        UserService,
+      ],
     }).compile();
     productController = app.get<ProductController>(ProductController);
     imagemController = app.get<ImageController>(ImageController);
