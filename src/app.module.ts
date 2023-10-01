@@ -24,6 +24,7 @@ else MongoUrl = null;
     MongooseModule.forRoot(MongoUrl),
     CacheModule.register({
       ttl: 900000,
+      isGlobal: true,
     }),
     UserModule,
     ImageModule,
