@@ -1,8 +1,10 @@
 import {
   Body,
+  CACHE_MANAGER,
   Controller,
   Delete,
   Get,
+  Inject,
   Logger,
   Param,
   Post,
@@ -15,14 +17,34 @@ import { Recommendation } from "./Schema/Rrecommendation.schema";
 import { Product } from "src/product/Schema/product.schema";
 import { AuthGuard } from "@nestjs/passport";
 import { Cron, CronExpression } from "@nestjs/schedule";
+import { QueueCacheService } from "src/queues/jobs/queue.cache.service";
+import { Cache } from "cache-manager";
+import { RequestsEnum } from "src/queues/enum/request.enum";
 @UseGuards(AuthGuard("jwt"))
 @Controller()
 @ApiTags("Recommendation Component")
 export class RecommendationController {
-  constructor(private readonly recommendationService: RecommendationService) {}
+  constructor(
+    private readonly recommendationService: RecommendationService,
+    @Inject(CACHE_MANAGER) private readonly cache: Cache,
+    private readonly queueCacheService: QueueCacheService
+  ) {}
   @Get("/listar-recomendacoes")
   async ListRecommendations(): Promise<Recommendation[]> {
-    return await this.recommendationService.listRecommedations();
+    const recomemendation_cache = await this.cache.get(
+      RequestsEnum.componentRecommendation
+    );
+    if (recomemendation_cache) {
+      return recomemendation_cache;
+    } else {
+      const recommendations =
+        await this.recommendationService.listRecommedations();
+      await this.cache.set(
+        RequestsEnum.componentRecommendation,
+        recommendations
+      );
+      return recommendations;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Post("/cadastrar-recomendacao")
@@ -31,6 +53,7 @@ export class RecommendationController {
       await this.recommendationService.RegisterRecommedations(
         craateRecommendaton
       );
+    this.queueCacheService.addItem(RequestsEnum.componentRecommendation);
     return {
       recommedation: createRecommedation,
       messagem: "Recomendação criada com sucesso",
@@ -41,7 +64,17 @@ export class RecommendationController {
   async ListRecommedationById(
     @Param("id") id: string
   ): Promise<Recommendation> {
-    return await this.recommendationService.ListRecommedationById(id);
+    const recommendationId_cache = await this.cache.get(
+      `${RequestsEnum.componentRecommendation}-${id}`
+    );
+    if (recommendationId_cache) {
+      return recommendationId_cache;
+    } else {
+      const recommendationId =
+        await this.recommendationService.ListRecommedationById(id);
+      await this.cache.set(`${RequestsEnum.componentRecommendation}-${id}`);
+      return recommendationId;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Put("/atualizar-recomendacao/:id")
@@ -54,7 +87,10 @@ export class RecommendationController {
         id,
         updateRecommedation
       );
-
+    this.queueCacheService.addItem(RequestsEnum.componentRecommendation);
+    this.queueCacheService.addItem(
+      `${RequestsEnum.componentRecommendation}-${id}`
+    );
     return {
       recommendation: UpdateRecommedation,
       messagem: "Recomendação atualizada com sucesso",
@@ -64,6 +100,7 @@ export class RecommendationController {
   @Delete("/deletar-recomendacao/:id")
   async DeleteRecommedation(@Param("id") id: string) {
     await this.recommendationService.DeleteRecommendation(id);
+    this.queueCacheService.addItem(RequestsEnum.componentRecommendation);
     return {
       messagem: "Recomendação deletada com sucesso",
     };
@@ -78,7 +115,7 @@ export class RecommendationController {
 
   @Cron(CronExpression.MONDAY_TO_FRIDAY_AT_9PM)
   async ReiniciaREcomendacao() {
-    Logger.debug("Called when the current second is 45");
+    Logger.debug("Atualizando dados para recomendação");
     const list = await this.recommendationService.listRecommedations();
     for (const i of list) {
       const i2 = i as any;
