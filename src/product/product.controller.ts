@@ -77,6 +77,7 @@ export default class ProductController {
       updateProduct
     );
     this.queueCacheService.addItem(RequestsEnum.product);
+    this.queueCacheService.addItem(`${RequestsEnum.product}-${id}`);
     return {
       product: updateProductId,
       messagem: "produto atualizado com sucesso",
