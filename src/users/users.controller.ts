@@ -67,7 +67,14 @@ export class UserController {
   @Get("listar-cliente/:id")
   @ApiOperation({ summary: "list user by id" })
   async SearchUserById(@Param("id") id: string): Promise<Users> {
-    return this.userService.searchId(id);
+    const userId_cache = await this.cache.get(`${RequestsEnum.users}-${id}`);
+    if (userId_cache) {
+      return userId_cache;
+    } else {
+      const userId = await this.userService.searchId(id);
+      await this.cache.set(`${RequestsEnum.users}-${id}`);
+      return userId;
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @Put("atualizar-cliente/:id")
