@@ -1,7 +1,4 @@
-import {
-  CacheModule,
-  Module,
-} from "@nestjs/common";
+import { CacheModule, Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserModule } from "./users/users.module";
 import { ImageModule } from "./image/image.module";
@@ -34,5 +31,4 @@ else MongoUrl = null;
     QueueModule,
   ],
 })
-export class AppModule {
-}
+export class AppModule {}

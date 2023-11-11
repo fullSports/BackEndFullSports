@@ -9,5 +9,5 @@ services:
     volumes:
       - .:/home/node/app
     environment:
-      URL_AUTHORIZATION: 'http://localhost:${PORT}/auth/login-app'
+      URL_AUTHORIZATION: "http://localhost:${PORT}/auth/login-app"
 
