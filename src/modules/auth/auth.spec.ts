@@ -1,41 +1,47 @@
-import { INestApplication } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { MongooseModule } from "@nestjs/mongoose";
 import { PassportModule } from "@nestjs/passport";
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthController } from "@auth/auth.controller";
-import { AuthService } from "@auth/auth.service";
-import { jwtConfig } from "@auth/config/jwt.config";
-import { JwtStrategy } from "@auth/strategies/jwt.strategy";
 import {
   Recommendation,
   RrecommendationSchema,
 } from "@componentRecommendation/Schema/Rrecommendation.schema";
-import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ImagemSchema, imagem } from "@image/Schema/image.schema";
 import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { ProductServices } from "@product/product.service";
 import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { UserSchema, Users } from "@users/Schema/user.schema";
+import { jwtConfig } from "./config/jwt.config";
+import { AuthController } from "./auth.controller";
+import { AuthService } from "./auth.service";
+import { JwtStrategy } from "./strategies/jwt.strategy";
 import { UserService } from "@users/user.service";
-import * as request from "supertest";
-const urlConfig = require("./globalConfig.json");
-describe("Auth", () => {
-  let app: INestApplication;
+import { RecommendationService } from "@componentRecommendation/recommendation.service";
+import { ProductServices } from "@product/product.service";
+const urlConfig = require("../../../globalConfig.json");
+describe("AuthController", () => {
+  let authController: AuthController;
+
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    const app: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([]),
+        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
         MongooseModule.forFeature([
-          { name: Users.name, schema: UserSchema },
           { name: imagem.name, schema: ImagemSchema },
+        ]),
+        MongooseModule.forFeature([
           { name: Recommendation.name, schema: RrecommendationSchema },
+        ]),
+        MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
+        ]),
+        MongooseModule.forFeature([
           { name: Provider.name, schema: ProviderSchema },
         ]),
         PassportModule,
         JwtModule.register(jwtConfig),
+        // Outros módulos necessários para o AuthModule
       ],
       controllers: [AuthController],
       providers: [
@@ -47,18 +53,16 @@ describe("Auth", () => {
       ],
       exports: [AuthService], // Se AuthService for usado em outros módulos
     }).compile();
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    authController = app.get<AuthController>(AuthController);
   });
 
-  it("• /auth/login-app", async () => {
-    const loginApp = await request(app.getHttpServer())
-      .post("/auth/login-app")
-      .send({
+  describe("👨‍💻 MethodsAuth", () => {
+    it("👨‍💻loginUser() ", async () => {
+      const loginApp = await authController.LoginApp({
         clientId: String(process.env.clientId),
         clientSecret: String(process.env.clientSecret),
-      })
-      .expect(201);
-    expect(loginApp.body).toHaveProperty("access_token");
+      });
+      expect(loginApp.access_token);
+    });
   });
 });

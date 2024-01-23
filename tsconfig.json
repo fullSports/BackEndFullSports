@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
@@ -16,7 +16,34 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "allowJs": true,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
+    "types": ["dotenv", "jest"],
+    "paths": {
+      "@auth/*": [
+        "./src/modules/auth/*"
+      ],
+      "@componentRecommendation/*": [
+        "./src/modules/componentRecommendation/*"
+      ],
+      "@image/*": [
+        "./src/modules/image/*"
+      ],
+      "@order/*": [
+        "./src/modules/order/*"
+      ],
+      "@product/*": [
+        "./src/modules/product/*"
+      ],
+      "@providers/*": [
+        "./src/modules/providers/*"
+      ],
+      "@queues/*": [
+        "./src/modules/queues/*"
+      ],
+      "@users/*": [
+        "./src/modules/users/*"
+      ]
+    }
   }
 }

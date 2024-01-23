@@ -2,23 +2,20 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
-import { UserSchema, Users } from "src/users/Schema/user.schema";
-import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
-import { UserController } from "src/users/users.controller";
-import { UserService } from "src/users/user.service";
+import { UserSchema, Users } from "@users/Schema/user.schema";
+import { ImagemSchema, imagem } from "@image/Schema/image.schema";
+import { UserController } from "@users/users.controller";
+import { UserService } from "@users/user.service";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
-import { Product, ProductSchema } from "src/product/Schema/product.schema";
-import {
-  Provider,
-  ProviderSchema,
-} from "src/providers/Schema/providers.schema";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
-import { ProductServices } from "src/product/product.service";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { AuthModule } from "src/auth/auth.module";
+} from "@componentRecommendation/Schema/Rrecommendation.schema";
+import { Product, ProductSchema } from "@product/Schema/product.schema";
+import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { RecommendationService } from "@componentRecommendation/recommendation.service";
+import { ProductServices } from "@product/product.service";
+import { RecommendationController } from "@componentRecommendation/recommendation.controller";
+import { AuthModule } from "@auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Users", () => {
   let app: INestApplication;
@@ -60,8 +57,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -78,8 +75,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
 
@@ -99,8 +96,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListUsersID = await request(app.getHttpServer())
@@ -117,8 +114,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newClient = {
@@ -146,8 +143,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const SingIn = await request(app.getHttpServer())
@@ -169,8 +166,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
@@ -193,8 +190,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const updateLogin = await request(app.getHttpServer())
@@ -219,8 +216,8 @@ describe("Users", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deletedUser = await request(app.getHttpServer())

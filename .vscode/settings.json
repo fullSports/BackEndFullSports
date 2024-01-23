@@ -1,3 +1,20 @@
 {
-    "git.ignoreLimitWarning": true
+    "configurations": [
+        {
+          "name": "Docker: Attach to Node",
+          "type": "node",
+          "request": "attach",
+          "port": 9229,
+          "address": "172.21.0.2",
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/home/node/app",
+          "protocol": "inspector",
+          "restart": true,
+          "sourceMaps": true,
+          "resolveSourceMapLocations": [
+            "${workspaceFolder}/**",
+            "!**/node_modules/**"
+        ]
+        }
+      ]
 }

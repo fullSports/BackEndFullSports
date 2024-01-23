@@ -2,15 +2,12 @@ import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
-import { Product, ProductSchema } from "src/product/Schema/product.schema";
-import { imagem, ImagemSchema } from "src/image/Schema/image.schema";
-import {
-  Provider,
-  ProviderSchema,
-} from "src/providers/Schema/providers.schema";
-import ProductController from "src/product/product.controller";
-import { ProductServices } from "src/product/product.service";
-import { AuthModule } from "src/auth/auth.module";
+import { Product, ProductSchema } from "@product/Schema/product.schema";
+import { imagem, ImagemSchema } from "@image/Schema/image.schema";
+import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import ProductController from "@product/product.controller";
+import { ProductServices } from "@product/product.service";
+import { AuthModule } from "@auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Product", () => {
   let app: INestApplication;
@@ -51,8 +48,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProduct = await request(app.getHttpServer())
@@ -70,8 +67,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProduct = await request(app.getHttpServer())
@@ -90,8 +87,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProductId = await request(app.getHttpServer())
@@ -109,8 +106,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newProduct = {
@@ -135,8 +132,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const searchProduct = await request(app.getHttpServer())
@@ -154,8 +151,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteProduct = await request(app.getHttpServer())

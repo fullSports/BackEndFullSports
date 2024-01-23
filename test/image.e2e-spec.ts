@@ -1,10 +1,10 @@
 import { INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
-import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
-import { ImageController } from "src/image/image.controller";
-import { ImageService } from "src/image/image.service";
-import { AuthModule } from "src/auth/auth.module";
+import { ImagemSchema, imagem } from "@image/Schema/image.schema";
+import { ImageController } from "@image/image.controller";
+import { ImageService } from "@image/image.service";
+import { AuthModule } from "@auth/auth.module";
 import * as request from "supertest";
 const path = require("path");
 const urlConfig = require("./globalConfig.json");
@@ -31,11 +31,11 @@ describe("Images", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
-
+    console.log(acessToke);
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
@@ -57,8 +57,8 @@ describe("Images", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -75,8 +75,8 @@ describe("Images", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     await request(app.getHttpServer())
@@ -92,8 +92,8 @@ describe("Images", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteImage = await request(app.getHttpServer())

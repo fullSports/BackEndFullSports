@@ -1,10 +1,32 @@
 version: '3'
 
 services:
+  mongodb:
+      image: mongo
+      container_name: mongodb
+      ports:
+        - "27017:27017"
+      volumes:
+        - .:/home/node/app
+      attach: false # desabilita os logs do mongo
+      networks:
+        - api-fullsports
+      command: mongod --bind_ip_all
+
   app:
     build: .
+    depends_on:
+      - mongodb
     entrypoint: .docker/entrypoint.sh
     ports:
       - "${PORT}:${PORT}"
     volumes:
       - .:/home/node/app
+    networks:
+        - api-fullsports
+    environment:
+        DBAAS_MONGODB_ENDPOINT: mongodb://mongodb:27017
+
+networks:
+  api-fullsports:
+    driver: bridge

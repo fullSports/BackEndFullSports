@@ -1,29 +1,26 @@
 import { INestApplication } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthModule } from "src/auth/auth.module";
+import { AuthModule } from "@auth/auth.module";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
-import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
-import { ImageController } from "src/image/image.controller";
-import { ImageService } from "src/image/image.service";
-import { Order, OrderSchema } from "src/order/Schema/order.schema";
-import { OrderController } from "src/order/order.controller";
-import { OrderService } from "src/order/order.service";
-import { Product, ProductSchema } from "src/product/Schema/product.schema";
-import ProductController from "src/product/product.controller";
-import { ProductServices } from "src/product/product.service";
-import {
-  Provider,
-  ProviderSchema,
-} from "src/providers/Schema/providers.schema";
-import { UserSchema, Users } from "src/users/Schema/user.schema";
-import { UserService } from "src/users/user.service";
-import { UserController } from "src/users/users.controller";
+} from "@componentRecommendation/Schema/Rrecommendation.schema";
+import { RecommendationController } from "@componentRecommendation/recommendation.controller";
+import { RecommendationService } from "@componentRecommendation/recommendation.service";
+import { ImagemSchema, imagem } from "@image/Schema/image.schema";
+import { ImageController } from "@image/image.controller";
+import { ImageService } from "@image/image.service";
+import { Order, OrderSchema } from "@order/Schema/order.schema";
+import { OrderController } from "@order/order.controller";
+import { OrderService } from "@order/order.service";
+import { Product, ProductSchema } from "@product/Schema/product.schema";
+import ProductController from "@product/product.controller";
+import { ProductServices } from "@product/product.service";
+import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { UserSchema, Users } from "@users/Schema/user.schema";
+import { UserService } from "@users/user.service";
+import { UserController } from "@users/users.controller";
 import * as request from "supertest";
 const urlConfig = require("./globalConfig.json");
 const path = require("path");
@@ -84,8 +81,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return await request(app.getHttpServer())
@@ -109,8 +106,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const RegisterUsers = await request(app.getHttpServer())
@@ -129,8 +126,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProduct = await request(app.getHttpServer())
@@ -162,8 +159,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdOrder = await request(app.getHttpServer())
@@ -188,8 +185,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListOders = await request(app.getHttpServer())
@@ -206,8 +203,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const listOrderId = await request(app.getHttpServer())
@@ -241,8 +238,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteOrder = await request(app.getHttpServer())
@@ -260,8 +257,8 @@ describe("Product", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     await request(app.getHttpServer())

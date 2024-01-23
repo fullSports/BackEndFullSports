@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
-import { AppService } from "src/app.service";
-import { AppController } from "src/app.controller";
+import { AppService } from "../src/app.service";
+import { AppController } from "../src/app.controller";
 import { MongooseModule } from "@nestjs/mongoose";
-import { AuthModule } from "src/auth/auth.module";
+import { AuthModule } from "@auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("AppController (e2e)", () => {
   let app: INestApplication;
@@ -25,8 +25,8 @@ describe("AppController (e2e)", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     await request(app.getHttpServer())

@@ -4,21 +4,18 @@ import { Test, TestingModule } from "@nestjs/testing";
 import {
   Recommendation,
   RrecommendationSchema,
-} from "src/componentRecommendation /Schema/Rrecommendation.schema";
+} from "@componentRecommendation/Schema/Rrecommendation.schema";
 import * as request from "supertest";
-import { RecommendationController } from "src/componentRecommendation /recommendation.controller";
-import { RecommendationService } from "src/componentRecommendation /recommendation.service";
-import { ImagemSchema, imagem } from "src/image/Schema/image.schema";
-import { Product, ProductSchema } from "src/product/Schema/product.schema";
-import { ProductServices } from "src/product/product.service";
-import {
-  Provider,
-  ProviderSchema,
-} from "src/providers/Schema/providers.schema";
-import { UserSchema, Users } from "src/users/Schema/user.schema";
-import { UserService } from "src/users/user.service";
-import { UserController } from "src/users/users.controller";
-import { AuthModule } from "src/auth/auth.module";
+import { RecommendationController } from "@componentRecommendation/recommendation.controller";
+import { RecommendationService } from "@componentRecommendation/recommendation.service";
+import { ImagemSchema, imagem } from "@image/Schema/image.schema";
+import { Product, ProductSchema } from "@product/Schema/product.schema";
+import { ProductServices } from "@product/product.service";
+import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { UserSchema, Users } from "@users/Schema/user.schema";
+import { UserService } from "@users/user.service";
+import { UserController } from "@users/users.controller";
+import { AuthModule } from "@auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Recommendation", () => {
   let app: INestApplication;
@@ -48,8 +45,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const _idUser = await request(app.getHttpServer())
@@ -100,8 +97,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -118,8 +115,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -135,8 +132,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return await request(app.getHttpServer())
@@ -159,8 +156,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     return request(app.getHttpServer())
@@ -176,8 +173,8 @@ describe("Recommendation", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const DeleteRecommedation = await request(app.getHttpServer())

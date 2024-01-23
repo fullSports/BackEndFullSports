@@ -2,13 +2,10 @@ import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
-import {
-  Provider,
-  ProviderSchema,
-} from "src/providers/Schema/providers.schema";
-import { ProviderController } from "src/providers/providers.controller";
-import { ProviderService } from "src/providers/providers.service";
-import { AuthModule } from "src/auth/auth.module";
+import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { ProviderController } from "@providers/providers.controller";
+import { ProviderService } from "@providers/providers.service";
+import { AuthModule } from "@auth/auth.module";
 const urlConfig = require("./globalConfig.json");
 describe("Providers", () => {
   let app: INestApplication;
@@ -40,8 +37,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProviders = await request(app.getHttpServer())
@@ -59,8 +56,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProvider = await request(app.getHttpServer())
@@ -83,8 +80,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProviderID = await request(app.getHttpServer())
@@ -102,8 +99,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newProvider = {
@@ -127,8 +124,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          client_id: String(process.env.clientId),
-          client_secret: String(process.env.clientSecret),
+          clientId: String(process.env.clientId),
+          clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteProvider = await request(app.getHttpServer())
