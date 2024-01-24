@@ -1,6 +1,4 @@
 import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserModule } from "./modules/users/users.module";
 import { ImageModule } from "./modules/image/image.module";
@@ -25,8 +23,6 @@ else MongoUrl = process.env.DBAAS_MONGODB_ENDPOINT;
     RecommendationModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
