@@ -35,7 +35,6 @@ describe("Images", () => {
           clientSecret: String(process.env.clientSecret),
         })
     ).body.access_token;
-    console.log(acessToke);
     return await request(app.getHttpServer())
       .post("/imagem")
       .field("file", "img")
