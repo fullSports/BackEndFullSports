@@ -2,16 +2,16 @@ version: '3'
 
 services:
   mongodb:
-      image: mongo
-      container_name: mongodb
-      ports:
-        - "27017:27017"
-      volumes:
-        - .:/home/node/app
-      attach: false # desabilita os logs do mongo
-      networks:
-        - api-fullsports
-      command: mongod --bind_ip_all
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - .:/home/node/app
+    attach: false # desabilita ou habilita os logs do mongo
+    networks:
+      - api-fullsports
+    command: mongod --bind_ip_all
 
   app:
     build: .
@@ -26,6 +26,27 @@ services:
         - api-fullsports
     environment:
         DBAAS_MONGODB_ENDPOINT: mongodb://mongodb:27017
+        VERCEL_GIT_COMMIT_REF: Local version
+
+  mongodb-seed: # rodar esse container, importa os dados das materias(json) no mongodb local
+    image: mongo
+    container_name: mongodb-seed
+    depends_on:
+      - mongodb
+    volumes:
+        - .:/home/node/app
+    networks:
+      - api-fullsports
+    command:
+      - sh
+      - -c
+      - | 
+        mongoimport --uri mongodb://mongodb:27017 --collection users --file home/node/app/src/mocks/user.mock.json --jsonArray
+        mongoimport --uri mongodb://mongodb:27017 --collection recommendations --file home/node/app/src/mocks/component_recommendation.mock.json --jsonArray
+        mongoimport --uri mongodb://mongodb:27017 --collection providers --file home/node/app/src/mocks/provider.mock.json --jsonArray
+        mongoimport --uri mongodb://mongodb:27017 --collection products --file home/node/app/src/mocks/product.mock.json --jsonArray
+        mongoimport --uri mongodb://mongodb:27017 --collection orders --file home/node/app/src/mocks/order.mock.json --jsonArray
+        mongoimport --uri mongodb://mongodb:27017 --collection models --file home/node/app/src/mocks/image.mock.json --jsonArray
 
 networks:
   api-fullsports:

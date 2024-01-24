@@ -1,0 +1,371 @@
+[
+    {
+      "_id": "638799113daa035e68364cfa",
+      "cpf": "471.928.098-69",
+      "nome": "renan cliente",
+      "login": {
+        "email": "renafigueoli09@gmail.com",
+        "password": "$2b$10$hIdw9SiOGqqgaTJwSbOVLuAiY38B9OJ5kIYFiRy8juuRMKHVWovp2",
+        "isAdmin": false
+      },
+      "dataNascimento": "33/33/333",
+      "sexo": "M",
+      "cep": "08452-000",
+      "endereco": "Rua João de Siqueira Afonso,333 -333- SP, São Paulo, Lajeado",
+      "dataCadastro": "30/11/2022",
+      "imagemPerfil": null,
+      "__v": 0
+    },
+    {
+      "_id": "6386542b6dec4623f23b54bb",
+      "cpf": "471.928.098-61",
+      "nome": "Renan Figueiredo de Oliveira",
+      "login": {
+        "email": "renanfigueoli09@gmail.com",
+        "password": "$2b$10$pxiMHCf14PLftGgLi6KtF.1fGLDx7hS4t0Wm88Mwv9JWbQkgEnoGW",
+        "isAdmin": false
+      },
+      "dataNascimento": "09/06/2003",
+      "sexo": "M",
+      "cep": "08452-000",
+      "endereco": "Rua João de Siqueira Afonso ,213 -casa- SP, São Paulo, Lajeado",
+      "dataCadastro": "29/11/2022",
+      "imagemPerfil": null,
+      "__v": 0
+    },
+    {
+      "_id": "6385739da6d27bb7801966c6",
+      "cpf": "839.226.370-78",
+      "nome": "Lisandra Ferraz",
+      "login": {
+        "email": "lih.ferrazsantana@gmail.com",
+        "password": "$2b$10$lOYIxZmCNL./7czRorvkY.tMrtHI7/EyuCl9eFM8prCo7KhzmOAcW",
+        "isAdmin": true
+      },
+      "dataNascimento": "05/03/2006",
+      "sexo": "F",
+      "cep": "08411-461",
+      "endereco": "Rua Alexandre Legrand,93 --- SP, São Paulo, Jardim Marpu",
+      "dataCadastro": "28/11/2022",
+      "imagemPerfil": null,
+      "__v": 0
+    },
+    {
+      "_id": "6387d36432fc20f92a1f57f7",
+      "cpf": "000.000.000-00",
+      "nome": "Paulo Gabriel ",
+      "login": {
+        "email": "gregoriogabriel299@gmail.com",
+        "password": "$2b$10$S3rcaVJQcRCBEF4B/ZBzIOwsZaFy.LDBmAuZQJQ4o1ByttOndygm2",
+        "isAdmin": false
+      },
+      "dataNascimento": "07/07/2003",
+      "sexo": "M",
+      "cep": "08452-262",
+      "endereco": "Rua Jorge Neto Falcão,58 -casa- SP, São Paulo, Lajeado",
+      "dataCadastro": "30/11/2022",
+      "imagemPerfil": {
+        "_id": "6387d36332fc20f92a1f57f5",
+        "name": "eu.jpg",
+        "size": 339196,
+        "key": "0e0335cc1cbe797c89de95569a811b21-eu.jpg",
+        "url": "https://upload-image-fullsports.s3.amazonaws.com/0e0335cc1cbe797c89de95569a811b21-eu.jpg",
+        "createAt": "2022-11-30T22:04:19.984Z",
+        "__v": 0
+      },
+      "__v": 0
+    },
+    {
+      "_id": "638580003c3c3c3b69aacbf2",
+      "cpf": "471.928.098-60",
+      "nome": "Renan Figueiredo de Oliveira ",
+      "login": {
+        "email": "renanfigueoli@outlook.com",
+        "password": "$2b$10$MzVOP819aJPmYyMpQzAckechbgw57cDM4LfgJCP26wkMcwgWeT0F2",
+        "isAdmin": true
+      },
+      "dataNascimento": "09/06/2003",
+      "sexo": "M",
+      "cep": "08452-000",
+      "endereco": "Rua João de Siqueira Afonso,775                 -casa- SP, São Paulo, Lajeado",
+      "dataCadastro": "29/11/2022",
+      "imagemPerfil": {
+        "_id": "654f6dc90e0b5770407019f2",
+        "name": "78419902.jpg",
+        "size": 28578,
+        "key": "315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+        "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+        "createAt": "2023-11-11T12:04:25.993Z",
+        "__v": 0
+      },
+      "__v": 0
+    },
+    {
+      "_id": "6388a3a632fc20f92a1f6e16",
+      "cpf": "443.112.212-21",
+      "nome": "renan",
+      "login": {
+        "email": "renanfigueoli08@outlook.com",
+        "password": "$2b$10$TSgRrdf.inBOY/kRLMT0iu/b17yj8PhRa2.Q5AWg9HKNKqLrhBj5.",
+        "isAdmin": false
+      },
+      "dataNascimento": "09/06/2033",
+      "sexo": "M",
+      "cep": "08452-000",
+      "endereco": "Rua João de Siqueira Afonso,777 -cas- SP, São Paulo, Lajeado",
+      "dataCadastro": "01/12/2022",
+      "__v": 0
+    },
+    {
+      "_id": "6388028832fc20f92a1f6398",
+      "cpf": "502.997.588-85",
+      "nome": "Daniela Lemmo 2",
+      "login": {
+        "email": "claudia_houck@hotmail.com",
+        "password": "$2b$10$xy8RGo1V7tyRT/DWE9OYyudgY7.rMeeCnsYntIEopV.R39obpqyKC",
+        "isAdmin": false
+      },
+      "dataNascimento": "03/12/2003",
+      "sexo": "F",
+      "cep": "03445040",
+      "endereco": "Rua Padre Manuel Bernardes,25 -Casa 2- SP, São Paulo, Vila Carrão",
+      "dataCadastro": "11/30/2022",
+      "__v": 0
+    },
+    {
+      "_id": "63887c1d32fc20f92a1f6ad1",
+      "cpf": "467.794.218-80",
+      "nome": "Juliana Rezende Silva",
+      "login": {
+        "email": "julianarezsilva@gmail.com",
+        "password": "$2b$10$LjL.wpo3zFwSjn9pDZnU6OSSrcX0OYrqrUEZ/oqzs514mjVqzkHrC",
+        "isAdmin": false
+      },
+      "dataNascimento": "20/04/2004",
+      "sexo": "F",
+      "cep": "08440-540",
+      "endereco": "São José de Mossamedes ,249 -66- Casada, São Paulo, Guaianases ",
+      "dataCadastro": "01/12/2022",
+      "imagemPerfil": null,
+      "__v": 0
+    },
+    {
+      "_id": "64677ce597419b54310ab2ba",
+      "cpf": "502.997.588-85",
+      "nome": "Daniela Lemmo Houck",
+      "login": {
+        "email": "daniela_houck@hotmail.com",
+        "password": "$2b$10$GC8XbH1wmC22kDX.FG5pheoO1D9QYHt4IbbybCdRTVDIBLSReACrO",
+        "isAdmin": true
+      },
+      "dataNascimento": "03/12/2003",
+      "sexo": "F",
+      "cep": "03445-040",
+      "endereco": "Rua Padre Manuel Bernardes,131 -casa- SP, São Paulo, Vila Carrão",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-05-19T13:43:01.964Z",
+      "__v": 0
+    },
+    {
+      "_id": "646ba0b022b9d9335e72e7fe",
+      "cpf": "839.226.370-78",
+      "nome": "Lisandra Ferraz",
+      "login": {
+        "email": "errazsantana@gmail.com",
+        "password": "$2b$10$aEMq5WhF0GDotXijnW7Kl.JNdWd4ULu/koxjEQFvJ4IKz07m4JWFu",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "F",
+      "cep": "08411-461",
+      "endereco": "Rua Alexandre Legrand,93 --- SP, São Paulo, Jardim Marpu",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-05-22T17:04:48.465Z",
+      "__v": 0
+    },
+    {
+      "_id": "6470ec8f4abd67f2d704db4e",
+      "cpf": "839.226.370-78",
+      "nome": "Lisandra Ferraz",
+      "login": {
+        "email": "teste@gmail.com.br",
+        "password": "$2b$10$tVE3NPshX6SKYD0K.C4zYONDmqRWB3RYjFRipJsZNwyxWJI48bQYK",
+        "isAdmin": false
+      },
+      "dataNascimento": "05/03/2006",
+      "sexo": "F",
+      "cep": "08411-461",
+      "endereco": "Rua Alexandre Legrand,34 --- SP, São Paulo, Jardim Marpu",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-05-26T17:29:51.955Z",
+      "__v": 0
+    },
+    {
+      "_id": "647c100bfb621af794d2ab14",
+      "cpf": "390.676.470-20",
+      "nome": "Marcia Dourado",
+      "login": {
+        "email": "MarciaDourado@gmail.com",
+        "password": "$2b$10$4FVwKc9mhcsIK8tVabdWmulldlaPQK9c.5i57fwrTM1lU3vfs.fEC",
+        "isAdmin": false
+      },
+      "dataNascimento": "02/02/2003",
+      "sexo": "F",
+      "cep": "78152-132",
+      "endereco": "Rua Marinet,90 --- MT, Várzea Grande, São Matheus",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-06-04T04:16:11.309Z",
+      "__v": 0
+    },
+    {
+      "_id": "647db3302e239bd1fbf19656",
+      "cpf": "471.928.098-61",
+      "nome": "Renan TESTE MOBLIE",
+      "login": {
+        "email": "renan_moblie@outlook.com",
+        "password": "$2b$10$kaRajxrp24BJCaTOXErWsunJ4PvlscSglvoCB4BNP5QA3ptPUfhEK",
+        "isAdmin": false
+      },
+      "dataNascimento": "09/06/2003",
+      "sexo": "Masculino",
+      "cep": "08452-000",
+      "endereco": "Rua João de Siqueira Afonso,4234 -casa- SP, São Paulo, Lajeado",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-06-05T10:04:32.012Z",
+      "__v": 0
+    },
+    {
+      "_id": "6482dce0a50f66f2d45c5aca",
+      "cpf": "127.642.116-86",
+      "nome": "Paulo Cliente",
+      "login": {
+        "email": "paulo2.0-@live.com",
+        "password": "$2b$10$yKhRYhTehq3MgK8cOlQJculUniwaB85CHbGZquIQK/uZrOiW8W1kq",
+        "isAdmin": false
+      },
+      "dataNascimento": "11/01/1996",
+      "sexo": "-",
+      "cep": "08230-220",
+      "endereco": "Rua Itaguatins,00 -00- SP, São Paulo, Vila Taquari",
+      "imagemPerfil": {
+        "_id": "6482dce0a50f66f2d45c5ac6",
+        "name": "Design sem nome.png",
+        "size": 179207,
+        "key": "528a20aa93b173a8806dcd62622a6c76-Design sem nome.png",
+        "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/528a20aa93b173a8806dcd62622a6c76-Design%20sem%20nome.png",
+        "createAt": "2023-06-09T08:03:44.091Z",
+        "__v": 0
+      },
+      "dataCadastro": "2023-06-09T08:03:44.282Z",
+      "__v": 0
+    },
+    {
+      "_id": "656100e42aa42fe1274a259a",
+      "cpf": "863.605.770-11",
+      "nome": "Lisandra Teste 01",
+      "login": {
+        "email": "teste@gmail.com",
+        "password": "$2b$10$a.gkolUOCEY02Y702PeU5u8Br0eBYjoCwbhA4W.WVzT.EB3pdk1lO",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "-",
+      "cep": "13456-701",
+      "endereco": "Rua do Cromo,23 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-11-24T20:00:36.583Z",
+      "__v": 0
+    },
+    {
+      "_id": "656103f8be70b2c67aca1694",
+      "cpf": "395.337.990-99",
+      "nome": "Lisandra Teste 02",
+      "login": {
+        "email": "teste2@outlook.com",
+        "password": "$2b$10$twc7.X6wKoMYUKpraW3TY.85bbWADRc8Nk.oW9RYoCG/H7F8z/PDG",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "F",
+      "cep": "13456-701",
+      "endereco": "Rua do Cromo,23 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+      "imagemPerfil": {
+        "_id": "656103f8be70b2c67aca1690",
+        "name": "9ac7a2c0104f1d5b99881f5ba69a9dbe_w200.gif",
+        "size": 362234,
+        "key": "9f38d441ab0715623baeb44a088afc1b-9ac7a2c0104f1d5b99881f5ba69a9dbe_w200.gif",
+        "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/9f38d441ab0715623baeb44a088afc1b-9ac7a2c0104f1d5b99881f5ba69a9dbe_w200.gif",
+        "createAt": "2023-11-24T20:13:44.475Z",
+        "__v": 0
+      },
+      "dataCadastro": "2023-11-24T20:13:44.842Z",
+      "__v": 0
+    },
+    {
+      "_id": "65610433be70b2c67aca16a2",
+      "cpf": "395.337.990-99",
+      "nome": "Lisandra Teste 02",
+      "login": {
+        "email": "teste2@gmail.com",
+        "password": "$2b$10$bQBRCmlWUT7vzHryGaCTzu18BlPHnmCwdwM56P3YA/vV/gCl5gPTa",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "F",
+      "cep": "13456-701",
+      "endereco": "Rua do Cromo,23 -- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+      "imagemPerfil": null,
+      "dataCadastro": "2023-11-24T20:14:43.252Z",
+      "__v": 0
+    },
+    {
+      "_id": "656ddff6c664deffad3d2b9b",
+      "cpf": "872.716.290-76",
+      "nome": "Amanda Pereira",
+      "login": {
+        "email": "seu_email@gmail.com",
+        "password": "$2b$10$gY/sKXSiCjfjBRt3e2xPIOb65hJOPReqnPPRXy7Bvz.K/8ZI7IphS",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "F",
+      "cep": "13456-701",
+      "endereco": "Rua do Cromo,134 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+      "imagemPerfil": {
+        "_id": "656ddff6c664deffad3d2b97",
+        "name": "imagem_2023-12-04_111845428.png",
+        "size": 116195,
+        "key": "8ab229d38edd5669c84988dd83ee643c-imagem_2023-12-04_111845428.png",
+        "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/8ab229d38edd5669c84988dd83ee643c-imagem_2023-12-04_111845428.png",
+        "createAt": "2023-12-04T14:19:34.539Z",
+        "__v": 0
+      },
+      "dataCadastro": "2023-12-04T14:19:34.789Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de07426dfdba9ec378f77",
+      "cpf": "723.558.990-61",
+      "nome": "Amanda Souza",
+      "login": {
+        "email": "seuemail@gmail.com",
+        "password": "$2b$10$I7TvCG0MW4ez3CN66EtRWeyet5qAYw4QM8J11kVbIH.Db8NXk082.",
+        "isAdmin": false
+      },
+      "dataNascimento": "04/03/2003",
+      "sexo": "F",
+      "cep": "06833-300",
+      "endereco": "Rua José Semião Rodrigues Agostinho,456 --- SP, Embu das Artes, Quinhaú",
+      "imagemPerfil": {
+        "_id": "656de07426dfdba9ec378f73",
+        "name": "imagem_2023-12-04_112058237.png",
+        "size": 1154586,
+        "key": "1965ec27efd9270394ffd66fe716f3ff-imagem_2023-12-04_112058237.png",
+        "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/1965ec27efd9270394ffd66fe716f3ff-imagem_2023-12-04_112058237.png",
+        "createAt": "2023-12-04T14:21:40.351Z",
+        "__v": 0
+      },
+      "dataCadastro": "2023-12-04T14:21:40.789Z",
+      "__v": 0
+    }
+  ]

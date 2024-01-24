@@ -1,0 +1,134 @@
+[
+    {
+      "_id": "656e689342c7d87495cff558",
+      "quantidadePedido": 1,
+      "produto": {
+        "_id": "656948a8eedacc9adfb03d96",
+        "categoriaProduto": {
+          "roupa": {
+            "nome": "CAMISETA BÁSICA BRANCA MASCULINA",
+            "fornecedor": {
+              "_id": "6569480b0cf846b2605312b8",
+              "cnpj": "42.274.696/0001-94",
+              "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+              "cep": "06833-073",
+              "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+              "dataCadastro": "2023-12-01T02:42:19.890Z",
+              "__v": 0
+            },
+            "cor": "BRANCO",
+            "sexo": "M",
+            "tamanho": 38,
+            "preco": "64,00",
+            "quantidade": "50",
+            "imagemProduto": [
+              {
+                "_id": "656948a7eedacc9adfb03d93",
+                "name": "imagem_2023-11-30_234453479.png",
+                "size": 351236,
+                "key": "3e2c2d511a765a856334ab36e7025ed0-imagem_2023-11-30_234453479.png",
+                "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/3e2c2d511a765a856334ab36e7025ed0-imagem_2023-11-30_234453479.png",
+                "createAt": "2023-12-01T02:44:55.916Z",
+                "__v": 0
+              }
+            ]
+          }
+        },
+        "dataCadastro": "2023-12-01T02:44:56.715Z",
+        "__v": 0
+      },
+      "cliente": {
+        "_id": "638580003c3c3c3b69aacbf2",
+        "cpf": "471.928.098-60",
+        "nome": "Renan Figueiredo de Oliveira ",
+        "login": {
+          "email": "renanfigueoli@outlook.com",
+          "password": "$2b$10$MzVOP819aJPmYyMpQzAckechbgw57cDM4LfgJCP26wkMcwgWeT0F2",
+          "isAdmin": true
+        },
+        "dataNascimento": "09/06/2003",
+        "sexo": "M",
+        "cep": "08452-000",
+        "endereco": "Rua João de Siqueira Afonso,775                 -casa- SP, São Paulo, Lajeado",
+        "dataCadastro": "29/11/2022",
+        "imagemPerfil": {
+          "_id": "654f6dc90e0b5770407019f2",
+          "name": "78419902.jpg",
+          "size": 28578,
+          "key": "315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+          "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+          "createAt": "2023-11-11T12:04:25.993Z",
+          "__v": 0
+        },
+        "__v": 0
+      },
+      "total": 64,
+      "__v": 0
+    },
+    {
+      "_id": "656e68a342c7d87495cff56b",
+      "quantidadePedido": 1,
+      "produto": {
+        "_id": "656dd3cdeeaed99681707be2",
+        "categoriaProduto": {
+          "equipamento": {
+            "nome": "Bola de basquete",
+            "fornecedor": {
+              "_id": "656946b30cf846b26053126a",
+              "cnpj": "59.546.515/0016-10",
+              "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+              "cep": "13456-701",
+              "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+              "dataCadastro": "2023-12-01T02:36:35.643Z",
+              "__v": 0
+            },
+            "cor": "Preto",
+            "sexo": "O",
+            "tamanho": 0,
+            "preco": "100,00",
+            "quantidade": "90",
+            "imagemProduto": [
+              {
+                "_id": "656dd4f62f6ccf4fa9e53a10",
+                "name": "9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+                "size": 361434,
+                "key": "f5b0118a4d39dca7732dfc1d3718da00-9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+                "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/f5b0118a4d39dca7732dfc1d3718da00-9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+                "createAt": "2023-12-04T13:32:38.751Z",
+                "__v": 0
+              }
+            ]
+          }
+        },
+        "dataCadastro": "2023-12-04T13:27:41.297Z",
+        "__v": 0
+      },
+      "cliente": {
+        "_id": "638580003c3c3c3b69aacbf2",
+        "cpf": "471.928.098-60",
+        "nome": "Renan Figueiredo de Oliveira ",
+        "login": {
+          "email": "renanfigueoli@outlook.com",
+          "password": "$2b$10$MzVOP819aJPmYyMpQzAckechbgw57cDM4LfgJCP26wkMcwgWeT0F2",
+          "isAdmin": true
+        },
+        "dataNascimento": "09/06/2003",
+        "sexo": "M",
+        "cep": "08452-000",
+        "endereco": "Rua João de Siqueira Afonso,775                 -casa- SP, São Paulo, Lajeado",
+        "dataCadastro": "29/11/2022",
+        "imagemPerfil": {
+          "_id": "654f6dc90e0b5770407019f2",
+          "name": "78419902.jpg",
+          "size": 28578,
+          "key": "315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+          "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/315ae85836610b3b02c853b7bc2d69de-78419902.jpg",
+          "createAt": "2023-11-11T12:04:25.993Z",
+          "__v": 0
+        },
+        "__v": 0
+      },
+      "total": 100,
+      "__v": 0
+    }
+  ]

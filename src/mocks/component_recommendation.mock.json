@@ -1,0 +1,76 @@
+[
+    {
+      "_id": "65694929728c1d3a03c87128",
+      "click_calcados": 2,
+      "click_equipamentos": 3,
+      "click_roupas": 12,
+      "click_suplementos": 2,
+      "user": {
+        "_id": "638580003c3c3c3b69aacbf2",
+        "cpf": "471.928.098-60",
+        "nome": "Renan Figueiredo de Oliveira ",
+        "login": {
+          "email": "renanfigueoli@outlook.com",
+          "password": "$2b$10$MzVOP819aJPmYyMpQzAckechbgw57cDM4LfgJCP26wkMcwgWeT0F2",
+          "isAdmin": true
+        },
+        "dataNascimento": "09/06/2003",
+        "sexo": "M",
+        "cep": "08452-000",
+        "endereco": "Rua João de Siqueira Afonso,775                 -casa- SP, São Paulo, Lajeado",
+        "dataCadastro": "29/11/2022",
+        "imagemPerfil": "654f6dc90e0b5770407019f2",
+        "__v": 0
+      }
+    },
+    {
+      "_id": "656ddff6c664deffad3d2b9d",
+      "user": {
+        "_id": "656ddff6c664deffad3d2b9b",
+        "cpf": "872.716.290-76",
+        "nome": "Amanda Pereira",
+        "login": {
+          "email": "seu_email@gmail.com",
+          "password": "$2b$10$gY/sKXSiCjfjBRt3e2xPIOb65hJOPReqnPPRXy7Bvz.K/8ZI7IphS",
+          "isAdmin": false
+        },
+        "dataNascimento": "04/03/2003",
+        "sexo": "F",
+        "cep": "13456-701",
+        "endereco": "Rua do Cromo,134 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+        "imagemPerfil": "656ddff6c664deffad3d2b97",
+        "dataCadastro": "2023-12-04T14:19:34.789Z",
+        "__v": 0
+      },
+      "click_calcados": 1,
+      "click_suplementos": 1,
+      "click_roupas": 1,
+      "click_equipamentos": 1,
+      "__v": 0
+    },
+    {
+      "_id": "656de07426dfdba9ec378f79",
+      "user": {
+        "_id": "656de07426dfdba9ec378f77",
+        "cpf": "723.558.990-61",
+        "nome": "Amanda Souza",
+        "login": {
+          "email": "seuemail@gmail.com",
+          "password": "$2b$10$I7TvCG0MW4ez3CN66EtRWeyet5qAYw4QM8J11kVbIH.Db8NXk082.",
+          "isAdmin": false
+        },
+        "dataNascimento": "04/03/2003",
+        "sexo": "F",
+        "cep": "06833-300",
+        "endereco": "Rua José Semião Rodrigues Agostinho,456 --- SP, Embu das Artes, Quinhaú",
+        "imagemPerfil": "656de07426dfdba9ec378f73",
+        "dataCadastro": "2023-12-04T14:21:40.789Z",
+        "__v": 0
+      },
+      "click_calcados": 1,
+      "click_suplementos": 1,
+      "click_roupas": 5,
+      "click_equipamentos": 2,
+      "__v": 0
+    }
+  ]

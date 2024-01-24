@@ -1,0 +1,1388 @@
+[
+    {
+      "_id": "656948a8eedacc9adfb03d96",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "CAMISETA BÁSICA BRANCA MASCULINA",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "BRANCO",
+          "sexo": "M",
+          "tamanho": 38,
+          "preco": "64,00",
+          "quantidade": "50",
+          "imagemProduto": [
+            {
+              "_id": "656948a7eedacc9adfb03d93",
+              "name": "imagem_2023-11-30_234453479.png",
+              "size": 351236,
+              "key": "3e2c2d511a765a856334ab36e7025ed0-imagem_2023-11-30_234453479.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/3e2c2d511a765a856334ab36e7025ed0-imagem_2023-11-30_234453479.png",
+              "createAt": "2023-12-01T02:44:55.916Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-01T02:44:56.715Z",
+      "__v": 0
+    },
+    {
+      "_id": "65694c5ba1a8ac7952fb88ae",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Calça Nike Sportswear Club Masculina",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "PRETO",
+          "sexo": "M",
+          "tamanho": 52,
+          "preco": "35,00",
+          "quantidade": "60",
+          "imagemProduto": [
+            {
+              "_id": "65694c59a1a8ac7952fb88ab",
+              "name": "imagem_2023-12-01_000040006.png",
+              "size": 299890,
+              "key": "02d13f865ee3267227e96f01c8875b11-imagem_2023-12-01_000040006.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/02d13f865ee3267227e96f01c8875b11-imagem_2023-12-01_000040006.png",
+              "createAt": "2023-12-01T03:00:41.950Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-01T03:00:43.523Z",
+      "__v": 0
+    },
+    {
+      "_id": "65694cd7a1a8ac7952fb88be",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Camiseta Adidas Sport Designed To Move",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "AZUL",
+          "sexo": "F",
+          "tamanho": 44,
+          "preco": "75,00",
+          "quantidade": "10",
+          "imagemProduto": [
+            {
+              "_id": "65694cd6a1a8ac7952fb88bb",
+              "name": "imagem_2023-12-01_000243315.png",
+              "size": 554845,
+              "key": "9fa79aa112d60b4fcd3fe43cb49c3006-imagem_2023-12-01_000243315.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/9fa79aa112d60b4fcd3fe43cb49c3006-imagem_2023-12-01_000243315.png",
+              "createAt": "2023-12-01T03:02:46.234Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-01T03:02:47.493Z",
+      "__v": 0
+    },
+    {
+      "_id": "65694d150cf846b260531321",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Shorts adidas Feminino 3 Listras Woven",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "PRETO",
+          "sexo": "F",
+          "tamanho": 38,
+          "preco": "65,00",
+          "quantidade": "80",
+          "imagemProduto": [
+            {
+              "_id": "65694d150cf846b26053131e",
+              "name": "imagem_2023-12-01_000346418.png",
+              "size": 740309,
+              "key": "2ce4ce0fdbb541e4366062025389ff28-imagem_2023-12-01_000346418.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/2ce4ce0fdbb541e4366062025389ff28-imagem_2023-12-01_000346418.png",
+              "createAt": "2023-12-01T03:03:49.313Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-01T03:03:49.779Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd040eeaed99681707b26",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "MAIÔ MID 3-STRIPES",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "F",
+          "tamanho": 44,
+          "preco": "200,00",
+          "quantidade": "26",
+          "imagemProduto": [
+            {
+              "_id": "656dd03feeaed99681707b23",
+              "name": "a8414404d1ed434ea147adaa016119e3_9366.png",
+              "size": 26166,
+              "key": "79f0225ee83f8c6d71d6cd9e27d15c4a-a8414404d1ed434ea147adaa016119e3_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/79f0225ee83f8c6d71d6cd9e27d15c4a-a8414404d1ed434ea147adaa016119e3_9366.png",
+              "createAt": "2023-12-04T13:12:31.437Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de56beeaed99681708808",
+              "name": "8665517938ef4557ac4cadaa0161386c_9366.png",
+              "size": 18698,
+              "key": "9ee150790393deff7680a080ca9d9922-8665517938ef4557ac4cadaa0161386c_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/9ee150790393deff7680a080ca9d9922-8665517938ef4557ac4cadaa0161386c_9366.png",
+              "createAt": "2023-12-04T14:42:51.629Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:12:32.498Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd0a586debb5861bee26e",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "CALÇA TREINO TIRO 23 LEAGUE",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "M",
+          "tamanho": 42,
+          "preco": "130,00",
+          "quantidade": "55",
+          "imagemProduto": [
+            {
+              "_id": "656dd0a486debb5861bee26b",
+              "name": "9858d0b9087f41faaa51aefc00f3dde9_9366.png",
+              "size": 29764,
+              "key": "b2387228ac4b73d21bd79039da8da41d-9858d0b9087f41faaa51aefc00f3dde9_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/b2387228ac4b73d21bd79039da8da41d-9858d0b9087f41faaa51aefc00f3dde9_9366.png",
+              "createAt": "2023-12-04T13:14:12.527Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de4d7c664deffad3d2ee6",
+              "name": "9d0d0dfcb5484da08f75aefc00f3cbff_9366.png",
+              "size": 22956,
+              "key": "1cbefd1bd23ea266f48eb94d05380e97-9d0d0dfcb5484da08f75aefc00f3cbff_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/1cbefd1bd23ea266f48eb94d05380e97-9d0d0dfcb5484da08f75aefc00f3cbff_9366.png",
+              "createAt": "2023-12-04T14:40:23.324Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:14:13.734Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd107eeaed99681707b65",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Conjunto Moletom Casual",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Azul Marinho",
+          "sexo": "-",
+          "tamanho": 42,
+          "preco": "400,00",
+          "quantidade": 20,
+          "imagemProduto": [
+            {
+              "_id": "656dd106eeaed99681707b62",
+              "name": "c7742038c4c24adb916aad11015ceaac_9366.png",
+              "size": 13190,
+              "key": "2320bdb87dce6044d5d419dc3f8c00fc-c7742038c4c24adb916aad11015ceaac_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/2320bdb87dce6044d5d419dc3f8c00fc-c7742038c4c24adb916aad11015ceaac_9366.png",
+              "createAt": "2023-12-04T13:15:50.045Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:15:51.407Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd182eeaed99681707b82",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "SHORTS ADICOLOR CLASSICS SPRINTER",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "M",
+          "tamanho": 50,
+          "preco": "109,00",
+          "quantidade": 80,
+          "imagemProduto": [
+            {
+              "_id": "656dd181eeaed99681707b7f",
+              "name": "ca39653b1575465db16eaf3900a9beb8_9366.png",
+              "size": 21074,
+              "key": "f37c93388e1a53e0761adefad218797c-ca39653b1575465db16eaf3900a9beb8_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/f37c93388e1a53e0761adefad218797c-ca39653b1575465db16eaf3900a9beb8_9366.png",
+              "createAt": "2023-12-04T13:17:53.101Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:17:54.470Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd28c86debb5861bee27a",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Regata Adidas ",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Cinza",
+          "sexo": "M",
+          "tamanho": 36,
+          "preco": "60,00",
+          "quantidade": 40,
+          "imagemProduto": [
+            {
+              "_id": "656dd28a86debb5861bee277",
+              "name": "82e86b1f8589445bbc1eaf3900a9ced7_9366.png",
+              "size": 20710,
+              "key": "d7982657e2c0886c2f61baea14e5882e-82e86b1f8589445bbc1eaf3900a9ced7_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/d7982657e2c0886c2f61baea14e5882e-82e86b1f8589445bbc1eaf3900a9ced7_9366.png",
+              "createAt": "2023-12-04T13:22:18.923Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:22:20.116Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd37c86debb5861bee284",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Moletom Basquete",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "-",
+          "tamanho": 40,
+          "preco": "500,00",
+          "quantidade": 20,
+          "imagemProduto": [
+            {
+              "_id": "656dd37b86debb5861bee280",
+              "name": "15dd0f33c8f84883a334afa30138c44e_faec.png",
+              "size": 27254,
+              "key": "18104aca99b12aa1a5d99db5950abbf8-15dd0f33c8f84883a334afa30138c44e_faec.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/18104aca99b12aa1a5d99db5950abbf8-15dd0f33c8f84883a334afa30138c44e_faec.png",
+              "createAt": "2023-12-04T13:26:19.339Z",
+              "__v": 0
+            },
+            {
+              "_id": "656dd37beeaed99681707bbd",
+              "name": "61add272ed7d4ee2a03bafa3013bf65c_faec.png",
+              "size": 23266,
+              "key": "e77b3cbe3c4ca32a68bf49feb85d41de-61add272ed7d4ee2a03bafa3013bf65c_faec.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/e77b3cbe3c4ca32a68bf49feb85d41de-61add272ed7d4ee2a03bafa3013bf65c_faec.png",
+              "createAt": "2023-12-04T13:26:19.349Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:26:20.568Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd3cdeeaed99681707be2",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Bola de basquete",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 0,
+          "preco": "100,00",
+          "quantidade": "90",
+          "imagemProduto": [
+            {
+              "_id": "656dd4f62f6ccf4fa9e53a10",
+              "name": "9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+              "size": 361434,
+              "key": "f5b0118a4d39dca7732dfc1d3718da00-9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/f5b0118a4d39dca7732dfc1d3718da00-9f98d6a4c292edc22c1e1afa7ebe259c.jpg",
+              "createAt": "2023-12-04T13:32:38.751Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:27:41.297Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd3fe86debb5861bee2db",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Bola de handebol Penalty Hand H3L Ultrafusion",
+          "fornecedor": {
+            "_id": "656d37535f155ad9d39b37e0",
+            "cnpj": "61.088.894/0008-84",
+            "nomeEmpresa": "PENALTY",
+            "cep": "18130-430",
+            "endereco": "Avenida Getúlio Vargas,930 --- SP, São Roque, Centro",
+            "dataCadastro": "2023-12-04T02:20:03.077Z",
+            "__v": 0
+          },
+          "cor": "Vermelho/Azul",
+          "sexo": "O",
+          "tamanho": 0,
+          "preco": "120,00",
+          "quantidade": 20,
+          "imagemProduto": [
+            {
+              "_id": "656dd3fd86debb5861bee2d8",
+              "name": "bola_penalty_hand_sem_costura_3_1_1.jpg",
+              "size": 17597,
+              "key": "3e1c45193e996f4aebef589295474da9-bola_penalty_hand_sem_costura_3_1_1.jpg",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/3e1c45193e996f4aebef589295474da9-bola_penalty_hand_sem_costura_3_1_1.jpg",
+              "createAt": "2023-12-04T13:28:29.448Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:28:30.723Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd448eeaed99681707c0c",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Bola vôlei de praia ",
+          "fornecedor": {
+            "_id": "656d37535f155ad9d39b37e0",
+            "cnpj": "61.088.894/0008-84",
+            "nomeEmpresa": "PENALTY",
+            "cep": "18130-430",
+            "endereco": "Avenida Getúlio Vargas,930 --- SP, São Roque, Centro",
+            "dataCadastro": "2023-12-04T02:20:03.077Z",
+            "__v": 0
+          },
+          "cor": "Laranja",
+          "sexo": "O",
+          "tamanho": 0,
+          "preco": "60,00",
+          "quantidade": "15",
+          "imagemProduto": [
+            {
+              "_id": "656dd546eeaed99681707c76",
+              "name": "bola-volei-de-praia-xxi-521321-3630-3.png",
+              "size": 75398,
+              "key": "95fbc3447704ba232ecf7934adaee27f-bola-volei-de-praia-xxi-521321-3630-3.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/95fbc3447704ba232ecf7934adaee27f-bola-volei-de-praia-xxi-521321-3630-3.png",
+              "createAt": "2023-12-04T13:33:58.880Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:29:44.587Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd58deeaed99681707cac",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Bola campo S11 R2 Xxiii",
+          "fornecedor": {
+            "_id": "656d37535f155ad9d39b37e0",
+            "cnpj": "61.088.894/0008-84",
+            "nomeEmpresa": "PENALTY",
+            "cep": "18130-430",
+            "endereco": "Avenida Getúlio Vargas,930 --- SP, São Roque, Centro",
+            "dataCadastro": "2023-12-04T02:20:03.077Z",
+            "__v": 0
+          },
+          "cor": "Branco",
+          "sexo": "O",
+          "tamanho": 0,
+          "preco": "200,00",
+          "quantidade": 66,
+          "imagemProduto": [
+            {
+              "_id": "656dd58deeaed99681707ca9",
+              "name": "bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-21572ae574f9cca1af26e55577f7d27a.png",
+              "size": 372305,
+              "key": "46bd5145a7ef47e66466c8acf805a157-bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-21572ae574f9cca1af26e55577f7d27a.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/46bd5145a7ef47e66466c8acf805a157-bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-21572ae574f9cca1af26e55577f7d27a.png",
+              "createAt": "2023-12-04T13:35:09.136Z",
+              "__v": 0
+            },
+            {
+              "_id": "656dd58d2f6ccf4fa9e53a79",
+              "name": "bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-aac8e705c69e72025273a9d9e6deb63d.png",
+              "size": 366236,
+              "key": "13a520cee462850c85035b5a5c3fbb22-bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-aac8e705c69e72025273a9d9e6deb63d.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/13a520cee462850c85035b5a5c3fbb22-bola-campo-penalty-s11-r2-xxiii-brancovermelhoazul-aac8e705c69e72025273a9d9e6deb63d.png",
+              "createAt": "2023-12-04T13:35:09.088Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:35:09.575Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd6a9eeaed99681707ce1",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Calça Adapte Reserva",
+          "fornecedor": {
+            "_id": "656d36491e1a23a4d758cf3b",
+            "cnpj": "16.590.234/0064-50",
+            "nomeEmpresa": "AREZZO INDUSTRIA E COMERCIO S.A ",
+            "cep": "25585-085",
+            "endereco": "Avenida Arthur Antônio Sendas,999 - GALPÃO 300- RJ, São João de Meriti, Parque Juriti",
+            "dataCadastro": "2023-12-04T02:15:37.788Z",
+            "__v": 0
+          },
+          "cor": "Azul Marinho",
+          "sexo": "M",
+          "tamanho": 44,
+          "preco": "200,00",
+          "quantidade": "6",
+          "imagemProduto": [
+            {
+              "_id": "656dd6a8eeaed99681707cde",
+              "name": "7647340-800-auto.png",
+              "size": 23730,
+              "key": "72bee7d44373ccb1c6a57ee9721f9904-7647340-800-auto.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/72bee7d44373ccb1c6a57ee9721f9904-7647340-800-auto.png",
+              "createAt": "2023-12-04T13:39:52.167Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de533c664deffad3d2f75",
+              "name": "7647337-800-auto.png",
+              "size": 48274,
+              "key": "9e059f84a5b9345806920b328377a66e-7647337-800-auto.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/9e059f84a5b9345806920b328377a66e-7647337-800-auto.png",
+              "createAt": "2023-12-04T14:41:55.242Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:39:53.374Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd8bf86debb5861bee37e",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Camiseta Adapte ",
+          "fornecedor": {
+            "_id": "656d36491e1a23a4d758cf3b",
+            "cnpj": "16.590.234/0064-50",
+            "nomeEmpresa": "AREZZO INDUSTRIA E COMERCIO S.A ",
+            "cep": "25585-085",
+            "endereco": "Avenida Arthur Antônio Sendas,999 - GALPÃO 300- RJ, São João de Meriti, Parque Juriti",
+            "dataCadastro": "2023-12-04T02:15:37.788Z",
+            "__v": 0
+          },
+          "cor": "Branco",
+          "sexo": "-",
+          "tamanho": 46,
+          "preco": "50,00",
+          "quantidade": "14",
+          "imagemProduto": [
+            {
+              "_id": "656dd8bd86debb5861bee37b",
+              "name": "7725173-800-auto.png",
+              "size": 32752,
+              "key": "c22a9f7ebc69615d0e16950a9aed7fc6-7725173-800-auto.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/c22a9f7ebc69615d0e16950a9aed7fc6-7725173-800-auto.png",
+              "createAt": "2023-12-04T13:48:45.940Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de54feeaed99681708800",
+              "name": "7725177-800-auto.png",
+              "size": 20938,
+              "key": "168086ac05513ce4cd84543aca6252d0-7725177-800-auto.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/168086ac05513ce4cd84543aca6252d0-7725177-800-auto.png",
+              "createAt": "2023-12-04T14:42:23.090Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:48:47.202Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd92ceeaed99681707cec",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "LUVAS PREDATOR MATCH",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Branco/Rosa",
+          "sexo": "-",
+          "tamanho": 25,
+          "preco": "200,00",
+          "quantidade": "40",
+          "imagemProduto": [
+            {
+              "_id": "656dd92beeaed99681707ce9",
+              "name": "ae2c99dc8b964927ad23afb9008cfdfd_9366.png",
+              "size": 49050,
+              "key": "fe26a2d1571c54c6516b9e54f65aaa07-ae2c99dc8b964927ad23afb9008cfdfd_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/fe26a2d1571c54c6516b9e54f65aaa07-ae2c99dc8b964927ad23afb9008cfdfd_9366.png",
+              "createAt": "2023-12-04T13:50:35.293Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de5cd9fd860c488265f01",
+              "name": "f760be85174b4280b02faf5d00c71f0d_9366.png",
+              "size": 123046,
+              "key": "f0b99948db9c586e3905fc5237b2f52d-f760be85174b4280b02faf5d00c71f0d_9366.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/f0b99948db9c586e3905fc5237b2f52d-f760be85174b4280b02faf5d00c71f0d_9366.png",
+              "createAt": "2023-12-04T14:44:29.822Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:50:36.385Z",
+      "__v": 0
+    },
+    {
+      "_id": "656dd9c8eeaed99681707cf5",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Luva de Goleiro futuro z grip 1 ",
+          "fornecedor": {
+            "_id": "656d34651e1a23a4d758cf2c",
+            "cnpj": "76.751.072/0001-32",
+            "nomeEmpresa": "PUMA DO BRASIL LTDA",
+            "cep": "06846-095",
+            "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+            "dataCadastro": "2023-12-04T02:07:33.948Z",
+            "__v": 0
+          },
+          "cor": "Preto/Verde",
+          "sexo": "-",
+          "tamanho": 30,
+          "preco": "250,00",
+          "quantidade": "50",
+          "imagemProduto": [
+            {
+              "_id": "656dd9c7eeaed99681707cf2",
+              "name": "luva_de_goleiro_future_grip_preto_e_verde_puma_8357_1_20190417160814.png",
+              "size": 58420,
+              "key": "55eabd3ba8f2d8b99919a8003e34fb74-luva_de_goleiro_future_grip_preto_e_verde_puma_8357_1_20190417160814.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/55eabd3ba8f2d8b99919a8003e34fb74-luva_de_goleiro_future_grip_preto_e_verde_puma_8357_1_20190417160814.png",
+              "createAt": "2023-12-04T13:53:11.012Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T13:53:12.096Z",
+      "__v": 0
+    },
+    {
+      "_id": "656ddc97eeaed99681707db9",
+      "categoriaProduto": {
+        "suplemento": {
+          "nome": "Nutri Whey Protein Chocolate 900g",
+          "fornecedor": {
+            "_id": "656d355b1e1a23a4d758cf33",
+            "cnpj": "22.863.265/0001-56",
+            "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+            "cep": "02611-003",
+            "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+            "dataCadastro": "2023-12-04T02:11:39.844Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 1,
+          "preco": "47,00",
+          "quantidade": "50",
+          "imagemProduto": [
+            {
+              "_id": "656ddc96eeaed99681707db6",
+              "name": "252-0951-799_zoom1.png",
+              "size": 24118,
+              "key": "615dca160abb78fc7f16b6ce81f4acd9-252-0951-799_zoom1.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/615dca160abb78fc7f16b6ce81f4acd9-252-0951-799_zoom1.png",
+              "createAt": "2023-12-04T14:05:10.646Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:05:11.886Z",
+      "__v": 0
+    },
+    {
+      "_id": "656ddfa0c664deffad3d2b4c",
+      "categoriaProduto": {
+        "suplemento": {
+          "nome": "Suplemento alimentar em pó",
+          "fornecedor": {
+            "_id": "656d355b1e1a23a4d758cf33",
+            "cnpj": "22.863.265/0001-56",
+            "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+            "cep": "02611-003",
+            "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+            "dataCadastro": "2023-12-04T02:11:39.844Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 1,
+          "preco": "400,00",
+          "quantidade": 809,
+          "imagemProduto": [
+            {
+              "_id": "656ddf9ec664deffad3d2b49",
+              "name": "2POTES_tutti_FV.png",
+              "size": 66786,
+              "key": "b87d0d369db59ea4bf34f1a05c64038e-2POTES_tutti_FV.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/b87d0d369db59ea4bf34f1a05c64038e-2POTES_tutti_FV.png",
+              "createAt": "2023-12-04T14:18:06.474Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:18:08.103Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de08426dfdba9ec378fc2",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "SUEDE CLASSIC XXI",
+          "fornecedor": {
+            "_id": "656d34651e1a23a4d758cf2c",
+            "cnpj": "76.751.072/0001-32",
+            "nomeEmpresa": "PUMA DO BRASIL LTDA",
+            "cep": "06846-095",
+            "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+            "dataCadastro": "2023-12-04T02:07:33.948Z",
+            "__v": 0
+          },
+          "cor": "Vinho",
+          "sexo": "F",
+          "tamanho": 39,
+          "preco": "300,00",
+          "quantidade": "56",
+          "imagemProduto": [
+            {
+              "_id": "656de08226dfdba9ec378fbf",
+              "name": "Tenis-Puma-Suede-Classic-XXI-Vermelho-5.png",
+              "size": 46348,
+              "key": "e25c158b21edfd1a525e73bef96853fa-Tenis-Puma-Suede-Classic-XXI-Vermelho-5.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/e25c158b21edfd1a525e73bef96853fa-Tenis-Puma-Suede-Classic-XXI-Vermelho-5.png",
+              "createAt": "2023-12-04T14:21:54.707Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de612c664deffad3d3004",
+              "name": "Tenis-Puma-Suede-Classic-XXI-Vermelho.png",
+              "size": 34296,
+              "key": "7b294905626b7d61a3b8bdbce48a619f-Tenis-Puma-Suede-Classic-XXI-Vermelho.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/7b294905626b7d61a3b8bdbce48a619f-Tenis-Puma-Suede-Classic-XXI-Vermelho.png",
+              "createAt": "2023-12-04T14:45:38.162Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:21:56.068Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de16feeaed99681708137",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "Tênis RS-Trck Earth",
+          "fornecedor": {
+            "_id": "656d34651e1a23a4d758cf2c",
+            "cnpj": "76.751.072/0001-32",
+            "nomeEmpresa": "PUMA DO BRASIL LTDA",
+            "cep": "06846-095",
+            "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+            "dataCadastro": "2023-12-04T02:07:33.948Z",
+            "__v": 0
+          },
+          "cor": "Azul / Verde",
+          "sexo": "M",
+          "tamanho": 44,
+          "preco": "400,00",
+          "quantidade": 55,
+          "imagemProduto": [
+            {
+              "_id": "656de16eeeaed99681708133",
+              "name": "38856-2-001-4.jpg",
+              "size": 98026,
+              "key": "fef1520c9624015b519840f6974ecc67-38856-2-001-4.jpg",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/fef1520c9624015b519840f6974ecc67-38856-2-001-4.jpg",
+              "createAt": "2023-12-04T14:25:50.519Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de16ec664deffad3d2d5d",
+              "name": "38856-2-001-1.jpg",
+              "size": 57406,
+              "key": "b836f3557f65a8e5eaddf6bef40d67f9-38856-2-001-1.jpg",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/b836f3557f65a8e5eaddf6bef40d67f9-38856-2-001-1.jpg",
+              "createAt": "2023-12-04T14:25:50.489Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:25:51.476Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de1b9c664deffad3d2d66",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "Tenis adidas NMD-R1",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Branco",
+          "sexo": "F",
+          "tamanho": 36,
+          "preco": "300,00",
+          "quantidade": 45,
+          "imagemProduto": [
+            {
+              "_id": "656de1b8c664deffad3d2d63",
+              "name": "Tenis-adidas-NMD-R1-Feminino-Branco-5.png",
+              "size": 39290,
+              "key": "5dcb86d690c972b76d9a299325ca13a8-Tenis-adidas-NMD-R1-Feminino-Branco-5.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/5dcb86d690c972b76d9a299325ca13a8-Tenis-adidas-NMD-R1-Feminino-Branco-5.png",
+              "createAt": "2023-12-04T14:27:04.140Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de1b8eeaed99681708180",
+              "name": "Tenis-adidas-NMD-R1-Feminino-Branco.png",
+              "size": 35186,
+              "key": "c09eefe71e1bff8ca9eddfd0544cef8c-Tenis-adidas-NMD-R1-Feminino-Branco.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/c09eefe71e1bff8ca9eddfd0544cef8c-Tenis-adidas-NMD-R1-Feminino-Branco.png",
+              "createAt": "2023-12-04T14:27:04.129Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:27:05.360Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de207eeaed996817081d5",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "AIR FORCE 1 ´07 ESS ",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "Branco",
+          "sexo": "-",
+          "tamanho": 68,
+          "preco": "400,00",
+          "quantidade": 20,
+          "imagemProduto": [
+            {
+              "_id": "656de206eeaed996817081d2",
+              "name": "DQ757-0-001-5.png",
+              "size": 38984,
+              "key": "8a3ba3f9c99f16c58be405a9348f2617-DQ757-0-001-5.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/8a3ba3f9c99f16c58be405a9348f2617-DQ757-0-001-5.png",
+              "createAt": "2023-12-04T14:28:22.737Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:28:23.964Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de24ac664deffad3d2d71",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "AIR FORCE ´07 NEXT NATURE",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "Creme",
+          "sexo": "-",
+          "tamanho": 34,
+          "preco": "300,00",
+          "quantidade": 5,
+          "imagemProduto": [
+            {
+              "_id": "656de249c664deffad3d2d6d",
+              "name": "DX454-4-072-1.png",
+              "size": 37588,
+              "key": "40214b18a2b820ca9e8d21de8b195e7f-DX454-4-072-1.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/40214b18a2b820ca9e8d21de8b195e7f-DX454-4-072-1.png",
+              "createAt": "2023-12-04T14:29:29.135Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de249eeaed99681708238",
+              "name": "DX454-4-072-5.png",
+              "size": 42166,
+              "key": "ebcb1c2c30ba9124f72a163aeca11370-DX454-4-072-5.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/ebcb1c2c30ba9124f72a163aeca11370-DX454-4-072-5.png",
+              "createAt": "2023-12-04T14:29:29.087Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:29:30.303Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de28aeeaed996817082e6",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "AIR JORDAN XXXVII LOW",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "M",
+          "tamanho": 40,
+          "preco": "800,00",
+          "quantidade": "56",
+          "imagemProduto": [
+            {
+              "_id": "656de289c664deffad3d2dcf",
+              "name": "DQ412-2-061-5.png",
+              "size": 52822,
+              "key": "b8972e2c41e63ca1c0654a79ec1e2999-DQ412-2-061-5.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/b8972e2c41e63ca1c0654a79ec1e2999-DQ412-2-061-5.png",
+              "createAt": "2023-12-04T14:30:33.845Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de2a7c664deffad3d2edf",
+              "name": "DQ412-2-061-1.png",
+              "size": 50500,
+              "key": "6cfd532e079843f57ec20c576d8cdd57-DQ412-2-061-1.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/6cfd532e079843f57ec20c576d8cdd57-DQ412-2-061-1.png",
+              "createAt": "2023-12-04T14:31:03.933Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:30:34.944Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de2f19fd860c4882658d4",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "Tênis grand-court-2-0",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Branco",
+          "sexo": "F",
+          "tamanho": 38,
+          "preco": "250,00",
+          "quantidade": 5,
+          "imagemProduto": [
+            {
+              "_id": "656de2f09fd860c4882658d1",
+              "name": "tenis-adidas-grand-court-2-0-branco-3.png",
+              "size": 169330,
+              "key": "de86aad39db2950a4fe78dbdc74dd1d5-tenis-adidas-grand-court-2-0-branco-3.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/de86aad39db2950a4fe78dbdc74dd1d5-tenis-adidas-grand-court-2-0-branco-3.png",
+              "createAt": "2023-12-04T14:32:16.328Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de2efeeaed99681708349",
+              "name": "tenis-adidas-grand-court-2-0-branco.png",
+              "size": 40398,
+              "key": "d7159d1edd50a7e74b00c5c9f225cbb6-tenis-adidas-grand-court-2-0-branco.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/d7159d1edd50a7e74b00c5c9f225cbb6-tenis-adidas-grand-court-2-0-branco.png",
+              "createAt": "2023-12-04T14:32:15.957Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:32:17.070Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de340eeaed99681708438",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "Tenis adidas NMD-R1",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Colorido",
+          "sexo": "F",
+          "tamanho": 36,
+          "preco": "405,00",
+          "quantidade": 55,
+          "imagemProduto": [
+            {
+              "_id": "656de33f9fd860c488265a7d",
+              "name": "FB8-3804-028_zoom3.png",
+              "size": 86590,
+              "key": "f2e57ba451ef0f816c62700a4c761e25-FB8-3804-028_zoom3.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/f2e57ba451ef0f816c62700a4c761e25-FB8-3804-028_zoom3.png",
+              "createAt": "2023-12-04T14:33:35.975Z",
+              "__v": 0
+            },
+            {
+              "_id": "656de33feeaed99681708432",
+              "name": "FB8-3804-028_zoom1.png",
+              "size": 15438,
+              "key": "83d13d1cdaed32c7b04ff4a9fca0e230-FB8-3804-028_zoom1.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/83d13d1cdaed32c7b04ff4a9fca0e230-FB8-3804-028_zoom1.png",
+              "createAt": "2023-12-04T14:33:35.735Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:33:36.987Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de3a2eeaed996817084a7",
+      "categoriaProduto": {
+        "suplemento": {
+          "nome": "Suplemento alimentar Tutti-Frutti",
+          "fornecedor": {
+            "_id": "656d355b1e1a23a4d758cf33",
+            "cnpj": "22.863.265/0001-56",
+            "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+            "cep": "02611-003",
+            "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+            "dataCadastro": "2023-12-04T02:11:39.844Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 1,
+          "preco": "100,00",
+          "quantidade": 5,
+          "imagemProduto": [
+            {
+              "_id": "656de3a1eeaed996817084a4",
+              "name": "shopping.png",
+              "size": 23022,
+              "key": "46d77660277921f3d0f9e1c19c7c2470-shopping.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/46d77660277921f3d0f9e1c19c7c2470-shopping.png",
+              "createAt": "2023-12-04T14:35:13.125Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:35:14.372Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de3e3eeaed9968170850f",
+      "categoriaProduto": {
+        "suplemento": {
+          "nome": "Suplemento alimentar - Pêssego e Tangerina",
+          "fornecedor": {
+            "_id": "656d355b1e1a23a4d758cf33",
+            "cnpj": "22.863.265/0001-56",
+            "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+            "cep": "02611-003",
+            "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+            "dataCadastro": "2023-12-04T02:11:39.844Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 1,
+          "preco": "120,00",
+          "quantidade": 63,
+          "imagemProduto": [
+            {
+              "_id": "656de3e2eeaed9968170850c",
+              "name": "D_NQ_NP_797702-MLB53814628455_022023-O.png",
+              "size": 18440,
+              "key": "fea0778c7f1e17d45d6a54d7224bd9c1-D_NQ_NP_797702-MLB53814628455_022023-O.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/fea0778c7f1e17d45d6a54d7224bd9c1-D_NQ_NP_797702-MLB53814628455_022023-O.png",
+              "createAt": "2023-12-04T14:36:18.280Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:36:19.475Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de4269fd860c488265af1",
+      "categoriaProduto": {
+        "suplemento": {
+          "nome": "Suplemento alimentar - Pink Lemonade",
+          "fornecedor": {
+            "_id": "656d355b1e1a23a4d758cf33",
+            "cnpj": "22.863.265/0001-56",
+            "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+            "cep": "02611-003",
+            "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+            "dataCadastro": "2023-12-04T02:11:39.844Z",
+            "__v": 0
+          },
+          "cor": "Preto",
+          "sexo": "O",
+          "tamanho": 1,
+          "preco": "130,00",
+          "quantidade": 20,
+          "imagemProduto": [
+            {
+              "_id": "656de4259fd860c488265aee",
+              "name": "Frame26.png",
+              "size": 56686,
+              "key": "27d6cb8c802ac7ab0c9d5cdf71d4fb47-Frame26.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/27d6cb8c802ac7ab0c9d5cdf71d4fb47-Frame26.png",
+              "createAt": "2023-12-04T14:37:25.319Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:37:26.405Z",
+      "__v": 0
+    },
+    {
+      "_id": "656de47d9fd860c488265c99",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Pé de Pato/Nadadeira Nike",
+          "fornecedor": {
+            "_id": "656946b30cf846b26053126a",
+            "cnpj": "59.546.515/0016-10",
+            "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+            "cep": "13456-701",
+            "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+            "dataCadastro": "2023-12-01T02:36:35.643Z",
+            "__v": 0
+          },
+          "cor": "Cinza / Vermelho",
+          "sexo": "-",
+          "tamanho": 39,
+          "preco": "350,00",
+          "quantidade": 10,
+          "imagemProduto": [
+            {
+              "_id": "656de47d9fd860c488265c96",
+              "name": "ffd9673b81026b4899dbcc055c32ec4f.png",
+              "size": 108018,
+              "key": "b5e0c1659704aeed302247e279628c85-ffd9673b81026b4899dbcc055c32ec4f.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/b5e0c1659704aeed302247e279628c85-ffd9673b81026b4899dbcc055c32ec4f.png",
+              "createAt": "2023-12-04T14:38:53.164Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-04T14:38:53.905Z",
+      "__v": 0
+    },
+    {
+      "_id": "656e767b857b18bf546c09be",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Luva de Goleiro Puma",
+          "fornecedor": {
+            "_id": "656d34651e1a23a4d758cf2c",
+            "cnpj": "76.751.072/0001-32",
+            "nomeEmpresa": "PUMA DO BRASIL LTDA",
+            "cep": "06846-095",
+            "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+            "dataCadastro": "2023-12-04T02:07:33.948Z",
+            "__v": 0
+          },
+          "cor": "Verde Limão / Preto",
+          "sexo": "-",
+          "tamanho": 32,
+          "preco": "50,00",
+          "quantidade": "20",
+          "imagemProduto": [
+            {
+              "_id": "656e76b5857b18bf546c0aa6",
+              "name": "Luvas-de-goleiro-puma.png",
+              "size": 290994,
+              "key": "953c212059413732fef51937aee1a783-Luvas-de-goleiro-puma.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/953c212059413732fef51937aee1a783-Luvas-de-goleiro-puma.png",
+              "createAt": "2023-12-05T01:02:45.009Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-05T01:01:47.417Z",
+      "__v": 0
+    },
+    {
+      "_id": "656e7703857b18bf546c0ab9",
+      "categoriaProduto": {
+        "roupa": {
+          "nome": "Camisa de Praia",
+          "fornecedor": {
+            "_id": "656d36491e1a23a4d758cf3b",
+            "cnpj": "16.590.234/0064-50",
+            "nomeEmpresa": "AREZZO INDUSTRIA E COMERCIO S.A ",
+            "cep": "25585-085",
+            "endereco": "Avenida Arthur Antônio Sendas,999 - GALPÃO 300- RJ, São João de Meriti, Parque Juriti",
+            "dataCadastro": "2023-12-04T02:15:37.788Z",
+            "__v": 0
+          },
+          "cor": "Azul / Verde",
+          "sexo": "M",
+          "tamanho": 30,
+          "preco": "45,00",
+          "quantidade": 9,
+          "imagemProduto": [
+            {
+              "_id": "656e7701857b18bf546c0ab6",
+              "name": "image.png",
+              "size": 52110,
+              "key": "a43af8a0a8eec413dd670e5026040eec-image.png",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/a43af8a0a8eec413dd670e5026040eec-image.png",
+              "createAt": "2023-12-05T01:04:01.861Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-05T01:04:03.001Z",
+      "__v": 0
+    },
+    {
+      "_id": "656e781babcc75223420d601",
+      "categoriaProduto": {
+        "equipamento": {
+          "nome": "Luva de Boxe / Muay Thai Profissional",
+          "fornecedor": {
+            "_id": "6569480b0cf846b2605312b8",
+            "cnpj": "42.274.696/0001-94",
+            "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+            "cep": "06833-073",
+            "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+            "dataCadastro": "2023-12-01T02:42:19.890Z",
+            "__v": 0
+          },
+          "cor": "Vermelho / Preto",
+          "sexo": "-",
+          "tamanho": 35,
+          "preco": "60,33",
+          "quantidade": 29,
+          "imagemProduto": [
+            {
+              "_id": "656e781aabcc75223420d5fe",
+              "name": "luvaLuta.jpg",
+              "size": 169805,
+              "key": "071fc7792884799eac5e944c2f241c26-luvaLuta.jpg",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/071fc7792884799eac5e944c2f241c26-luvaLuta.jpg",
+              "createAt": "2023-12-05T01:08:42.431Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-05T01:08:43.307Z",
+      "__v": 0
+    },
+    {
+      "_id": "656e78e1abcc75223420d60b",
+      "categoriaProduto": {
+        "calcado": {
+          "nome": "Tênis Puma X-ray 2 Square Bdp",
+          "fornecedor": {
+            "_id": "656d34651e1a23a4d758cf2c",
+            "cnpj": "76.751.072/0001-32",
+            "nomeEmpresa": "PUMA DO BRASIL LTDA",
+            "cep": "06846-095",
+            "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+            "dataCadastro": "2023-12-04T02:07:33.948Z",
+            "__v": 0
+          },
+          "cor": "Colorido",
+          "sexo": "F",
+          "tamanho": 37,
+          "preco": "400,00",
+          "quantidade": 600,
+          "imagemProduto": [
+            {
+              "_id": "656e78e0abcc75223420d608",
+              "name": "tenis.PNG",
+              "size": 192407,
+              "key": "d468045b90dc13f8c630be4c0242825a-tenis.PNG",
+              "url": "https://upload-image-fullsports.s3.us-east-1.amazonaws.com/d468045b90dc13f8c630be4c0242825a-tenis.PNG",
+              "createAt": "2023-12-05T01:12:00.827Z",
+              "__v": 0
+            }
+          ]
+        }
+      },
+      "dataCadastro": "2023-12-05T01:12:01.766Z",
+      "__v": 0
+    }
+  ]

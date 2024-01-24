@@ -1,0 +1,56 @@
+[
+    {
+      "_id": "656946b30cf846b26053126a",
+      "cnpj": "59.546.515/0016-10",
+      "nomeEmpresa": "Fisia Comércio de Produtos Esportivos Ltda ",
+      "cep": "13456-701",
+      "endereco": "Rua do Cromo,56 --- SP, Santa Bárbara D'Oeste, Vila Pântano II",
+      "dataCadastro": "2023-12-01T02:36:35.643Z",
+      "__v": 0
+    },
+    {
+      "_id": "6569480b0cf846b2605312b8",
+      "cnpj": "42.274.696/0001-94",
+      "nomeEmpresa": "ADIDAS DO BRASIL LTDA",
+      "cep": "06833-073",
+      "endereco": "Rua Pataxós,241 --- SP, Embu das Artes, Pataxós",
+      "dataCadastro": "2023-12-01T02:42:19.890Z",
+      "__v": 0
+    },
+    {
+      "_id": "656d34651e1a23a4d758cf2c",
+      "cnpj": "76.751.072/0001-32",
+      "nomeEmpresa": "PUMA DO BRASIL LTDA",
+      "cep": "06846-095",
+      "endereco": "Rua Pasadena,10 -B- SP, Embu das Artes, Bosque Capuava",
+      "dataCadastro": "2023-12-04T02:07:33.948Z",
+      "__v": 0
+    },
+    {
+      "_id": "656d355b1e1a23a4d758cf33",
+      "cnpj": "22.863.265/0001-56",
+      "nomeEmpresa": " Overclock Comercio E Suporte Ltda",
+      "cep": "02611-003",
+      "endereco": "Avenida Parada Pinto ,52 --- SP, São Paulo, Vila Nova Cachoeirinha",
+      "dataCadastro": "2023-12-04T02:11:39.844Z",
+      "__v": 0
+    },
+    {
+      "_id": "656d36491e1a23a4d758cf3b",
+      "cnpj": "16.590.234/0064-50",
+      "nomeEmpresa": "AREZZO INDUSTRIA E COMERCIO S.A ",
+      "cep": "25585-085",
+      "endereco": "Avenida Arthur Antônio Sendas,999 - GALPÃO 300- RJ, São João de Meriti, Parque Juriti",
+      "dataCadastro": "2023-12-04T02:15:37.788Z",
+      "__v": 0
+    },
+    {
+      "_id": "656d37535f155ad9d39b37e0",
+      "cnpj": "61.088.894/0008-84",
+      "nomeEmpresa": "PENALTY",
+      "cep": "18130-430",
+      "endereco": "Avenida Getúlio Vargas,930 --- SP, São Roque, Centro",
+      "dataCadastro": "2023-12-04T02:20:03.077Z",
+      "__v": 0
+    }
+  ]

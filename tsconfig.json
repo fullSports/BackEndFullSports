@@ -43,6 +43,12 @@
       ],
       "@users/*": [
         "./src/modules/users/*"
+      ],
+      "@configs/*":[
+        "./src/configs/*"
+      ],
+      "@enums/*":[
+        "./src/enums/*"
       ]
     }
   }
