@@ -3,17 +3,13 @@ import { UserController } from "./users.controller";
 import { UserService } from "./user.service";
 import { Users, UserSchema } from "./Schema/user.schema";
 import { MongooseModule } from "@nestjs/mongoose";
-import { imagem, ImagemSchema } from "../image/Schema/image.schema";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
-import {
-  Recommendation,
-  RrecommendationSchema,
-} from "@componentRecommendation/Schema/Rrecommendation.schema";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
-import { RecommendationController } from "@componentRecommendation/recommendation.controller";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
+import { ProductModule } from "@product/product.module";
+import { RecommendationModule } from "@componentRecommendation/recommendation.module";
 const urlConfig = require("../../../globalConfig.json");
 
 describe("UserController", () => {
@@ -24,21 +20,14 @@ describe("UserController", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-        MongooseModule.forFeature([
-          { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
+        RecommendationModule,
+        ProductModule,
+        ProviderModule,
+        ImageModule,
       ],
-      controllers: [UserController, RecommendationController],
+      controllers: [UserController],
       providers: [UserService, RecommendationService, ProductServices],
+      exports: [MongooseModule],
     }).compile();
 
     userController = app.get<UserController>(UserController);

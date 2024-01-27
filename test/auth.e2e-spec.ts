@@ -7,18 +7,15 @@ import { AuthController } from "@auth/auth.controller";
 import { AuthService } from "@auth/auth.service";
 import { jwtConfig } from "@auth/config/jwt.config";
 import { JwtStrategy } from "@auth/strategies/jwt.strategy";
-import {
-  Recommendation,
-  RrecommendationSchema,
-} from "@componentRecommendation/Schema/Rrecommendation.schema";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
 import { ProductServices } from "@product/product.service";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
-import { UserSchema, Users } from "@users/Schema/user.schema";
 import { UserService } from "@users/user.service";
 import * as request from "supertest";
+import { UserModule } from "@users/users.module";
+import { ImageModule } from "@image/image.module";
+import { RecommendationModule } from "@componentRecommendation/recommendation.module";
+import { ProductModule } from "@product/product.module";
+import { ProviderModule } from "@providers/providers.module";
 const urlConfig = require("./globalConfig.json");
 describe("Auth", () => {
   let app: INestApplication;
@@ -26,14 +23,12 @@ describe("Auth", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([]),
-        MongooseModule.forFeature([
-          { name: Users.name, schema: UserSchema },
-          { name: imagem.name, schema: ImagemSchema },
-          { name: Recommendation.name, schema: RrecommendationSchema },
-          { name: Product.name, schema: ProductSchema },
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
+        UserModule,
+        ImageModule,
+        RecommendationModule,
+        ProductModule,
+        ProviderModule,
+        PassportModule,
         PassportModule,
         JwtModule.register(jwtConfig),
       ],

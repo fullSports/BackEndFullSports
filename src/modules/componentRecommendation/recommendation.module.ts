@@ -4,25 +4,24 @@ import { RecommendationService } from "./recommendation.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import {
   Recommendation,
-  RrecommendationSchema,
+  RecommendationSchema,
 } from "./Schema/Rrecommendation.schema";
-import { UserSchema, Users } from "@users/Schema/user.schema";
 import { ProductServices } from "@product/product.service";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
+import { ProductModule } from "@product/product.module";
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: Recommendation.name, schema: RrecommendationSchema },
-      { name: Product.name, schema: ProductSchema },
-      { name: imagem.name, schema: ImagemSchema },
-      { name: Provider.name, schema: ProviderSchema },
-      { name: Users.name, schema: UserSchema },
+      { name: Recommendation.name, schema: RecommendationSchema },
     ]),
+    ProductModule,
+    ImageModule,
+    ProviderModule,
   ],
   controllers: [RecommendationController],
   providers: [RecommendationService, ProductServices],
+  exports: [MongooseModule],
 })
 export class RecommendationModule {}

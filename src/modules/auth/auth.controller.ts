@@ -5,14 +5,14 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post("login-app")
   async LoginApp(@Body() body: { clientId: string; clientSecret: string }) {
-    const user = await this.authService.validateApp(
+    const app = await this.authService.validateApp(
       body.clientId,
       body.clientSecret
     );
-    if (!user) {
+    if (!app) {
       throw new UnauthorizedException();
     }
-    const token = await this.authService.generateToken(user);
+    const token = await this.authService.generateToken(app);
     this.authService.setAccessToken(token.access_token);
     return token;
   }

@@ -3,19 +3,19 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
 import {
   Recommendation,
-  RrecommendationSchema,
+  RecommendationSchema,
 } from "@componentRecommendation/Schema/Rrecommendation.schema";
 import * as request from "supertest";
 import { RecommendationController } from "@componentRecommendation/recommendation.controller";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
 import { ProductServices } from "@product/product.service";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
-import { UserSchema, Users } from "@users/Schema/user.schema";
 import { UserService } from "@users/user.service";
 import { UserController } from "@users/users.controller";
 import { AuthModule } from "@auth/auth.module";
+import { UserModule } from "@users/users.module";
+import { ProductModule } from "@product/product.module";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
 const urlConfig = require("./globalConfig.json");
 describe("Recommendation", () => {
   let app: INestApplication;
@@ -24,13 +24,13 @@ describe("Recommendation", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
-          { name: Recommendation.name, schema: RrecommendationSchema },
-          { name: Product.name, schema: ProductSchema },
-          { name: imagem.name, schema: ImagemSchema },
-          { name: Provider.name, schema: ProviderSchema },
-          { name: Users.name, schema: UserSchema },
+          { name: Recommendation.name, schema: RecommendationSchema },
         ]),
         AuthModule,
+        UserModule,
+        ProductModule,
+        ImageModule,
+        ProviderModule,
       ],
       controllers: [RecommendationController, UserController],
       providers: [RecommendationService, ProductServices, UserService],

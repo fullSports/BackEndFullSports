@@ -3,19 +3,16 @@ import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserSchema, Users } from "@users/Schema/user.schema";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
 import { UserController } from "@users/users.controller";
 import { UserService } from "@users/user.service";
-import {
-  Recommendation,
-  RrecommendationSchema,
-} from "@componentRecommendation/Schema/Rrecommendation.schema";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
 import { RecommendationController } from "@componentRecommendation/recommendation.controller";
 import { AuthModule } from "@auth/auth.module";
+import { RecommendationModule } from "@componentRecommendation/recommendation.module";
+import { ProductModule } from "@product/product.module";
+import { ProviderModule } from "@providers/providers.module";
+import { ImageModule } from "@image/image.module";
 const urlConfig = require("./globalConfig.json");
 describe("Users", () => {
   let app: INestApplication;
@@ -23,13 +20,11 @@ describe("Users", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([
-          { name: Users.name, schema: UserSchema },
-          { name: imagem.name, schema: ImagemSchema },
-          { name: Recommendation.name, schema: RrecommendationSchema },
-          { name: Product.name, schema: ProductSchema },
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
+        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        RecommendationModule,
+        ProductModule,
+        ProviderModule,
+        ImageModule,
         AuthModule,
       ],
       controllers: [UserController, RecommendationController],

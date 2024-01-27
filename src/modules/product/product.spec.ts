@@ -8,6 +8,8 @@ import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
 import { ImageController } from "@image/image.controller";
 import { ImageService } from "@image/image.service";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
 const path = require("path");
 const urlConfig = require("../../../globalConfig.json");
 
@@ -21,12 +23,8 @@ describe("ProductController", () => {
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
         ]),
-        MongooseModule.forFeature([
-          { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
+        ImageModule,
+        ProviderModule,
       ],
       controllers: [ProductController, ImageController],
       providers: [ProductServices, ImageService],

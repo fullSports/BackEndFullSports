@@ -12,5 +12,6 @@ import { Provider, ProviderSchema } from "./Schema/providers.schema";
   ],
   controllers: [ProviderController],
   providers: [ProviderService],
+  exports: [ProviderService, MongooseModule],
 })
 export class ProviderModule {}

@@ -2,23 +2,16 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { OrderController } from "./order.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Order, OrderSchema } from "./Schema/order.schema";
-import { UserSchema, Users } from "@users/Schema/user.schema";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
+import { Product } from "@product/Schema/product.schema";
 import { UserController } from "@users/users.controller";
 import ProductController from "@product/product.controller";
 import { ImageController } from "@image/image.controller";
 import { OrderService } from "./order.service";
 import { ProductServices } from "@product/product.service";
-import { UserService } from "@users/user.service";
-import { ImageService } from "@image/image.service";
-import { RecommendationController } from "@componentRecommendation/recommendation.controller";
-import { RecommendationService } from "@componentRecommendation/recommendation.service";
-import {
-  Recommendation,
-  RrecommendationSchema,
-} from "@componentRecommendation/Schema/Rrecommendation.schema";
+import { UserModule } from "@users/users.module";
+import { ProductModule } from "@product/product.module";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
 const urlConfig = require("../../../globalConfig.json");
 
 const path = require("path");
@@ -32,36 +25,13 @@ describe("OrderController", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
-
-        MongooseModule.forFeature([
-          { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
+        UserModule,
+        ProductModule,
+        ImageModule,
+        ProviderModule,
       ],
-      controllers: [
-        OrderController,
-        UserController,
-        ProductController,
-        ImageController,
-      ],
-      providers: [
-        OrderService,
-        ProductServices,
-        RecommendationController,
-        UserService,
-        ProductServices,
-        ImageService,
-        RecommendationService,
-      ],
+      controllers: [OrderController],
+      providers: [OrderService, ProductServices],
     }).compile();
     orderController = app.get<OrderController>(OrderController);
     userController = app.get<UserController>(UserController);

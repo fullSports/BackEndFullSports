@@ -3,16 +3,16 @@ import { RecommendationController } from "./recommendation.controller";
 import { MongooseModule } from "@nestjs/mongoose";
 import {
   Recommendation,
-  RrecommendationSchema,
+  RecommendationSchema,
 } from "./Schema/Rrecommendation.schema";
-import { UserSchema, Users } from "@users/Schema/user.schema";
 import { ProductServices } from "@product/product.service";
-import { Product, ProductSchema } from "@product/Schema/product.schema";
-import { ImagemSchema, imagem } from "@image/Schema/image.schema";
-import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { RecommendationService } from "./recommendation.service";
 import { UserController } from "@users/users.controller";
 import { UserService } from "@users/user.service";
+import { ProductModule } from "@product/product.module";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
+import { UserModule } from "@users/users.module";
 const urlConfig = require("../../../globalConfig.json");
 
 describe("RecommendationController", () => {
@@ -23,18 +23,12 @@ describe("RecommendationController", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
-          { name: Recommendation.name, schema: RrecommendationSchema },
+          { name: Recommendation.name, schema: RecommendationSchema },
         ]),
-        MongooseModule.forFeature([
-          { name: Product.name, schema: ProductSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: imagem.name, schema: ImagemSchema },
-        ]),
-        MongooseModule.forFeature([
-          { name: Provider.name, schema: ProviderSchema },
-        ]),
-        MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        UserModule,
+        ProductModule,
+        ImageModule,
+        ProviderModule,
       ],
       controllers: [RecommendationController, UserController],
       providers: [RecommendationService, ProductServices, UserService],

@@ -29,13 +29,14 @@ async function bootstrap() {
       bearerFormat: "JWT",
       flows: {
         password: {
-          authorizationUrl: `${configService.get<string>("URL_AUTHORIZATION")}`,
-          tokenUrl: `${configService.get<string>("URL_AUTHORIZATION")}`,
+          authorizationUrl: configService.get<string>("URL_AUTHORIZATION"),
+          tokenUrl: configService.get<string>("URL_AUTHORIZATION"),
           scopes: {},
         },
       },
     })
     .build();
+  logger.debug(configService.get<string>("URL_AUTHORIZATION"));
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(
     "swagger",

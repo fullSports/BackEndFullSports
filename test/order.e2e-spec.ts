@@ -4,7 +4,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AuthModule } from "@auth/auth.module";
 import {
   Recommendation,
-  RrecommendationSchema,
+  RecommendationSchema,
 } from "@componentRecommendation/Schema/Rrecommendation.schema";
 import { RecommendationController } from "@componentRecommendation/recommendation.controller";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
@@ -22,6 +22,10 @@ import { UserSchema, Users } from "@users/Schema/user.schema";
 import { UserService } from "@users/user.service";
 import { UserController } from "@users/users.controller";
 import * as request from "supertest";
+import { UserModule } from "@users/users.module";
+import { ProductModule } from "@product/product.module";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
 const urlConfig = require("./globalConfig.json");
 const path = require("path");
 describe("Product", () => {
@@ -30,31 +34,15 @@ describe("Product", () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
-        MongooseModule.forFeature([
-          { name: Order.name, schema: OrderSchema },
-          { name: Users.name, schema: UserSchema },
-          { name: Product.name, schema: ProductSchema },
-          { name: imagem.name, schema: ImagemSchema },
-          { name: Provider.name, schema: ProviderSchema },
-          { name: Recommendation.name, schema: RrecommendationSchema },
-        ]),
+        MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
         AuthModule,
+        UserModule,
+        ProductModule,
+        ImageModule,
+        ProviderModule,
       ],
-      controllers: [
-        OrderController,
-        UserController,
-        ProductController,
-        ImageController,
-      ],
-      providers: [
-        OrderService,
-        ProductServices,
-        RecommendationController,
-        UserService,
-        ProductServices,
-        ImageService,
-        RecommendationService,
-      ],
+      controllers: [OrderController],
+      providers: [OrderService, ProductServices],
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();

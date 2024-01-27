@@ -8,6 +8,8 @@ import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import ProductController from "@product/product.controller";
 import { ProductServices } from "@product/product.service";
 import { AuthModule } from "@auth/auth.module";
+import { ImageModule } from "@image/image.module";
+import { ProviderModule } from "@providers/providers.module";
 const urlConfig = require("./globalConfig.json");
 describe("Product", () => {
   let app: INestApplication;
@@ -17,9 +19,9 @@ describe("Product", () => {
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([
           { name: Product.name, schema: ProductSchema },
-          { name: imagem.name, schema: ImagemSchema },
-          { name: Provider.name, schema: ProviderSchema },
         ]),
+        ImageModule,
+        ProviderModule,
         AuthModule,
       ],
       controllers: [ProductController],

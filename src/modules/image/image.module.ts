@@ -9,5 +9,6 @@ import { ImagemSchema, imagem } from "./Schema/image.schema";
   ],
   controllers: [ImageController],
   providers: [ImageService],
+  exports: [MongooseModule],
 })
 export class ImageModule {}

@@ -35,5 +35,5 @@ export class Recommendation {
   @Prop({ required: false })
   click_equipamentos: number;
 }
-export const RrecommendationSchema =
+export const RecommendationSchema =
   SchemaFactory.createForClass(Recommendation);

@@ -30,23 +30,12 @@
 
 [docker compose](https://docs.docker.com/compose/install/) install Docker Componse.
 
-## automatic installation with docker
+## Running the app  with docker
 ```bash
 # run local api
 $ docker compose up or $ docker compose up --build
 # DELETE THE CONTAINERS
 $ docker compose down -v
-```
-
-## Running the app and Installation manual
-```bash
-$ npm install
-# build
-$ npm run build
-# development
-$ npm run start:dev
-# production
-$ npm run start:prod
 ```
 
 # watch mode
