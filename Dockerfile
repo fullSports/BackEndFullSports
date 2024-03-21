@@ -1,4 +1,4 @@
-FROM node:20.5.1
+FROM node:20.11
 
 # RUN apk add --no-cache bash
 RUN npm install -g pnpm
