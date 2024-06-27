@@ -1,5 +1,10 @@
 import { Model } from "mongoose";
-import { Injectable, NotFoundException, UseGuards } from "@nestjs/common";
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  UseGuards,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
@@ -16,14 +21,15 @@ export class UserService {
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>,
     private readonly recommendationService: RecommendationService
   ) {}
+  private Logger: Logger = new Logger(UserService.name);
   @UseGuards(AuthGuard("jwt"))
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
       .populate("imagemPerfil")
       .exec();
-    if (!listUser) throw new NotFoundException();
-    else return listUser;
+    if (!listUser) throw new NotFoundException("Erro ao procurar usuários");
+    return listUser;
   }
   @UseGuards(AuthGuard("jwt"))
   async RegisterUsers(createUser: Users): Promise<Users> {

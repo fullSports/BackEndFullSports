@@ -1,8 +1,8 @@
 import { ConfigService } from "@nestjs/config";
 
 const configService = new ConfigService();
-export enum envseEnum {
-  PROD = configService.get("mongoPROD"),
-  QA = configService.get("mongoQA"),
-  LOCAL = configService.get("DBAAS_MONGODB_ENDPOINT"),
-}
+export const envseEnum = {
+  PROD: configService.get<string>("mongoPROD"),
+  QA: configService.get<string>("mongoQA"),
+  LOCAL: configService.get<string>("DBAAS_MONGODB_ENDPOINT"),
+};

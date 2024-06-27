@@ -1,8 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-// import { UserService } from '../users/user.service';
-// import * as bcrypt from "bcrypt";
-// import * as crypto from "crypto";
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -29,7 +27,8 @@ export class AuthService {
       const hash = id
         .split("")
         .reduce(
-          (hex, c) => (hex += c.charCodeAt(0).toString(16).padStart(2, "0")),
+          (hex: string, c) =>
+            hex + c.charCodeAt(0).toString(16).padStart(2, "0"),
           ""
         );
       return {
@@ -55,7 +54,7 @@ export class AuthService {
     const hash = id
       .split("")
       .reduce(
-        (hex, c) => (hex += c.charCodeAt(0).toString(16).padStart(2, "0")),
+        (hex: string, c) => hex + c.charCodeAt(0).toString(16).padStart(2, "0"),
         ""
       );
     if (hash == userId) return true;
