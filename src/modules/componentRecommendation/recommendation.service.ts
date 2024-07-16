@@ -20,25 +20,30 @@ export class RecommendationService {
     const listRecommedations = await this.RecommendationModel.find()
       .populate("user")
       .exec();
-    if (!listRecommedations) throw new NotFoundException();
-    else return listRecommedations;
+    if (!listRecommedations) {
+      throw new NotFoundException();
+    }
+    return listRecommedations;
   }
 
   async RegisterRecommedations(
     createRecommedation: Recommendation
   ): Promise<Recommendation> {
     const create = await this.RecommendationModel.create(createRecommedation);
-    if (!create) throw new NotFoundException();
-    else return create;
+    if (!create) {
+      throw new NotFoundException();
+    }
+    return create;
   }
 
   async ListRecommedationById(id: string): Promise<Recommendation> {
     const ListRecommedationById = await this.RecommendationModel.findById({
       _id: id,
     }).exec();
-    if (!ListRecommedationById)
+    if (!ListRecommedationById) {
       throw new NotFoundException("recomendação inexistente");
-    else return ListRecommedationById;
+    }
+    return ListRecommedationById;
   }
 
   async updateRecommedation(
@@ -46,32 +51,31 @@ export class RecommendationService {
     updateRecommendation: Recommendation
   ): Promise<Recommendation> {
     const findBydId = await this.RecommendationModel.findById(id);
-    if (!findBydId)
+    if (!findBydId) {
       throw new NotFoundException("id da recomendação não encontrado");
-    else {
-      const newRecommendation = {
-        user: findBydId.user,
-        click_calcados: updateRecommendation.click_calcados
-          ? updateRecommendation.click_calcados
-          : findBydId.click_calcados,
-        click_suplementos: updateRecommendation.click_suplementos
-          ? updateRecommendation.click_suplementos
-          : findBydId.click_suplementos,
-        click_roupas: updateRecommendation.click_roupas
-          ? updateRecommendation.click_roupas
-          : findBydId.click_roupas,
-        click_equipamentos: updateRecommendation.click_equipamentos
-          ? updateRecommendation.click_equipamentos
-          : findBydId.click_equipamentos,
-      };
-      const updateRecommendationById =
-        await this.RecommendationModel.findByIdAndUpdate(
-          id,
-          newRecommendation
-        ).setOptions({ overwrite: false, new: true });
-      if (!updateRecommendationById) throw new NotFoundException();
-      else return updateRecommendationById;
     }
+    const newRecommendation = {
+      user: findBydId.user,
+      click_calcados: updateRecommendation.click_calcados
+        ? updateRecommendation.click_calcados
+        : findBydId.click_calcados,
+      click_suplementos: updateRecommendation.click_suplementos
+        ? updateRecommendation.click_suplementos
+        : findBydId.click_suplementos,
+      click_roupas: updateRecommendation.click_roupas
+        ? updateRecommendation.click_roupas
+        : findBydId.click_roupas,
+      click_equipamentos: updateRecommendation.click_equipamentos
+        ? updateRecommendation.click_equipamentos
+        : findBydId.click_equipamentos,
+    };
+    const updateRecommendationById =
+      await this.RecommendationModel.findByIdAndUpdate(
+        id,
+        newRecommendation
+      ).setOptions({ overwrite: false, new: true });
+    if (!updateRecommendationById) throw new NotFoundException();
+    return updateRecommendationById;
   }
 
   async DeleteRecommendation(id: string): Promise<Recommendation> {
@@ -85,96 +89,34 @@ export class RecommendationService {
     id: string
   ): Promise<{ recommendations: Product[]; producstRemains: Product[] }> {
     const findBydId = await this.ListRecommedationById(id);
-    const higherNumber = Math.max(
-      findBydId.click_calcados,
-      findBydId.click_equipamentos,
-      findBydId.click_roupas,
-      findBydId.click_suplementos
+
+    const categories = {
+      click_calcados: "calcado",
+      click_equipamentos: "equipamento",
+      click_roupas: "roupa",
+      click_suplementos: "suplemento",
+    };
+
+    const higherNumberCategory = Object.keys(categories).reduce((a, b) =>
+      findBydId[a] > findBydId[b] ? a : b
     );
-    if (higherNumber == findBydId.click_calcados) {
-      const findAllProducts = await this.ProductService.listProducts();
-      const Products: Product[] = [];
-      const producstRemains: Product[] = [];
-      for (let i = 0; i < findAllProducts.length; i++) {
-        const categoriaDeproduto = findAllProducts[i].categoriaProduto;
-        const obj = Object.keys(categoriaDeproduto)[0].toString() as
-          | "roupa"
-          | "equipamento"
-          | "suplemento"
-          | "calcado";
-        if (obj == "calcado") {
-          Products.push(findAllProducts[i]);
-        } else {
-          producstRemains.push(findAllProducts[i]);
-        }
+
+    const findAllProducts = await this.ProductService.listProducts();
+    const recommendations: Product[] = [];
+    const producstRemains: Product[] = [];
+
+    findAllProducts.forEach((product) => {
+      const category = Object.keys(product.categoriaProduto)[0];
+      if (category === categories[higherNumberCategory]) {
+        recommendations.push(product);
+      } else {
+        producstRemains.push(product);
       }
-      return {
-        recommendations: Products,
-        producstRemains: producstRemains,
-      };
-    } else if (higherNumber == findBydId.click_equipamentos) {
-      const findAllProducts = await this.ProductService.listProducts();
-      const Products: Product[] = [];
-      const producstRemains: Product[] = [];
-      for (let i = 0; i < findAllProducts.length; i++) {
-        const categoriaDeproduto = findAllProducts[i].categoriaProduto;
-        const obj = Object.keys(categoriaDeproduto)[0].toString() as
-          | "roupa"
-          | "equipamento"
-          | "suplemento"
-          | "calcado";
-        if (obj == "equipamento") {
-          Products.push(findAllProducts[i]);
-        } else {
-          producstRemains.push(findAllProducts[i]);
-        }
-      }
-      return {
-        recommendations: Products,
-        producstRemains: producstRemains,
-      };
-    } else if (higherNumber == findBydId.click_roupas) {
-      const findAllProducts = await this.ProductService.listProducts();
-      const Products: Product[] = [];
-      const producstRemains: Product[] = [];
-      for (let i = 0; i < findAllProducts.length; i++) {
-        const categoriaDeproduto = findAllProducts[i].categoriaProduto;
-        const obj = Object.keys(categoriaDeproduto)[0].toString() as
-          | "roupa"
-          | "equipamento"
-          | "suplemento"
-          | "calcado";
-        if (obj == "roupa") {
-          Products.push(findAllProducts[i]);
-        } else {
-          producstRemains.push(findAllProducts[i]);
-        }
-      }
-      return {
-        recommendations: Products,
-        producstRemains: producstRemains,
-      };
-    } else if (higherNumber == findBydId.click_suplementos) {
-      const findAllProducts = await this.ProductService.listProducts();
-      const Products: Product[] = [];
-      const producstRemains: Product[] = [];
-      for (let i = 0; i < findAllProducts.length; i++) {
-        const categoriaDeproduto = findAllProducts[i].categoriaProduto;
-        const obj = Object.keys(categoriaDeproduto)[0].toString() as
-          | "roupa"
-          | "equipamento"
-          | "suplemento"
-          | "calcado";
-        if (obj == "suplemento") {
-          Products.push(findAllProducts[i]);
-        } else {
-          producstRemains.push(findAllProducts[i]);
-        }
-      }
-      return {
-        recommendations: Products,
-        producstRemains: producstRemains,
-      };
-    }
+    });
+
+    return {
+      recommendations,
+      producstRemains,
+    };
   }
 }

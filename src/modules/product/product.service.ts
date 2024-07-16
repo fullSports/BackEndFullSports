@@ -1,13 +1,17 @@
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, ObjectId } from "mongoose";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import {
   Provider,
   ProviderDocument,
 } from "../providers/Schema/providers.schema";
 import { updateProductDTO } from "./dto/updateProduct.dto";
-import { Product, ProductDocument } from "./Schema/product.schema";
+import {
+  categoryProduct,
+  Product,
+  ProductDocument,
+} from "./Schema/product.schema";
 
 @Injectable()
 export class ProductServices {
@@ -20,63 +24,39 @@ export class ProductServices {
     private readonly ProviderModel: Model<ProviderDocument>
   ) {}
   async listProducts(): Promise<Product[]> {
-    const listProducts = await this.productModel.find().exec();
-    const products: Product[] = [];
-    for (const i of listProducts) {
-      const searchId = await this.productModel.findById({ _id: i._id }).exec();
-      if (searchId) {
-        const imgId = [];
-        const img = [];
-        let ProviderId = String;
-        const obj = Object.keys(searchId.categoriaProduto)[0].toString();
-        imgId.push(searchId.categoriaProduto[obj].imagemProduto);
-        ProviderId = searchId.categoriaProduto[obj].fornecedor;
-        for (const i of imgId[0]) {
-          const searchImgId = await this.imageModel.findById({ _id: i }).exec();
-          img.push(searchImgId);
-        }
-        const searchProductId = await this.ProviderModel.findById({
-          _id: ProviderId,
-        }).exec();
-
-        searchId.categoriaProduto[obj].imagemProduto = [];
-        searchId.categoriaProduto[obj].imagemProduto = img;
-        searchId.categoriaProduto[obj].fornecedor = searchProductId;
-
-        products.push(searchId);
-      }
-    }
-    return products;
+    const listProducts = await this.productModel.find().lean().exec();
+    return listProducts;
   }
+
   async RegisterProduct(createProduct: Product): Promise<Product> {
     const RegisterProduct = await this.productModel.create(createProduct);
-    if (!RegisterProduct) throw new NotFoundException();
-    else return RegisterProduct;
+    if (!RegisterProduct) {
+      throw new NotFoundException();
+    }
+    return RegisterProduct;
   }
   async searchProductId(id: string): Promise<Product> {
     const searchId = await this.productModel.findById({ _id: id }).exec();
     if (!searchId) throw new NotFoundException();
-    else {
-      const imgId = [];
-      const img = [];
-      let ProviderId = String;
-      const obj = Object.keys(searchId.categoriaProduto)[0].toString();
-      imgId.push(searchId.categoriaProduto[obj].imagemProduto);
-      ProviderId = searchId.categoriaProduto[obj].fornecedor;
-      for (const i of imgId[0]) {
-        const searchImgId = await this.imageModel.findById({ _id: i }).exec();
-        img.push(searchImgId);
-      }
-      const searchProductId = await this.ProviderModel.findById({
-        _id: ProviderId,
-      }).exec();
-
-      searchId.categoriaProduto[obj].imagemProduto = [];
-      searchId.categoriaProduto[obj].imagemProduto = img;
-      searchId.categoriaProduto[obj].fornecedor = searchProductId;
-
-      return searchId;
+    const imgId = [];
+    const img = [];
+    let ProviderId = String;
+    const obj = Object.keys(searchId.categoriaProduto)[0].toString();
+    imgId.push(searchId.categoriaProduto[obj].imagemProduto);
+    ProviderId = searchId.categoriaProduto[obj].fornecedor;
+    for (const i of imgId[0]) {
+      const searchImgId = await this.imageModel.findById({ _id: i }).exec();
+      img.push(searchImgId);
     }
+    const searchProductId = await this.ProviderModel.findById({
+      _id: ProviderId,
+    }).exec();
+
+    searchId.categoriaProduto[obj].imagemProduto = [];
+    searchId.categoriaProduto[obj].imagemProduto = img;
+    searchId.categoriaProduto[obj].fornecedor = searchProductId;
+
+    return searchId;
   }
 
   async updateProduct(
@@ -84,119 +64,87 @@ export class ProductServices {
     updateProduct: updateProductDTO
   ): Promise<Product> {
     const findByIdProduct = await this.productModel.findById({ _id: id });
-    if (!findByIdProduct) throw new NotFoundException();
-    else {
-      const obj = Object.keys(findByIdProduct.categoriaProduto)[0].toString();
-      const ObjUpdate = Object.keys(
-        updateProduct.categoriaProduto
-      )[0].toString();
-      const newProduct = {
-        categoriaProduto: {
-          [ObjUpdate]: {
-            nome: updateProduct.categoriaProduto[ObjUpdate].nome
-              ? updateProduct.categoriaProduto[ObjUpdate].nome
-              : findByIdProduct.categoriaProduto[obj].nome,
-            fornecedor: updateProduct.categoriaProduto[ObjUpdate].fornecedor
-              ? updateProduct.categoriaProduto[ObjUpdate].fornecedor
-              : findByIdProduct.categoriaProduto[obj].fornecedor,
-            cor: updateProduct.categoriaProduto[ObjUpdate].cor
-              ? updateProduct.categoriaProduto[ObjUpdate].cor
-              : findByIdProduct.categoriaProduto[obj].cor,
-            sexo: updateProduct.categoriaProduto[ObjUpdate].sexo
-              ? updateProduct.categoriaProduto[ObjUpdate].sexo
-              : findByIdProduct.categoriaProduto[obj].sexo,
-            tamanho: updateProduct.categoriaProduto[ObjUpdate].tamanho
-              ? updateProduct.categoriaProduto[ObjUpdate].tamanho
-              : findByIdProduct.categoriaProduto[obj].tamanho,
-            preco: updateProduct.categoriaProduto[ObjUpdate].preco
-              ? updateProduct.categoriaProduto[ObjUpdate].preco
-              : findByIdProduct.categoriaProduto[obj].preco,
-            quantidade: updateProduct.categoriaProduto[ObjUpdate].quantidade
-              ? updateProduct.categoriaProduto[ObjUpdate].quantidade
-              : findByIdProduct.categoriaProduto[obj].quantidade,
-            imagemProduto: updateProduct.categoriaProduto[ObjUpdate]
-              .imagemProduto
-              ? updateProduct.categoriaProduto[ObjUpdate].imagemProduto
-              : findByIdProduct.categoriaProduto[obj].imagemProduto,
-          },
-        },
-      };
-      const updateNewProduct = await this.productModel
-        .findByIdAndUpdate(id, newProduct)
-        .exec();
-      if (!updateNewProduct) throw new NotFoundException();
-      else return updateNewProduct;
+    if (!findByIdProduct) {
+      throw new NotFoundException();
     }
+    const currentCategoryKey = Object.keys(findByIdProduct.categoriaProduto)[0];
+    const updatedCategoryKey = Object.keys(updateProduct.categoriaProduto)[0];
+    const currentCategory =
+      findByIdProduct.categoriaProduto[currentCategoryKey];
+    const updatedCategory = updateProduct.categoriaProduto[updatedCategoryKey];
+    const newProductData = {
+      categoriaProduto: {
+        [updatedCategoryKey]: {
+          nome: updatedCategory.nome ?? currentCategory.nome,
+          fornecedor: updatedCategory.fornecedor ?? currentCategory.fornecedor,
+          cor: updatedCategory.cor ?? currentCategory.cor,
+          sexo: updatedCategory.sexo ?? currentCategory.sexo,
+          tamanho: updatedCategory.tamanho ?? currentCategory.tamanho,
+          preco: updatedCategory.preco ?? currentCategory.preco,
+          quantidade: updatedCategory.quantidade ?? currentCategory.quantidade,
+          imagemProduto:
+            updatedCategory.imagemProduto ?? currentCategory.imagemProduto,
+        },
+      },
+    };
+    const updatedProduct = await this.productModel
+      .findByIdAndUpdate(id, newProductData, { new: true })
+      .exec();
+
+    if (!updatedProduct) {
+      throw new NotFoundException();
+    }
+    return updatedProduct;
   }
 
   async deleteProduct(id: string) {
-    const searchId = await this.productModel.findById({ _id: id }).exec();
-    if (!searchId) throw new NotFoundException();
-    else {
-      const obj = Object.keys(searchId.categoriaProduto)[0].toString();
-      searchId.categoriaProduto[obj].imagemProduto.map(async (item) => {
-        if (item) {
-          const deleteImageProduto = await this.imageModel
-            .findById({ _id: item })
-            .exec();
-          if (deleteImageProduto) {
-            await deleteImageProduto.remove();
+    const product = await this.productModel.findById({ _id: id }).exec();
+    if (!product) {
+      throw new NotFoundException();
+    }
+    const categoryKey = Object.keys(product.categoriaProduto)[0];
+    const images = product.categoriaProduto[categoryKey].imagemProduto;
+    await Promise.all(
+      images.map(async (imageId) => {
+        if (imageId) {
+          const image = await this.imageModel.findById({ _id: imageId }).exec();
+          if (image) {
+            await image.remove();
           }
         }
-      });
-      const deleteProduct = await this.productModel
-        .findByIdAndDelete({ _id: id })
-        .exec();
-
-      if (!searchId || !deleteProduct) throw new NotFoundException();
-      else return deleteProduct;
+      })
+    );
+    const deletedProduct = await this.productModel
+      .findByIdAndDelete({ _id: id })
+      .exec();
+    if (!deletedProduct) {
+      throw new NotFoundException();
     }
+    return deletedProduct;
   }
 
   async searchProducts(search: string): Promise<Product[]> {
-    Logger.debug(search);
-    const searchFormat = search
-      .normalize("NFD")
-      .replace(/[^a-zA-Z\s]/g, "")
-      .toLowerCase();
-    Logger.debug(searchFormat);
+    const normalizeString = (str: string): string =>
+      str
+        .normalize("NFD")
+        .replace(/[^a-zA-Z\s]/g, "")
+        .toLowerCase();
+    const searchFormat = normalizeString(search);
     const listProducts = await this.listProducts();
-    const ListProductResult: Product[] = [];
-    for (let i = 0; i < listProducts.length; i++) {
+    const searchCategories = ["calcado", "equipamento", "suplemento", "roupa"];
+    const ListProductResult = listProducts.filter((product) => {
+      const categoryKey = Object.keys(product.categoriaProduto)[0];
+      const categoryName = product.categoriaProduto[categoryKey].nome;
       if (
-        searchFormat.includes("calcado") &&
-        Object.keys(listProducts[i].categoriaProduto)[0] == "calcado"
+        searchCategories.includes(categoryKey) &&
+        searchFormat.includes(categoryKey)
       ) {
-        ListProductResult.push(listProducts[i]);
-      } else if (
-        searchFormat.includes("equipamento") &&
-        Object.keys(listProducts[i].categoriaProduto)[0] == "equipamento"
-      ) {
-        ListProductResult.push(listProducts[i]);
-      } else if (
-        searchFormat.includes("suplemento") &&
-        Object.keys(listProducts[i].categoriaProduto)[0] == "suplemento"
-      ) {
-        ListProductResult.push(listProducts[i]);
-      } else if (
-        searchFormat.includes("roupa") &&
-        Object.keys(listProducts[i].categoriaProduto)[0] == "roupa"
-      ) {
-        ListProductResult.push(listProducts[i]);
-      } else {
-        const nameProdut = listProducts[i].categoriaProduto[
-          Object.keys(listProducts[i].categoriaProduto)[0]
-        ].nome
-          .normalize("NFD")
-          .replace(/[^a-zA-Z\s]/g, "")
-          .toLowerCase();
-        if (nameProdut.includes(searchFormat)) {
-          ListProductResult.push(listProducts[i]);
-        }
+        return true;
       }
-    }
+      const normalizedProductName = normalizeString(categoryName);
+      return normalizedProductName.includes(searchFormat);
+    });
     Logger.debug(ListProductResult);
-
     return ListProductResult;
   }
 }

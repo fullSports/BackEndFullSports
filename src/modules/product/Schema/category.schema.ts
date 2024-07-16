@@ -14,7 +14,7 @@ export class category {
   @ApiProperty()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Provider.name })
   @IsNotEmpty({ message: "campo fornceder(id) vazio" })
-  fornecedor: ObjectId | null | string;
+  fornecedor: ObjectId | string;
 
   @ApiProperty()
   @Prop({ required: true })

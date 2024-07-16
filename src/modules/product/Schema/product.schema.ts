@@ -4,7 +4,7 @@ import { IsNotEmpty } from "class-validator";
 import { HydratedDocument } from "mongoose";
 import { category } from "./category.schema";
 export type ProductDocument = HydratedDocument<Product>;
-class categoryProduct {
+export class categoryProduct {
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo(objeto) roupa estar vazio vazio" })
