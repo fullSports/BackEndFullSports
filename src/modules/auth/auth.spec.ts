@@ -47,8 +47,8 @@ describe("AuthController", () => {
   describe("👨‍💻 MethodsAuth", () => {
     it("👨‍💻loginUser() ", async () => {
       const loginApp = await authController.LoginApp({
-        clientId: String(process.env.clientId),
-        clientSecret: String(process.env.clientSecret),
+        client_id: String(process.env.clientId),
+        client_secret: String(process.env.clientSecret),
       });
       expect(loginApp.access_token);
     });

@@ -50,8 +50,8 @@ describe("Auth", () => {
     const loginApp = await request(app.getHttpServer())
       .post("/auth/login-app")
       .send({
-        clientId: String(process.env.clientId),
-        clientSecret: String(process.env.clientSecret),
+        client_id: String(process.env.clientId),
+        client_secret: String(process.env.clientSecret),
       })
       .expect(201);
     expect(loginApp.body).toHaveProperty("access_token");

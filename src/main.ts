@@ -27,10 +27,6 @@ async function bootstrap() {
       type: "oauth2",
       bearerFormat: "JWT",
       flows: {
-        clientCredentials: {
-          authorizationUrl: configService.get<string>("URL_AUTHORIZATION"),
-          scopes: {},
-        },
         password: {
           authorizationUrl: configService.get<string>("URL_AUTHORIZATION"),
           tokenUrl: configService.get<string>("URL_AUTHORIZATION"),

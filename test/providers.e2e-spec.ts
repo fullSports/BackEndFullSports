@@ -37,8 +37,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientId: String(process.env.clientId),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProviders = await request(app.getHttpServer())
@@ -56,8 +56,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientId: String(process.env.clientId),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const createdProvider = await request(app.getHttpServer())
@@ -80,8 +80,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientId: String(process.env.clientId),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const ListProviderID = await request(app.getHttpServer())
@@ -99,8 +99,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientId: String(process.env.clientId),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const newProvider = {
@@ -124,8 +124,8 @@ describe("Providers", () => {
       await request(app.getHttpServer())
         .post("/auth/login-app")
         .send({
-          clientId: String(process.env.clientId),
-          clientSecret: String(process.env.clientSecret),
+          client_id: String(process.env.clientId),
+          client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
     const deleteProvider = await request(app.getHttpServer())
