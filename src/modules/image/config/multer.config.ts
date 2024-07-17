@@ -44,12 +44,15 @@ const storageTypes = {
     },
   }),
 };
-
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+if (MAX_FILE_SIZE > 10 * 1024 * 1024) {
+  throw new Error("File size limit exceeds the safe threshold.");
+}
 export default {
   dest: path.resolve(__dirname, "..", "..", "..", "..", "tmp", "uploads"),
   storage: storageTypes[configService.get<string>("STORAGE_TYPE")],
   limits: {
-    fileSize: 10 * 1024 * 1024, // MB
+    fileSize: MAX_FILE_SIZE,
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [

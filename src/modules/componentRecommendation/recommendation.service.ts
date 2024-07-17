@@ -97,8 +97,9 @@ export class RecommendationService {
       click_suplementos: "suplemento",
     };
 
-    const higherNumberCategory = Object.keys(categories).reduce((a, b) =>
-      findBydId[a] > findBydId[b] ? a : b
+    const higherNumberCategory = Object.keys(categories).reduce(
+      (a, b) => (findBydId[a] > findBydId[b] ? a : b),
+      Object.keys(categories)[0]
     );
 
     const findAllProducts = await this.ProductService.listProducts();

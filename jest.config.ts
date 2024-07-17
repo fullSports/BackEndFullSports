@@ -19,6 +19,8 @@ const config: Config = {
     ".*module\\.ts$",
     ".*main\\.ts$",
     ".*dto\\.ts$",
+    "/.vercel/",
+    ".*tmp\\.ts$",
     "/validator/",
     "/test/",
     "/mock/",

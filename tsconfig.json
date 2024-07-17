@@ -47,6 +47,9 @@
       "@configs/*":[
         "./src/configs/*"
       ],
+      "@mocks/*":[
+        "./src/mocks/*"
+      ],
       "@enums/*":[
         "./src/enums/*"
       ]
