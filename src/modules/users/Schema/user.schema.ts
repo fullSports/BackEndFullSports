@@ -51,7 +51,7 @@ export class Users {
 
   @ApiProperty()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: imagem.name })
-  imagemPerfil: ObjectId | null;
+  imagemPerfil: ObjectId | null | string;
 
   @Prop({ required: true })
   dataCadastro: string;

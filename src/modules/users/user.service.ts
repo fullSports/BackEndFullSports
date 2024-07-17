@@ -28,52 +28,55 @@ export class UserService {
       .find()
       .populate("imagemPerfil")
       .exec();
-    if (!listUser) throw new NotFoundException("Erro ao procurar usuários");
+    if (!listUser) {
+      throw new NotFoundException("Erro ao procurar usuários");
+    }
     return listUser;
   }
   @UseGuards(AuthGuard("jwt"))
   async RegisterUsers(createUser: Users): Promise<Users> {
     const { email, password, isAdmin } = createUser.login;
-    const listUser = this.ListUsers();
+    const listUser = await this.ListUsers();
 
-    const userTrue = (await listUser).filter(function (item) {
-      return item.login.email == email;
-    });
+    const userExists = listUser.some((user) => user.login.email === email);
 
-    if (userTrue.length === 0) {
-      return bcrypt.hash(password, 10).then(async (hash) => {
-        const encryptedPassowrd = hash;
-        const dateNow = new Date().toISOString();
-        const newUser = this.userModel.create({
-          cpf: createUser.cpf,
-          nome: createUser.nome,
-          login: {
-            email: email,
-            password: encryptedPassowrd,
-            isAdmin: isAdmin,
-          },
-          dataNascimento: createUser.dataNascimento,
-          sexo: createUser.sexo,
-          cep: createUser.cep,
-          endereco: createUser.endereco,
-          imagemPerfil: createUser.imagemPerfil,
-          dataCadastro: dateNow,
-        });
-        if (!newUser) throw new NotFoundException();
-        else {
-          const _id = await newUser.then((res) => res._id.toString());
-          await this.recommendationService.RegisterRecommedations({
-            click_calcados: 1,
-            click_equipamentos: 1,
-            click_roupas: 1,
-            click_suplementos: 1,
-            user: _id,
-          });
-          return newUser;
-        }
-      });
-    } else {
+    if (userExists) {
       return null;
+    }
+
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const dateNow = new Date().toISOString();
+      const newUser = await this.userModel.create({
+        cpf: createUser.cpf,
+        nome: createUser.nome,
+        login: {
+          email: email,
+          password: hashedPassword,
+          isAdmin: isAdmin,
+        },
+        dataNascimento: createUser.dataNascimento,
+        sexo: createUser.sexo,
+        cep: createUser.cep,
+        endereco: createUser.endereco,
+        imagemPerfil: createUser.imagemPerfil,
+        dataCadastro: dateNow,
+      });
+
+      if (!newUser) {
+        throw new NotFoundException();
+      }
+      const userId = newUser._id.toString();
+      await this.recommendationService.RegisterRecommedations({
+        click_calcados: 1,
+        click_equipamentos: 1,
+        click_roupas: 1,
+        click_suplementos: 1,
+        user: userId,
+      });
+      return newUser;
+    } catch (error) {
+      throw new Error("Falha ao registrar usuário");
     }
   }
   @UseGuards(AuthGuard("jwt"))
@@ -82,50 +85,50 @@ export class UserService {
       .findById({ _id: id })
       .populate("imagemPerfil")
       .exec();
-    if (!searchId) throw new NotFoundException();
-    else return searchId;
-  }
-  @UseGuards(AuthGuard("jwt"))
-  async updateUser(id: string, updateUserBoy: UpdateUserDTO): Promise<Users> {
-    const findByIDUser = await this.userModel.findById(id);
-    const imagemPerfilBody = updateUserBoy.imagemPerfil;
-    let ImgPerfil;
-    if (!imagemPerfilBody) ImgPerfil = null;
-    else ImgPerfil = imagemPerfilBody;
-    const newUser = {
-      cpf: updateUserBoy.cpf ? updateUserBoy.cpf : findByIDUser.cpf,
-      nome: updateUserBoy.nome ? updateUserBoy.nome : findByIDUser.nome,
-      login: {
-        email: findByIDUser.login.email,
-        password: findByIDUser.login.password,
-        isAdmin: findByIDUser.login.isAdmin,
-      },
-      dataNascimento: updateUserBoy.dataNascimento
-        ? updateUserBoy.dataNascimento
-        : findByIDUser.dataNascimento,
-      sexo: updateUserBoy.sexo ? updateUserBoy.sexo : findByIDUser.sexo,
-      cep: updateUserBoy.cep ? updateUserBoy.cep : findByIDUser.cep,
-      endereco: updateUserBoy.endereco
-        ? updateUserBoy.endereco
-        : findByIDUser.endereco,
-      imagemPerfil: ImgPerfil,
-      dataCadastro: findByIDUser.dataCadastro,
-    };
-    const updateUser = await this.userModel
-      .findByIdAndUpdate(id, newUser)
-      .setOptions({ overwrite: false, new: true });
-    if (!updateUser) {
+    if (!searchId) {
       throw new NotFoundException();
     }
-    return updateUser;
+    return searchId;
   }
+  @UseGuards(AuthGuard("jwt"))
+  async updateUser(id: string, updateUserDTO: UpdateUserDTO): Promise<Users> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new NotFoundException();
+    }
+    const updatedUser = {
+      cpf: updateUserDTO.cpf || user.cpf,
+      nome: updateUserDTO.nome || user.nome,
+      login: {
+        email: user.login.email,
+        password: user.login.password,
+        isAdmin: user.login.isAdmin,
+      },
+      dataNascimento: updateUserDTO.dataNascimento || user.dataNascimento,
+      sexo: updateUserDTO.sexo || user.sexo,
+      cep: updateUserDTO.cep || user.cep,
+      endereco: updateUserDTO.endereco || user.endereco,
+      imagemPerfil: updateUserDTO.imagemPerfil || null,
+      dataCadastro: user.dataCadastro,
+    };
+    const updatedUserRecord = await this.userModel.findByIdAndUpdate(
+      id,
+      updatedUser,
+      { overwrite: false, new: true }
+    );
+    if (!updatedUserRecord) {
+      throw new NotFoundException();
+    }
+    return updatedUserRecord;
+  }
+
   @UseGuards(AuthGuard("jwt"))
   async deleteUser(id: string, realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
     const userTrue = await this.userModel.findById({ _id: id }).exec();
     if (userTrue.login.email !== email)
       return {
-        messgem: "email ou senha invalida",
+        message: "email ou senha invalida",
       };
     else {
       const comparePassword = await bcrypt.compareSync(
@@ -158,11 +161,14 @@ export class UserService {
             .findByIdAndDelete({ _id: id })
             .exec();
           if (!deleteUser) throw new NotFoundException();
-          else return deleteUser;
+          else
+            return {
+              message: "Usuário deletado com sucesso",
+            };
         }
       } else
         return {
-          messgem: "email ou senha invalida",
+          message: "email ou senha invalida",
         };
     }
   }
@@ -175,7 +181,7 @@ export class UserService {
     });
     if (userTrue.length == 0)
       return {
-        messagem: "email não encontrado",
+        message: "email não encontrado",
         emailExists: false,
         emailAndPassword: false,
       };
@@ -192,7 +198,7 @@ export class UserService {
         };
       } else {
         return {
-          messagem: "email ou senha incorretos",
+          message: "email ou senha incorretos",
           emailExists: true,
           emailAndPassword: false,
         };
@@ -209,7 +215,7 @@ export class UserService {
     });
     if (userTrue.length == 0)
       return {
-        messagem: "email ou senha incorretos",
+        message: "email ou senha incorretos",
         emailExists: false,
       };
     else {
@@ -253,7 +259,7 @@ export class UserService {
           });
       } else
         return {
-          messagem: "email ou senha incorretos",
+          message: "email ou senha incorretos",
           emailAndPassword: false,
         };
     }
