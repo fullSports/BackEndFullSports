@@ -27,6 +27,7 @@ services:
     environment:
         DBAAS_MONGODB_ENDPOINT: mongodb://mongodb:27017
         VERCEL_GIT_COMMIT_REF: Local version
+        URL_AUTHORIZATION: http://localhost:${PORT}/auth/login-app/
 
   mongodb-seed: # rodar esse container, importa os dados das materias(json) no mongodb local
     image: mongo

@@ -12,6 +12,9 @@ import { NotFoundException } from "@nestjs/common";
 import { Mocks } from "@mocks/mocks";
 import * as bcrypt from "bcrypt";
 import { Recommendation } from "@componentRecommendation/Schema/Rrecommendation.schema";
+import { RealizarLogin } from "./dto/SingIn.dto";
+import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
+import { Types } from "mongoose";
 const urlConfig = require("../../../globalConfig.json");
 
 describe("userService", () => {
@@ -63,6 +66,14 @@ describe("userService", () => {
     userService = app.get<UserService>(UserService);
   });
   describe("ListUsers()", () => {
+    it("should throw NotFoundException when no users are found", async () => {
+      mockMongo.find = jest.fn().mockReturnValue({
+        populate: jest.fn().mockReturnValue({
+          exec: jest.fn().mockResolvedValue([]),
+        }),
+      });
+      await expect(userService.ListUsers()).rejects.toThrow(NotFoundException);
+    });
     it("should return a list of users when users exist in the database", async () => {
       const mockUsers: Users[] = mocks.users();
       mockMongo.find = jest.fn().mockReturnValue({
@@ -79,6 +90,27 @@ describe("userService", () => {
     });
   });
   describe("RegisterUsers()", () => {
+    it("should throw NotFoundException when no users are create", async () => {
+      mockMongo.create = jest.fn().mockResolvedValue(null);
+      const createUser = {
+        cpf: "123.456.789-00",
+        nome: "John Doe",
+        login: {
+          email: "john.doe@example.com",
+          password: "password123",
+          isAdmin: false,
+        },
+        dataNascimento: "1990-01-01",
+        sexo: "M",
+        cep: "12345678",
+        endereco: "123 Main St",
+        imagemPerfil: null,
+        dataCadastro: "",
+      };
+      await expect(userService.RegisterUsers(createUser)).rejects.toThrow(
+        Error
+      );
+    });
     it("should register a new user when provided with valid data", async () => {
       mockMongo.create = jest.fn().mockResolvedValue({ _id: "12345" });
       const bcryptHashSpy = jest
@@ -196,7 +228,6 @@ describe("userService", () => {
       const result = await userService.updateUser(id, updateUserDTO);
       expect(result).toEqual(updatedUser);
     });
-    // Throws NotFoundException if user with given id does not exist
     it("should throw NotFoundException if user with given id does not exist", async () => {
       const userMocks = mocks.users()[0];
       const id = userMocks["_id"];
@@ -272,6 +303,125 @@ describe("userService", () => {
 
       expect(result).toEqual({ message: "email ou senha invalida" });
       expect(mockMongo.findById).toHaveBeenCalledWith("userId");
+    });
+  });
+  describe("signIn()", () => {
+    it("should return user object with emailExists and emailAndPassword set to true when valid email and password are provided", async () => {
+      const mockUser = {
+        login: {
+          email: "test@example.com",
+          password: await bcrypt.hash("validPassword", 10),
+        },
+      };
+      const mockListUsers = jest.fn().mockResolvedValue([mockUser]);
+      userService.ListUsers = mockListUsers;
+
+      const realizarLogin = new RealizarLogin();
+      realizarLogin.email = "test@example.com";
+      realizarLogin.password = "validPassword";
+
+      const result = await userService.signIn(realizarLogin);
+
+      expect(result).toEqual({
+        result: mockUser,
+        emailExists: true,
+        emailAndPassword: true,
+      });
+    });
+    it("should return error message when email and password fields are empty", async () => {
+      const realizarLogin = new RealizarLogin();
+      realizarLogin.email = "";
+      realizarLogin.password = "";
+
+      const result = await userService.signIn(realizarLogin);
+
+      expect(result).toEqual({
+        message: "email não encontrado",
+        emailExists: false,
+        emailAndPassword: false,
+      });
+    });
+  });
+  describe("updatePassworUser", () => {
+    it("should update password when old password is correct", async () => {
+      const id = new Types.ObjectId().toString();
+      const updatePasswordBody: UpdatePasswordUser = {
+        email: "test@example.com",
+        OldPassword: "oldPassword123",
+        newPassoWord: "newPassword123",
+        isAdmin: true,
+        newEmail: "test2@example.com",
+      };
+      jest.spyOn(userService, "ListUsers").mockResolvedValue([
+        {
+          cpf: "123456789",
+          cep: "tweasd",
+          dataCadastro: "09-06-2024",
+          dataNascimento: "09/06/2021",
+          endereco: "asdasds",
+          imagemPerfil: null,
+          nome: "Test User",
+          sexo: "M",
+          login: {
+            isAdmin: true,
+            email: "test@example.com",
+            password: bcrypt.hashSync("oldPassword123", 10),
+          },
+        },
+      ]);
+      mockMongo.findById.mockReturnValue({
+        cpf: "123456789",
+        nome: "Test User",
+        login: {
+          email: "test@example.com",
+          password: bcrypt.hashSync("oldPassword123", 10),
+          isAdmin: false,
+        },
+        dataNascimento: "1990-01-01",
+        sexo: "M",
+        cep: "12345-678",
+        endereco: "Test Address",
+        imagemPerfil: null,
+      });
+      const hash = bcrypt.hashSync("newPassword123", 10);
+      mockMongo.findByIdAndUpdate.mockReturnValue({
+        cpf: "123456789",
+        nome: "Test User",
+        login: {
+          email: "test2@example.com",
+          password: hash,
+          isAdmin: true,
+        },
+        dataNascimento: "1990-01-01",
+        sexo: "M",
+        cep: "12345-678",
+        endereco: "Test Address",
+        imagemPerfil: null,
+      });
+      const result = await userService.updatePassworUser(
+        id,
+        updatePasswordBody
+      );
+      expect(result["login"].password).toBe(hash);
+    });
+    it("should return error message when email is not found", async () => {
+      const id = new Types.ObjectId().toString();
+      const updatePasswordBody: UpdatePasswordUser = {
+        email: "nonexistent@example.com",
+        OldPassword: "oldPassword123",
+        newPassoWord: "newPassword123",
+        isAdmin: true,
+        newEmail: "nonexistent@example.com",
+      };
+      jest.spyOn(userService, "ListUsers").mockResolvedValue([]);
+      const result = await userService.updatePassworUser(
+        id,
+        updatePasswordBody
+      );
+      expect(result).toEqual({
+        message: "email ou senha incorretos",
+        emailExists: false,
+      });
     });
   });
 });

@@ -22,18 +22,18 @@ export class UserService {
     private readonly recommendationService: RecommendationService
   ) {}
   private Logger: Logger = new Logger(UserService.name);
-  @UseGuards(AuthGuard("jwt"))
+
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
       .populate("imagemPerfil")
       .exec();
-    if (!listUser) {
+    if (!listUser || listUser.length === 0) {
       throw new NotFoundException("Erro ao procurar usuários");
     }
     return listUser;
   }
-  @UseGuards(AuthGuard("jwt"))
+
   async RegisterUsers(createUser: Users): Promise<Users> {
     const { email, password, isAdmin } = createUser.login;
     const listUser = await this.ListUsers();
@@ -79,7 +79,6 @@ export class UserService {
       throw new Error("Falha ao registrar usuário");
     }
   }
-  @UseGuards(AuthGuard("jwt"))
   async searchId(id: string): Promise<Users> {
     const searchId = await this.userModel
       .findById({ _id: id })
@@ -90,7 +89,6 @@ export class UserService {
     }
     return searchId;
   }
-  @UseGuards(AuthGuard("jwt"))
   async updateUser(id: string, updateUserDTO: UpdateUserDTO): Promise<Users> {
     const user = await this.userModel.findById(id);
     if (!user) {
@@ -121,8 +119,6 @@ export class UserService {
     }
     return updatedUserRecord;
   }
-
-  @UseGuards(AuthGuard("jwt"))
   async deleteUser(
     id: string,
     realizarLogin: RealizarLogin
@@ -164,97 +160,90 @@ export class UserService {
 
     return { message: "Usuário deletado com sucesso" };
   }
-
-  @UseGuards(AuthGuard("jwt"))
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
-    const listUser = this.ListUsers();
-    const userTrue = (await listUser).filter(function (item) {
-      return item.login.email == email;
-    });
-    if (userTrue.length == 0)
+
+    const users = await this.ListUsers();
+    const user = users.find((user) => user.login.email === email);
+
+    if (!user) {
       return {
         message: "email não encontrado",
         emailExists: false,
         emailAndPassword: false,
       };
-    else {
-      const comparePassword = await bcrypt.compareSync(
-        password,
-        userTrue[0].login.password
-      );
-      if (comparePassword) {
-        return {
-          result: userTrue[0],
-          emailExists: true,
-          emailAndPassword: true,
-        };
-      } else {
-        return {
-          message: "email ou senha incorretos",
-          emailExists: true,
-          emailAndPassword: false,
-        };
-      }
     }
-  }
-  @UseGuards(AuthGuard("jwt"))
-  async updatePassworUser(id: string, UpdatePasswordBody: UpdatePasswordUser) {
-    const { email, OldPassword, newPassoWord } = UpdatePasswordBody;
-    const listUser = this.ListUsers();
 
-    const userTrue = (await listUser).filter(function (item) {
-      return item.login.email == email;
-    });
-    if (userTrue.length == 0)
+    const isPasswordValid = bcrypt.compareSync(password, user.login.password);
+    if (isPasswordValid) {
+      return {
+        result: user,
+        emailExists: true,
+        emailAndPassword: true,
+      };
+    }
+
+    return {
+      message: "email ou senha incorretos",
+      emailExists: true,
+      emailAndPassword: false,
+    };
+  }
+  async updatePassworUser(id: string, updatePasswordBody: UpdatePasswordUser) {
+    const { email, OldPassword, newPassoWord, newEmail, isAdmin } =
+      updatePasswordBody;
+
+    if (!Types.ObjectId.isValid(id)) {
+      throw new Error("ID de usuário inválido");
+    }
+
+    const users = await this.ListUsers();
+
+    const user = users.find((user) => user.login.email === email);
+    if (!user) {
       return {
         message: "email ou senha incorretos",
         emailExists: false,
       };
-    else {
-      const comparePassword = await bcrypt.compareSync(
-        OldPassword,
-        userTrue[0].login.password
-      );
-      if (comparePassword) {
-        return bcrypt
-          .hash(newPassoWord ? newPassoWord : "2", 10)
-          .then(async (hash) => {
-            const encryptedPassowrd = hash;
-            const findByIDUser = await this.userModel.findById(id);
-            const newUser = {
-              cpf: findByIDUser.cpf,
-              nome: findByIDUser.nome,
-              login: {
-                email: UpdatePasswordBody.newEmail
-                  ? UpdatePasswordBody.newEmail
-                  : findByIDUser.login.email,
-                password: newPassoWord
-                  ? encryptedPassowrd
-                  : findByIDUser.login.password,
-                isAdmin: UpdatePasswordBody.isAdmin
-                  ? UpdatePasswordBody.isAdmin
-                  : findByIDUser.login.isAdmin,
-              },
-              dataNascimento: findByIDUser.dataNascimento,
-              sexo: findByIDUser.sexo,
-              cep: findByIDUser.cep,
-              endereco: findByIDUser.endereco,
-              imagemPerfil: findByIDUser.imagemPerfil,
-            };
-            const updateUser = await this.userModel
-              .findByIdAndUpdate(id, newUser)
-              .setOptions({ overwrite: false, new: true });
-            if (!updateUser) {
-              throw new NotFoundException();
-            }
-            return updateUser;
-          });
-      } else
-        return {
-          message: "email ou senha incorretos",
-          emailAndPassword: false,
-        };
     }
+    const isPasswordValid = await bcrypt.compare(
+      OldPassword,
+      user.login.password
+    );
+    if (!isPasswordValid) {
+      return {
+        message: "email ou senha incorretos",
+        emailAndPassword: false,
+      };
+    }
+
+    const encryptedPassword = newPassoWord
+      ? await bcrypt.hash(newPassoWord, 10)
+      : user.login.password;
+
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      id,
+      {
+        login: {
+          email: newEmail || user.login.email,
+          password: encryptedPassword,
+          isAdmin: isAdmin !== undefined ? isAdmin : user.login.isAdmin,
+        },
+        cpf: user.cpf,
+        nome: user.nome,
+        dataNascimento: user.dataNascimento,
+        sexo: user.sexo,
+        cep: user.cep,
+        endereco: user.endereco,
+        imagemPerfil: user.imagemPerfil,
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      throw new Error("Erro ao atualizar email/senha do usuário");
+    }
+
+    return updatedUser;
   }
 }
