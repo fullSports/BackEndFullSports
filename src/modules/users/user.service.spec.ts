@@ -32,6 +32,7 @@ describe("userService", () => {
     findById: jest.fn(),
     findByIdAndUpdate: jest.fn(),
     setOptions: jest.fn(),
+    findByIdAndDelete: jest.fn(),
   };
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -219,6 +220,58 @@ describe("userService", () => {
       await expect(userService.updateUser(id, updateUserDTO)).rejects.toThrow(
         NotFoundException
       );
+    });
+  });
+  describe("deleteUser()", () => {
+    it("should delete user when valid email and password are provided", async () => {
+      mockMongo.findById = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue({
+          login: { email: "test@example.com", password: "hashedpassword" },
+          imagemPerfil: "60d0fe4f5311236168a109ca", // Example ObjectId string
+          _id: "60d0fe4f5311236168a109cb", // Example ObjectId string
+        }),
+      });
+      mockMongo.findByIdAndDelete = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue(true),
+      });
+      jest
+        .spyOn(RecommendationService.prototype, "listRecommedations")
+        .mockResolvedValue([
+          { user: "60d0fe4f5311236168a109cb", _id: "recommendationId" },
+        ] as any);
+      const bcryptCompareSync = jest
+        .spyOn(bcrypt, "compareSync")
+        .mockReturnValue(true);
+      const result = await userService.deleteUser("60d0fe4f5311236168a109cb", {
+        email: "test@example.com",
+        password: "password",
+      });
+
+      expect(result).toEqual({ message: "Usuário deletado com sucesso" });
+      expect(mockMongo.findById).toHaveBeenCalledWith(
+        "60d0fe4f5311236168a109cb"
+      );
+      expect(mockMongo.findByIdAndDelete).toHaveBeenCalledWith(
+        "60d0fe4f5311236168a109cb"
+      );
+    });
+    it("should return error message when email does not match user's email", async () => {
+      mockMongo.findById = jest.fn().mockReturnValue({
+        exec: jest.fn().mockResolvedValue({
+          login: {
+            email: "different@example.com",
+            password: "hashedpassword",
+          },
+        }),
+      });
+
+      const result = await userService.deleteUser("userId", {
+        email: "test@example.com",
+        password: "password",
+      });
+
+      expect(result).toEqual({ message: "email ou senha invalida" });
+      expect(mockMongo.findById).toHaveBeenCalledWith("userId");
     });
   });
 });

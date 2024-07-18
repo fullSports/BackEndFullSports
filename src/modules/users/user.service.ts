@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import {
   Injectable,
   Logger,
@@ -123,55 +123,48 @@ export class UserService {
   }
 
   @UseGuards(AuthGuard("jwt"))
-  async deleteUser(id: string, realizarLogin: RealizarLogin) {
+  async deleteUser(
+    id: string,
+    realizarLogin: RealizarLogin
+  ): Promise<{ message: string }> {
     const { email, password } = realizarLogin;
-    const userTrue = await this.userModel.findById({ _id: id }).exec();
-    if (userTrue.login.email !== email)
-      return {
-        message: "email ou senha invalida",
-      };
-    else {
-      const comparePassword = await bcrypt.compareSync(
-        password,
-        userTrue.login.password
-      );
-      if (comparePassword) {
-        const searchId = await this.userModel.findById({ _id: id }).exec();
-        if (!searchId) throw new NotFoundException();
-        else {
-          if (searchId.imagemPerfil) {
-            const deleteImage = await this.imageModel.findByIdAndDelete({
-              _id: searchId.imagemPerfil,
-            });
-            deleteImage;
-          }
-          const searchRecommedation =
-            await this.recommendationService.listRecommedations();
-          for (let i = 0; i < searchRecommedation.length; i++) {
-            const user = searchRecommedation[i]["user"] as any;
-            const _id = searchRecommedation[i]["_id"] as any;
-            if (_id && user._id.toString() == searchId._id) {
-              await this.recommendationService.DeleteRecommendation(
-                _id.toString()
-              );
-              break;
-            }
-          }
-          const deleteUser = await this.userModel
-            .findByIdAndDelete({ _id: id })
-            .exec();
-          if (!deleteUser) throw new NotFoundException();
-          else
-            return {
-              message: "Usuário deletado com sucesso",
-            };
-        }
-      } else
-        return {
-          message: "email ou senha invalida",
-        };
+
+    const user = await this.userModel.findById(id).exec();
+    if (!user || user.login.email !== email) {
+      return { message: "email ou senha invalida" };
     }
+
+    const isPasswordValid = bcrypt.compareSync(password, user.login.password);
+    if (!isPasswordValid) {
+      return { message: "email ou senha invalida" };
+    }
+
+    if (user.imagemPerfil) {
+      await this.imageModel.findByIdAndDelete(
+        new Types.ObjectId(String(user.imagemPerfil))
+      );
+    }
+
+    const recommendations =
+      await this.recommendationService.listRecommedations();
+    for (const recommendation of recommendations) {
+      const recommendationUserId: string = recommendation.user["_id"];
+      if (recommendationUserId && recommendationUserId.toString() === id) {
+        await this.recommendationService.DeleteRecommendation(
+          recommendation["_id"]
+        );
+        break;
+      }
+    }
+
+    const deleteUser = await this.userModel.findByIdAndDelete(id).exec();
+    if (!deleteUser) {
+      throw new NotFoundException("Erro ao excluir usuário");
+    }
+
+    return { message: "Usuário deletado com sucesso" };
   }
+
   @UseGuards(AuthGuard("jwt"))
   async signIn(realizarLogin: RealizarLogin) {
     const { email, password } = realizarLogin;
