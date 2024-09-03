@@ -251,6 +251,7 @@ describe("userService", () => {
       await expect(userService.updateUser(id, updateUserDTO)).rejects.toThrow(
         NotFoundException
       );
+      expect(mockMongo.findById).toHaveBeenCalledWith(id);
     });
   });
   describe("deleteUser()", () => {

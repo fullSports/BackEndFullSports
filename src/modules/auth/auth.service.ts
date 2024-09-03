@@ -7,12 +7,14 @@ export class AuthService {
     // private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) {}
-  private accessToken: string;
-  setAccessToken(token: string) {
-    this.accessToken = token;
+  private access_token: {
+    access_token: string;
+  };
+  private async setAccessToken(token: { access_token: string }) {
+    this.access_token = token;
   }
-  getAccessToken() {
-    return this.accessToken;
+  async getAccessToken() {
+    return this.access_token;
   }
   async validateApp(clientId: string, clientSecret: string) {
     if (
@@ -47,7 +49,7 @@ export class AuthService {
   //     }
   //     return null;
   // }
-  async validateUserById(userId: string) {
+  async validateUserById(userId: string): Promise<boolean> {
     const id = `${new Date().getUTCDate()}-${process.env.clientId}-${
       process.env.clientSecret
     }`;
@@ -57,14 +59,14 @@ export class AuthService {
         (hex: string, c) => hex + c.charCodeAt(0).toString(16).padStart(2, "0"),
         ""
       );
-    if (hash == userId) return true;
-    else return false;
+    return hash == userId;
   }
 
-  async generateToken(user: any) {
+  async generateToken(user: { id: string }): Promise<{ access_token: string }> {
     const payload = { sub: user.id };
-    return {
+    await this.setAccessToken({
       access_token: this.jwtService.sign(payload),
-    };
+    });
+    return await this.getAccessToken();
   }
 }

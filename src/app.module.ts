@@ -7,7 +7,7 @@ import { ProviderModule } from "@providers/providers.module";
 import { OderModule } from "@order/order.module";
 import { RecommendationModule } from "@componentRecommendation/recommendation.module";
 import { AuthModule } from "@auth/auth.module";
-import { JwtInjectionMiddleware } from "@auth/jwt-injection.middleware";
+import { JwtInjectionMiddleware } from "@auth/middlewares/jwt-injection.middleware";
 import { ConfigModule } from "@nestjs/config";
 import { WinstonModule } from "nest-winston";
 import winstonConfig from "@configs/winston.config";

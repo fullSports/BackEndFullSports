@@ -1,10 +1,5 @@
 import { Model, Types } from "mongoose";
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  UseGuards,
-} from "@nestjs/common";
+import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
 import { RealizarLogin } from "./dto/SingIn.dto";
@@ -12,7 +7,6 @@ import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { ImageDocument, imagem } from "../image/Schema/image.schema";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
-import { AuthGuard } from "@nestjs/passport";
 import * as bcrypt from "bcrypt";
 @Injectable()
 export class UserService {
@@ -21,7 +15,7 @@ export class UserService {
     @InjectModel(imagem.name) private readonly imageModel: Model<ImageDocument>,
     private readonly recommendationService: RecommendationService
   ) {}
-  private Logger: Logger = new Logger(UserService.name);
+  private logger: Logger = new Logger(UserService.name);
 
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
@@ -76,6 +70,7 @@ export class UserService {
       });
       return newUser;
     } catch (error) {
+      this.logger.error(this.RegisterUsers.name, error);
       throw new Error("Falha ao registrar usuário");
     }
   }

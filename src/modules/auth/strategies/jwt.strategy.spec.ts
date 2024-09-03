@@ -2,10 +2,9 @@ import { JwtModule } from "@nestjs/jwt";
 import { MongooseModule } from "@nestjs/mongoose";
 import { PassportModule } from "@nestjs/passport";
 import { Test, TestingModule } from "@nestjs/testing";
-import { jwtConfig } from "./config/jwt.config";
-import { AuthController } from "./auth.controller";
-import { AuthService } from "./auth.service";
-import { JwtStrategy } from "./strategies/jwt.strategy";
+import { jwtConfig } from "../config/jwt.config";
+import { AuthService } from "../auth.service";
+import { JwtStrategy } from "../strategies/jwt.strategy";
 import { UserService } from "@users/user.service";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
@@ -14,9 +13,11 @@ import { ProductModule } from "@product/product.module";
 import { RecommendationModule } from "@componentRecommendation/recommendation.module";
 import { ImageModule } from "@image/image.module";
 import { UserModule } from "@users/users.module";
-const urlConfig = require("../../../globalConfig.json");
-describe("AuthController", () => {
-  let authController: AuthController;
+import { AuthController } from "@auth/auth.controller";
+import { UnauthorizedException } from "@nestjs/common";
+const urlConfig = require("../../../../globalConfig.json");
+describe("jwtStrategy", () => {
+  let jwtStrategy: JwtStrategy;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -29,7 +30,6 @@ describe("AuthController", () => {
         ProviderModule,
         PassportModule,
         JwtModule.register(jwtConfig),
-        // Outros módulos necessários para o AuthModule
       ],
       controllers: [AuthController],
       providers: [
@@ -39,18 +39,29 @@ describe("AuthController", () => {
         RecommendationService,
         ProductServices,
       ],
-      exports: [AuthService], // Se AuthService for usado em outros módulos
+      exports: [AuthService],
     }).compile();
-    authController = app.get<AuthController>(AuthController);
+    jwtStrategy = app.get<JwtStrategy>(JwtStrategy);
   });
+  it("should return user when JWT is valid", async () => {
+    const payload = { sub: 1 };
+    jest
+      .spyOn(AuthService.prototype, "validateUserById")
+      .mockResolvedValue(true);
+    const user = await jwtStrategy.validate(payload);
 
-  describe("👨‍💻 MethodsAuth", () => {
-    it("👨‍💻loginUser() ", async () => {
-      const loginApp = await authController.LoginApp({
-        client_id: String(process.env.clientId),
-        client_secret: String(process.env.clientSecret),
-      });
-      expect(loginApp.access_token);
-    });
+    expect(user).toEqual(true);
+    expect(AuthService.prototype.validateUserById).toHaveBeenCalledWith(1);
+  });
+  it("should throw UnauthorizedException when JWT is invalid", async () => {
+    jest
+      .spyOn(AuthService.prototype, "validateUserById")
+      .mockResolvedValue(false);
+    const payload = { sub: 1 };
+
+    await expect(jwtStrategy.validate(payload)).rejects.toThrow(
+      UnauthorizedException
+    );
+    expect(AuthService.prototype.validateUserById).toHaveBeenCalledWith(1);
   });
 });

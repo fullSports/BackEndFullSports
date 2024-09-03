@@ -7,15 +7,14 @@ export class AuthController {
   @Post("login-app")
   @ApiExcludeEndpoint()
   async LoginApp(@Body() body: { client_id: string; client_secret: string }) {
-    const app = await this.authService.validateApp(
+    const app: { id: string } = await this.authService.validateApp(
       body.client_id,
       body.client_secret
     );
     if (!app) {
       throw new UnauthorizedException();
     }
-    const token = await this.authService.generateToken(app);
-    this.authService.setAccessToken(token.access_token);
-    return token;
+    await this.authService.generateToken(app);
+    return await this.authService.getAccessToken();
   }
 }
