@@ -12,7 +12,7 @@ import { ConfigModule } from "@nestjs/config";
 import { WinstonModule } from "nest-winston";
 import winstonConfig from "@configs/winston.config";
 import { envseEnum } from "@enums/envs.enum";
-import { configService } from "@configs/configService";
+import { configService } from "@configs/configService.config";
 const envAmb = configService.get<string>("ENV_AMB");
 @Module({
   imports: [

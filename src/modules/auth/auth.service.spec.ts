@@ -84,7 +84,6 @@ describe("AuthService", () => {
   });
   describe("validateUserById", () => {
     it("should return true when userId is valid", async () => {
-      const userId = "validUserIdHash";
       process.env.clientId = "testClientId";
       process.env.clientSecret = "testClientSecret";
       const id = `${new Date().getUTCDate()}-${process.env.clientId}-${

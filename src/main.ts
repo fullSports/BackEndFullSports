@@ -6,7 +6,7 @@ import * as express from "express";
 import * as path from "path";
 import { useContainer } from "class-validator";
 import { WINSTON_MODULE_NEST_PROVIDER } from "nest-winston";
-import { configService } from "@configs/configService";
+import { configService } from "@configs/configService.config";
 async function bootstrap() {
   const logger = new Logger("Main");
   const app = await NestFactory.create<NestApplication>(AppModule);

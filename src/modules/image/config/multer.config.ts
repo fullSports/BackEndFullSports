@@ -1,6 +1,6 @@
 import { S3Client } from "@aws-sdk/client-s3";
 import { NotAcceptableException } from "@nestjs/common";
-import { configService } from "@configs/configService";
+import { configService } from "@configs/configService.config";
 import * as multer from "multer";
 import * as path from "path";
 import * as crypto from "crypto";

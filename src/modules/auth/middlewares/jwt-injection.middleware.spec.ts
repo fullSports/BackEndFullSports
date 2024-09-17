@@ -64,4 +64,16 @@ describe("AuthController", () => {
     expect(req.headers.authorization).toBe("Bearer mockToken");
     expect(next).toHaveBeenCalled();
   });
+  it("should handle scenario where AuthService returns null or undefined token", async () => {
+    const req = { headers: { authorization: undefined } };
+    const res = {};
+    const next = jest.fn();
+    jest.spyOn(service, "getAccessToken").mockResolvedValue(null);
+
+    const jwtInjectionMiddleware = new JwtInjectionMiddleware(service);
+    await jwtInjectionMiddleware.use(req, res, next);
+
+    expect(req.headers.authorization).toBeUndefined();
+    expect(next).toHaveBeenCalled();
+  });
 });
