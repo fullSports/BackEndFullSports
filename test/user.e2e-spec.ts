@@ -4,7 +4,7 @@ import * as request from "supertest";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UserSchema, Users } from "@users/Schema/user.schema";
 import { UserController } from "@users/users.controller";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
 import { RecommendationController } from "@componentRecommendation/recommendation.controller";
@@ -13,6 +13,7 @@ import { RecommendationModule } from "@componentRecommendation/recommendation.mo
 import { ProductModule } from "@product/product.module";
 import { ProviderModule } from "@providers/providers.module";
 import { ImageModule } from "@image/image.module";
+import { UserModule } from "@users/users.module";
 const urlConfig = require("./globalConfig.json");
 describe("Users", () => {
   let app: INestApplication;
@@ -21,6 +22,7 @@ describe("Users", () => {
       imports: [
         MongooseModule.forRoot(urlConfig.mongoUri),
         MongooseModule.forFeature([{ name: Users.name, schema: UserSchema }]),
+        UserModule,
         RecommendationModule,
         ProductModule,
         ProviderModule,
@@ -32,6 +34,8 @@ describe("Users", () => {
     }).compile();
     app = moduleFixture.createNestApplication();
     await app.init();
+    process.env.clientId = "test-client-id";
+    process.env.clientSecret = "test-client-secret";
   });
   let ID;
   const client = {
@@ -113,6 +117,7 @@ describe("Users", () => {
           client_secret: String(process.env.clientSecret),
         })
     ).body.access_token;
+    console.log(acessToke);
     const newClient = {
       cpf: "466.773.520-13",
       //   nome: "TDD user.controller",

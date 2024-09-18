@@ -9,7 +9,7 @@ import { RealizarLogin } from "./dto/SingIn.dto";
 import { UpdatePasswordUser } from "./dto/updateLogin.dtp";
 import { UpdateUserDTO } from "./dto/updateUser.dto";
 import { Users } from "./Schema/user.schema";
-import { UserService } from "./user.service";
+import { UserService } from "./users.service";
 import { AuthGuard } from "@nestjs/passport";
 @Controller()
 @ApiTags("Users")
@@ -32,13 +32,12 @@ export class UserController {
         messagem: "email de usuario já cadastrado",
         registeredSuccess: false,
       };
-    } else {
-      return {
-        user: createdUser,
-        messagem: "usuario cadastrado com sucesso",
-        registeredSuccess: true,
-      };
     }
+    return {
+      user: createdUser,
+      messagem: "usuario cadastrado com sucesso",
+      registeredSuccess: true,
+    };
   }
   @UseGuards(AuthGuard("jwt"))
   @Get("listar-cliente/:id")
@@ -54,10 +53,12 @@ export class UserController {
     @Body() updateUser: UpdateUserDTO
   ) {
     const updateUserId = await this.userService.updateUser(id, updateUser);
-    return {
-      user: updateUserId,
-      messagem: "usuario atualizado com sucesso",
-    };
+    if (updateUserId) {
+      return {
+        user: updateUserId,
+        messagem: "usuario atualizado com sucesso",
+      };
+    }
   }
   @UseGuards(AuthGuard("jwt"))
   @ApiOperation({ summary: "delete user with id" })
@@ -67,10 +68,7 @@ export class UserController {
     @Body() singInBody: RealizarLogin
   ) {
     const deleteUser = await this.userService.deleteUser(id, singInBody);
-    if (deleteUser)
-      return {
-        messagem: "cliente deletado com sucesso ",
-      };
+    return deleteUser;
   }
   @UseGuards(AuthGuard("jwt"))
   @Post("realizar-login")

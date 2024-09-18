@@ -9,6 +9,7 @@ import { IsBrithDate } from "../validator/birthDate.validator";
 export type UsersDocument = HydratedDocument<Users>;
 @Schema()
 export class Users {
+  _id?: string;
   @ApiProperty()
   @Prop({ required: true })
   @IsNotEmpty({ message: "campo cpf vazio" })

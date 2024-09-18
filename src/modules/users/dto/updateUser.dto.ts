@@ -9,53 +9,53 @@ import { IsBrithDate } from "../validator/birthDate.validator";
 export class UpdateUserDTO {
   @IsOptional()
   @Exclude()
-  _id: string;
+  _id?: string;
   @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   @Exclude()
   @IsCPF({ message: "cpf invalido" })
-  cpf: string | null;
+  cpf?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  nome: string | null;
+  nome?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @Exclude()
-  login: Login | null;
+  login?: Partial<Login> | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
   @IsBrithDate({ message: "data de nascimento invalida" })
-  dataNascimento: string | null;
+  dataNascimento?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  sexo: string | null;
+  sexo?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  cep: string | null;
+  cep?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Exclude()
-  endereco: string | null;
+  endereco?: string | null;
 
   @ApiPropertyOptional()
   @IsOptional()
   @Exclude()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "model" })
-  imagemPerfil: ObjectId | null;
+  imagemPerfil?: ObjectId | null;
 }

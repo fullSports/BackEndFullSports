@@ -9,7 +9,7 @@ import { jwtConfig } from "@auth/config/jwt.config";
 import { JwtStrategy } from "@auth/strategies/jwt.strategy";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import * as request from "supertest";
 import { UserModule } from "@users/users.module";
 import { ImageModule } from "@image/image.module";

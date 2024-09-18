@@ -9,7 +9,7 @@ import * as request from "supertest";
 import { RecommendationController } from "@componentRecommendation/recommendation.controller";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import { UserController } from "@users/users.controller";
 import { AuthModule } from "@auth/auth.module";
 import { UserModule } from "@users/users.module";

@@ -1,4 +1,4 @@
-import { Model, Types } from "mongoose";
+import { isValidObjectId, Model, Types } from "mongoose";
 import { Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Users, UsersDocument } from "./Schema/user.schema";
@@ -16,7 +16,9 @@ export class UserService {
     private readonly recommendationService: RecommendationService
   ) {}
   private logger: Logger = new Logger(UserService.name);
-
+  validateId(id: string): boolean {
+    return isValidObjectId(id);
+  }
   async ListUsers(): Promise<Users[]> {
     const listUser = await this.userModel
       .find()
@@ -58,7 +60,7 @@ export class UserService {
       });
 
       if (!newUser) {
-        throw new NotFoundException();
+        throw new NotFoundException("Usuário inexistente");
       }
       const userId = newUser._id.toString();
       await this.recommendationService.RegisterRecommedations({
@@ -75,19 +77,25 @@ export class UserService {
     }
   }
   async searchId(id: string): Promise<Users> {
+    if (!this.validateId(id)) {
+      throw new NotFoundException("Usuário inexistente");
+    }
     const searchId = await this.userModel
-      .findById({ _id: id })
+      .findById(id)
       .populate("imagemPerfil")
       .exec();
     if (!searchId) {
-      throw new NotFoundException();
+      throw new NotFoundException("Usuário inexistente");
     }
     return searchId;
   }
   async updateUser(id: string, updateUserDTO: UpdateUserDTO): Promise<Users> {
+    if (!this.validateId(id)) {
+      throw new NotFoundException("Usuário inexistente");
+    }
     const user = await this.userModel.findById(id);
     if (!user) {
-      throw new NotFoundException();
+      throw new NotFoundException("Usuário inexistente");
     }
     const updatedUser = {
       cpf: updateUserDTO.cpf || user.cpf,
@@ -110,7 +118,7 @@ export class UserService {
       { overwrite: false, new: true }
     );
     if (!updatedUserRecord) {
-      throw new NotFoundException();
+      throw new NotFoundException("Usuário inexistente");
     }
     return updatedUserRecord;
   }
@@ -119,7 +127,9 @@ export class UserService {
     realizarLogin: RealizarLogin
   ): Promise<{ message: string }> {
     const { email, password } = realizarLogin;
-
+    if (!this.validateId(id)) {
+      throw new NotFoundException("Usuário inexistente");
+    }
     const user = await this.userModel.findById(id).exec();
     if (!user || user.login.email !== email) {
       return { message: "email ou senha invalida" };
@@ -160,7 +170,9 @@ export class UserService {
 
     const users = await this.ListUsers();
     const user = users.find((user) => user.login.email === email);
-
+    if (!this.validateId(user["_id"])) {
+      throw new NotFoundException("Usuário inexistente");
+    }
     if (!user) {
       return {
         message: "email não encontrado",
@@ -184,14 +196,23 @@ export class UserService {
       emailAndPassword: false,
     };
   }
-  async updatePassworUser(id: string, updatePasswordBody: UpdatePasswordUser) {
+  async updatePassworUser(
+    id: string,
+    updatePasswordBody: UpdatePasswordUser
+  ): Promise<
+    | Users
+    | {
+        message?: string;
+        emailAndPassword?: boolean;
+        emailExists?: boolean;
+      }
+  > {
     const { email, OldPassword, newPassoWord, newEmail, isAdmin } =
       updatePasswordBody;
 
-    if (!Types.ObjectId.isValid(id)) {
-      throw new Error("ID de usuário inválido");
+    if (!this.validateId(id)) {
+      throw new NotFoundException("Usuário inexistente");
     }
-
     const users = await this.ListUsers();
 
     const user = users.find((user) => user.login.email === email);

@@ -19,7 +19,7 @@ import ProductController from "@product/product.controller";
 import { ProductServices } from "@product/product.service";
 import { Provider, ProviderSchema } from "@providers/Schema/providers.schema";
 import { UserSchema, Users } from "@users/Schema/user.schema";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import { UserController } from "@users/users.controller";
 import * as request from "supertest";
 import { UserModule } from "@users/users.module";

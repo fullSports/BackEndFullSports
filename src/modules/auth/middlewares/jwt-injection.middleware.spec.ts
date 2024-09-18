@@ -12,7 +12,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { ProductModule } from "@product/product.module";
 import { ProductServices } from "@product/product.service";
 import { ProviderModule } from "@providers/providers.module";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import { UserModule } from "@users/users.module";
 import { JwtInjectionMiddleware } from "./jwt-injection.middleware";
 const urlConfig = require("../../../../globalConfig.json");

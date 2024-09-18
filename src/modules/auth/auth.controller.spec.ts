@@ -6,7 +6,7 @@ import { jwtConfig } from "./config/jwt.config";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
-import { UserService } from "@users/user.service";
+import { UserService } from "@users/users.service";
 import { RecommendationService } from "@componentRecommendation/recommendation.service";
 import { ProductServices } from "@product/product.service";
 import { ProviderModule } from "@providers/providers.module";

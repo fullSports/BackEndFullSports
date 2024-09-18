@@ -30,6 +30,7 @@ const envAmb = configService.get<string>("ENV_AMB");
     RecommendationModule,
     AuthModule,
   ],
+  controllers: [],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
